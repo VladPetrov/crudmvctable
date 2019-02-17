@@ -2,26 +2,6 @@
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML>
-<HEAD>
-	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
-	<META NAME="GENERATOR" CONTENT="LibreOffice 4.1.6.2 (Linux)">
-	<META NAME="AUTHOR" CONTENT="V P">
-	<META NAME="CREATED" CONTENT="20190210;114100000000000">
-	<META NAME="CHANGEDBY" CONTENT="V P">
-	<META NAME="CHANGED" CONTENT="20190217;160200000000000">
-	<META NAME="AppVersion" CONTENT="16.0000">
-	<META NAME="DocSecurity" CONTENT="0">
-	<META NAME="HyperlinksChanged" CONTENT="false">
-	<META NAME="LinksUpToDate" CONTENT="false">
-	<META NAME="ScaleCrop" CONTENT="false">
-	<META NAME="ShareDoc" CONTENT="false">
-	
-	<!--
-		@page { size: 8.5in 11in; margin-left: 0.39in; margin-right: 0.39in }
-		P { margin-bottom: 0.08in; direction: ltr; widows: 2; orphans: 2 }
-	-->
-	</STYLE>
-</HEAD>
 <BODY LANG="en-US" DIR="LTR">
 <P STYLE="text-indent: 0.2in; margin-bottom: 0in"><FONT SIZE=3>CRUD
 MVC Table</FONT></P>
