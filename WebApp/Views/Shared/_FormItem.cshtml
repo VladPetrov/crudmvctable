@@ -1,0 +1,86 @@
+﻿@using Common
+@using Common.Exceptions
+@model Domain.DomainBase
+
+@{
+    var itemDescriptor = Html.GetFormItemDescriptor();
+    var descriptor = Html.GetFormDescriptor();
+
+    var property = ViewData.ModelExplorer.Properties.FirstOrDefault(x => string.Equals(x.Metadata.Name, itemDescriptor.Name));
+
+    Defensive.AssertNotNull(property, $"Requested prop name '{itemDescriptor}' was not found");
+
+    var propName = property.Metadata.Name;
+}
+
+@if (itemDescriptor.Type == typeof(bool))
+{
+    var htmlAttributes = new object();
+    var readonlyClass = "";
+
+    if (itemDescriptor.Readonly || descriptor.ReadOnly)
+    {
+        htmlAttributes = htmlAttributes.Merge(new { disabled = "disabled", @readonly = "readonly" });
+        readonlyClass = "m-checkbox--disabled";
+    }
+
+    htmlAttributes = htmlAttributes.Merge(itemDescriptor.HtmlAttributes);
+
+    var label = property.Metadata.DisplayName ?? property.Metadata.PropertyName;
+
+    <label class="m-checkbox @readonlyClass">
+        @Html.Editor(propName, new { htmlAttributes = htmlAttributes })
+        @label
+        <span></span>
+    </label>
+}
+else
+{
+    @Html.Label(propName)
+
+    object htmlAttributes = new { @class = "form-control m-input" };
+
+    if (itemDescriptor.Readonly || descriptor.ReadOnly)
+    {
+        htmlAttributes = htmlAttributes.Merge(new { disabled = "disabled", @readonly = "readonly" });
+    }
+
+    htmlAttributes = htmlAttributes.Merge(itemDescriptor.HtmlAttributes);
+
+    if (itemDescriptor.CanRender)
+    {
+        @(await itemDescriptor.RenderAsync(Html))
+    }
+    else if (itemDescriptor.Type.IsEnum)
+    {
+        @Html.DropDownList(itemDescriptor.Name, Html.GetSelectList(itemDescriptor.Type), htmlAttributes)
+    }
+    else if (itemDescriptor.Type == typeof(DateTime) || itemDescriptor.Type == typeof(DateTime?))
+    {
+        htmlAttributes = htmlAttributes.Merge(new { type = "datetime" });
+
+        var val = (DateTime)ViewData.ModelExplorer.Properties.Single(x => x.Metadata.Name == itemDescriptor.Name).Model;
+
+        val = val == DateTime.MinValue ? DateTime.Now : val;
+
+        var valStr = val.ToString(DateTimeContext.DateFormat);
+
+        @Html.TextBox(propName, valStr, null, htmlAttributes)
+
+        if (!descriptor.ReadOnly && itemDescriptor.Readonly)
+        {
+            @Html.TextBox(propName, valStr, null, new { type = "hidden"})
+        }
+    }
+    else
+    {
+        @Html.Editor(propName, new { htmlAttributes = htmlAttributes })
+    }
+
+    if (!descriptor.ReadOnly && itemDescriptor.Readonly && itemDescriptor.Type != typeof(DateTime))
+    {
+        @Html.Hidden(propName)
+    }
+
+    @Html.ValidationMessage(propName, "", new { @class = "text-danger form-control-feedback" })
+}

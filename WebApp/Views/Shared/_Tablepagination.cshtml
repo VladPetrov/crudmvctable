@@ -1,0 +1,75 @@
+﻿@using WebApp.Model.GenericMvc
+@model PagingViewModel
+
+@{
+    var pagingInfo = Model.PagingInfo;
+
+    var context = Html.GetPageContext();
+}
+
+<ul class="pagination">
+    <li class="page-item">
+        <a class="page-link" 
+           data-ajax = "true"
+           data-ajax-method = "Get"
+           data-ajax-mode = "replace"
+           data-ajax-update = "#@context.TableContainerId"
+           asp-action= "@Model.Action"
+           asp-route-page= "@pagingInfo.FirstPage"
+           >
+            <i class="fa fa-angle-double-left"></i>
+        </a>
+    </li>
+    <li class="page-item">
+        <a class="page-link" 
+           data-ajax = "true"
+           data-ajax-method = "Get"
+           data-ajax-mode = "replace"
+           data-ajax-update = "#@context.TableContainerId"
+           asp-action= "@Model.Action"
+           asp-route-page= "@pagingInfo.PreviousPage"
+           >
+            <i class="fa fa-angle-left"></i>
+        </a>
+    </li>
+
+    @for (var i = pagingInfo.StartPage; i <= pagingInfo.EndPage; i++)
+    {
+        var activeClass = i == Model.PagingInfo.CurrentPage ? "active" : "";
+
+        <li class="page-item @activeClass">
+            <a class="page-link" 
+               data-ajax = "true"
+               data-ajax-method = "Get"
+               data-ajax-mode = "replace"
+               data-ajax-update = "#@context.TableContainerId"
+               asp-action= "@Model.Action"
+               asp-route-page= "@i"
+               >@i</a>
+        </li>
+    }
+
+    <li class="page-item">
+        <a class="page-link" 
+           data-ajax = "true"
+           data-ajax-method = "Get"
+           data-ajax-mode = "replace"
+           data-ajax-update = "#@context.TableContainerId"
+           asp-action= "@Model.Action"
+           asp-route-page= "@pagingInfo.NextPage"
+           >
+            <i class="fa fa-angle-right"></i>
+        </a>
+    </li>
+    <li class="page-item">
+        <a class="page-link" 
+           data-ajax = "true"
+           data-ajax-method = "Get"
+           data-ajax-mode = "replace"
+           data-ajax-update = "#@context.TableContainerId"
+           asp-action= "@Model.Action"
+           asp-route-page= "@pagingInfo.LastPage">
+            <i class="fa fa-angle-double-right"></i>
+        </a>
+    </li>
+</ul>

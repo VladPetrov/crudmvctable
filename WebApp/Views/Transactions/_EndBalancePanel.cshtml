@@ -1,0 +1,40 @@
+﻿@using WebApp.Controllers
+@model Domain.Balance.EndBalance
+
+@{
+    var context = Html.GetPageContext();
+
+    var containerId = Guid.NewGuid().ToString();
+}
+
+<div id="@containerId">
+    @if (Model != null)
+    {
+        <div class="m-portlet m-portlet--full-height">
+            <div class="m-portlet__head">
+                <div class="m-portlet__head-caption">
+                    <div class="m-portlet__head-title">
+                        <h3 class="m-portlet__head-text">
+                            End Balance
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <div class="m-portlet__body">
+                <div class="m-section">
+                    <div class="m-section__content">
+                        @await Html.PartialAsync("_EndBalanceTable")
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<script>
+    {
+        let service = scripts.TableService.instance('@context.TableServiceName');
+
+        scripts.EndBalanceService.subscribeToTable(service, '@Url.Action(nameof(TransactionsController.CalculateEndBalance))', '@containerId');
+    }
+</script>

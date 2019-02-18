@@ -1,0 +1,19 @@
+﻿@using WebApp.Model.GenericMvc
+@model TableFilterDescriptor
+
+@{
+    var items = new List<SelectListItem>
+    {
+        new SelectListItem("True", "true"),
+        new SelectListItem("False", "false"),
+    };
+}
+
+<div>
+    @Html.DropDownList("booleanFilter", items, " ", new
+    {
+        @class = "form-control booleanFilter",
+        data_field_id = Model.FieldId,
+        data_filter_value = Model.FilterValue
+    })
+</div>

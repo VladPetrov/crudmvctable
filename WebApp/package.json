@@ -1,0 +1,31 @@
+{
+  "version": "1.0.0",
+  "name": "asp.net",
+  "private": true,
+  "devDependencies": {
+    "@types/daterangepicker": "3.0.0",
+    "@types/bootstrap-datepicker": "0.0.13",
+    "@types/jquery": "^3.3.4",
+    "@types/pdfjs-dist": "0.1.2",
+    "clean-webpack-plugin": "^1.0.0",
+    "del": "3.0.0",
+    "gulp": "4.0.0",
+    "ts-loader": "^5.3.2",
+    "typescript": "^3.2.2",
+    "webpack": "^4.28.2",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.4"
+  },
+  "dependencies": {
+    "jquery": "^3.3.1",
+    "moment": "^2.23.0",
+    "pdfjs-dist": "2.0.943",
+    "rxjs": "^6.3.3",
+    "bootstrap-datepicker": "1.8.0" 
+  },
+  "scripts": {
+    "build:watch": "webpack --display-error-details --watch --mode=development",
+    "build:prod": "webpack --display-error-details --mode=production",
+    "build:dev": "webpack --display-error-details --mode=development"
+  }
+}

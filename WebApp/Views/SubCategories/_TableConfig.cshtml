@@ -1,0 +1,14 @@
+﻿@using Domain.Category
+@using WebApp.Model.GenericMvc
+
+
+@model TableViewModel
+
+@{
+    var descriptor = TableBuilder<SubCategoryDisplay>.CreateNew()
+        .AddColumn(x => x.Name)
+        .Build();
+}
+
+@await Html.TableAsync(Model, descriptor)
+

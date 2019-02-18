@@ -1,0 +1,20 @@
+﻿@using WebApp.Components
+@using WebApp.Controllers
+@using WebApp.Model.GenericMvc
+@using WebApp.Model.GenericMvc.ChildPage
+@model Domain.DomainBase
+
+@{
+    Layout = null;
+}
+
+@Html.GetPageHeader()
+<hr />
+@await Html.PartialAsync("_DisplayModel", Model)
+<br>
+@await Html.PartialAsync("_ChildPage", ChildPageDescriptor.Create(nameof(SubMessagesController), Model.Id))
+
+<div>
+    @await Component.InvokeAsync(typeof(ButtonComponent), ButtonViewModel.Create("Back to List", "IndexPage", "btn btn-default btn-sm"))
+    |@await Component.InvokeAsync(typeof(ButtonComponent), ButtonViewModel.Create("Edit", "Edit", "btn btn-primary btn-sm", new { id = Model.Id }))
+</div>

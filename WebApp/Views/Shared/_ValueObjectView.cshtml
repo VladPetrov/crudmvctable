@@ -1,0 +1,22 @@
+﻿@using Common
+@using Common.Exceptions
+@using DAL.Repositories
+@using WebApp.Model.TableRenders.Renders
+@using Domain;
+
+@inject IValueObjectRepository Repository
+
+@{
+    var renderInfo = (ValueObjectViewModel)ViewData[ValueObjectViewModel.Name];
+    Defensive.AssertNotNull(renderInfo, "Forms Item RenderInfo is not found");
+
+    var htmlAttributes = !renderInfo.Descriptor.Readonly ? new { @class = "form-control" } as object : new { @class = "form-control", disabled = "disabled", @readonly = "readonly" };
+
+    htmlAttributes = htmlAttributes.Merge(renderInfo.Descriptor.HtmlAttributes);
+
+    var items = Repository.GetItems(renderInfo.Type, renderInfo.Predicate);
+}
+
+@Html.DropDownList($"{renderInfo.Descriptor.Name}.{nameof(ValueObject.Id)}", items.ToSelectListItems(), renderInfo.OptionalLabel, htmlAttributes)
+
+

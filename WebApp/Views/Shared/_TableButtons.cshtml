@@ -1,0 +1,21 @@
+﻿@using WebApp.Components
+@using WebApp.Model.GenericMvc
+@model Domain.DomainBase
+
+@{
+    var context = Html.GetPageContext();
+}
+
+@if (context.TableCanDelete || context.TableCanEdit)
+{
+    <td style="text-align: right; display: flex">
+        @if (context.TableCanEdit)
+        {
+            @await Component.InvokeAsync(typeof(ButtonComponent), ButtonViewModel.Create("Edit", "Edit", "btn btn-primary btn-sm", new { id = Model.Id }))
+        }
+        @if (context.TableCanDelete)
+        {
+            @await Component.InvokeAsync(typeof(ButtonComponent), ButtonViewModel.Create("Delete", "Delete", "btn btn-danger btn-sm", new { id = Model.Id }))
+        }
+    </td>
+}

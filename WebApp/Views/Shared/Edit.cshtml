@@ -1,0 +1,9 @@
+﻿@model Domain.DomainBase
+
+@await Html.RenderPageHeaderAsync()
+
+<div class="m-content">
+    @await Html.PartialAsync("_EditModel", Model)
+
+    @await Html.RenderCrudButtonsAsync()
+</div>

@@ -1,0 +1,20 @@
+﻿@using WebApp.Model.GenericMvc
+@using WebApp.Model
+
+@model TableViewModel
+
+@{
+    var context = Html.GetPageContext();
+}
+
+<div id="@context.TableContainerId" class='noselect'>
+    @await Html.PartialAsync("_TableScripts")
+    @await Html.PartialAsync("_TableMenu")
+    <table class="table table-striped m-table">
+        @await Html.PartialAsync("_TableSorts")
+        @await Html.PartialAsync("_TableFilters")
+        @await Html.PartialAsync("_TableItems", Model.Data)
+    </table>
+    @await Html.PartialAsync("_TablePagination", Model.ToPagingViewModel())
+</div>
+@await Html.PartialAsync("_CustomTableScripts")

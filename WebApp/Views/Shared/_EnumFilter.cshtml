@@ -1,0 +1,11 @@
+﻿@using WebApp.Model.GenericMvc
+@model TableFilterDescriptor
+
+<div>
+    @Html.DropDownList("enumFilter", Html.GetSelectList(Model.FiledType), " ", new
+    {
+        @class = "form-control enumFilter",
+        data_field_id = Model.FieldId,
+        data_filter_value = Model.FilterValue
+    })
+</div>

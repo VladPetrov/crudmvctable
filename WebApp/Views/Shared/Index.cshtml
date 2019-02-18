@@ -1,0 +1,24 @@
+﻿@using Domain
+@using WebApp.Controllers
+@using WebApp.Model.GenericMvc
+@model GenericMvcIndexViewModel
+
+@{
+    if (!Model.RenderLayout)
+    {
+        Layout = null;
+    }
+
+    var context = Html.GetPageContext();
+}
+
+@* ReSharper restore Mvc.ActionNotResolved *@
+@if (!context.IsChildPage)
+{
+    @await Html.PartialAsync("_MasterIndexPage")
+}
+else
+{
+    @await Html.PartialAsync("_ChildIndexPage")
+}
+

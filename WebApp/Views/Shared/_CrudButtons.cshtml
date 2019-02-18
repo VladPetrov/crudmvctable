@@ -1,0 +1,11 @@
+﻿@using WebApp.Views.Shared.CommonButtons
+<div class="row">
+    <div class="m-form__actions">
+        @await Html.RenderBackToListButtonAsync()
+        
+        @if (Html.GetAction() == CrudButtonsSettings.DetailsUrl)
+        {
+            @await Html.RenderEditButtonAsync()
+        }
+    </div>
+</div>

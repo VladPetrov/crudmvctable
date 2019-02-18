@@ -1,0 +1,14 @@
+﻿@using DAL.Repositories
+@using WebApp.Model.ColumnFilter
+@using WebApp.Model.TableRenders.Renders
+
+@model ValueObjectRendererViewModel
+@inject IValueObjectRepository Repository
+
+<div>
+    @Html.DropDownList("ValueObjectFilter", Repository.GetItems(Model.EntityType, Model.Predicate).ToSelectListItems(), " ",
+        new { @class = "form-control valueObjectFilter",
+              data_field_id = Model.ReplacedFieldId,
+              data_filter_value = Model.ReplacedFilterValue
+        })
+</div>

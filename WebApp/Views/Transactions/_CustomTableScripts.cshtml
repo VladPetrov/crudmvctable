@@ -1,0 +1,26 @@
+﻿@using WebApp.Controllers
+@using WebApp.Extensions
+
+
+@{
+    var context = Html.GetPageContext();
+
+    var fileLink = Url.Action(nameof(FilesController.File), nameof(FilesController).ToControllerName());
+    var documentLink = Url.Action(nameof(TransactionsController.GetFilePreview), nameof(TransactionsController).ToControllerName());
+    var editNoteLink = Url.Action(nameof(TransactionsController.EditNote), nameof(TransactionsController).ToControllerName());
+    var fileUploadLink = Url.Action(nameof(TransactionsController.AddFile), nameof(TransactionsController).ToControllerName());
+    var editProjectCategoryLink = Url.Action(nameof(TransactionsController.EditProjectAndCategory), nameof(TransactionsController).ToControllerName());
+}
+
+<script>
+    {
+        const service = scripts.TableService.instance('@context.TableServiceName');
+
+        new scripts.FilesPreviewService('@context.TableContainerId', '@fileLink', '@documentLink').startListening();
+        new scripts.EditNoteService('@editNoteLink', service).startListening();
+        new scripts.DragAndDropFileUploader('@fileUploadLink', service).startListening();
+        scripts.EditProjectAndCategoryService.getInstance(service, '@editProjectCategoryLink');
+    }
+</script>
+
+@await Html.PartialAsync("_EditNote")

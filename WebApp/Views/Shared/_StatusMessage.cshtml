@@ -1,0 +1,25 @@
+﻿@model string
+
+@if (!string.IsNullOrEmpty(Model))
+{
+    var statusMessageClass = Model.StartsWith("Error") ? "danger" : "success";
+
+    <script>
+        $.notify({
+                message: '<h5>@Model</h5>'
+            },
+            {
+                type: '@statusMessageClass',
+                offset:
+                {
+                    x: 30,
+                    y: 100
+                },
+                animate:
+                {
+                    enter: 'animated bounceIn',
+                    exit: 'animated bounceOut'
+                }
+            });
+    </script>
+}

@@ -1,0 +1,30 @@
+﻿@using Domain
+@using WebApp.Controllers
+@model WebApp.Model.GenericMvc.ButtonViewModel
+
+@{
+    var context = Html.GetPageContext();
+    var isActionLink = (Model.ActionName != nameof(BasicCrudController<DomainBase, DomainBase>.IndexPage)).ToString();
+}
+
+@if (context.IsChildPage)
+{
+    var id = Guid.NewGuid().ToString();
+
+    <button id="@id" type="button" class="@Model.Class" url="@Url.Action(Model.ActionName, Model.RouteValues)" isActionlink="@isActionLink">@Model.Label</button>
+
+    <script type="text/javascript">
+        modalService.registerButton('@id');
+    </script>
+}
+else
+{
+    @Html.ActionLink(Model.Label, Model.ActionName, Model.RouteValues, new
+    {
+        @class = Model.Class,
+        data_ajax = "true",
+        data_ajax_method = "Get",
+        data_ajax_mode = "replace",
+        data_ajax_update = $"#{context.PageContainerId}"
+    })
+}

@@ -1,0 +1,24 @@
+﻿@model string
+
+@{
+    var id = Guid.NewGuid().ToString();
+}
+
+<div id="@id">
+
+</div>
+
+
+<script>
+    $.ajax({
+        type: "GET",
+        url: '@Model',
+        data: '',
+        contentType: "application/json; charset=utf-8",
+        dataType: "HTML",
+        success: response =>
+        {
+            $(`#@id`).html(response);
+        }
+    });
+</script>

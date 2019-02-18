@@ -1,0 +1,78 @@
+﻿@using Domain
+@using WebApp.Controllers
+@using WebApp.Model.GenericMvc
+@model List<DomainBase>
+
+@{
+    var descriptor = Html.GetTableDescriptor();
+    var context = Html.GetPageContext();
+}
+
+@foreach (var item in Model)
+{
+    <tr data-id='@item.Id'
+
+        @if (context.TableCanDetails)
+        {
+            @: ondblclick="showDetails('@Url.Action(nameof(BasicCrudController<DomainBase, DomainBase>.Details), Html.GetController(), new {id = item.Id})')"
+            @: style="cursor: pointer"
+        }
+
+        @if (descriptor.RowStyler != null)
+        {
+            @(descriptor.RowStyler.Render(descriptor, item))
+        }
+    >
+
+        @if (descriptor.RowsSelect)
+        {
+            <td>
+                <label class="m-checkbox">
+                    <input type="checkbox" class="row-select">
+                    <span></span>
+                </label>
+            </td>
+        }
+
+        @foreach (var descr in descriptor.Columns)
+        {
+            var val = descr.DataSelector.DynamicInvoke(item);
+
+            <td>
+                @(descr.ColumnRenderer.Render(val))
+            </td>
+        }
+
+        @await Html.PartialAsync("_TableButtons", item)
+    </tr>
+}
+
+<script>
+    {
+        let service = scripts.TableService.instance('@context.TableServiceName');
+
+        service.startListeningToEvents();
+    }
+
+    function showDetails(url)
+    {
+        if (@context.IsChildPage.ToInt())
+        {
+            modalService.showPage(url);
+        } else
+        {
+            $.ajax({
+                type: "GET",
+                url: url,
+                data: {},
+                contentType: "application/json; charset=utf-8",
+                dataType: "HTML",
+                cache: false,
+                success: response =>
+                {
+                    $(`#@context.PageContainerId`).html(response);
+                }
+            });
+        }
+    }
+</script>

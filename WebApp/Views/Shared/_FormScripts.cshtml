@@ -1,0 +1,40 @@
+﻿@{
+    var id = Guid.NewGuid().ToString();
+}
+
+@*<script id="@id">
+    {
+        const scr = new scripts.FormScripts('@id');
+        scr.run();
+    }
+</script>*@
+
+
+<script id="@id">
+    {
+        //todo this is bad
+        const $form = $(`#@id`).closest("form");
+
+        console.log($form[0]);
+
+        $form.find('input[type=datetime]').datepicker({
+            todayHighlight: true,
+            orientation: "bottom left",
+            format: "dd/mm/yyyy",
+            templates: {
+                leftArrow: '<i class="la la-angle-left"></i>',
+                rightArrow: '<i class="la la-angle-right"></i>'
+            }
+        });
+
+        $form.find('input[type=datetime-local]').datepicker({
+            todayHighlight: true,
+            orientation: "bottom left",
+            format:"dd/mm/yyyy",
+            templates: {
+                leftArrow: '<i class="la la-angle-left"></i>',
+                rightArrow: '<i class="la la-angle-right"></i>'
+            },
+        });
+    }
+</script>

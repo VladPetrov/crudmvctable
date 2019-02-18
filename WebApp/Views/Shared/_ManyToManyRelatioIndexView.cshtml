@@ -1,0 +1,47 @@
+﻿@using Domain.ManyToManyService
+@model ManyToManyRelationVm
+
+@{
+    var context = Html.GetPageContext();
+    var serviceName = context.ManyToManyServiceName;
+}
+
+@* ReSharper disable once Mvc.ActionNotResolved *@
+<script>
+    var @serviceName = new scripts.ManyToManyRelationService(@Model.LeftEntityId,
+        '@context.TableContainerId',
+        '@Url.Action("SaveManyToManyRelation")');
+
+    function save()
+    {
+        let service = @serviceName;
+        service.save();
+    }
+</script>
+
+<div class="m-portlet m-portlet--full-height">
+    <div data-toggle="collapse" data-target="#@context.PageCollapseContainerId" style="cursor: pointer">
+        <div class="m-portlet__head">
+            <div class="m-portlet__head-caption">
+                <div class="m-portlet__head-title">
+                    <h3 class="m-portlet__head-text">
+                        @Html.GetPageHeader()
+                    </h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="collapse" id="@context.PageCollapseContainerId">
+        <div class="m-portlet__body">
+            <div class="m-section">
+                <div class="m-section__content">
+                    <div id="@context.PageContainerId">
+                        @*@await Html.PartialAsync("_StatusMessage", Model.StatusMessage)*@
+                        @await Html.PartialAsync("_ManyToManyRelatioTable", Model)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

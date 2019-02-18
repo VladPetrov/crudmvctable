@@ -1,0 +1,33 @@
+﻿@using Domain.ManyToManyService
+@using WebApp.Views.Shared.CommonButtons
+@model ManyToManyRelationVm
+
+@{
+    var context = Html.GetPageContext();
+    var serviceName = context.ManyToManyServiceName;
+}
+
+<table class="table table-striped table-hover">
+    <tbody>
+    @foreach (var relation in Model.Items)
+    {
+        var guid = Guid.NewGuid().ToString();
+        var htmlAttributes = context.TableCanEdit ? new {id = $"{guid}"} as object : new {id = $"{guid}", disabled = "disabled", @readonly = "readonly"};
+        <tr>
+            <td>@relation.Name</td>
+            <td>@Html.CheckBox("CheckBox", relation.IsSelected, htmlAttributes)</td>
+            <script>
+                {
+                    var service = @serviceName;
+                    service.registerCheckbox('@guid', @relation.Id);
+                }
+            </script>
+        </tr>
+    }
+    </tbody>
+</table>
+
+@if (context.TableCanEdit)
+{
+    <input value="@CrudButtonsSettings.SaveLabel" type="submit" class="@CrudButtonsSettings.SaveStyle" onclick="save()"/>
+}

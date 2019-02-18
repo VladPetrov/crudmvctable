@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="node_modules\**" />
+    <Compile Remove="tools\node_modules\**" />
+    <EmbeddedResource Remove="node_modules\**" />
+    <EmbeddedResource Remove="tools\node_modules\**" />
+    <None Remove="node_modules\**" />
+    <None Remove="tools\node_modules\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="src\js\demo\demo11\custom\crud\datatables\advanced\" />
+    <Folder Include="src\js\demo\demo11\custom\crud\datatables\data-sources\" />
+    <Folder Include="src\js\demo\demo11\custom\crud\datatables\extensions\" />
+  </ItemGroup>
+
+</Project>

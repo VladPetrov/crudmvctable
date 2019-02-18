@@ -1,0 +1,14 @@
+﻿@using Domain.Transaction
+@using WebApp.Model.Forms
+
+@model TransactionTagDetails
+
+@{
+    var formDescriptor = FormBuilder<TransactionTagDetails>.CreateNew(false, "Edit")
+        .AddItem(x => x.Text)
+        .Build();
+}
+
+<div class="form-horizontal">
+    @await Html.FormAsync(formDescriptor)
+</div>

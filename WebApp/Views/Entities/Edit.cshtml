@@ -1,0 +1,15 @@
+﻿@using WebApp.Controllers
+@using WebApp.Model.GenericMvc.ChildPage
+@model Domain.DomainBase
+
+@await Html.RenderPageHeaderAsync()
+
+<div class="m-content">
+    @await Html.PartialAsync("_EditModel")
+
+    @await Html.PartialAsync("_ChildPage", ChildPageDescriptor.Create(nameof(IbansController), Model.Id))
+
+    @await Html.PartialAsync("_ChildPage", ManyToManyChildPageDescriptor.Create(nameof(EntityProjectManyToManyRelationController), Model.Id))
+
+    @await Html.RenderCrudButtonsAsync()
+</div>

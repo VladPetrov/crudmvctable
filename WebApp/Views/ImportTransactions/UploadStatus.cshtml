@@ -1,0 +1,10 @@
+﻿@{
+    string message = ViewBag.UploadStatus;
+}
+@if (!string.IsNullOrEmpty(message))
+{
+    <div class="alert alert-success alert-dismissable">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="True">&times;</button>
+        @message
+    </div>
+}

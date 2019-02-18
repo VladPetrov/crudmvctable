@@ -1,0 +1,27 @@
+﻿@using Domain
+@using WebApp.Controllers
+@using WebApp.Model.GenericMvc
+@model GenericMvcIndexViewModel
+
+@{
+    var context = Html.GetPageContext();
+}
+
+<div id="@context.PageContainerId">
+
+    @await Html.RenderPageHeaderAsync()
+
+    <div class="m-content">
+        <div class="m-portlet m-portlet--full-height">
+            <div class="m-portlet__body">
+                <div class="m-section">
+                    <div class="m-section__content">
+                        @await Html.PartialAsync("_StatusMessage", Model.StatusMessage)
+                        @* ReSharper disable once Mvc.PartialViewNotResolved *@
+                        @await Html.PartialAsync("_AjaxContent", Url.Action(nameof(BasicCrudController<DomainBase, DomainBase>.Table)))
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,7 @@
+﻿@using WebApp.Components
+@using WebApp.Model.GenericMvc
+@using WebApp.Views.Shared.CommonButtons
+
+@model CrudButtonViewModel
+
+@await Component.InvokeAsync(typeof(ButtonComponent), ButtonViewModel.Create(Model.Label, Model.Url, Model.Style, Model.RouteValues))

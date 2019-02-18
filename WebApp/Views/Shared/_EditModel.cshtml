@@ -1,0 +1,7 @@
+﻿@{
+    throw new Exception($"Edit model is not implemented for controller: '{Html.GetPageContext().ControllerName}', action: '{Html.GetAction()};");
+}
+
+<div class="form-horizontal">
+    @await Html.EditFromItemsAsync()
+</div>

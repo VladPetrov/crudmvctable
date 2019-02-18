@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="DbManagers\Seeds\SeedData\Categories.xlsx" />
+    <None Remove="DbManagers\Seeds\SeedData\Entities.xlsx" />
+    <None Remove="DbManagers\Seeds\SeedData\Projects.xlsx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="DbManagers\Seeds\SeedData\Categories.xlsx" />
+    <EmbeddedResource Include="DbManagers\Seeds\SeedData\Entities.xlsx">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DbManagers\Seeds\SeedData\Projects.xlsx">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+	<PackageReference Include="AutoMapper" Version="6.2.2" />
+    <PackageReference Include="JetBrains.Annotations" Version="2018.2.1" />
+    <PackageReference Include="Optional" Version="4.0.0" />
+    <PackageReference Include="Serilog.Extensions.Logging" Version="2.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj" />
+    <ProjectReference Include="..\DAL.Infrastructure\DAL.Infrastructure.csproj" />
+    <ProjectReference Include="..\Domain\Domain.csproj" />
+  </ItemGroup>
+
+</Project>

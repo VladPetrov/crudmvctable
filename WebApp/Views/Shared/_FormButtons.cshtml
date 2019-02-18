@@ -1,0 +1,30 @@
+﻿@using WebApp.Views.Shared.CommonButtons
+@model Domain.DomainBase
+
+@{
+    var descriptor = Html.GetFormDescriptor();
+}
+
+<div class="m-portlet__foot m-portlet__foot--fit">
+    <div class="m-form__actions m-form__actions">
+        @if (!descriptor.ReadOnly)
+        {
+            switch (Html.GetAction())
+            {
+                case CrudButtonsSettings.EditUrl:
+                    <button type="submit" class="@CrudButtonsSettings.SaveStyle">@CrudButtonsSettings.SaveLabel</button>
+                    break;
+                case CrudButtonsSettings.CreateUrl:
+                    <button type="submit" class="@CrudButtonsSettings.CreateStyle">@CrudButtonsSettings.CreateLabel</button>
+                    break;
+                default:
+                    throw new Exception("Unknown action");
+            }
+        }
+        else if (Html.GetAction() == CrudButtonsSettings.DeleteUrl)
+        {
+            <button type="submit" class="@CrudButtonsSettings.DeleteStyle">@CrudButtonsSettings.DeleteLabel</button>
+        }
+
+    </div>
+</div>

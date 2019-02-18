@@ -1,0 +1,15 @@
+﻿@using Domain.Message
+@using WebApp.Model.Forms
+
+@{
+    var formDescriptor = FormBuilder<MessageDetails>.CreateNew(false, "Edit")
+        .AddItem(x => x.Text)
+        .AddItem(x => x.IsViewed)
+        .AddItem(x => x.Number)
+        .AddItem(x => x.Type)
+        .Build();
+}
+
+<div class="form-horizontal">
+    @await Html.FormAsync(formDescriptor)
+</div>

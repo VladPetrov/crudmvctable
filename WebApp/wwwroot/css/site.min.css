@@ -1,0 +1,113 @@
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+.ascSort {
+    width: 16px;
+    height: 16px;
+    content: "";
+    display: inline-block;
+    background: url("../arrow_up.svg") 0 center no-repeat;
+    background-size: 16px 16px;
+}
+
+.descSort {
+    width: 16px;
+    height: 16px;
+    content: "";
+    display: inline-block;
+    background: url("../arrow_down.svg") 0 center no-repeat;
+    background-size: 16px 16px;
+}
+
+
+
+.m-section .m-section__content {
+    margin: 0 0 10px 0;
+    font-size: 1.1rem;
+}
+
+body {
+    font-family: Poppins;
+}
+
+.m-form .m-form__section {
+    color: #1f2024;
+}
+
+.m-form .form-control-label, .m-form label {
+    font-size: 1.1rem;
+}
+
+/* custom-popover */
+
+.custom-popover {
+    position: relative;
+    display: inline-block;
+    cursor: pointer
+}
+
+    .custom-popover .content {
+        color: #6f727d;
+        background: white;
+        -webkit-box-shadow: 0px 1px 15px 1px rgba(69, 65, 78, 0.25);
+        box-shadow: 0px 1px 15px 1px rgba(69, 65, 78, 0.25);
+        text-align: center;
+        border-radius: 6px;
+        position: absolute;
+        z-index: 1;
+        padding: 5px 0;
+        padding: 5px;
+        display: flex;
+        flex-direction: column;
+    }
+
+        .custom-popover .content.preview {
+            height: 550px;
+            width: 400px;
+            bottom: 100%;
+            left: 50%;
+            margin-left: -230px; /* width / 2 */
+        }
+
+        .custom-popover .content.edit-note {
+            left: 105%;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .custom-popover .content.preview::after {
+            content: " ";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: white transparent transparent transparent;
+        }
+
+        .custom-popover .content.preview .img {
+            height: 85%;
+        }
+
+            .custom-popover .content.preview .img img {
+                width: 100%;
+                height: 100%;
+            }
+
+        .custom-popover .content.preview .buttons {
+            flex: 1;
+            display: flex;
+            -webkit-align-items: center;
+            align-items: center;
+            justify-content: space-around;
+        }
+
+/* custom-popover */

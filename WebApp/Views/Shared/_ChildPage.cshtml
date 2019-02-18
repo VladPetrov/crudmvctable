@@ -1,0 +1,30 @@
+﻿@using WebApp.Model.GenericMvc.ChildPage
+@model ChildPageDescriptorBase
+
+@{
+    Model.SaveChildPageMusterFilterToSession(Context.Session);
+}
+
+@if (Model.MasterEntityFk > 0)
+{  
+    <div class="row">
+        <div class="col-md-12">
+            <div id="@Model.ChildPageContainerId"></div>
+        </div>
+    </div>
+
+    <script>
+        $.ajax({
+            type: "GET",
+            url: '@Url.Action("Index", Model.ControllerName, new { isReadonly = Model.IsReadonly})',
+            data: '',
+            contentType: "application/json; charset=utf-8",
+            dataType: "HTML",
+            success: response =>
+            {
+                $(`#@Model.ChildPageContainerId`).html(response);
+            }
+        });
+    </script>
+}
+

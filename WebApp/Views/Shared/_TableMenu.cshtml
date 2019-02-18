@@ -1,0 +1,17 @@
+﻿@using Microsoft.AspNetCore.Mvc.Rendering
+@using WebApp.Components
+@using WebApp.Model.GenericMvc
+
+@{
+    var descriptor = Html.GetTableDescriptor();
+    var context = Html.GetPageContext();
+}
+
+<div style="margin: 10px">
+    @if (context.TableCanAdd)
+    {
+        @await Component.InvokeAsync(typeof(ButtonComponent), ButtonViewModel.Create("Add new", "Create", "btn btn-primary btn-sm"))
+    }
+    <span class="pull-right">@await Html.PartialAsync("_TableQuickMenu", descriptor.GetQuickMenuViewModel())</span>
+    <div class="clearfix"></div>
+</div>

@@ -1,0 +1,47 @@
+﻿@using Domain
+@model DomainBase
+
+@{
+    var descriptor = Html.GetFormDescriptor();
+    var context = Html.GetPageContext();
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="m-portlet">
+            @await Html.PartialAsync("_FormHeader", descriptor.Name)
+
+            @if (!descriptor.ReadOnly)
+            {
+                @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+            }
+
+            <form class="m-form m-form--fit m-form--label-align-right"
+                  asp-action="@(descriptor.Action ?? Html.GetAction())"
+                  data-ajax="true"
+                  data-ajax-method="Post"
+                  data-ajax-mode="replace"
+                  data-ajax-update="#@context.PageContainerId">
+
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(x => x.Id)
+                @Html.HiddenFor(x => x.RowVersion)
+
+                <div class="m-portlet__body">
+                    <div class="m-form__section m-form__section--first">
+                        @foreach (var itemDescriptor in descriptor.Items)
+                        {
+                            <div class="form-group m-form__group">
+                                @await Html.PartialAsync("_FormItem", Model, Html.SaveToViewDictionary(itemDescriptor))
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                @await Html.PartialAsync("_FormButtons")
+                @await Html.PartialAsync("_FormScripts")
+
+            </form>
+        </div>
+    </div>
+</div>

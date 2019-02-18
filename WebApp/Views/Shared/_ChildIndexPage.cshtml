@@ -1,0 +1,45 @@
+﻿@using Domain
+@using WebApp.Controllers
+@using WebApp.Model.GenericMvc
+@model GenericMvcIndexViewModel
+
+@{
+    var context = Html.GetPageContext();
+}
+
+@* ReSharper disable Mvc.PartialViewNotResolved *@
+@if (context.IsChildPage && Html.GetAction() == nameof(BasicCrudController<object, object>.IndexPage))
+{
+    @await Html.PartialAsync("_StatusMessage", Model.StatusMessage)
+    @await Html.PartialAsync("_AjaxContent", Url.Action(nameof(BasicCrudController<DomainBase, DomainBase>.Table)))
+}
+else
+{
+    <div class="m-portlet m-portlet--full-height">
+
+        <div data-toggle="collapse" data-target="#@context.PageCollapseContainerId" style="cursor: pointer">
+            <div class="m-portlet__head">
+                <div class="m-portlet__head-caption">
+                    <div class="m-portlet__head-title">
+                        <h3 class="m-portlet__head-text">
+                            @Html.GetPageHeader()
+                        </h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="collapse" id="@context.PageCollapseContainerId">
+            <div class="m-portlet__body">
+                <div class="m-section">
+                    <div class="m-section__content">
+                        <div id="@context.PageContainerId">
+                            @await Html.PartialAsync("_StatusMessage", Model.StatusMessage)
+                            @await Html.PartialAsync("_AjaxContent", Url.Action(nameof(BasicCrudController<DomainBase, DomainBase>.Table)))
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@* ReSharper restore Mvc.PartialViewNotResolved *@

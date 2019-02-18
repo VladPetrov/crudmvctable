@@ -1,0 +1,12 @@
+﻿@using Common.Extensions
+@using WebApp.Model.GenericMvc
+@model TableFilterDescriptor
+
+@{
+    var startFilterValue = Model.Model.Filters.FindStartDateFilter(Model.FieldId)?.Value?.ToString();
+    var endFilterValue = Model.Model.Filters.FindEndDateFilter(Model.FieldId)?.Value?.ToString();
+}
+
+<div>
+    <input data-field-id ="@Model.FieldId" data-filter-start-value="@startFilterValue" data-filter-end-value="@endFilterValue" type="text" class="form-control dateRangeFilter">
+</div>

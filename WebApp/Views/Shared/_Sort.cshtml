@@ -1,0 +1,9 @@
+﻿@model WebApp.Model.GenericMvc.TableSortDescriptor
+
+@Html.Label(Model.DisplayName, null, new
+{
+    @class = "tableSort",
+    data_field_id = Model.FieldId,
+    data_sort_direction = Model.DirectionAsInt
+})
+ 

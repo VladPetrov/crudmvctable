@@ -1,0 +1,28 @@
+﻿@using WebApp.Components
+@using WebApp.Model.GenericMvc
+@using Domain.Transaction
+@using WebApp.Controllers
+@using WebApp.Extensions
+@using WebApp.Views.Shared.CommonButtons
+@using WebApp.Views.Transactions
+@model TransactionDomain
+
+@await Html.RenderPageHeaderAsync()
+
+<div class="m-content">
+    @await Html.FormTwoColumnsAsync(TransactionFormDescriptor.Get(true))
+
+    <div class="row">
+        <div class="m-form__actions">
+            @await Component.InvokeAsync(typeof(ButtonComponent), ButtonViewModel.Create(CrudButtonsSettings.BackToListLabel, CrudButtonsSettings.BackToListUrl, CrudButtonsSettings.BackToListStyle))
+        </div>
+    </div>
+</div>
+
+<script>
+    {
+        const service = new scripts.DropdownService('@Url.Action(nameof(DropdownController.GetProjectsByEntities), nameof(DropdownController).ToControllerName())');
+
+        service.listen('@TransactionFormDescriptor.RecipientEntityId', '@TransactionFormDescriptor.ProjectId');
+    }
+</script>

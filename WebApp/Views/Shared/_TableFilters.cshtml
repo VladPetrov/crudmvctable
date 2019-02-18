@@ -1,0 +1,23 @@
+﻿@{
+    var descriptor = Html.GetTableDescriptor();
+    var context = Html.GetPageContext();
+}
+
+<tr>
+    @if (descriptor.RowsSelect)
+    {
+        <th></th>
+    }
+
+    @foreach (var descr in descriptor.Columns)
+    {
+        <th>
+            @await descr.RenderColumnFilter(Html)
+        </th>
+    }
+
+    @if (context.TableCanDelete || context.TableCanEdit || context.TableCanDetails)
+    {
+        <th style="text-align: right"></th>
+    }
+</tr>

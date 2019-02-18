@@ -1,0 +1,18 @@
+﻿@using Domain
+@using WebApp.Controllers
+
+@model TableViewModel
+
+@{
+    var context = Html.GetPageContext();
+    var serviceName = context.TableServiceName;
+}
+
+@* ReSharper disable Mvc.ActionNotResolved *@
+<script>
+    scripts.TableService.initService('@serviceName',
+        () => new scripts.TableService('@context.TableContainerId',
+            '@Url.Action(nameof(GenericCrudController<DomainBase, DomainBase>.ApplyFilters))',
+            '@Url.Action(nameof(GenericCrudController<DomainBase, DomainBase>.Table))',
+            @Model.PagingInfo.ItemsPerPage));
+</script>

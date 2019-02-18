@@ -1,0 +1,54 @@
+﻿@using DAL.Model
+@using DAL.Repositories
+@using WebApp.Controllers
+@using WebApp.Extensions
+@using WebApp.Model.Transactions
+@model TransactionFilesViewModel
+@inject IValueObjectRepository Repository;
+
+@{
+    Layout = null;
+    // TODO
+    //var files = Repository.GetItems<File>(x => x.TransactionId == Model.TransactionId);
+    var files = Repository.GetItems<File>(x => x.Id == Model.TransactionId);
+}
+
+<div id="@TransactionFilesViewModel.ContainerId">
+    <div class="form-group">
+        @Html.Label("Files", null, htmlAttributes: new {@class = "control-label col-md-2"})
+        <div class="col-md-10">
+            @await Html.PartialAsync("_FilesUpload", new TransactionUploadFilesViewModel(Model.TransactionId))
+            <ul class="list-group">
+                @foreach (var file in files)
+                {
+                    <li class="list-group-item">@file.Name <span class="glyphicon glyphicon-remove" style="cursor: pointer; float: right;" onclick="deleteFile(@file.Id)"></span></li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script>
+    function deleteFile(fileId)
+    {
+        $.ajax({
+            url: '@Url.Action(nameof(FilesController.DeleteFile), nameof(FilesController).ToControllerName())' + `/${fileId}`,
+            type: 'DELETE',
+            data: {},
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function(data)
+            {
+                $.get('@Url.Action(nameof(TransactionsController.GetFiles), new {id = Model.TransactionId})', response =>
+                {
+                    $("#@TransactionFilesViewModel.ContainerId").html(response);
+                });
+            },
+            error: function(xhr, error, status)
+            {
+                console.log(error, status);
+            }
+        });
+    }
+</script>

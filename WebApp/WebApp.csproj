@@ -1,0 +1,147 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TypeScriptToolsVersion>3.1</TypeScriptToolsVersion>
+    <UserSecretsId>39cdf7d5-61ad-49c2-bf7a-041acefebabe</UserSecretsId>
+	<TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
+	<TypeScriptEnabled>false</TypeScriptEnabled>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Scripts\common\index.ts" />
+    <None Remove="Scripts\common\Singletone.ts" />
+    <None Remove="Scripts\common\stringConstants.ts" />
+    <None Remove="Scripts\dragAndDropFileUploader.ts" />
+    <None Remove="Scripts\dropdownService.ts" />
+    <None Remove="Scripts\EditProjectAndCategoryService\editProjectAndCategoryService.ts" />
+    <None Remove="Scripts\EndBalanceService\endBalanceService.ts" />
+    <None Remove="Scripts\filesPreviewService\filesPreviewService.ts" />
+    <None Remove="Scripts\FormScripts\formScripts.ts" />
+    <None Remove="Scripts\index.ts" />
+    <None Remove="Scripts\manyToManyRelationService\manyToManyRelationServiceCommon.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Scripts\manyToManyReleationService.ts" />
+    <None Remove="Scripts\tableService\clearSearch.ts" />
+    <None Remove="Scripts\tableService\filters\boolFilter.ts" />
+    <None Remove="Scripts\TableService\filters\common.ts" />
+    <None Remove="Scripts\tableService\filters\dateRange.ts" />
+    <None Remove="Scripts\tableService\filters\enumFilter.ts" />
+    <None Remove="Scripts\tableService\filters\filtersCommon.ts" />
+    <None Remove="Scripts\tableService\filters\index.ts" />
+    <None Remove="Scripts\tableService\filters\numberFilter.ts" />
+    <None Remove="Scripts\tableService\filters\valueObjectFilter.ts" />
+    <None Remove="Scripts\TableService\rowsSelect\rowsSelect.ts" />
+    <None Remove="Scripts\tableService\sort\sortCommon.ts" />
+    <None Remove="Scripts\tableService\sort\sortCreator.ts" />
+    <None Remove="Scripts\tableService\stringFilter.ts" />
+    <None Remove="Scripts\tableService\tableServiceCommon.ts" />
+    <None Remove="Scripts\tableService\xnr.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Logs\" />
+    <Folder Include="wwwroot\js\scripts\" />
+    <Folder Include="wwwroot\lib\pdf-js\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="JetBrains.Annotations" Version="2018.2.1" />
+    <PackageReference Include="LightInject" Version="5.2.1" />
+    <PackageReference Include="LightInject.Microsoft.DependencyInjection" Version="2.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.6" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BLL.Infrastructure\BLL.Infrastructure.csproj" />
+    <ProjectReference Include="..\BLL\BLL.csproj" />
+    <ProjectReference Include="..\Common\Common.csproj" />
+    <ProjectReference Include="..\Configuration\Configuration.csproj" />
+    <ProjectReference Include="..\DAL.Infrastructure\DAL.Infrastructure.csproj" />
+    <ProjectReference Include="..\DAL\DAL.csproj" />
+    <ProjectReference Include="..\Domain\Domain.csproj" />
+    <ProjectReference Include="..\Security\Security.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="Scripts\common\index.ts" />
+    <TypeScriptCompile Include="Scripts\common\singleTone.ts" />
+    <TypeScriptCompile Include="Scripts\common\stringConstants.ts" />
+    <TypeScriptCompile Include="Scripts\dragAndDropFileUploader\dragAndDropFileUploader.ts" />
+    <TypeScriptCompile Include="Scripts\dropdownService\dropdownService.ts" />
+    <TypeScriptCompile Include="Scripts\EditProjectAndCategoryService\editProjectAndCategoryService.ts" />
+    <TypeScriptCompile Include="Scripts\EndBalanceService\endBalanceService.ts" />
+    <TypeScriptCompile Include="Scripts\filesPreviewService\filesPreviewService.ts" />
+    <TypeScriptCompile Include="Scripts\FormScripts\formScripts.ts" />
+    <TypeScriptCompile Include="Scripts\index.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="Scripts\manyToManyRelationService\manyToManyRelationService.ts" />
+    <TypeScriptCompile Include="Scripts\manyToManyRelationService\manyToManyRelationServiceCommon.ts" />
+    <TypeScriptCompile Include="Scripts\tableService\clearSearch.ts" />
+    <TypeScriptCompile Include="Scripts\tableService\filters\boolFilter.ts" />
+    <TypeScriptCompile Include="Scripts\TableService\filters\common.ts" />
+    <TypeScriptCompile Include="Scripts\tableService\filters\dateRange.ts" />
+    <TypeScriptCompile Include="Scripts\tableService\filters\enumFilter.ts" />
+    <TypeScriptCompile Include="Scripts\tableService\filters\filtersCommon.ts" />
+    <TypeScriptCompile Include="Scripts\tableService\filters\index.ts" />
+    <TypeScriptCompile Include="Scripts\tableService\filters\numberFilter.ts" />
+    <TypeScriptCompile Include="Scripts\tableService\filters\stringFilter.ts" />
+    <TypeScriptCompile Include="Scripts\tableService\filters\valueObjectFilter.ts" />
+    <TypeScriptCompile Include="Scripts\TableService\rowsSelect\rowsSelect.ts" />
+    <TypeScriptCompile Include="Scripts\tableService\sort\sortCommon.ts" />
+    <TypeScriptCompile Include="Scripts\tableService\sort\sortCreator.ts" />
+    <TypeScriptCompile Include="Scripts\tableService\tableServiceCommon.ts" />
+    <TypeScriptCompile Include="Scripts\common\xhr.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Views\Categories\Details.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Categories\Edit.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Categories\_EditModel.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Categories\_DisplayModel.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Entities\Delete.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Entities\_EditModel.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Entities\_DisplayModel.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Shared\_ManyToManyRelatioTable.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\SubCategories\_DisplayModel.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\SubCategories\_EditModel.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\SubCategories\_TableConfig.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Transactions\_CustomTableScripts.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Transactions\_EndBalancePanel.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Transactions\_EndBalanceTable.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+  </ItemGroup>
+
+</Project>
