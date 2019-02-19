@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebApp.Controllers
 {
-    [Authorize(Roles = RoleNames.Admin)]
     public class HomeController : Controller
     {
         public IActionResult Index()
