@@ -385,5 +385,6 @@ Html.FormTwoColumnsAsync(</FONT></FONT></FONT><FONT COLOR="#2b91af"><FONT FACE="
 </P>
 <P STYLE="margin-bottom: 0in; line-height: 100%"><BR>
 </P>
+	<a href="https://crudmvctable.azurewebsites.net/Transactions">Working application could be found here</a>
 </BODY>
 </HTML>
