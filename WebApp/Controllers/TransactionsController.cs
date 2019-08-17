@@ -4,13 +4,12 @@ using Common.Table;
 using Domain.Files;
 using Domain.Transaction;
 using Microsoft.AspNetCore.Mvc;
-using WebApp.Filters;
 using WebApp.Model.GenericMvc;
 using WebApp.Model.Transactions;
 
 namespace WebApp.Controllers
 {
-    [TableAction(TableActions.Add, TableActions.Edit)]
+    [SetAvailableTableActions(TableActions.Add, TableActions.Edit)]
     public class TransactionsController : MasterPageCrudController<TransactionDisplay, TransactionDomain>
     {
         protected override string Title => "Transactions";

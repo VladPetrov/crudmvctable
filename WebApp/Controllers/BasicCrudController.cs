@@ -13,7 +13,7 @@ using WebApp.Model.GenericMvc;
 
 namespace WebApp.Controllers
 {
-    public abstract class BasicCrudController<TCreate, TEdit> : ContextAwareController
+    public abstract class BasicCrudController<TCreate, TEdit> : ParentChildPageController
         where TCreate : new()
         where TEdit : new()
     {

@@ -14,7 +14,7 @@ using WebApp.Model.GenericMvc;
 namespace WebApp.Controllers
 {
     [Authorize]
-    public abstract class GenericManyToManyLeftController<TContext, TManyToManyEntity, TLeftLink, TRightLink> : ContextAwareController //todo reject ont ajax requests
+    public abstract class GenericManyToManyLeftController<TContext, TManyToManyEntity, TLeftLink, TRightLink> : ParentChildPageController //todo reject ont ajax requests
         where TContext : DbContext
         where TLeftLink : EntityBase
         where TRightLink : EntityBase
