@@ -1,18 +1,19 @@
-﻿using Common.Exceptions;
+﻿using Common;
+using Common.Exceptions;
 using Common.Table;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Common;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 using WebApp.Extensions;
+using WebApp.Filters;
 using WebApp.Model;
 using WebApp.Model.GenericMvc;
 
 namespace WebApp.Controllers
 {
+    [TableActionsAccessCheckFilter]
     public abstract class BasicCrudController<TCreate, TEdit> : ParentChildPageController
         where TCreate : new()
         where TEdit : new()

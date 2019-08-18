@@ -5,7 +5,6 @@
         Add,
         Details,
         Edit,
-        Delete,
-        Readonly
+        Delete
     }
 }

@@ -11,6 +11,8 @@ namespace WebApp.Model.GenericMvc
 
         public bool IsChildPage { get; set; }
 
+        private bool _isReadonly;
+
         public void SetTableActions(IEnumerable<TableActions> actions)
         {
             _actions = actions?.ToList();
@@ -18,7 +20,7 @@ namespace WebApp.Model.GenericMvc
 
         public void SetTableIsReadonly()
         {
-            _actions.Add(TableActions.Readonly);
+            _isReadonly = true;
         }
         
         public static string Name => "MvcPageContext";
@@ -28,14 +30,11 @@ namespace WebApp.Model.GenericMvc
         public string PageCollapseContainerId => ControllerName.ToPageCollapseContainerId();
         public string ManyToManyServiceName => ControllerName.ManyToManyServiceName();
         
-        public bool TableCanEdit => CheckAction(TableActions.Edit);
-        public bool TableCanAdd => CheckAction(TableActions.Add);
-        public bool TableCanDetails => _actions.All(x => x == TableActions.Readonly) || _actions.Contains(TableActions.Details);
-        public bool TableCanDelete => CheckAction(TableActions.Delete);
+        public bool TableCanEdit => HaveAction(TableActions.Edit);
+        public bool TableCanAdd => HaveAction(TableActions.Add);
+        public bool TableCanDelete => HaveAction(TableActions.Delete);
+        public bool TableCanDetails => _actions.Contains(TableActions.Details);
 
-        private bool CheckAction(TableActions action)
-        {
-            return !_actions.Any() || !_actions.Contains(TableActions.Readonly) && _actions.Contains(action);
-        }
+        private bool HaveAction(TableActions action) => !_isReadonly && _actions.Contains(action);
     }
 }

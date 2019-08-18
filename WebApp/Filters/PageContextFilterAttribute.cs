@@ -10,13 +10,11 @@ using WebApp.Model.GenericMvc;
 
 namespace WebApp.Filters
 {
-    public class PageContextFilterAttribute : ActionFilterAttribute
+    public class PageContextFilterAttribute : ActionFilterAttribute, IOrderedFilter
     {
-        public TableActions[] TableActions { get; }
-
-        public PageContextFilterAttribute(params TableActions[] tableActions)
+        public PageContextFilterAttribute()
         {
-            TableActions = tableActions;
+            Order = 2;
         }
         public override void OnActionExecuting(ActionExecutingContext context)
         {
@@ -25,8 +23,6 @@ namespace WebApp.Filters
             SetAvailableTableActions(context);
 
             //read user permissions and set access level
-
-            //check permissions
         }
 
         private void SetPageContext(ActionExecutingContext context)
