@@ -1,5 +1,8 @@
-﻿namespace WebApp.Controllers
+﻿using WebApp.Filters;
+
+namespace WebApp.Controllers
 {
+    [PageContextFilter]
     public abstract class ParentChildPageController : MvcController
     {
         public bool IsChildPage { get; }

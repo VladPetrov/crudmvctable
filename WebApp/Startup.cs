@@ -196,7 +196,6 @@ namespace WebApp
             builder.AddMvcOptions(x =>
             {
                 //x.Filters.Add<AntiforgeryFilter>();
-                x.Filters.Add<PageContextFilterAttribute>();
                 x.Filters.Add(new GlobalExceptionHandler());
                 x.ModelBinderProviders.Insert(0, new BinderProvider());
             });
