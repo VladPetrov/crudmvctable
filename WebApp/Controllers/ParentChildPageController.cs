@@ -2,7 +2,7 @@
 
 namespace WebApp.Controllers
 {
-    [PageContextFilter]
+    //[PageContextFilter]
     public abstract class ParentChildPageController : MvcController
     {
         public bool IsChildPage { get; }

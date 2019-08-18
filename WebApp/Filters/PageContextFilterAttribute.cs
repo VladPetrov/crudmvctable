@@ -14,7 +14,7 @@ namespace WebApp.Filters
     {
         public PageContextFilterAttribute()
         {
-            Order = 2;
+            Order = 1;
         }
         public override void OnActionExecuting(ActionExecutingContext context)
         {

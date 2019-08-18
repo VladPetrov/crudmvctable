@@ -14,6 +14,7 @@ using WebApp.Model.GenericMvc;
 namespace WebApp.Controllers
 {
     [TableActionsAccessCheckFilter]
+    [PageContextFilter]
     public abstract class BasicCrudController<TCreate, TEdit> : ParentChildPageController
         where TCreate : new()
         where TEdit : new()
@@ -47,41 +48,6 @@ namespace WebApp.Controllers
         public abstract IActionResult Delete(long id);
 
         public abstract IActionResult DeleteConfirmed(long id);
-
-        public override void OnActionExecuted(Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext context)
-        {
-            CheckPermissionAction();
-            base.OnActionExecuted(context);
-        }
-
-        protected void CheckPermissionAction()
-        {
-            var context = ViewData.GetPageContext();
-
-            var actionName = ControllerContext.ActionDescriptor.ActionName;
-
-            if (!context.TableCanAdd && actionName == nameof(Create))
-            {
-                throw new Exception(
-                    $"Controller action is forbidden {actionName}"); //todo specific exception and global handling
-            }
-
-            if (!context.TableCanDetails && actionName == nameof(Details))
-            {
-                throw new Exception($"Controller action is forbidden {actionName}");
-            }
-
-            if (!context.TableCanDelete && actionName == nameof(Delete)
-                || actionName == nameof(DeleteConfirmed))
-            {
-                throw new Exception($"Controller action is forbidden {actionName}");
-            }
-
-            if (!context.TableCanEdit && actionName == nameof(Edit))
-            {
-                throw new Exception($"Controller action is forbidden {actionName}");
-            }
-        }
 
         protected ChildPageMusterFilter GetChildPageMusterFilter()
         {

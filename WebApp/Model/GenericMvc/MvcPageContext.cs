@@ -30,11 +30,19 @@ namespace WebApp.Model.GenericMvc
         public string PageCollapseContainerId => ControllerName.ToPageCollapseContainerId();
         public string ManyToManyServiceName => ControllerName.ManyToManyServiceName();
         
-        public bool TableCanEdit => HaveAction(TableActions.Edit);
-        public bool TableCanAdd => HaveAction(TableActions.Add);
-        public bool TableCanDelete => HaveAction(TableActions.Delete);
-        public bool TableCanDetails => _actions.Contains(TableActions.Details);
+        public bool TableCanEdit => IsActionEnabled(TableActions.Edit);
+        public bool TableCanAdd => IsActionEnabled(TableActions.Add);
+        public bool TableCanDelete => IsActionEnabled(TableActions.Delete);
+        public bool TableCanDetails => IsActionEnabled(TableActions.Details);
 
-        private bool HaveAction(TableActions action) => !_isReadonly && _actions.Contains(action);
+        public bool IsActionEnabled(TableActions action)
+        {
+            if (action == TableActions.Details)
+            {
+                return _actions.Contains(action);
+            }
+
+            return !_isReadonly && _actions.Contains(action);
+        }
     }
 }
