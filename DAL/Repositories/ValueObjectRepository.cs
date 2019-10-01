@@ -37,7 +37,14 @@ namespace DAL.Repositories
 
         public IEnumerable<ValueObject> GetItems<T>(Expression<Func<T, bool>> predicate) where T : EntityBase
         {
-            return Context.Set<T>().Where(predicate).ProjectTo<ValueObject>().ToList();
+            var query = Context.Set<T>().AsQueryable();
+
+            if (predicate != null)
+            {
+                query = query.Where(predicate);
+            }
+
+            return query.ProjectTo<ValueObject>().ToList();
         }
     }
 }
