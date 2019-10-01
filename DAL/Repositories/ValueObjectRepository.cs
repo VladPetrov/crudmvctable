@@ -16,23 +16,10 @@ namespace DAL.Repositories
         public ValueObjectRepository(DataBase context) : base(context)
         {
         }
-        
-        public IEnumerable<ValueObject> GetItems(Type type, Expression<Func<object, bool>> predicate = null)
+
+        public IEnumerable<ValueObject> GetItems<T>() where T : EntityBase
         {
-            var items = Context.Set(type);
-
-            if (predicate != null)
-            {
-                items = items.Where(predicate).Cast(type);
-            }
-
-            var filtered = items.ProjectTo<ValueObject>().ToList();
-
-            var result = new List<ValueObject>();
-
-            Mapper.Map(filtered, result, filtered.GetType(), result.GetType());
-
-            return result;
+            return GetItems<T>(null);
         }
 
         public IEnumerable<ValueObject> GetItems<T>(Expression<Func<T, bool>> predicate) where T : EntityBase

@@ -7,8 +7,8 @@
 @inject IValueObjectRepository Repository
 
 @{
-    var projects = Repository.GetItems(typeof(Project));
-    var categories = Repository.GetItems(typeof(Category));
+    var projects = Repository.GetItems<Project>();
+    var categories = Repository.GetItems<Category>();
 }
 
 <div class="modal fade show" id="projectAndCategoryEditView" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" style="display: none; padding-right: 16px;">

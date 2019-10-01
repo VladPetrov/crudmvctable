@@ -5,37 +5,38 @@ using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using Configuration.IoC;
+using DAL.Model;
+using DAL.Repositories;
 using WebApp.Model.Forms;
 
 namespace WebApp.Model.TableRenders.Renders
 {
-    public class ValueObjectRenderer<T> : IFormItemRenderer
+    public class ValueObjectRenderer<T> : IFormItemRenderer where T : EntityBase
     {
         private readonly string _optionalLabel;
 
-        private readonly Expression<Func<object, bool>> _predicate;
+        private readonly Expression<Func<T, bool>> _predicate;
 
         public ValueObjectRenderer(Expression<Func<T, bool>> predicate = null):this(null, predicate){}
 
         public ValueObjectRenderer(string optionalLabel, Expression<Func<T, bool>> predicate = null)
         {
             _optionalLabel = optionalLabel;
-
-            if (predicate != null)
-            {
-                var parameter = Expression.Parameter(typeof(object));
-                _predicate = Expression.Lambda<Func<object, bool>>(Expression.Invoke(predicate, Expression.Convert(parameter, typeof(T))), parameter);
-            }
+            _predicate = predicate;
         }
 
         public async Task<IHtmlContent> RenderAsync(IHtmlHelper htmlHelper, FormItemsDescriptor descriptor)
         {
+            var repository = (IValueObjectRepository)Ioc.Container.GetInstance(typeof(IValueObjectRepository));
+
+            var items = repository.GetItems(_predicate).ToSelectListItems();
+
             var renderInfo = new ValueObjectViewModel
             {
                 Descriptor = descriptor,
                 OptionalLabel = _optionalLabel,
-                Type = typeof(T),
-                Predicate = _predicate
+                Items = items
             };
 
             var dictionary = new ViewDataDictionary(htmlHelper.ViewData)
