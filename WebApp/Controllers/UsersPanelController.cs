@@ -4,9 +4,12 @@ using System.Threading.Tasks;
 using BLL;
 using Common;
 using Common.StringConstants;
+using DAL.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
+using WebApp.Extensions;
 using WebApp.Model.UsersPanel;
 
 
@@ -17,13 +20,16 @@ namespace WebApp.Controllers
     public class UsersPanelController : Controller
     {
         private AppsUserManager UserManager { get; }
-        
+
+        private IEmailSender EmailSender { get; }
+
         [TempData]
         public string StatusMessage { get; set; }
 
-        public UsersPanelController(AppsUserManager userManager)
+        public UsersPanelController(AppsUserManager userManager, IEmailSender emailSender)
         {
             UserManager = userManager;
+            EmailSender = emailSender;
         }
 
         [HttpGet]
@@ -91,13 +97,42 @@ namespace WebApp.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Delete(string id)
+        public IActionResult Create()
         {
-            throw new NotImplementedException();
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(CreateUserViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+
+                var result = await UserManager.CreateAsync(user, model.Password);
+
+                if (result.Succeeded)
+                {
+                    Log.Logger().Information("User created a new account with password.");
+
+                    var code = await UserManager.GenerateEmailConfirmationTokenAsync(user);
+
+                    var callbackUrl = Url.EmailConfirmationLink(user.Id.ToString(), code, Request.Scheme);
+
+                    await EmailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);
+                    
+                    Log.Logger().Information("User created a new account with password.");
+
+                    return RedirectToAction(nameof(Index));
+                }
+
+                AddErrors(result);
+            }
+            return View(model);
         }
 
         [HttpGet]
-        public async Task<IActionResult> Create()
+        public async Task<IActionResult> Delete(string id)
         {
             throw new NotImplementedException();
         }

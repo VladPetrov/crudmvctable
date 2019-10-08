@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using Common;
+﻿using Common;
 using Common.StringConstants;
 using DAL.Model;
 using Microsoft.AspNetCore.Authentication;
@@ -8,8 +6,11 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
-using WebApp.Model.AccountViewModels;
+using System;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
 using WebApp.Extensions;
+using WebApp.Model.AccountViewModels;
 
 
 namespace WebApp.Controllers
@@ -21,12 +22,14 @@ namespace WebApp.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
+        private readonly IHostingEnvironment _env;
 
-        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IEmailSender emailSender)
+        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IEmailSender emailSender, IHostingEnvironment env)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
+            _env = env;
         }
 
         [TempData] public string ErrorMessage { get; set; }
@@ -36,6 +39,13 @@ namespace WebApp.Controllers
         public async Task<IActionResult> Login(string returnUrl = null)
         {
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme); // Clear the existing external cookie to ensure a clean login process
+
+            if (_env.IsDevelopment())
+            {
+                await _signInManager.PasswordSignInAsync(Constants.DefaultUser, Constants.DefaultUserPassword, true, lockoutOnFailure: true);
+
+                return RedirectToLocal(returnUrl);
+            }
 
             ViewData["ReturnUrl"] = returnUrl;
             return View();
@@ -73,43 +83,6 @@ namespace WebApp.Controllers
         public IActionResult Lockout()
         {
             return View();
-        }
-
-        [HttpGet]
-        //[AllowAnonymous]
-        public IActionResult Register(string returnUrl = null)
-        {
-            throw  new NotImplementedException();
-
-            ViewData["ReturnUrl"] = returnUrl;
-            return View();
-        }
-
-        [HttpPost]
-        //[AllowAnonymous]
-        public async Task<IActionResult> Register(RegisterViewModel model, string returnUrl = null)
-        {
-            ViewData["ReturnUrl"] = returnUrl;
-            if (ModelState.IsValid)
-            {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email};
-                var result = await _userManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
-                {
-                    Log.Logger().Information("User created a new account with password.");
-
-                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    var callbackUrl = Url.EmailConfirmationLink(user.Id.ToString(), code, Request.Scheme);
-                    await _emailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);
-
-                    await _signInManager.SignInAsync(user, isPersistent: false);
-                    Log.Logger().Information("User created a new account with password.");
-                    return RedirectToLocal(returnUrl);
-                }
-
-                AddErrors(result);
-            }
-            return View(model);
         }
 
         [HttpPost]

@@ -9,7 +9,7 @@ namespace WebApp.Extensions
         {
             return urlHelper.Action(
                 action: nameof(AccountController.ConfirmEmail),
-                controller: "Account",
+                controller: nameof(AccountController).ToControllerName(),
                 values: new { userId, code },
                 protocol: scheme);
         }
@@ -18,7 +18,7 @@ namespace WebApp.Extensions
         {
             return urlHelper.Action(
                 action: nameof(AccountController.ResetPassword),
-                controller: "Account",
+                controller: nameof(AccountController).ToControllerName(),
                 values: new { userId, code },
                 protocol: scheme);
         }

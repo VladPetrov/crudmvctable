@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace WebApp.Model.AccountViewModels
+namespace WebApp.Model.UsersPanel
 {
-    public class RegisterViewModel
+    public class CreateUserViewModel
     {
         [Required]
         [EmailAddress]

@@ -9,9 +9,6 @@ namespace DAL.DbManagers
 {
     public class BasicSeed : AbstractSeed
     {
-        public const string SystemUserLogin = "system@test.com";
-        public const string SystemPass = "Df34rwr235";
-
         private UserManager<ApplicationUser> UserManager { get; }
         private RoleManager<IdentityRole> RoleManager { get; }
 
@@ -29,9 +26,9 @@ namespace DAL.DbManagers
         
         private async Task PopulateSystemUser()
         {
-            var user = new ApplicationUser { UserName = SystemUserLogin, Email = SystemUserLogin};
+            var user = new ApplicationUser { UserName = Constants.DefaultUser, Email = Constants.DefaultUser};
 
-            var result = await UserManager.CreateAsync(user, SystemPass);
+            var result = await UserManager.CreateAsync(user, Constants.DefaultUserPassword);
 
             Defensive.AssertTrue(result.Succeeded, string.Join("; ", result.Errors));
 
