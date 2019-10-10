@@ -99,13 +99,6 @@ export class SortCreator
 
     private static getDirection(label$:JQuery): OrderDirection | null
     {
-        const valueStr:string = label$.data("sort-direction");
-
-        if (!valueStr)
-        {
-            return null;
-        }
-
-        return OrderDirection[valueStr];
+        return label$.data("sort-direction");
     }
 }
