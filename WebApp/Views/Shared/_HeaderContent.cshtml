@@ -1,0 +1,33 @@
+﻿<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>@ViewData["Title"] - Bank Scraper</title>
+
+<link href="~/metronic/vendors/base/vendors.bundle.css" rel="stylesheet" />
+<link href="~/metronic/demo/demo3/base/style.bundle.css" rel="stylesheet" />
+
+<script src="~/metronic/vendors/base/vendors.bundle.js"></script>
+<script src="~/metronic/demo/demo3/base/scripts.bundle.js"></script>
+
+<environment exclude="Development">
+    <script src="~/js/site.min.js" asp-append-version="true"></script>
+    <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+</environment>
+
+<environment include="Development">
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</environment>
+
+<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script>
+<script>
+    WebFont.load({
+        google: { "families": ["Poppins:300,400,500,600,700", "Roboto:300,400,500,600,700"] },
+        active: function () {
+            sessionStorage.fonts = true;
+        }
+    });
+</script>
+
+<script src="~/lib/jquery-ajax-unobtrusive-master/dist/jquery.unobtrusive-ajax.min.js"></script>
+
+@await Html.PartialAsync("_ApplictionScripts")

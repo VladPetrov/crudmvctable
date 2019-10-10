@@ -1,0 +1,21 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    @await Html.PartialAsync("_HeaderContent")
+
+    @RenderSection("Scripts", required: false)
+</head>
+<body class="m-page--fluid m--skin- m-content--skin-light2 m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default">
+@await Html.PartialAsync("_ModalService")
+<!-- begin:: Page -->
+@RenderBody()
+<!-- end:: Page -->
+
+<!-- begin::Scroll Top -->
+<div id="m_scroll_top" class="m-scroll-top">
+    <i class="la la-arrow-up"></i>
+</div>
+<!-- end::Scroll Top -->
+
+</body>
+</html>
