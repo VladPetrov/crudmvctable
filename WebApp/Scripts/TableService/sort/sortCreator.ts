@@ -38,8 +38,6 @@ export class SortCreator
         {
             const cssClass: string = direction === OrderDirection.Asc ? SortCreator.ascClass : SortCreator.descClass;
             arrowContainer$.addClass(cssClass);
-
-            service.upsertSort({ fieldId: fieldId, direction: direction });
         }
 
         this.register(fieldId, arrowContainer$, service);
