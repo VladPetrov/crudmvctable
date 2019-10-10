@@ -29,6 +29,8 @@
             if (typeof (callback) === "function") {
                 callback();
             }
+
+            console.log(input);
         }
 
         function triggerBtn() {

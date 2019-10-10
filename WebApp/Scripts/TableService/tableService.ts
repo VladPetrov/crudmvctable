@@ -86,12 +86,7 @@ export class TableService extends SingleToneBase
 
     public removeFilter(field: string)
     {
-        let index: number;
-
-        while ((index = this.filterIndex(field)) >= 0)
-        {
-            this.filters.splice(index);
-        }
+        this.filters = this.filters.filter(x => x.fieldId != field && x.group == null);
     }
 
     public registerSort(info: SortInfo)
