@@ -1,82 +1,69 @@
-﻿
-
-export function extendClearSearch()
+﻿export class ClearSearch
 {
-    $.fn.extend({
-        clearSearch: function(callback: () => void)
-        {
-            const clearClass: string = 'clear_input';
-            const focusAfterClear: boolean = true;
-            const linkText: string = '&times;';
+    public static register(input: HTMLElement, callback: () => void): void {
+        const clearClass: string = 'clear_input';
+        const focusAfterClear: boolean = true;
+        const linkText: string = '&times;';
 
-            return this.each(() =>
-            {
-                const divClass = clearClass + '_div';
-                var $this = $(this);
+        const divClass = clearClass + '_div';
+        var $this = $(input);
 
-                if (!$this.parent().hasClass(divClass))
-                {
-                    $this.wrap(`<div style='position: relative;' class='${divClass}'>${$this.html()}</div>`);
+        if (!$this.parent().hasClass(divClass)) {
+            $this.wrap(`<div style='position: relative;' class='${divClass}'>${$this.html()}</div>`);
 
-                    $this.after(
-                        `<a style='position: absolute; cursor: pointer;' class='${clearClass}'>${linkText}</a>`);
-                }
+            $this.after(
+                `<a style='position: absolute; cursor: pointer;' class='${clearClass}'>${linkText}</a>`);
+        }
 
-                var btn = $this.next();
+        var btn = $this.next(); 
 
-                function clearField()
-                {
-                    $this.val('').change();
+        function clearField() {
+            $this.val('').change();
 
-                    triggerBtn();
+            triggerBtn();
 
-                    if (focusAfterClear)
-                    {
-                        $this.focus();
-                    }
+            if (focusAfterClear) {
+                $this.focus();
+            }
 
-                    if (typeof (callback) === "function")
-                    {
-                        callback();
-                    }
-                }
+            if (typeof (callback) === "function") {
+                callback();
+            }
+        }
 
-                function triggerBtn()
-                {
-                    if (inputHasText())
-                    {
-                        btn.show();
-                    } else
-                    {
-                        btn.hide();
-                    }
-                    applyButtonCss();
-                }
+        function triggerBtn() {
+            if (inputHasText()) {
+                btn.show();
+            } else {
+                btn.hide();
+            }
+            applyButtonCss();
+        }
 
-                function inputHasText()
-                {
-                    return $this.val().toString().replace(/^\s+|\s+$/g, '').length > 0;
-                }
+        function inputHasText() {
+            return $this.val().toString().replace(/^\s+|\s+$/g, '').length > 0;
+        }
 
-                function applyButtonCss()
-                {
-                    const width = $this.outerWidth();
-                    const height = $this.outerHeight();
+        function applyButtonCss() {
+            const width = $this.outerWidth();
+            const height = $this.outerHeight();
 
-                    btn.css({
-                        top: height / 2 - btn.height() / 2,
-                        left: width - btn.width() - 10
-                    });
-                }
-
-                btn.on('click', clearField);
-                $this.on('keyup keydown change focus', triggerBtn);
-
-                $(document as any).ready(() =>
-                {
-                    triggerBtn();
-                });
+            btn.css({
+                top: height / 2 - btn.height() / 2,
+                left: width - btn.width() - 10
             });
         }
-    });
+
+        btn.on('click', clearField);
+        $this.on('keyup keydown change focus', triggerBtn);
+
+        $(document as any).ready(() => {
+            triggerBtn();
+        });
+    }
+}
+
+export function clearSearch()
+{
+    
 }

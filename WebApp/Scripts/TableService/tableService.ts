@@ -13,12 +13,9 @@ import {
     BoolFilterCreator,
     DateRangeCreator
 } from './filters';
-import { extendClearSearch } from './clearSearch';
 import { Xhr, SingleToneBase } from '../common';
 import { SortCreator } from './sort/sortCreator';
 import { RowsSelectManager } from './rowsSelect/rowsSelect';
-
-extendClearSearch();
 
 export class TableService extends SingleToneBase
 {

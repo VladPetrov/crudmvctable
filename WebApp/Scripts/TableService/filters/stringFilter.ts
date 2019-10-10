@@ -1,6 +1,7 @@
 ﻿import { TableService } from "./filtersCommon";
 import { TableFilter } from "../tableServiceCommon";
 import { getFilterValue, getFilterFieldId } from "./common";
+import { ClearSearch } from "../clearSearch";
 
 export class StringFilterCreator //implements ITableFilterCreator
 {
@@ -27,7 +28,7 @@ export class StringFilterCreator //implements ITableFilterCreator
             input$.val(value);
         }
 
-        (input$ as any).clearSearch(() =>
+        ClearSearch.register(input, () =>
         {
             service.removeFilter(fieldId);
             service.filterData();
