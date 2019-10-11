@@ -139,8 +139,8 @@ export class TableService extends SingleToneBase
 
     private resetService(): void
     {
-        //this.filters = [];
-        //this.sorts = [];
+        this.filters = [];
+        this.sorts = [];
         this.sortsInfo = [];
         //this.onFilterTable.complete();
     }
