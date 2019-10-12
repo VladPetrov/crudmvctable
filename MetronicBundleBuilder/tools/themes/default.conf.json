@@ -6,19 +6,7 @@
       "rtl": {
         "enabled": false,
         "skip": [
-          "select2",
-          "socicon",
-          "line-awesome",
-          "flaticon",
-          "metronic",
-          "fontawesome5",
-          "jstree",
-          "owl.carousel",
-          "fullcalendar",
-          "bootstrap-datepicker",
-          "bootstrap-datetime-picker",
-          "bootstrap-switch",
-          "nouislider"
+
         ]
       },
       "jsUglify": true,
