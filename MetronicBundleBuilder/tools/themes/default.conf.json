@@ -21,15 +21,15 @@
           "nouislider"
         ]
       },
-      "jsUglify": false,
-      "cssMinify": false,
+      "jsUglify": true,
+      "cssMinify": true,
       "jsSourcemaps": false,
       "cssSourcemaps": false
     },
     "path": {
       "src": "./../src",
       "node_modules": "./node_modules",
-      "demo_api_url": "https://keenthemes.com/metronic/themes/themes/metronic/dist/preview/"
+      "demo_api_url": ""
     },
     "dist": [
       "./../../WebApp/wwwroot/metronic"
