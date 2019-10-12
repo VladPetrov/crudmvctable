@@ -11,14 +11,16 @@
     Defensive.AssertNotNull(property, $"Requested prop name '{itemDescriptor}' was not found");
 
     var propName = property.Metadata.Name;
+
+    var isReadonly = itemDescriptor.Readonly || descriptor.ReadOnly;
 }
 
 @if (itemDescriptor.Type == typeof(bool))
 {
     var htmlAttributes = new object();
     var readonlyClass = "";
-
-    if (itemDescriptor.Readonly || descriptor.ReadOnly)
+    
+    if (isReadonly)
     {
         htmlAttributes = htmlAttributes.Merge(new { disabled = "disabled", @readonly = "readonly" });
         readonlyClass = "m-checkbox--disabled";
@@ -40,7 +42,7 @@ else
 
     object htmlAttributes = new { @class = "form-control m-input" };
 
-    if (itemDescriptor.Readonly || descriptor.ReadOnly)
+    if (isReadonly)
     {
         htmlAttributes = htmlAttributes.Merge(new { disabled = "disabled", @readonly = "readonly" });
     }
