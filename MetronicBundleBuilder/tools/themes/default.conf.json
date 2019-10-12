@@ -298,45 +298,6 @@
                                 "{$config.path.node_modules}/toastr/build/toastr.min.js"
                             ]
                         },
-                        "morris.js": {
-                            "styles": [
-                                "{$config.path.node_modules}/morris.js/morris.css"
-                            ],
-                            "scripts": [
-                                "{$config.path.node_modules}/raphael/raphael.js",
-                                "{$config.path.node_modules}/morris.js/morris.js"
-                            ]
-                        },
-                        "chartist": {
-                            "styles": [
-                                "{$config.path.node_modules}/chartist/dist/chartist.min.css"
-                            ],
-                            "scripts": [
-                                "{$config.path.node_modules}/chartist/dist/chartist.js"
-                            ]
-                        },
-                        "chart.js": {
-                            "scripts": [
-                                "{$config.path.node_modules}/chart.js/dist/Chart.bundle.js",
-                                "{$config.path.src}/js/framework/components/plugins/charts/chart.init.js"
-                            ]
-                        },
-                        "bootstrap-session-timeout": {
-                            "scripts": [
-                                "{$config.path.src}/vendors/bootstrap-session-timeout/dist/bootstrap-session-timeout.min.js"
-                            ]
-                        },
-                        "jquery-idletimer": {
-                            "scripts": [
-                                "{$config.path.src}/vendors/jquery-idletimer/idle-timer.min.js"
-                            ]
-                        },
-                        "counterup": {
-                            "scripts": [
-                                "{$config.path.node_modules}/waypoints/lib/jquery.waypoints.js",
-                                "{$config.path.node_modules}/counterup/jquery.counterup.js"
-                            ]
-                        },
                         "socicon": {
                             "styles": [
                                 "{$config.path.node_modules}/socicon/css/socicon.css"
