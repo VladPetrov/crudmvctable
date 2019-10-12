@@ -1,14 +1,13 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using BLL;
+﻿using BLL;
 using Common;
 using Common.StringConstants;
 using DAL.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 using WebApp.Extensions;
 using WebApp.Model.UsersPanel;
 
@@ -21,12 +20,12 @@ namespace WebApp.Controllers
     {
         private AppsUserManager UserManager { get; }
 
-        private IEmailSender EmailSender { get; }
+        private IEmailSenderService EmailSender { get; }
 
         [TempData]
         public string StatusMessage { get; set; }
 
-        public UsersPanelController(AppsUserManager userManager, IEmailSender emailSender)
+        public UsersPanelController(AppsUserManager userManager, IEmailSenderService emailSender)
         {
             UserManager = userManager;
             EmailSender = emailSender;

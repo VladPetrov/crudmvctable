@@ -1,12 +1,12 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using BLL;
 using Common;
 using Common.StringConstants;
 using DAL.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Threading.Tasks;
 using WebApp.Extensions;
 using WebApp.Model.ManageViewModels;
 
@@ -18,12 +18,12 @@ namespace WebApp.Controllers
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly IEmailSender _emailSender;
+        private readonly IEmailSenderService _emailSender;
 
         public ManageController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
-            IEmailSender emailSender)
+            IEmailSenderService emailSender)
         {
             _userManager = userManager;
             _signInManager = signInManager;

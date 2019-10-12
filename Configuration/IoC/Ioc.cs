@@ -9,7 +9,6 @@ using DAL.Model;
 using DAL.Repositories;
 using JetBrains.Annotations;
 using LightInject;
-using Microsoft.AspNetCore.Identity.UI.Services;
 
 namespace Configuration.IoC
 {
@@ -25,7 +24,7 @@ namespace Configuration.IoC
             Container.RegisterInstance(configurationProvider);
 
             Container.Register<IValidateService, ValidateService>();
-            Container.Register<IEmailSender, EmailSender>();
+            Container.Register<IEmailSenderService, EmailSenderService>();
             Container.Register<IMessageRepository, MessageRepository>();
             Container.Register<ISubMessageRepository, SubMessageRepository>();
             Container.Register<ITransactionRepository, TransactionRepository>();

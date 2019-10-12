@@ -1,15 +1,17 @@
 using Common;
 using Common.Configuration;
 using Configuration;
+using Configuration.AppSettings;
 using Configuration.IoC;
 using Configuration.Mapping;
 using DAL.DbManagers;
 using DAL.Model;
 using JetBrains.Annotations;
+using LightInject.Microsoft.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Configuration;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Logging;
@@ -18,10 +20,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using Configuration.AppSettings;
-using LightInject;
-using LightInject.Microsoft.DependencyInjection;
-using Microsoft.EntityFrameworkCore.Diagnostics;
+using Microsoft.AspNetCore.Mvc;
 using WebApp.Binders;
 using WebApp.Filters;
 using Log = Common.Log;
@@ -119,6 +118,9 @@ namespace WebApp
 
                 app.UseMvc(routes =>
                 {
+                    routes.MapRoute(name: "backoffice", template: "backoffice/{controller=Home}/{action=Index}/{id?}");
+                    routes.MapRoute(name: "backoffice2", template: "backoffice/{controller=Home}/{action=Index}/{isReadonly?}");
+
                     routes.MapRoute(name: "default", template: "{controller=Home}/{action=Index}/{id?}");
                     routes.MapRoute(name: "default2", template: "{controller=Home}/{action=Index}/{isReadonly?}");
                 });
@@ -191,7 +193,8 @@ namespace WebApp
 
 
             Log.Logger().Information("Configure MVC services...");
-            var builder = services.AddMvc();
+            var builder = services.AddMvc(options => options.EnableEndpointRouting = false)
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             builder.AddMvcOptions(x =>
             {

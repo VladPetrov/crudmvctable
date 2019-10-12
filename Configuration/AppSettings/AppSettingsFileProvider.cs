@@ -9,9 +9,8 @@ namespace Configuration.AppSettings
             var builder = new ConfigurationBuilder()
                 .SetBasePath(path)
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{environmentName}.json", optional: true)
-                .AddEnvironmentVariables();
-
+                .AddJsonFile($"appsettings.{environmentName}.json", optional: true);
+                
             return builder.Build();
         }
     }

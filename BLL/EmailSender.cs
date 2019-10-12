@@ -1,11 +1,17 @@
 ﻿using System.Threading.Tasks;
 using JetBrains.Annotations;
-using Microsoft.AspNetCore.Identity.UI.Services;
+
 
 namespace BLL
 {
+    public interface IEmailSenderService
+    {
+        Task SendEmailAsync(string email, string subject, string message);
+    }
+
+
     [UsedImplicitly]
-    public class EmailSender : IEmailSender
+    public class EmailSenderService : IEmailSenderService
     {
         public Task SendEmailAsync(string email, string subject, string message)
         {

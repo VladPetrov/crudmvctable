@@ -1,12 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
 	<PackageReference Include="iTextSharp" Version="5.5.13" />
-	<PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.6" />
+	<PackageReference Include="Microsoft.AspNetCore.App"/>
     <PackageReference Include="JetBrains.Annotations" Version="2018.2.1" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
     <PackageReference Include="Optional" Version="4.0.0" />
