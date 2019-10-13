@@ -103,24 +103,20 @@ namespace WebApp
                 }
                 else
                 {
-                    app.UseExceptionHandler("/Home/Error");
+                    app.UseExceptionHandler("/Home/Error"); //todo IS incorrect page diesnt exist yet!!
                     app.UseHsts();
-                }
-
-                if (env.IsDevelopment())
-                {
                     app.UseHttpsRedirection();
                 }
-
+                
                 app.UseStaticFiles(new StaticFileOptions { FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot")) });
                 app.UseSession();
                 app.UseAuthentication();
 
                 app.UseMvc(routes =>
                 {
-                    routes.MapRoute(name: "backoffice", template: "backoffice/{controller=Home}/{action=Index}/{id?}");
-                    routes.MapRoute(name: "backoffice2", template: "backoffice/{controller=Home}/{action=Index}/{isReadonly?}");
-
+                    routes.MapRoute(name: "Area", template: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                    routes.MapRoute(name: "Area2", template: "{area:exists}/{controller=Home}/{action=Index}/{isReadonly?}");
+                   
                     routes.MapRoute(name: "default", template: "{controller=Home}/{action=Index}/{id?}");
                     routes.MapRoute(name: "default2", template: "{controller=Home}/{action=Index}/{isReadonly?}");
                 });
@@ -193,7 +189,7 @@ namespace WebApp
 
 
             Log.Logger().Information("Configure MVC services...");
-            var builder = services.AddMvc(options => options.EnableEndpointRouting = false)
+            var builder = services.AddMvc(options => options.EnableEndpointRouting = false) //area bugfix for .net core 2.2. kill me in next release
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             builder.AddMvcOptions(x =>

@@ -42,6 +42,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Areas\BackOffice\Data\" />
+    <Folder Include="Areas\BackOffice\Models\" />
+    <Folder Include="Areas\BackOffice\Views\" />
     <Folder Include="Logs\" />
     <Folder Include="wwwroot\js\scripts\" />
     <Folder Include="wwwroot\lib\pdf-js\" />
@@ -51,7 +54,7 @@
     <PackageReference Include="JetBrains.Annotations" Version="2018.2.1" />
     <PackageReference Include="LightInject" Version="5.2.1" />
     <PackageReference Include="LightInject.Microsoft.DependencyInjection" Version="2.1.1" />
-    <PackageReference Include="Microsoft.AspNetCore.App"/>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.9" />
   </ItemGroup>
 
