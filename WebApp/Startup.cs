@@ -11,6 +11,8 @@ using LightInject.Microsoft.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
@@ -20,7 +22,6 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using Microsoft.AspNetCore.Mvc;
 using WebApp.Binders;
 using WebApp.Controllers;
 using WebApp.Extensions;
@@ -198,6 +199,7 @@ namespace WebApp
             {
                 //x.Filters.Add<AntiforgeryFilter>();
                 x.Filters.Add(new GlobalExceptionHandler());
+                x.Filters.Add(new AuthorizeFilter());
                 x.ModelBinderProviders.Insert(0, new BinderProvider());
             });
 

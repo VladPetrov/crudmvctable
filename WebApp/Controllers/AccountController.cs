@@ -15,7 +15,7 @@ using WebApp.Model.AccountViewModels;
 
 namespace WebApp.Controllers
 {
-    [Authorize(Roles = RoleNames.AdminAndBackOffice)]
+    [Authorize(Roles = RoleNames.AdminAndBackOfficeAndCustomer)]
     [Route("[controller]/[action]")]
     public class AccountController : Controller
     {

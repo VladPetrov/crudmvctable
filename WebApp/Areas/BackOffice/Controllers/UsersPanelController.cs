@@ -1,22 +1,21 @@
-﻿using BLL;
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
+using BLL;
 using Common;
 using Common.StringConstants;
 using DAL.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 using WebApp.Extensions;
 using WebApp.Model.UsersPanel;
 
-
-namespace WebApp.Controllers
+namespace WebApp.Areas.BackOffice.Controllers
 {
+
     [Authorize(Roles = RoleNames.Admin)]
-    [Route("[controller]/[action]")]
-    public class UsersPanelController : Controller
+    public class UsersPanelController : BackOfficeController
     {
         private AppsUserManager UserManager { get; }
 
