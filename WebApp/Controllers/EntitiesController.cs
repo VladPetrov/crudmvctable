@@ -5,7 +5,7 @@ using WebApp.Model.GenericMvc;
 namespace WebApp.Controllers
 {
     [SetAvailableTableActions(TableActions.Add, TableActions.Delete, TableActions.Details, TableActions.Edit)]
-    public class EntitiesController : MasterPageCrudController<EntityDisplay, EntityDomain>
+    public class EntitiesController : MasterPageCrudController<EntityDisplay, EntityDomain, long>
     {
         public EntitiesController(IEntityService service) : base(service)
         {

@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace DAL.Repositories
 {
-    public class EntityRepository : GenericCrudRepository<DataBase, Entity, EntityDisplay, EntityDomain>, IEntityRepository
+    public class EntityRepository : GenericCrudRepository<DataBase, Entity, EntityDisplay, EntityDomain, long>, IEntityRepository
     {
         public EntityRepository(DataBase context) : base(context){}
 

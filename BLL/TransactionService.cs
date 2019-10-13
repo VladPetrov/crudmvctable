@@ -12,7 +12,7 @@ using Domain;
 
 namespace BLL
 {
-    public class TransactionService : GenericCrudServise<TransactionDisplay, TransactionDomain>, ITransactionService
+    public class TransactionService : GenericCrudServise<TransactionDisplay, TransactionDomain, long>, ITransactionService
     {
         private ITransactionRepository TransactionRepository { get; }
 

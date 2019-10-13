@@ -13,7 +13,7 @@ using System.Linq;
 namespace DAL.Repositories
 {
     [UsedImplicitly]
-    public class FileUploadLogger : BaseRepository<TransientDataBase>, IFileUploadLogger
+    public class FileUploadLogger : BaseRepository<TransientDataBase, long>, IFileUploadLogger
     {
         public FileUploadLogger(TransientDataBase context) : base(context)
         {
@@ -62,7 +62,7 @@ namespace DAL.Repositories
 
             return Context.FileUploadLogs
                 .Include(x => x.Errors)
-                .FindOptional(id)
+                .FindOptional(x => x.Id == id)
                 .SomeOrEntityNotFoundException()
                 .Do(e => Context.Entry(e).GetDatabaseValues())
                 .Map(Mapper.Map<UploadFileLogDetails>)

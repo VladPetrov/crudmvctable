@@ -5,7 +5,7 @@ using DAL.Infrastructure;
 
 namespace DAL.Repositories
 {
-    public class TransactionThroughEmailInfoRepository : BaseRepository<DataBase>, ITransactionThroughEmailInfoRepository
+    public class TransactionThroughEmailInfoRepository : BaseRepository<DataBase, long>, ITransactionThroughEmailInfoRepository
     {
         public TransactionThroughEmailInfoRepository(DataBase context) : base(context)
         {

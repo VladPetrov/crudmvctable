@@ -2,7 +2,7 @@
 
 namespace Domain.Iban
 {
-    public class IbanDomain : DomainBase, IChildEntity
+    public class IbanDomain : DomainBase, IChildEntity<long>
     {
         public string IbanStr { get; set; }
 

@@ -2,7 +2,7 @@
 
 namespace Domain.Category
 {
-    public class SubCategoryDisplay : DomainBase, IChildEntity
+    public class SubCategoryDisplay : DomainBase, IChildEntity<long>
     {
         public string Name { get; set; }
 

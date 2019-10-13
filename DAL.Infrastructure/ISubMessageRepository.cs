@@ -2,7 +2,7 @@
 
 namespace DAL.Infrastructure
 {
-    public interface ISubMessageRepository : IGenericCrudRepository<SubMessageDisplay, SubMessageDetails>
+    public interface ISubMessageRepository : IGenericCrudRepository<SubMessageDisplay, SubMessageDetails, long>
     {
     }
 }

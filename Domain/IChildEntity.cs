@@ -1,7 +1,7 @@
 ﻿namespace Domain
 {
-    public interface IChildEntity
+    public interface IChildEntity<TKey>
     {
-        long MusterEntityFk { get; set; }
+        TKey MusterEntityFk { get; set; }
     }
 }

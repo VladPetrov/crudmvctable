@@ -12,7 +12,7 @@ using Optional.Unsafe;
 
 namespace DAL.Repositories
 {
-    public class TransactionRepository : GenericCrudRepository<DataBase, Transaction, TransactionDisplay, TransactionDomain>, ITransactionRepository
+    public class TransactionRepository : GenericCrudRepository<DataBase, Transaction, TransactionDisplay, TransactionDomain, long>, ITransactionRepository
     {
         public TransactionRepository(DataBase context): base(context){}
 
@@ -23,7 +23,7 @@ namespace DAL.Repositories
                 .Include(x => x.Project)
                 .Include(x => x.RecipientEntity)
                 .Include(x => x.Category)
-                .FindOptional(id)
+                .FindOptional(x =>x.Id == id)
                 .SomeOrEntityNotFoundException()
                 .Do(e => Context.Entry(e).GetDatabaseValues())
                 .Map(Mapper.Map<TransactionDomain>)

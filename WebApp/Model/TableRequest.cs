@@ -35,7 +35,7 @@ namespace WebApp.Model
             return new ListRequest(Filters, Orders, skip, ItemsPerPage);
         }
 
-        public TableResponse<TDomain> FromListResult<TDomain>(ListResult<TDomain> result, int currentPage) where TDomain : DomainBase
+        public TableResponse<TDomain> FromListResult<TDomain, TKey>(ListResult<TDomain> result, int currentPage) where TDomain : IDomainBase<TKey>
         {
             return result != null ? new TableResponse<TDomain>(result.Data, Filters, Orders, result.Filtered, ItemsPerPage, currentPage) : null;
         }

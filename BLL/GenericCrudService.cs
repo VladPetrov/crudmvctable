@@ -6,14 +6,14 @@ using Domain.DeleteResult;
 
 namespace BLL
 {
-    public abstract class GenericCrudServise<TDto, TDomain> : IGenericCrudService<TDto, TDomain>
-        where TDto : DomainBase
-        where TDomain : DomainBase
+    public abstract class GenericCrudServise<TDto, TDomain, TKey> : IGenericCrudService<TDto, TDomain, TKey>
+        where TDto : IDomainBase<TKey>
+        where TDomain : IDomainBase<TKey>
 
     {
-        protected IGenericCrudRepository<TDto, TDomain> Repository { get; }
+        protected IGenericCrudRepository<TDto, TDomain, TKey> Repository { get; }
 
-        protected GenericCrudServise(IGenericCrudRepository<TDto, TDomain> repository)
+        protected GenericCrudServise(IGenericCrudRepository<TDto, TDomain, TKey> repository)
         {
             Repository = repository;
         }
@@ -23,7 +23,7 @@ namespace BLL
             return Repository.List(request);
         }
 
-        public virtual OperationResult<TDomain> GetById(long id)
+        public virtual OperationResult<TDomain> GetById(TKey id)
         {
             return OperationResult.Ok().SetData(Repository.GetById(id));
         }
@@ -33,7 +33,7 @@ namespace BLL
             return Repository.Upsert(domain);
         }
 
-        public virtual OperationResult<DeleteResult> Delete(long id)
+        public virtual OperationResult<DeleteResult> Delete(TKey id)
         {
             return Repository.Delete(id).ToOperationResult();
         }

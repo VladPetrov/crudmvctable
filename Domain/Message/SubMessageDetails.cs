@@ -3,7 +3,7 @@
 
 namespace Domain.Message
 {
-    public class SubMessageDetails : DomainBase, IChildEntity
+    public class SubMessageDetails : DomainBase, IChildEntity<long>
     {
         [Required]
         public string Text { get; set; }

@@ -6,7 +6,7 @@ using JetBrains.Annotations;
 namespace DAL.Repositories
 {
     [UsedImplicitly]
-    public class MessageRepository : GenericCrudRepository<DataBase, Message, MessageDisplay, MessageDetails>, IMessageRepository
+    public class MessageRepository : GenericCrudRepository<DataBase, Message, MessageDisplay, MessageDetails, long>, IMessageRepository
     {
         public MessageRepository(DataBase context) : base(context)
         {

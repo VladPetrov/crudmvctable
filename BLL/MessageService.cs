@@ -6,7 +6,7 @@ using JetBrains.Annotations;
 namespace BLL
 {
     [UsedImplicitly]
-    public class MessageService : GenericCrudServise<MessageDisplay, MessageDetails>, IMessageService
+    public class MessageService : GenericCrudServise<MessageDisplay, MessageDetails, long>, IMessageService
     {
         public MessageService(IMessageRepository repository) : base(repository)
         {

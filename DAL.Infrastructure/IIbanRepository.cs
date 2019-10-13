@@ -1,9 +1,8 @@
-﻿using Domain.Entity;
-using Domain.Iban;
+﻿using Domain.Iban;
 
 namespace DAL.Infrastructure
 {
-    public interface IIbanRepository : IGenericCrudRepository<IbanDisplay, IbanDomain>
+    public interface IIbanRepository : IGenericCrudRepository<IbanDisplay, IbanDomain, long>
     {
     }
 }

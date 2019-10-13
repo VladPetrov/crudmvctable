@@ -5,7 +5,7 @@ using WebApp.Model.GenericMvc;
 namespace WebApp.Controllers
 {
     [SetAvailableTableActions(TableActions.Add, TableActions.Edit, TableActions.Delete, TableActions.Details)]
-    public class ProjectsController : MasterPageCrudController<ProjectDto, ProjectDomain>
+    public class ProjectsController : MasterPageCrudController<ProjectDto, ProjectDomain, long>
     {
         public ProjectsController(IProjectService service) : base(service)
         {

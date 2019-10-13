@@ -6,7 +6,7 @@ using WebApp.Model.GenericMvc;
 namespace WebApp.Controllers
 {
     //[TableAction(TableActions.Add, TableActions.Details)]
-    public class MessagesController : MasterPageCrudController<MessageDisplay, MessageDetails>
+    public class MessagesController : MasterPageCrudController<MessageDisplay, MessageDetails, long>
     {
         public MessagesController(IMessageService service) : base(service)
         {

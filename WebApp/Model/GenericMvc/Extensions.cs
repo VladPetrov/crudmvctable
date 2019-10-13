@@ -25,7 +25,7 @@ namespace WebApp.Model.GenericMvc
                 response.PagingInfo);
         }
 
-        public static PagingViewModel ToPagingViewModel(this TableViewModel tableModel, string action = nameof(GenericCrudController<DomainBase,DomainBase>.Table))
+        public static PagingViewModel ToPagingViewModel(this TableViewModel tableModel, string action = nameof(GenericCrudController<DomainBase,DomainBase, long>.Table))
         {
             return new PagingViewModel(tableModel.PagingInfo, action);
         }

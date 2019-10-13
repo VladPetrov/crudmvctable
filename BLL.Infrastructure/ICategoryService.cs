@@ -2,7 +2,7 @@
 
 namespace BLL.Infrastructure
 {
-    public interface ICategoryService : IGenericCrudService<CategoryDisplay, CategoryDomain>
+    public interface ICategoryService : IGenericCrudService<CategoryDisplay, CategoryDomain, long>
     {
     }
 }

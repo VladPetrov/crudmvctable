@@ -3,7 +3,7 @@ using Domain.Message;
 
 namespace WebApp.Controllers
 {
-    public class SubMessagesController : ChildPageCrudController<SubMessageDisplay, SubMessageDetails>
+    public class SubMessagesController : ChildPageCrudController<SubMessageDisplay, SubMessageDetails, long>
     {
         public SubMessagesController(ISubMessageService service) : base(service)
         {

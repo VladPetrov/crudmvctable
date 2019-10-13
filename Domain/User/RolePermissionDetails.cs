@@ -4,7 +4,7 @@ using JetBrains.Annotations;
 namespace Domain.User
 {
     [UsedImplicitly(ImplicitUseTargetFlags.WithMembers)]
-    public class RolePermissionDetails : DomainBase, IChangeType
+    public class RolePermissionDetails : DomainBase
     {
         public Permission Permission => GetPermission();
 

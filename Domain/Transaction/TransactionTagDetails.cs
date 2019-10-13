@@ -2,7 +2,7 @@
 
 namespace Domain.Transaction
 {
-    public class TransactionTagDetails : DomainBase, IChildEntity
+    public class TransactionTagDetails : DomainBase, IChildEntity<long>
     {
         [Required]
         [MaxLength(500)]

@@ -2,7 +2,7 @@
 
 namespace DAL.Infrastructure
 {
-    public interface IMessageRepository: IGenericCrudRepository<MessageDisplay, MessageDetails>
+    public interface IMessageRepository: IGenericCrudRepository<MessageDisplay, MessageDetails, long>
     {
     }
 }

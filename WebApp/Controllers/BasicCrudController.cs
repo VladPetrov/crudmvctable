@@ -14,7 +14,7 @@ namespace WebApp.Controllers
 {
     [TableActionsAccessCheckFilter]
     [PageContextFilter]
-    public abstract class BasicCrudController<TCreate, TEdit> : ParentChildPageController
+    public abstract class BasicCrudController<TCreate, TEdit, TKey> : ParentChildPageController
         where TCreate : new()
         where TEdit : new()
     {
@@ -34,19 +34,19 @@ namespace WebApp.Controllers
 
         public abstract IActionResult Table(int? page);
 
-        public abstract IActionResult Details(long id);
+        public abstract IActionResult Details(TKey id);
 
         public abstract IActionResult Create();
 
         public abstract IActionResult Create(TCreate domain);
 
-        public abstract IActionResult Edit(long id);
+        public abstract IActionResult Edit(TKey id);
 
         public abstract IActionResult Edit(TEdit domain);
 
-        public abstract IActionResult Delete(long id);
+        public abstract IActionResult Delete(TKey id);
 
-        public abstract IActionResult DeleteConfirmed(long id);
+        public abstract IActionResult DeleteConfirmed(TKey id);
 
         protected ChildPageMusterFilter GetChildPageMusterFilter()
         {
@@ -103,7 +103,7 @@ namespace WebApp.Controllers
                 return;
             }
 
-            var childEntity = model as IChildEntity;
+            var childEntity = model as IChildEntity<TKey>;
 
             Defensive.AssertNotNull(childEntity, "Child entity must implement IChildEntity interface");
 
@@ -112,7 +112,7 @@ namespace WebApp.Controllers
             Defensive.AssertNotNull(fk, "Session for child page is expired");
 
             childEntity.MusterEntityFk =
-                (long) GetChildPageMusterFilter().Filters.Single(x => x.Type == FilterType.Number).Value;
+                (TKey)GetChildPageMusterFilter().Filters.Single(x => x.Type == FilterType.Number).Value;
         }
 
         protected virtual void AssembleTitleFor(TitleType type)

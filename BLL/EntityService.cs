@@ -4,7 +4,7 @@ using Domain.Entity;
 
 namespace BLL
 {
-    public class EntityService : GenericCrudServise<EntityDisplay, EntityDomain>, IEntityService
+    public class EntityService : GenericCrudServise<EntityDisplay, EntityDomain, long>, IEntityService
     {
         public EntityService(IEntityRepository repository) : base(repository)
         {

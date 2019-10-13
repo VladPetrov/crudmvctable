@@ -2,7 +2,7 @@
 
 namespace BLL.Infrastructure
 {
-    public interface ISubMessageService : IGenericCrudService<SubMessageDisplay, SubMessageDetails>
+    public interface ISubMessageService : IGenericCrudService<SubMessageDisplay, SubMessageDetails, long>
     {
     }
 }

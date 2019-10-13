@@ -4,7 +4,7 @@ using Domain.Transaction;
 
 namespace DAL.Repositories
 {
-    public class TransactionTagRepository : GenericCrudRepository<DataBase, TransactionTag, TransactionTagDetails, TransactionTagDetails>, ITransactionTagRepository
+    public class TransactionTagRepository : GenericCrudRepository<DataBase, TransactionTag, TransactionTagDetails, TransactionTagDetails, long>, ITransactionTagRepository
     {
         private ITransactionManager TransactionManager { get; }
 

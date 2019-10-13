@@ -8,7 +8,7 @@ namespace WebApp.Model.GenericMvc.ChildPage
 {
     public class ChildPageDescriptor : ChildPageDescriptorBase
     {
-        private ChildPageDescriptor(long masterEntityFk, string fullControllerName, bool isReadonly) 
+        private ChildPageDescriptor(object masterEntityFk, string fullControllerName, bool isReadonly) 
             : base(masterEntityFk, fullControllerName, isReadonly)
         {
         }
@@ -26,7 +26,7 @@ namespace WebApp.Model.GenericMvc.ChildPage
                 {
                     new Filter
                     {
-                        FieldId = nameof(IChildEntity.MusterEntityFk),
+                        FieldId = nameof(IChildEntity<long>.MusterEntityFk),
                         Operator = FilterOperator.Equal,
                         Value = MasterEntityFk,
                         Type = FilterType.Number
@@ -35,7 +35,7 @@ namespace WebApp.Model.GenericMvc.ChildPage
             };
         }
         
-        public static ChildPageDescriptor Create(string controllerName, long musterEntityId, bool isReadonly = false)
+        public static ChildPageDescriptor Create(string controllerName, object musterEntityId, bool isReadonly = false)
         {
             return new ChildPageDescriptor(musterEntityId, controllerName, isReadonly);
         }

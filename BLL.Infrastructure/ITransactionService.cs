@@ -5,7 +5,7 @@ using Domain.Transaction;
 
 namespace BLL.Infrastructure
 {
-    public interface ITransactionService : IGenericCrudService<TransactionDisplay, TransactionDomain>
+    public interface ITransactionService : IGenericCrudService<TransactionDisplay, TransactionDomain, long>
     {
         FileDownloadable ExportTransactionsToCsv(ListRequest request);
         void EditNote(long transactionId, string note);
