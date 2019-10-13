@@ -3,6 +3,7 @@ using Common.Extensions;
 using Common.Table;
 using DAL.Extensions;
 using DAL.Infrastructure;
+using DAL.Model;
 using Domain;
 using Domain.DeleteResult;
 using Microsoft.EntityFrameworkCore;
@@ -12,7 +13,7 @@ namespace DAL.Repositories
 {
     public abstract class GenericCrudRepository<TContext, TEntity, TDto, TDomain> : BaseRepository<TContext>,
         IGenericCrudRepository<TDto, TDomain>
-        where TEntity : class, IEntity, new()
+        where TEntity : EntityBase, new()
         where TDto : DomainBase
         where TDomain : DomainBase, new()
         where TContext : DbContext
@@ -25,7 +26,7 @@ namespace DAL.Repositories
 
         public virtual ListResult<TDto> List(ListRequest request)
         {
-            return Set.ApplyTableRequest<TEntity, TDto>(request);
+            return Set.ApplyTableRequest<TEntity, TDto, long>(request);
         }
 
         public virtual TDomain GetById(long id)

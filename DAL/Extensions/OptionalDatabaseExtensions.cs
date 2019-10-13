@@ -6,6 +6,7 @@ using Common;
 using Common.Exceptions;
 using Common.Extensions;
 using DAL.Infrastructure;
+using DAL.Model;
 using Microsoft.EntityFrameworkCore;
 using Optional;
 
@@ -23,7 +24,7 @@ namespace DAL.Extensions
             return source.FirstOrDefault(predicate).AsOptional();
         }
         
-        public static Option<TEntity> FindOptional<TEntity>(this IQueryable<TEntity> source, long key) where TEntity : class, IEntity
+        public static Option<TEntity> FindOptional<TEntity>(this IQueryable<TEntity> source, long key) where TEntity : EntityBase
         {
             return source.FirstOrDefault(x => x.Id == key).AsOptional();
         }
@@ -43,7 +44,7 @@ namespace DAL.Extensions
             return key.AsOptional().FlatMap(id => dbSet.Find(id).AsOptional());
         }
 
-        public static Option<TValue> SomeOrEntityNotFoundException<TValue>(this Option<TValue> value, long id = 0) where TValue : IEntity
+        public static Option<TValue> SomeOrEntityNotFoundException<TValue>(this Option<TValue> value, long id = 0) where TValue : EntityBase
         {
             if (value.HasValue)
             {
@@ -58,7 +59,7 @@ namespace DAL.Extensions
             throw new EntityNotFoundException(typeof(TValue));
         }
 
-        public static Option<TEntity> MatchNew<TEntity>(this Option<TEntity> option, Action<TEntity> action) where TEntity : class, IEntity
+        public static Option<TEntity> MatchNew<TEntity>(this Option<TEntity> option, Action<TEntity> action) where TEntity : EntityBase
         {
             return option.Do(value =>
             {

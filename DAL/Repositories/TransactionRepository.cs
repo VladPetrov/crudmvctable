@@ -32,7 +32,7 @@ namespace DAL.Repositories
 
         public override ListResult<TransactionDisplay> List(ListRequest request)
         {
-            return Set.ApplyTableRequest<Transaction, TransactionDisplay>(request, new SortOrder(nameof(TransactionDisplay.CreatedTime), OrderDirection.Desc));
+            return Set.ApplyTableRequest<Transaction, TransactionDisplay, long>(request, new SortOrder(nameof(TransactionDisplay.CreatedTime), OrderDirection.Desc));
         }
 
         public TransactionImportResult TryImportTransaction(TransactionDomain domain)

@@ -65,7 +65,7 @@ namespace Test.Table
 
         private ListResult<UserDisplay> ApplyTableRequest(ListRequest request)
         {
-            return Context.Users.ApplyTableRequest<User, UserDisplay>(request);
+            return Context.Users.ApplyTableRequest<User, UserDisplay, long>(request);
         }
 
         private ListRequest CreateTableRequest(Filter filter, SortOrder sort)

@@ -13,9 +13,9 @@ namespace DAL.Extensions
 {
     public static class TableExtensions
     {
-        public static ListResult<TDomain> ApplyTableRequest<TEntity, TDomain>(this IQueryable<TEntity> query, ListRequest request, params SortOrder[] sortOrders) 
-            where TEntity : IEntity
-            where TDomain : DomainBase
+        public static ListResult<TDomain> ApplyTableRequest<TEntity, TDomain, TKey>(this IQueryable<TEntity> query, ListRequest request, params SortOrder[] sortOrders) 
+            where TEntity : IEntity<TKey>
+            where TDomain : IDomainBase<TKey>
         {
             var totalCount = query.Count();
             var filtered = totalCount;
@@ -30,7 +30,7 @@ namespace DAL.Extensions
                 filtered = domainQuery.Count();
             }
 
-            domainQuery = Sort(domainQuery, sortOrders, request.Sorts);
+            domainQuery = Sort<TDomain, TKey>(domainQuery, sortOrders, request.Sorts);
 
             if (!request.SkipPaging)
             {
@@ -56,9 +56,9 @@ namespace DAL.Extensions
             return new ListResult<TDomain>(list, filtered, totalCount);
         }
 
-        public static IQueryable<TDomain> ApplyTableRequestIQueryable<TEntity, TDomain>(this IQueryable<TEntity> query, ListRequest request, params SortOrder[] sortOrders)
-            where TEntity : IEntity
-            where TDomain : DomainBase
+        public static IQueryable<TDomain> ApplyTableRequestIQueryable<TEntity, TDomain, TKey>(this IQueryable<TEntity> query, ListRequest request, params SortOrder[] sortOrders)
+            where TEntity : IEntity<TKey>
+            where TDomain : IDomainBase<TKey>
         {
             var domainQuery = query.ProjectTo<TDomain>();
 
@@ -69,7 +69,7 @@ namespace DAL.Extensions
                 domainQuery = domainQuery.Where(FilterExpressionCreator.CreateFilterExpression<TEntity, TDomain>(request.Filters));
             }
 
-            domainQuery = Sort(domainQuery, sortOrders, request.Sorts);
+            domainQuery = Sort<TDomain, TKey>(domainQuery, sortOrders, request.Sorts);
 
             if (!request.SkipPaging)
             {
@@ -84,7 +84,8 @@ namespace DAL.Extensions
             return domainQuery;
         }
 
-        private static IQueryable<TDomain> Sort<TDomain>(IQueryable<TDomain> domainQuery, SortOrder[] sortOrders, List<SortOrder> sorts) where TDomain : DomainBase
+        private static IQueryable<TDomain> Sort<TDomain, TKey>(IQueryable<TDomain> domainQuery, SortOrder[] sortOrders, List<SortOrder> sorts) 
+            where TDomain : IDomainBase<TKey>
         {
             var orders = new List<SortOrder>(sortOrders);
 
@@ -106,19 +107,19 @@ namespace DAL.Extensions
         }
 
         #region OderByHelper
-        private static IQueryable<TEntity> OrderBy<TEntity>(this IQueryable<TEntity> query, LambdaExpression expression, OrderDirection direction) where TEntity : class
+        private static IQueryable<TEntity> OrderBy<TEntity>(this IQueryable<TEntity> query, LambdaExpression expression, OrderDirection direction)// where TEntity : class
         {
             return direction == OrderDirection.Asc ? query.OrderBy(expression) : query.OrderByDescending(expression);
         }
         
-        private static IQueryable<TEntity> OrderBy<TEntity>(this IQueryable<TEntity> query, LambdaExpression expression) where TEntity : class
+        private static IQueryable<TEntity> OrderBy<TEntity>(this IQueryable<TEntity> query, LambdaExpression expression)// where TEntity : class
         {
             var orderBy = typeof(Queryable).GetMethods().First(m => m.Name == "OrderBy" && m.GetParameters().Length == 2).MakeGenericMethod(typeof(TEntity), expression.ReturnType);
 
             return (IQueryable<TEntity>)orderBy.Invoke(null, new object[] { query, expression });
         }
 
-        private static IQueryable<TEntity> OrderByDescending<TEntity>(this IQueryable<TEntity> query, LambdaExpression expression) where TEntity : class
+        private static IQueryable<TEntity> OrderByDescending<TEntity>(this IQueryable<TEntity> query, LambdaExpression expression)// where TEntity : class
         {
             var orderByDescending = typeof(Queryable).GetMethods().First(m => m.Name == "OrderByDescending" && m.GetParameters().Length == 2).MakeGenericMethod(typeof(TEntity), expression.ReturnType);
 
