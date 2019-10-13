@@ -40,12 +40,12 @@ namespace WebApp.Controllers
         {
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme); // Clear the existing external cookie to ensure a clean login process
 
-            if (_env.IsDevelopment())
-            {
-                await _signInManager.PasswordSignInAsync(Constants.DefaultUser, Constants.DefaultUserPassword, true, lockoutOnFailure: true);
+            //if (_env.IsDevelopment())
+            //{
+            //    await _signInManager.PasswordSignInAsync(Constants.DefaultUser, Constants.DefaultUserPassword, true, lockoutOnFailure: true);
 
-                return RedirectToLocal(returnUrl);
-            }
+            //    return RedirectToLocal(returnUrl);
+            //}
 
             ViewData["ReturnUrl"] = returnUrl;
             return View();
