@@ -12,7 +12,7 @@ using WebApp.Model.ManageViewModels;
 
 namespace WebApp.Controllers
 {
-    [Authorize(Roles = RoleNames.AdminAndCustomer)]
+    [Authorize(Roles = RoleNames.AdminAndBackOffice)]
     [Route("[controller]/[action]")]
     public class ManageController : Controller
     {
