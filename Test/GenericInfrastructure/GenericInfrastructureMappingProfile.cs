@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using AutoMapper;
-using DAL.Repositories;
-using Domain.List;
+﻿using AutoMapper;
 using JetBrains.Annotations;
 
 namespace Test.GenericInfrastructure

@@ -5,9 +5,9 @@ using System.Collections.Generic;
 
 namespace WebApp.Model.GenericMvc
 {
-    public class MvcTableResponse<TKey>
+    public class MvcTableResponse<TDomain, TKey> where TDomain : IDomainBase<TKey>
     {
-        public List<IDomainBase<TKey>> Data { get; }
+        public List<TDomain> Data { get; }
 
         public Type DataType { get; }
 
@@ -17,9 +17,9 @@ namespace WebApp.Model.GenericMvc
 
         public List<SortOrder> Order { get; }
 
-        public MvcTableResponse(List<IDomainBase<TKey>> data, Type dataType, List<Filter> filters, List<SortOrder> order, PagingInfo pagingInfo)
+        public MvcTableResponse(List<TDomain> data, Type dataType, List<Filter> filters, List<SortOrder> order, PagingInfo pagingInfo)
         {
-            Data = data ?? new List<IDomainBase<TKey>>();
+            Data = data ?? new List<TDomain>();
             DataType = dataType;
             Filters = filters ?? new List<Filter>();
             Order = order ?? new List<SortOrder>();

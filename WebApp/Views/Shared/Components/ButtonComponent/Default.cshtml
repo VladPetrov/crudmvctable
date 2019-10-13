@@ -4,7 +4,7 @@
 
 @{
     var context = Html.GetPageContext();
-    var isActionLink = (Model.ActionName != nameof(BasicCrudController<DomainBase, DomainBase>.IndexPage)).ToString();
+    var isActionLink = (Model.ActionName != nameof(BasicCrudController<DomainBase, DomainBase, long>.IndexPage)).ToString();
 }
 
 @if (context.IsChildPage)

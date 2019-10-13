@@ -142,7 +142,7 @@ namespace WebApp.Controllers
             return GetPartialView(TitleType.Delete, Service.GetById(id));
         }
      
-        protected MvcTableResponse<TKey> GetTableItemsPerPage(int? page)
+        protected MvcTableResponse<TDto,TKey> GetTableItemsPerPage(int? page)
         {
             if (!page.HasValue)
             {
@@ -155,7 +155,9 @@ namespace WebApp.Controllers
 
             var request = GetTableRequest();
 
-            return request.FromListResult(Service.List(request.ToListRequest(page.Value)), page.Value).ToMvcTableResponse();
+            var listResult = request.FromListResult<TDto, TKey>(Service.List(request.ToListRequest(page.Value)), page.Value);
+
+            return listResult.ToMvcTableResponse();
         }
     }
 }

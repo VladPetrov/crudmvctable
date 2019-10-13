@@ -1,12 +1,10 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Common.Attributes;
-using DAL;
+﻿using Common.Attributes;
 using DAL.Model;
 using Domain;
-using Domain.List;
 using JetBrains.Annotations;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Test.GenericInfrastructure
 {
@@ -60,7 +58,7 @@ namespace Test.GenericInfrastructure
         public string Email { get; set; }
         public string Street { get; set; }
 
-        public DomainList<AccountDomain> Accounts { get; set; } = new DomainList<AccountDomain>();
+        public List<AccountDomain> Accounts { get; set; } = new List<AccountDomain>();
     }
 
     [UsedImplicitly]

@@ -13,10 +13,10 @@ namespace WebApp.Filters
     {
         private static readonly Dictionary<string, TableActions> ActionNameToTableActionsMap = new Dictionary<string, TableActions>
         {
-            {nameof(BasicCrudController<DomainBase,DomainBase>.Create),  TableActions.Add},
-            {nameof(BasicCrudController<DomainBase,DomainBase>.Details),  TableActions.Details},
-            {nameof(BasicCrudController<DomainBase,DomainBase>.Edit),  TableActions.Edit},
-            {nameof(BasicCrudController<DomainBase,DomainBase>.Delete),  TableActions.Delete}
+            {nameof(BasicCrudController<DomainBase,DomainBase, long>.Create),  TableActions.Add},
+            {nameof(BasicCrudController<DomainBase,DomainBase, long>.Details),  TableActions.Details},
+            {nameof(BasicCrudController<DomainBase,DomainBase, long>.Edit),  TableActions.Edit},
+            {nameof(BasicCrudController<DomainBase,DomainBase, long>.Delete),  TableActions.Delete}
         };
 
         public TableActionsAccessCheckFilterAttribute()

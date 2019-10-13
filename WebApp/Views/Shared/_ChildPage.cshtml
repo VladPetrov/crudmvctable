@@ -5,7 +5,7 @@
     Model.SaveChildPageMusterFilterToSession(Context.Session);
 }
 
-@if (Model.MasterEntityFk > 0)
+@if (Model.MasterEntityFk != null) //incorect
 {  
     <div class="row">
         <div class="col-md-12">

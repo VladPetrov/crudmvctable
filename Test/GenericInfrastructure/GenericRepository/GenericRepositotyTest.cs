@@ -131,7 +131,7 @@ namespace Test.GenericInfrastructure.GenericRepository
 
             account.BankName = newBankName;
 
-            user.Accounts.Update(account);
+            //user.Accounts.Update(account);
 
             var resultUser = Repository.Upsert(user).Data;
             
