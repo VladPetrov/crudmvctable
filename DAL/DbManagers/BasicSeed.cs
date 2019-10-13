@@ -43,6 +43,10 @@ namespace DAL.DbManagers
 
             Defensive.AssertTrue(result.Succeeded, string.Join("; ", result.Errors));
 
+            result = await RoleManager.CreateAsync(new IdentityRole(RoleNames.BackOffice));
+
+            Defensive.AssertTrue(result.Succeeded, string.Join("; ", result.Errors));
+
             result = await RoleManager.CreateAsync(new IdentityRole(RoleNames.Customer));
 
             Defensive.AssertTrue(result.Succeeded, string.Join("; ", result.Errors));
