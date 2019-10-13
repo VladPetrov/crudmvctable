@@ -22,6 +22,8 @@ using System.IO;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using WebApp.Binders;
+using WebApp.Controllers;
+using WebApp.Extensions;
 using WebApp.Filters;
 using Log = Common.Log;
 
@@ -174,8 +176,8 @@ namespace WebApp
             {
                 options.Cookie.HttpOnly = true;
                 options.Cookie.Expiration = TimeSpan.FromDays(150);
-                options.LoginPath = "/Account/Login";
-                options.AccessDeniedPath = "/Account/AccessDenied";
+                options.LoginPath = $"{nameof(AccountController).ToControllerName()}/{nameof(AccountController.Login)}"; 
+                options.AccessDeniedPath = $"{nameof(AccountController).ToControllerName()}/{nameof(AccountController.AccessDenied)}";
                 options.SlidingExpiration = true;
             });
 
@@ -187,9 +189,9 @@ namespace WebApp
                 options.Cookie.HttpOnly = true;
             });
 
-
             Log.Logger().Information("Configure MVC services...");
-            var builder = services.AddMvc(options => options.EnableEndpointRouting = false) //area bugfix for .net core 2.2. kill me in next release
+
+            var builder = services.AddMvc(options => options.EnableEndpointRouting = false) //area bug-fix for .net core 2.2. kill me in next release
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             builder.AddMvcOptions(x =>
