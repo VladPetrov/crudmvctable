@@ -176,8 +176,8 @@ namespace WebApp
             {
                 options.Cookie.HttpOnly = true;
                 options.Cookie.Expiration = TimeSpan.FromDays(150);
-                options.LoginPath = $"{nameof(AccountController).ToControllerName()}/{nameof(AccountController.Login)}"; 
-                options.AccessDeniedPath = $"{nameof(AccountController).ToControllerName()}/{nameof(AccountController.AccessDenied)}";
+                options.LoginPath = $"/{nameof(AccountController).ToControllerName()}/{nameof(AccountController.Login)}"; 
+                options.AccessDeniedPath = $"/{nameof(AccountController).ToControllerName()}/{nameof(AccountController.AccessDenied)}";
                 options.SlidingExpiration = true;
             });
 
