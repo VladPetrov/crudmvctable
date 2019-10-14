@@ -19,9 +19,9 @@ namespace Domain.Client
 
         public long Balance { get; set; }
 
-        public DateTime? ContractStartDate { get; set; }
+        public DateTime ContractStartDate { get; set; }
 
-        public DateTime? ContractEndDate { get; set; }
+        public DateTime ContractEndDate { get; set; }
 
         public List<string> Companies { get; set; } = new List<string>();
     }

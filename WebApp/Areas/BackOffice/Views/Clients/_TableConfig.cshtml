@@ -8,7 +8,6 @@
 @{
     var descriptor = TableBuilder<ClientDisplay>.CreateNew()
         .AddColumn(x => x.Email)
-        .AddColumn(x => x.Balance)
         .AddColumn(x => x.Balance, new RowOptions{ColumnRenderer = new EurRenderer()})
         .AddColumn(x => x.ContractStartDate)
         .AddColumn(x => x.ContractEndDate)

@@ -21,9 +21,9 @@ namespace DAL.Model
 
         public long Balance { get; set; }
 
-        public DateTime? ContractStartDate { get; set; }
+        public DateTime ContractStartDate { get; set; }
 
-        public DateTime? ContractEndDate { get; set; }
+        public DateTime ContractEndDate { get; set; }
 
         public virtual ApplicationUser User { get; set; }
     }
