@@ -5,7 +5,7 @@ using WebApp.Model.GenericMvc;
 namespace WebApp.Controllers
 {
     [SetAvailableTableActions(TableActions.Add, TableActions.Delete, TableActions.Details, TableActions.Edit)]
-    public class CategoriesController : MasterPageCrudController<CategoryDisplay, CategoryDomain>
+    public class CategoriesController : MasterPageCrudController<CategoryDisplay, CategoryDomain, long>
     {
         public CategoriesController(ICategoryService service) : base(service)
         {

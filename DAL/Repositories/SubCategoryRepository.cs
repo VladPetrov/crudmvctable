@@ -4,7 +4,7 @@ using Domain.Category;
 
 namespace DAL.Repositories
 {
-    public class SubCategoryRepository :  GenericCrudRepository<DataBase, SubCategory, SubCategoryDisplay, SubCategoryDomain>, ISubCategoryRepository
+    public class SubCategoryRepository :  GenericCrudRepository<DataBase, SubCategory, SubCategoryDisplay, SubCategoryDomain, long>, ISubCategoryRepository
     {
         public SubCategoryRepository(DataBase context) : base(context)
         {

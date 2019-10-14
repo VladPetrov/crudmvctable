@@ -9,14 +9,14 @@ using WebApp.Model.GenericMvc;
 
 namespace WebApp.Controllers
 {
-    //[Authorize]
-    public abstract class GenericCrudController<TDto, TDomain> : BasicCrudController<TDomain, TDomain>
-        where TDto : DomainBase
-        where TDomain : DomainBase, new ()
+    [Authorize]
+    public abstract class GenericCrudController<TDto, TDomain, TKey> : BasicCrudController<TDomain, TDomain, TKey>
+        where TDto : IDomainBase<TKey>
+        where TDomain : IDomainBase<TKey>, new ()
     {
-        protected IGenericCrudService<TDto, TDomain> Service { get; }
+        protected IGenericCrudService<TDto, TDomain, TKey> Service { get; }
     
-        protected GenericCrudController(IGenericCrudService<TDto, TDomain> service, bool isChildPage) : base(isChildPage)
+        protected GenericCrudController(IGenericCrudService<TDto, TDomain, TKey> service, bool isChildPage) : base(isChildPage)
         {
             Service = service;
         }
@@ -59,7 +59,7 @@ namespace WebApp.Controllers
         }
 
         [HttpGet]
-        public override IActionResult Details(long id)
+        public override IActionResult Details(TKey id)
         {
             return GetPartialView(TitleType.Details, Service.GetById(id));
         }
@@ -93,7 +93,7 @@ namespace WebApp.Controllers
         }
 
         [HttpGet]
-        public override IActionResult Edit(long id)
+        public override IActionResult Edit(TKey id)
         {
             return GetPartialView(TitleType.Edit, Service.GetById(id));
         }
@@ -121,13 +121,13 @@ namespace WebApp.Controllers
         }
 
         [HttpGet]
-        public override IActionResult Delete(long id)
+        public override IActionResult Delete(TKey id)
         {
             return GetPartialView(TitleType.Delete, Service.GetById(id));
         }
 
         [HttpPost, ActionName(nameof(Delete))]
-        public override IActionResult DeleteConfirmed(long id)
+        public override IActionResult DeleteConfirmed(TKey id)
         {
             var result = Service.Delete(id);
 
@@ -142,7 +142,7 @@ namespace WebApp.Controllers
             return GetPartialView(TitleType.Delete, Service.GetById(id));
         }
      
-        protected MvcTableResponse GetTableItemsPerPage(int? page)
+        protected MvcTableResponse<TDto,TKey> GetTableItemsPerPage(int? page)
         {
             if (!page.HasValue)
             {
@@ -155,7 +155,9 @@ namespace WebApp.Controllers
 
             var request = GetTableRequest();
 
-            return request.FromListResult(Service.List(request.ToListRequest(page.Value)), page.Value).ToMvcTableResponse();
+            var listResult = request.FromListResult<TDto, TKey>(Service.List(request.ToListRequest(page.Value)), page.Value);
+
+            return listResult.ToMvcTableResponse();
         }
     }
 }

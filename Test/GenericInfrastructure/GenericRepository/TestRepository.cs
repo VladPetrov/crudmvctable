@@ -1,16 +1,14 @@
-﻿using System;
-using System.Linq.Expressions;
-using DAL.Repositories;
+﻿using DAL.Repositories;
 using JetBrains.Annotations;
 
 namespace Test.GenericInfrastructure.GenericRepository
 {
     [UsedImplicitly]
-    internal class TestRepository : GenericCrudRepository<GenericInfrastructureContext, User, UserDisplay, UserDomain>
+    internal class TestRepository : GenericCrudRepository<GenericInfrastructureContext, User, UserDisplay, UserDomain, long>
     {
         public TestRepository(GenericInfrastructureContext context) : base(context)
         {
-            ReferenceChecker.RegisterReferences(new Reference<Account>(account => account.UserId));
+            ReferenceChecker.RegisterReferences(new Reference<Account, long>(account => account.UserId));
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace BLL.Infrastructure
 {
-    public interface IEntityService : IGenericCrudService<EntityDisplay, EntityDomain>
+    public interface IEntityService : IGenericCrudService<EntityDisplay, EntityDomain, long>
     {
     }
 }

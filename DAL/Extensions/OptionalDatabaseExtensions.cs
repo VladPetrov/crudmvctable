@@ -6,6 +6,7 @@ using Common;
 using Common.Exceptions;
 using Common.Extensions;
 using DAL.Infrastructure;
+using DAL.Model;
 using Microsoft.EntityFrameworkCore;
 using Optional;
 
@@ -23,42 +24,22 @@ namespace DAL.Extensions
             return source.FirstOrDefault(predicate).AsOptional();
         }
         
-        public static Option<TEntity> FindOptional<TEntity>(this IQueryable<TEntity> source, long key) where TEntity : class, IEntity
-        {
-            return source.FirstOrDefault(x => x.Id == key).AsOptional();
-        }
-       
-        public static Option<TEntity> FindOptional<TEntity>(this DbSet<TEntity> dbSet, string key) where TEntity : class
+        public static Option<TEntity> FindOptional<TEntity, TKey>(this DbSet<TEntity> dbSet, TKey key) where TEntity : class
         {
             return dbSet.Find(key).AsOptional();
-        }
-        
-        public static Option<TEntity> FindOptional<TEntity>(this DbSet<TEntity> dbSet, long key) where TEntity : class
-        {
-            return dbSet.Find(key).AsOptional();
-        }
-        
-        public static Option<TEntity> FindOptional<TEntity>(this DbSet<TEntity> dbSet, long? key) where TEntity : class
-        {
-            return key.AsOptional().FlatMap(id => dbSet.Find(id).AsOptional());
         }
 
-        public static Option<TValue> SomeOrEntityNotFoundException<TValue>(this Option<TValue> value, long id = 0) where TValue : IEntity
+        public static Option<TValue> SomeOrEntityNotFoundException<TValue>(this Option<TValue> value)
         {
             if (value.HasValue)
             {
                 return value;
             }
-
-            if (id > 0)
-            {
-                throw new EntityNotFoundException(typeof(TValue), id);
-            }
-
-            throw new EntityNotFoundException(typeof(TValue));
+            
+            throw new EntityNotFoundException($"{typeof(TValue)}");
         }
 
-        public static Option<TEntity> MatchNew<TEntity>(this Option<TEntity> option, Action<TEntity> action) where TEntity : class, IEntity
+        public static Option<TEntity> MatchNew<TEntity, TKey>(this Option<TEntity> option, Action<TEntity> action) where TEntity : IEntity<TKey>
         {
             return option.Do(value =>
             {

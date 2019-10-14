@@ -10,7 +10,7 @@ using WebApp.Model.Transactions;
 namespace WebApp.Controllers
 {
     [SetAvailableTableActions(TableActions.Add, TableActions.Edit)]
-    public class TransactionsController : MasterPageCrudController<TransactionDisplay, TransactionDomain>
+    public class TransactionsController : MasterPageCrudController<TransactionDisplay, TransactionDomain, long>
     {
         protected override string Title => "Transactions";
 

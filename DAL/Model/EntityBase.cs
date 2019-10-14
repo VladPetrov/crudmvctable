@@ -5,7 +5,7 @@ using DAL.Infrastructure;
 
 namespace DAL.Model
 {
-    public abstract class EntityBase : IEntity
+    public abstract class EntityBase : IEntity<long>
     {
         protected EntityBase()
         {

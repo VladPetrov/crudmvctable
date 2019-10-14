@@ -55,7 +55,6 @@ namespace DAL.Mapping
                 .ForMember(x => x.RecipientEntity, opt => opt.Ignore())
                 .ForMember(x => x.Id, opt => opt.Ignore())
                 .ForMember(x => x.CreatedDate, opt => opt.Ignore())
-                .ForMember(x => x.Guid, opt => opt.Ignore())
                 .ForMember(x => x.RowVersion, opt => opt.Ignore())
                 .ForMember(x => x.Type, opt => opt.ResolveUsing(x => x.Type.ParseToEnum<TransactionType>())) //todo parse on csv parser level
                 .ForMember(x => x.Source, opt => opt.ResolveUsing(x => TransactionSource.ImportFromCsv))

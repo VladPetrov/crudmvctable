@@ -1,7 +1,7 @@
 ﻿@using Domain
 @using WebApp.Controllers
 @using WebApp.Model.GenericMvc
-@model List<DomainBase>
+@model List<IDomainBase>
 
 @{
     var descriptor = Html.GetTableDescriptor();
@@ -10,11 +10,11 @@
 
 @foreach (var item in Model)
 {
-    <tr data-id='@item.Id'
+    <tr data-id='@item.GetId()'
 
         @if (context.TableCanDetails)
         {
-            @: ondblclick="showDetails('@Url.Action(nameof(BasicCrudController<DomainBase, DomainBase>.Details), Html.GetController(), new {id = item.Id})')"
+            @: ondblclick="showDetails('@Url.Action(nameof(BasicCrudController<DomainBase, DomainBase, int>.Details), Html.GetController(), new {id = item.GetId()})')"
             @: style="cursor: pointer"
         }
 

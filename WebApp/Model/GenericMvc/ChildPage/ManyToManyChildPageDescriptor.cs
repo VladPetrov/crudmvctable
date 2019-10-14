@@ -5,7 +5,7 @@ namespace WebApp.Model.GenericMvc.ChildPage
 {
     public class ManyToManyChildPageDescriptor : ChildPageDescriptorBase
     {
-        private ManyToManyChildPageDescriptor(long masterEntityFk, string fullControllerName, bool isReadonly) 
+        private ManyToManyChildPageDescriptor(object masterEntityFk, string fullControllerName, bool isReadonly) 
             : base(masterEntityFk, fullControllerName, isReadonly)
         {}
         
@@ -14,7 +14,7 @@ namespace WebApp.Model.GenericMvc.ChildPage
             session.Set(GetSessionKey(), MasterEntityFk);
         }
         
-        public static ManyToManyChildPageDescriptor Create(string controllerName, long musterEntityId, bool isReadonly = false)
+        public static ManyToManyChildPageDescriptor Create(string controllerName, object musterEntityId, bool isReadonly = false)
         {
             return new ManyToManyChildPageDescriptor(musterEntityId, controllerName, isReadonly);
         }

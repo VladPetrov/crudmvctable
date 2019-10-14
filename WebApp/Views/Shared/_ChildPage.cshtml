@@ -1,11 +1,32 @@
-﻿@using WebApp.Model.GenericMvc.ChildPage
+﻿@using Common
+@using WebApp.Model.GenericMvc.ChildPage
 @model ChildPageDescriptorBase
 
 @{
     Model.SaveChildPageMusterFilterToSession(Context.Session);
+
+    bool showChildPage = false;
+
+    if (Model.MasterEntityFk != null)
+    {
+        var propertyInfo = Model.GetType().GetProperty(nameof(ChildPageDescriptorBase.MasterEntityFk));
+
+        Defensive.AssertNotNull(propertyInfo);
+
+        var type = propertyInfo.PropertyType;
+        
+        if (type.IsValueType)
+        {
+            showChildPage = Model.MasterEntityFk != Activator.CreateInstance(type);
+        }
+        else 
+        {
+            showChildPage = true;
+        }
+    }
 }
 
-@if (Model.MasterEntityFk > 0)
+@if (showChildPage) 
 {  
     <div class="row">
         <div class="col-md-12">

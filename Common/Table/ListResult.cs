@@ -2,7 +2,7 @@
 
 namespace Common.Table
 {
-    public class ListResult<T>
+    public class ListResult<T>     
     {
         public ListResult(List<T> data, int filtered, int total)
         {

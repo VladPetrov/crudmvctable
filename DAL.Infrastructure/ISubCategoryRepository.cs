@@ -2,7 +2,7 @@
 
 namespace DAL.Infrastructure
 {
-    public interface ISubCategoryRepository : IGenericCrudRepository<SubCategoryDisplay, SubCategoryDomain>
+    public interface ISubCategoryRepository : IGenericCrudRepository<SubCategoryDisplay, SubCategoryDomain, long>
     {
     }
 }

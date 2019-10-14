@@ -6,19 +6,20 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using DAL.Infrastructure;
 
 namespace DAL.Repositories
 {
-    public interface IReference
+    public interface IReference<TKey>
     {
         Type Type { get; }
 
-        int Count(long foreignKey, DbContext context);
+        int Count(TKey foreignKey, DbContext context);
     }
 
-    public class ReferenceChecker
+    public class ReferenceChecker<TKey>
     {
-        private readonly List<IReference> _references = new List<IReference>();
+        private readonly List<IReference<TKey>> _references = new List<IReference<TKey>>();
 
         private readonly DbContext _context;
 
@@ -27,12 +28,12 @@ namespace DAL.Repositories
             _context = context;
         }
 
-        public void RegisterReferences(params IReference[] references)
+        public void RegisterReferences(params IReference<TKey>[] references)
         {
             _references.AddRange(references);
         }
 
-        public DeleteResult Check(long id)
+        public DeleteResult Check(TKey id)
         {
             var result = new DeleteResult();
 
@@ -50,22 +51,22 @@ namespace DAL.Repositories
         }
     }
 
-    public class Reference<TEntity> : IReference where TEntity : EntityBase
+    public class Reference<TEntity, TKey> : IReference<TKey> where TEntity : class, IEntity<TKey>
     {
         public Type Type { get; }
 
-        private Expression<Func<TEntity, long?>> ForeignKeyExpression { get; }
+        private Expression<Func<TEntity, TKey>> ForeignKeyExpression { get; }
 
         private Expression<Func<TEntity, bool>> Predicate { get; }
 
-        public Reference([NotNull] Expression<Func<TEntity, long?>> foreignKeyExpression, Expression<Func<TEntity, bool>> predicate = null)
+        public Reference([NotNull] Expression<Func<TEntity, TKey>> foreignKeyExpression, Expression<Func<TEntity, bool>> predicate = null)
         {
             ForeignKeyExpression = foreignKeyExpression;
             Predicate = predicate;
             Type = typeof(TEntity);
         }
 
-        public int Count(long foreignKey, [NotNull] DbContext context)
+        public int Count(TKey foreignKey, [NotNull] DbContext context)
         {
             var query = context.Set<TEntity>().AsQueryable();
 
@@ -74,7 +75,7 @@ namespace DAL.Repositories
                 query = query.Where(Predicate);
             }
 
-            return query.Select(ForeignKeyExpression).Count(x => x == foreignKey);
+            return query.Select(ForeignKeyExpression).AsEnumerable().Count(x => EqualityComparer<TKey>.Default.Equals(x, foreignKey));
         }
     }
 }

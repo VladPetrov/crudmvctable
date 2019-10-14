@@ -8,7 +8,7 @@ namespace WebApp.Model.GenericMvc.ChildPage
     {
         public string ChildPageContainerId => _childPageContainerId ?? (_childPageContainerId = Guid.NewGuid().ToString());
 
-        public long MasterEntityFk { get; private set; }
+        public object MasterEntityFk { get; private set; }
 
         public bool IsReadonly { get; private set; }
 
@@ -16,7 +16,7 @@ namespace WebApp.Model.GenericMvc.ChildPage
 
         protected string _childPageContainerId;
 
-        public ChildPageDescriptorBase(long masterEntityFk, string fullControllerName, bool isReadonly)
+        public ChildPageDescriptorBase(object masterEntityFk, string fullControllerName, bool isReadonly)
         {
             MasterEntityFk = masterEntityFk;
             IsReadonly = isReadonly;

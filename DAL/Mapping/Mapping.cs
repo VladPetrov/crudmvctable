@@ -17,7 +17,6 @@ namespace DAL.Mapping
             //configuration.ShouldMapField = ShouldMap;
             //configuration.ShouldMapProperty = ShouldMap;
 
-            configuration.AddProfile<DomainListProfile>();
             configuration.AddProfile<MessageProfile>();
             configuration.AddProfile<TransactionProfile>();
             configuration.AddProfile<ProjectProfile>();

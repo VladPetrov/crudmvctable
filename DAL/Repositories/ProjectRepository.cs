@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace DAL.Repositories
 {
-    public class ProjectRepository : GenericCrudRepository<DataBase, Project, ProjectDto, ProjectDomain>, IProjectRepository
+    public class ProjectRepository : GenericCrudRepository<DataBase, Project, ProjectDto, ProjectDomain, long>, IProjectRepository
     {
         public ProjectRepository(DataBase context) : base(context)
         {

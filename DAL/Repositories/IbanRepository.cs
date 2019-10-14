@@ -8,7 +8,7 @@ using Optional.Unsafe;
 
 namespace DAL.Repositories
 {
-    public class IbanRepository : GenericCrudRepository<DataBase, Iban, IbanDisplay, IbanDomain>, IIbanRepository
+    public class IbanRepository : GenericCrudRepository<DataBase, Iban, IbanDisplay, IbanDomain, long>, IIbanRepository
     {
         public IbanRepository(DataBase context) : base(context)
         {
@@ -22,7 +22,7 @@ namespace DAL.Repositories
                 .FindOptional(domain.Id)
                 .CreateIfNone()
                 .MapFrom(domain)
-                .MatchNew(entity => Set.Add(entity))
+                .MatchNew<Iban, long>(entity => Set.Add(entity))
                 .Do(Context.SaveChanges)
                 .Map(entity => GetById(entity.Id))
                 .ValueOrFailure();

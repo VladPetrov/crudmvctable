@@ -11,7 +11,7 @@ using System.Linq.Expressions;
 
 namespace DAL.Repositories
 {
-    public class ValueObjectRepository : BaseRepository<DbContext>, IValueObjectRepository
+    public class ValueObjectRepository : BaseRepository<DbContext, long>, IValueObjectRepository
     {
         public ValueObjectRepository(DataBase context) : base(context)
         {

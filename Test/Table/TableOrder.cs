@@ -18,7 +18,7 @@ namespace Test.Table
         public void TableOderTest()
         {
             var sort = SortOrder.CreateOrder<UserDisplay>(u => u.LastName, OrderDirection.Desc);
-            var result = Context.Users.ApplyTableRequest<User, UserDisplay>(CreateTableRequest(null, sort)).Data;
+            var result = Context.Users.ApplyTableRequest<User, UserDisplay, long>(CreateTableRequest(null, sort)).Data;
 
             Assert.AreEqual(3, result.Count);
 
@@ -41,7 +41,7 @@ namespace Test.Table
         public void TableOderWithDefaultOrderTest()
         {
             var sort = SortOrder.CreateOrder<UserDisplay>(u => u.LastName, OrderDirection.Asc);
-            var result = Context.Users.ApplyTableRequest<User, UserDisplay>(CreateTableRequest(null, null), sort)
+            var result = Context.Users.ApplyTableRequest<User, UserDisplay, long>(CreateTableRequest(null, null), sort)
                 .Data;
 
             Assert.AreEqual(3, result.Count);
@@ -87,7 +87,7 @@ namespace Test.Table
 
         private ListResult<UserDisplay> ApplyTableRequest(ListRequest request)
         {
-            return Context.Users.ApplyTableRequest<User, UserDisplay>(request);
+            return Context.Users.ApplyTableRequest<User, UserDisplay, long>(request);
         }
 
         private ListRequest CreateTableRequest(Filter filter, SortOrder sort)

@@ -2,7 +2,7 @@
 
 namespace BLL.Infrastructure
 {
-    public interface IProjectService : IGenericCrudService<ProjectDto, ProjectDomain>
+    public interface IProjectService : IGenericCrudService<ProjectDto, ProjectDomain, long>
     {
     }
 }

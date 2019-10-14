@@ -18,7 +18,7 @@
                     <div class="m-section__content">
                         @await Html.PartialAsync("_StatusMessage", Model.StatusMessage)
                         @* ReSharper disable once Mvc.PartialViewNotResolved *@
-                        @await Html.PartialAsync("_AjaxContent", Url.Action(nameof(BasicCrudController<DomainBase, DomainBase>.Table)))
+                        @await Html.PartialAsync("_AjaxContent", Url.Action(nameof(BasicCrudController<DomainBase, DomainBase, long>.Table)))
                     </div>
                 </div>
             </div>

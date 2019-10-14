@@ -10,11 +10,11 @@ using Optional.Unsafe;
 
 namespace DAL.Repositories
 {
-    public abstract class GenericCrudRepository<TContext, TEntity, TDto, TDomain> : BaseRepository<TContext>,
-        IGenericCrudRepository<TDto, TDomain>
-        where TEntity : class, IEntity, new()
-        where TDto : DomainBase
-        where TDomain : DomainBase, new()
+    public abstract class GenericCrudRepository<TContext, TEntity, TDto, TDomain, TKey> : BaseRepository<TContext, TKey>,
+        IGenericCrudRepository<TDto, TDomain, TKey>
+        where TEntity : class, IEntity<TKey>, new()
+        where TDto : class, IDomainBase<TKey>
+        where TDomain : class, IDomainBase<TKey>, new()
         where TContext : DbContext
     {
         protected GenericCrudRepository(TContext context) : base(context)
@@ -25,10 +25,10 @@ namespace DAL.Repositories
 
         public virtual ListResult<TDto> List(ListRequest request)
         {
-            return Set.ApplyTableRequest<TEntity, TDto>(request);
+            return Set.ApplyTableRequest<TEntity, TDto, TKey>(request);
         }
 
-        public virtual TDomain GetById(long id)
+        public virtual TDomain GetById(TKey id)
         {
             return Set
                 .FindOptional(id)
@@ -44,7 +44,7 @@ namespace DAL.Repositories
                 .FindOptional(domain.Id)
                 .CreateIfNone()
                 .MapFrom(domain)
-                .MatchNew(entity => Set.Add(entity))
+                .MatchNew<TEntity, TKey>(entity => Set.Add(entity))
                 .Do(Context.SaveChanges)
                 .Map(entity => GetById(entity.Id))
                 .ValueOrFailure();
@@ -52,7 +52,7 @@ namespace DAL.Repositories
             return UpsertResult<TDomain>.Ok(saved);
         }
 
-        public virtual DeleteResult Delete(long id)
+        public virtual DeleteResult Delete(TKey id)
         {
             return ReferenceChecker
                 .Check(id)

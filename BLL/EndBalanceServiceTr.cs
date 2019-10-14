@@ -39,7 +39,7 @@ namespace BLL
             }
             
             var transactionsAmount = Context.Transactions
-                .ApplyTableRequestIQueryable<Transaction, TransactionDisplay>(CreateTableRequest(filters))
+                .ApplyTableRequestIQueryable<Transaction, TransactionDisplay, long>(CreateTableRequest(filters))
                 .Select(x => x.Amount)
                 .ToList();
 

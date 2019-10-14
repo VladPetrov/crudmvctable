@@ -1,7 +1,7 @@
 ﻿
 namespace Domain.Message
 {
-    public class SubMessageDisplay : DomainBase, IChildEntity
+    public class SubMessageDisplay : DomainBase, IChildEntity<long>
     {
         public string Text { get; set; }
         public bool IsViewed { get; set; }

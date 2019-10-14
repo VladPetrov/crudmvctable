@@ -1,26 +1,25 @@
-﻿using BLL;
+﻿using System;
+using System.Threading.Tasks;
+using BLL;
 using Common;
 using Common.StringConstants;
 using DAL.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Threading.Tasks;
 using WebApp.Extensions;
 using WebApp.Model.ManageViewModels;
 
-namespace WebApp.Controllers
+namespace WebApp.Areas.BackOffice.Controllers
 {
-    [Authorize(Roles = RoleNames.AdminAndCustomer)]
-    [Route("[controller]/[action]")]
-    public class ManageController : Controller
+    [Authorize(Roles = RoleNames.AdminAndBackOffice)]
+    public class ManageAccountController : BackOfficeController
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSenderService _emailSender;
 
-        public ManageController(
+        public ManageAccountController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             IEmailSenderService emailSender)

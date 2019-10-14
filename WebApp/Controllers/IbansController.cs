@@ -3,7 +3,7 @@ using Domain.Iban;
 
 namespace WebApp.Controllers
 {
-    public class IbansController : ChildPageCrudController<IbanDisplay, IbanDomain>
+    public class IbansController : ChildPageCrudController<IbanDisplay, IbanDomain, long>
     {
         public IbansController(IIbanService service) : base(service)
         {

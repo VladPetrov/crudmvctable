@@ -4,9 +4,9 @@ using JetBrains.Annotations;
 namespace DAL.Infrastructure
 {
     [UsedImplicitly(ImplicitUseTargetFlags.WithMembers)]
-    public interface IEntity
+    public interface IEntity<TKey>
     {
-        long Id { get; set; }
+        TKey Id { get; set; }
 
         bool IsNew { get; }
         

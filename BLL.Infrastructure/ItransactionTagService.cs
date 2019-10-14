@@ -2,7 +2,7 @@
 
 namespace BLL.Infrastructure
 {
-    public interface ITransactionTagService : IGenericCrudService<TransactionTagDetails, TransactionTagDetails>
+    public interface ITransactionTagService : IGenericCrudService<TransactionTagDetails, TransactionTagDetails, long>
     {
     }
 }

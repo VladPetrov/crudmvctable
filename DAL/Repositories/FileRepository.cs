@@ -14,7 +14,7 @@ using File = DAL.Model.File;
 
 namespace DAL.Repositories
 {
-    public class FileRepository : BaseRepository<DataBase>, IFileRepository
+    public class FileRepository : BaseRepository<DataBase, long>, IFileRepository
     {
         private ITransactionManager TransactionManager { get; }
 
