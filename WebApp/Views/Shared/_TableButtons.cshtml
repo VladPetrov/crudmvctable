@@ -1,6 +1,6 @@
 ﻿@using WebApp.Components
 @using WebApp.Model.GenericMvc
-@model Domain.DomainBase
+@model Domain.IDomainBase
 
 @{
     var context = Html.GetPageContext();
@@ -11,11 +11,11 @@
     <td style="text-align: right; display: flex">
         @if (context.TableCanEdit)
         {
-            @await Component.InvokeAsync(typeof(ButtonComponent), ButtonViewModel.Create("Edit", "Edit", "btn btn-primary btn-sm", new { id = Model.Id }))
+            @await Component.InvokeAsync(typeof(ButtonComponent), ButtonViewModel.Create("Edit", "Edit", "btn btn-primary btn-sm", new { id = Model.GetId() }))
         }
         @if (context.TableCanDelete)
         {
-            @await Component.InvokeAsync(typeof(ButtonComponent), ButtonViewModel.Create("Delete", "Delete", "btn btn-danger btn-sm", new { id = Model.Id }))
+            @await Component.InvokeAsync(typeof(ButtonComponent), ButtonViewModel.Create("Delete", "Delete", "btn btn-danger btn-sm", new { id = Model.GetId() }))
         }
     </td>
 }

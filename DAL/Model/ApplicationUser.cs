@@ -13,5 +13,7 @@ namespace DAL.Model
 
         [Timestamp]
         public byte[] RowVersion { get; set; }
+
+        public virtual ClientProfile ClientProfile { get; set; }
     }
 }

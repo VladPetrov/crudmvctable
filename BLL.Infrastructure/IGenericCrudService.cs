@@ -4,11 +4,11 @@ using Domain.DeleteResult;
 
 namespace BLL.Infrastructure
 {
-    public interface IGenericCrudService<TDto, TDomain, TKey>
-        where TDto : IDomainBase<TKey>
+    public interface IGenericCrudService<TDisplay, TDomain, in TKey>
+        where TDisplay : IDomainBase<TKey>
         where TDomain : IDomainBase<TKey>
     {
-        ListResult<TDto> List(ListRequest request);
+        ListResult<TDisplay> List(ListRequest request);
 
         OperationResult<TDomain> GetById(TKey id);
 

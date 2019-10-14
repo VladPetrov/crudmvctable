@@ -65,6 +65,7 @@ namespace Configuration.IoC
             Container.Register<ISubCategoryService, SubCategoryService>();
             Container.Register<IEndBalanceService, EndBalanceServiceTr>();
             Container.Register<ScriptsResolveService, ScriptsResolveService>();
+            Container.Register<IClientService, ClientServiceTr>();
 
             Container.Register<ISeed, BasicSeed>(nameof(BasicSeed));
             Container.Register<ISeed, EntitySeed>(nameof(EntitySeed));

@@ -1,0 +1,19 @@
+﻿@using Domain.Client
+@using WebApp.Model
+@using WebApp.Model.GenericMvc
+@using WebApp.Model.TableRenders.Renders
+
+@model WebApp.Model.TableViewModel
+
+@{
+    var descriptor = TableBuilder<ClientDisplay>.CreateNew()
+        .AddColumn(x => x.Email)
+        .AddColumn(x => x.Balance)
+        .AddColumn(x => x.Balance, new RowOptions{ColumnRenderer = new EurRenderer()})
+        .AddColumn(x => x.ContractStartDate)
+        .AddColumn(x => x.ContractEndDate)
+        .Build();
+}
+
+@await Html.TableAsync(Model, descriptor)
+

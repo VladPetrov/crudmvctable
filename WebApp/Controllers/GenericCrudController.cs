@@ -10,13 +10,13 @@ using WebApp.Model.GenericMvc;
 namespace WebApp.Controllers
 {
     [Authorize]
-    public abstract class GenericCrudController<TDto, TDomain, TKey> : BasicCrudController<TDomain, TDomain, TKey>
-        where TDto : IDomainBase<TKey>
+    public abstract class GenericCrudController<TDisplay, TDomain, TKey> : BasicCrudController<TDomain, TDomain, TKey>
+        where TDisplay : IDomainBase<TKey>
         where TDomain : IDomainBase<TKey>, new ()
     {
-        protected IGenericCrudService<TDto, TDomain, TKey> Service { get; }
+        protected IGenericCrudService<TDisplay, TDomain, TKey> Service { get; }
     
-        protected GenericCrudController(IGenericCrudService<TDto, TDomain, TKey> service, bool isChildPage) : base(isChildPage)
+        protected GenericCrudController(IGenericCrudService<TDisplay, TDomain, TKey> service, bool isChildPage) : base(isChildPage)
         {
             Service = service;
         }
@@ -142,7 +142,7 @@ namespace WebApp.Controllers
             return GetPartialView(TitleType.Delete, Service.GetById(id));
         }
      
-        protected MvcTableResponse<TDto,TKey> GetTableItemsPerPage(int? page)
+        protected MvcTableResponse<TDisplay,TKey> GetTableItemsPerPage(int? page)
         {
             if (!page.HasValue)
             {
@@ -155,7 +155,7 @@ namespace WebApp.Controllers
 
             var request = GetTableRequest();
 
-            var listResult = request.FromListResult<TDto, TKey>(Service.List(request.ToListRequest(page.Value)), page.Value);
+            var listResult = request.FromListResult<TDisplay, TKey>(Service.List(request.ToListRequest(page.Value)), page.Value);
 
             return listResult.ToMvcTableResponse();
         }
