@@ -10,10 +10,8 @@ namespace DAL.Infrastructure
 
         bool IsNew { get; }
         
-        DateTime CreatedDate { get; set; } 
-        
-        DateTime? DeletedDate { get; set; }
-        
-        bool IsDeleted { get; set; }
+        DateTime CreatedDate { get; set; }
+
+        byte[] RowVersion { get; set; }
     }
 }

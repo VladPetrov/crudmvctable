@@ -19,7 +19,6 @@ namespace DAL.Mapping
             CreateMap<ProjectFileRecordModel, Project>()
                 .ForMember(x => x.Id, opt => opt.Ignore())
                 .ForMember(x => x.CreatedDate, opt => opt.Ignore())
-                .ForMember(x => x.Guid, opt => opt.Ignore())
                 .ForMember(x => x.RowVersion, opt => opt.Ignore())
                 .ForMember(x => x.Entities, opt => opt.Ignore());
 

@@ -14,7 +14,6 @@ namespace DAL.Mapping
             CreateMap<EntityAccountFileRecordModel, Entity>()
                 .ForMember(x => x.Projects, opt => opt.Ignore())
                 .ForMember(x => x.Id, opt => opt.Ignore())
-                .ForMember(x => x.Guid, opt => opt.Ignore())
                 .ForMember(x => x.CreatedDate, opt => opt.Ignore())
                 .ForMember(x => x.RowVersion, opt => opt.Ignore())
                 .ForMember(x => x.Ibans, opt => opt.Ignore())
@@ -22,7 +21,6 @@ namespace DAL.Mapping
 
             CreateMap<EntityAccountFileRecordModel, Iban>()
                 .ForMember(x => x.Id, opt => opt.Ignore())
-                .ForMember(x => x.Guid, opt => opt.Ignore())
                 .ForMember(x => x.CreatedDate, opt => opt.Ignore())
                 .ForMember(x => x.RowVersion, opt => opt.Ignore())
                 .ForMember(x => x.Entity, opt => opt.Ignore())

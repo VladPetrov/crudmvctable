@@ -4,20 +4,7 @@ using Newtonsoft.Json;
 
 namespace Domain
 {
-    public interface IDomainBase
-    {
-        object GetId();
-    }
-
-    public interface IDomainBase<TKey> : IDomainBase
-    {
-        TKey Id { get; set; }
-        bool IsNew { get; }
-        DateTime CreatedDate { get; set; }
-    }
-
-    public class DomainBase //: IChangeType
-        : IDomainBase<long>
+    public class DomainBase : IDomainBase<long>
     {
         [ScaffoldColumn(false)]
         public long Id { get; set; }

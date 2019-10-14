@@ -124,8 +124,8 @@ namespace WebApp
                     routes.MapRoute(name: "default2", template: "{controller=Home}/{action=Index}/{isReadonly?}");
                 });
 
-                //migrationManager.EnsureCreated(ConfigurationProvider);
-                //migrationManager.ApplyMigrations(ConfigurationProvider);
+                migrationManager.EnsureCreated(ConfigurationProvider);
+                migrationManager.ApplyMigrations(ConfigurationProvider);
                 seedManager.Seed(ConfigurationProvider);
                
             }
@@ -145,9 +145,9 @@ namespace WebApp
         private void ConfigureMvcServices(IServiceCollection services)
         {
             Log.Logger().Information("Configure ApplicationContext...");
-            //DbContextConfiguration.UseSqlDataBase<DataBase>(services, ConfigurationProvider);
-            DbContextConfiguration.UseInMemoryDatabase<DataBase>(services, option => 
-              option.ConfigureWarnings(y => y.Ignore(InMemoryEventId.TransactionIgnoredWarning)));
+            DbContextConfiguration.UseSqlDataBase<DataBase>(services, ConfigurationProvider);
+            //DbContextConfiguration.UseInMemoryDatabase<DataBase>(services, option => 
+              //option.ConfigureWarnings(y => y.Ignore(InMemoryEventId.TransactionIgnoredWarning)));
 
             Log.Logger().Information("Configure Identity...");
             services.AddIdentity<ApplicationUser, IdentityRole>()
