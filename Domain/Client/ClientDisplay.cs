@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Domain.Client
 {
-    public class ClientDisplay : IDomainBase<string>
+    public class ClientDisplay : IDomain<string>
     {
         public string Id { get; set; }
 

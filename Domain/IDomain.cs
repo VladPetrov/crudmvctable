@@ -7,7 +7,7 @@ namespace Domain
         object GetId();
     }
 
-    public interface IDomainBase<TKey> : IDomainBase
+    public interface IDomain<TKey> : IDomainBase
     {
         TKey Id { get; set; }
         bool IsNew { get; }

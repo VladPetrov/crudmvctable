@@ -11,8 +11,8 @@ namespace WebApp.Controllers
 {
     [Authorize]
     public abstract class GenericCrudController<TDisplay, TDomain, TKey> : BasicCrudController<TDomain, TDomain, TKey>
-        where TDisplay : IDomainBase<TKey>
-        where TDomain : IDomainBase<TKey>, new ()
+        where TDisplay : IDomain<TKey>
+        where TDomain : IDomain<TKey>, new ()
     {
         protected IGenericCrudService<TDisplay, TDomain, TKey> Service { get; }
     

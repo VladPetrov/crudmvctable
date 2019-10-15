@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace Domain
 {
-    public class DomainBase : IDomainBase<long>
+    public class DomainBase : IDomain<long>
     {
         [ScaffoldColumn(false)]
         public long Id { get; set; }

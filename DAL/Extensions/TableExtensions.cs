@@ -15,7 +15,7 @@ namespace DAL.Extensions
     {
         public static ListResult<TDomain> ApplyTableRequest<TEntity, TDomain, TKey>(this IQueryable<TEntity> query, ListRequest request, params SortOrder[] sortOrders) 
             where TEntity : IEntity<TKey>
-            where TDomain : IDomainBase<TKey>
+            where TDomain : IDomain<TKey>
         {
             var totalCount = query.Count();
             var filtered = totalCount;
@@ -58,7 +58,7 @@ namespace DAL.Extensions
 
         public static IQueryable<TDomain> ApplyTableRequestIQueryable<TEntity, TDomain, TKey>(this IQueryable<TEntity> query, ListRequest request, params SortOrder[] sortOrders)
             where TEntity : IEntity<TKey>
-            where TDomain : IDomainBase<TKey>
+            where TDomain : IDomain<TKey>
         {
             var domainQuery = query.ProjectTo<TDomain>();
 
@@ -85,7 +85,7 @@ namespace DAL.Extensions
         }
 
         private static IQueryable<TDomain> Sort<TDomain, TKey>(IQueryable<TDomain> domainQuery, SortOrder[] sortOrders, List<SortOrder> sorts) 
-            where TDomain : IDomainBase<TKey>
+            where TDomain : IDomain<TKey>
         {
             var orders = new List<SortOrder>(sortOrders);
 

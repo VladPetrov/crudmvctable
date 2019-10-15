@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Domain.Client
 {
-    public class ClientDomain : IDomainBase<string>
+    public class ClientDomain : IDomain<string>
     {
         public string Id { get; set; }
 

@@ -5,8 +5,8 @@ using Domain.DeleteResult;
 namespace BLL.Infrastructure
 {
     public interface IGenericCrudService<TDisplay, TDomain, in TKey>
-        where TDisplay : IDomainBase<TKey>
-        where TDomain : IDomainBase<TKey>
+        where TDisplay : IDomain<TKey>
+        where TDomain : IDomain<TKey>
     {
         ListResult<TDisplay> List(ListRequest request);
 

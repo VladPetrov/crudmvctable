@@ -5,8 +5,8 @@ using Domain.DeleteResult;
 namespace DAL.Infrastructure
 {
     public interface IGenericCrudRepository<TDto, TDomain, TKey>
-        where TDto    : IDomainBase<TKey>
-        where TDomain : IDomainBase<TKey>
+        where TDto    : IDomain<TKey>
+        where TDomain : IDomain<TKey>
     {
         ListResult<TDto> List(ListRequest request);
 

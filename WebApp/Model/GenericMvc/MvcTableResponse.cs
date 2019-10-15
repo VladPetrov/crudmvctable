@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace WebApp.Model.GenericMvc
 {
-    public class MvcTableResponse<TDomain, TKey> where TDomain : IDomainBase<TKey>
+    public class MvcTableResponse<TDomain, TKey> where TDomain : IDomain<TKey>
     {
         public List<TDomain> Data { get; }
 

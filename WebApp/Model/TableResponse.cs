@@ -6,7 +6,7 @@ using JetBrains.Annotations;
 namespace WebApp.Model
 {
     [UsedImplicitly(ImplicitUseTargetFlags.WithMembers)]
-    public sealed class TableResponse<TDomain, TKey> where TDomain : IDomainBase<TKey>
+    public sealed class TableResponse<TDomain, TKey> where TDomain : IDomain<TKey>
     {
         public List<TDomain> Data { get; }
 

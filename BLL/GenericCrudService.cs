@@ -7,8 +7,8 @@ using Domain.DeleteResult;
 namespace BLL
 {
     public abstract class GenericCrudServise<TDto, TDomain, TKey> : IGenericCrudService<TDto, TDomain, TKey>
-        where TDto : IDomainBase<TKey>
-        where TDomain : IDomainBase<TKey>
+        where TDto : IDomain<TKey>
+        where TDomain : IDomain<TKey>
 
     {
         protected IGenericCrudRepository<TDto, TDomain, TKey> Repository { get; }

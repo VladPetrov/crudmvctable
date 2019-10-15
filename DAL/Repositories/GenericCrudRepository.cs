@@ -13,8 +13,8 @@ namespace DAL.Repositories
     public abstract class GenericCrudRepository<TContext, TEntity, TDto, TDomain, TKey> : BaseRepository<TContext, TKey>,
         IGenericCrudRepository<TDto, TDomain, TKey>
         where TEntity : class, IEntity<TKey>, new()
-        where TDto : class, IDomainBase<TKey>
-        where TDomain : class, IDomainBase<TKey>, new()
+        where TDto : class, IDomain<TKey>
+        where TDomain : class, IDomain<TKey>, new()
         where TContext : DbContext
     {
         protected GenericCrudRepository(TContext context) : base(context)

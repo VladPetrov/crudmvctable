@@ -10,12 +10,12 @@ namespace WebApp.Model.GenericMvc
 {
     public static class Extensions
     {
-        public static MvcTableResponse<TDto, TKey> ToMvcTableResponse<TDto, TKey>(this TableResponse<TDto, TKey> response) where TDto : IDomainBase<TKey>
+        public static MvcTableResponse<TDto, TKey> ToMvcTableResponse<TDto, TKey>(this TableResponse<TDto, TKey> response) where TDto : IDomain<TKey>
         {
             return new MvcTableResponse<TDto, TKey>(response.Data, typeof(TDto), response.Filters, response.Order, response.PagingInfo);
         }
 
-        public static TableViewModel ToTableViewModel<TDto, TKey>(this MvcTableResponse<TDto, TKey> response) where TDto : IDomainBase<TKey>
+        public static TableViewModel ToTableViewModel<TDto, TKey>(this MvcTableResponse<TDto, TKey> response) where TDto : IDomain<TKey>
         {
             return new TableViewModel(
                 response.Data.Cast<IDomainBase>().ToList(),
