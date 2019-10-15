@@ -1,8 +1,11 @@
 ﻿namespace Domain
 {
-    public class ValueObject //: DomainBase
+    public class ValueObject : IDomain
     {
-        public long? Id { get; set; }
+        public long Id { get; set; }
+        
         public string Name { get; set; }
+
+        public object GetId() => Id;
     }
 }

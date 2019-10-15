@@ -18,7 +18,7 @@ namespace WebApp.Model.GenericMvc
         public static TableViewModel ToTableViewModel<TDto, TKey>(this MvcTableResponse<TDto, TKey> response) where TDto : IDomain<TKey>
         {
             return new TableViewModel(
-                response.Data.Cast<IDomainBase>().ToList(),
+                response.Data.Cast<IDomain>().ToList(),
                 response.DataType,
                 response.Filters,
                 response.Order,

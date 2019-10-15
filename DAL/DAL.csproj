@@ -6,12 +6,14 @@
 
   <ItemGroup>
     <None Remove="DbManagers\Seeds\SeedData\Categories.xlsx" />
+    <None Remove="DbManagers\Seeds\SeedData\Countries.txt" />
     <None Remove="DbManagers\Seeds\SeedData\Entities.xlsx" />
     <None Remove="DbManagers\Seeds\SeedData\Projects.xlsx" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="DbManagers\Seeds\SeedData\Categories.xlsx" />
+    <EmbeddedResource Include="DbManagers\Seeds\SeedData\Countries.txt" />
     <EmbeddedResource Include="DbManagers\Seeds\SeedData\Entities.xlsx">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>

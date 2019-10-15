@@ -8,7 +8,7 @@ namespace WebApp.Model
 {
     public class TableViewModel
     {
-        public List<IDomainBase> Data { get; }
+        public List<IDomain> Data { get; }
 
         public Type DataType { get; }
 
@@ -18,9 +18,9 @@ namespace WebApp.Model
 
         public List<SortOrder> Orders { get; }
         
-        public TableViewModel(List<IDomainBase> data, Type dataType, List<Filter> filters, List<SortOrder> order, PagingInfo pagingInfo)
+        public TableViewModel(List<IDomain> data, Type dataType, List<Filter> filters, List<SortOrder> order, PagingInfo pagingInfo)
         {
-            Data = data ?? new List<IDomainBase>();
+            Data = data ?? new List<IDomain>();
             DataType = dataType;
             Filters = filters ?? new List<Filter>();
             Orders = order ?? new List<SortOrder>();

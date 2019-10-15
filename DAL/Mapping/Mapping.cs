@@ -25,6 +25,7 @@ namespace DAL.Mapping
             configuration.AddProfile<EntityProfile>();
             configuration.AddProfile<FileUploadLogErrorProfile>();
             configuration.AddProfile<ManyToManyRelationProfile>();
+            configuration.AddProfile<CountyProfile>();
         }
     }
 }

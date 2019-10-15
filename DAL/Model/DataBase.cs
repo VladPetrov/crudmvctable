@@ -27,6 +27,7 @@ namespace DAL.Model
         public DbSet<TransactionThroughEmailImportInfo> TransactionThroughEmailImportInfo { get; set; }
         public DbSet<EntityProject> EntityProject { get; set; }
         public DbSet<TransactionFiles> TransactionFiles { get; set; }
+        public DbSet<Country> Countries { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder builder)

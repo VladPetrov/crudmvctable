@@ -2,12 +2,12 @@
 
 namespace Domain
 {
-    public interface IDomainBase
+    public interface IDomain
     {
         object GetId();
     }
 
-    public interface IDomain<TKey> : IDomainBase
+    public interface IDomain<TKey> : IDomain
     {
         TKey Id { get; set; }
         bool IsNew { get; }

@@ -1,4 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
+using System.Threading.Tasks;
 using Common;
 using Common.Configuration;
 using Common.StringConstants;
@@ -12,6 +15,8 @@ namespace DAL.DbManagers
     {
         private UserManager<ApplicationUser> UserManager { get; }
         private RoleManager<IdentityRole> RoleManager { get; }
+        private string ResourceName => "DAL.DbManagers.Seeds.SeedData.Countries.txt";
+
 
         public BasicSeed(DataBase context, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager) : base(context, SeedType.Basic, 1)
         {
@@ -21,10 +26,27 @@ namespace DAL.DbManagers
 
         protected override void DoSeed()
         {
+            PopulateCounties();
             PopulateRoles().Wait();
             PopulateSystemUser().Wait();
         }
-        
+
+        private void PopulateCounties()
+        {
+            using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(ResourceName))
+            {
+                Defensive.AssertNotNull(stream, $"Resource '{ResourceName}' was not found");
+
+                using (var reader = new StreamReader(stream))
+                {
+                    while (!reader.EndOfStream)
+                    {
+                        Context.Countries.Add(new Country{Name = reader.ReadLine() });
+                    }
+                }
+            }
+        }
+
         private async Task PopulateSystemUser()
         {
             var user = new ApplicationUser { UserType = UserType.AdminOrBackOffice, UserName = Constants.DefaultUser, Email = Constants.DefaultUser};
