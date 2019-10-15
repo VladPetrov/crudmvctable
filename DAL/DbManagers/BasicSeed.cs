@@ -3,6 +3,7 @@ using Common;
 using Common.Configuration;
 using Common.StringConstants;
 using DAL.Model;
+using Domain;
 using Microsoft.AspNetCore.Identity;
 
 namespace DAL.DbManagers
@@ -26,13 +27,13 @@ namespace DAL.DbManagers
         
         private async Task PopulateSystemUser()
         {
-            var user = new ApplicationUser { UserName = Constants.DefaultUser, Email = Constants.DefaultUser};
+            var user = new ApplicationUser { UserType = UserType.AdminOrBackOffice, UserName = Constants.DefaultUser, Email = Constants.DefaultUser};
 
             var result = await UserManager.CreateAsync(user, Constants.DefaultUserPassword);
 
             Defensive.AssertTrue(result.Succeeded, string.Join("; ", result.Errors));
 
-            var roleResult = await UserManager.AddToRoleAsync(user, RoleNames.Admin);
+            var roleResult = await UserManager.AddToRolesAsync(user, new []{ RoleNames.Admin , RoleNames.BackOffice});
 
             Defensive.AssertTrue(roleResult.Succeeded, string.Join("; ", roleResult.Errors));
         }

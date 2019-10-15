@@ -105,13 +105,17 @@ namespace WebApp.Areas.BackOffice.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = ApplicationUser.CreateEmployee();
+                user.UserName = model.Email;
+                user.Email = model.Email;
 
                 var result = await UserManager.CreateAsync(user, model.Password);
 
                 if (result.Succeeded)
                 {
                     Log.Logger().Information("User created a new account with password.");
+
+                    await UserManager.AddToRoleAsync(user, RoleNames.BackOffice);
 
                     var code = await UserManager.GenerateEmailConfirmationTokenAsync(user);
 

@@ -73,6 +73,7 @@ namespace Configuration.IoC
             //Container.AddTransient<ISeed, MessageSeed>(nameof(MessageSeed));   
             Container.Register<ISeed, TransactionSeed>(nameof(TransactionSeed));
             Container.Register<ISeed, CategorySeed>(nameof(CategorySeed));
+            Container.Register<ISeed, ClientsSeed>(nameof(ClientsSeed));
 
             Container.Register<AppsUserManager>();
         }

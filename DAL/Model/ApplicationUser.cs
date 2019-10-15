@@ -23,5 +23,10 @@ namespace DAL.Model
         {
             return new ApplicationUser {UserType = UserType.Client};
         }
+        
+        public static ApplicationUser CreateEmployee()
+        {
+            return new ApplicationUser { UserType = UserType.AdminOrBackOffice };
+        }
     }
 }
