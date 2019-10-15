@@ -5,6 +5,7 @@ using BLL;
 using Common;
 using Common.StringConstants;
 using DAL.Model;
+using Domain;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -33,7 +34,9 @@ namespace WebApp.Areas.BackOffice.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            var users = UserManager.Users.ToList();
+            var users = UserManager.Users
+                .Where(x => x.UserType == UserType.AdminOrBackOffice)
+                .ToList();
 
             ViewBag.StatusMessage = StatusMessage;
 
