@@ -10,8 +10,7 @@
     string status = ViewBag.StatusMessage;
 }
 
-@Html.Partial("_StatusMessage", status)
-
+<partial name="_StatusMessage" model="@status"/>
 
 <div style="margin: 10px">
     @Html.ActionLink("Add User", "Create", new {}, new { @class = "btn btn-primary btn-sm" })
