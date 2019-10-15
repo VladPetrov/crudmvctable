@@ -1,8 +1,7 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
+﻿using DAL.Infrastructure;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using DAL.Infrastructure;
 
 namespace DAL.Model
 {
@@ -26,5 +25,9 @@ namespace DAL.Model
         public DateTime ContractEndDate { get; set; }
 
         public virtual ApplicationUser User { get; set; }
+
+        public virtual ClientDeliveryAddress DeliveryAddress { get; set; }
+
+        public virtual ClientAuthorizedPersons AuthorizedPersons { get; set; }
     }
 }
