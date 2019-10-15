@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using DAL.Infrastructure;
+using Domain;
 using Microsoft.AspNetCore.Identity;
 
 namespace DAL.Model
@@ -14,6 +15,13 @@ namespace DAL.Model
         [Timestamp]
         public byte[] RowVersion { get; set; }
 
+        public UserType UserType { get; set; }
+
         public virtual ClientProfile ClientProfile { get; set; }
+
+        public static ApplicationUser CreateClient()
+        {
+            return new ApplicationUser {UserType = UserType.Client};
+        }
     }
 }

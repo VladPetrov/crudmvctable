@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using BLL.Infrastructure;
 using Common.Table;
@@ -20,7 +21,9 @@ namespace BLL
 
         public ListResult<ClientDisplay> List(ListRequest request)
         {
-            return Context.Users.ApplyTableRequest<ApplicationUser, ClientDisplay, string>(request);
+            return Context.Users
+                .Where(x => x.UserType == UserType.Client)
+                .ApplyTableRequest<ApplicationUser, ClientDisplay, string>(request);
         }
 
         public OperationResult<ClientDomain> GetById(string id)

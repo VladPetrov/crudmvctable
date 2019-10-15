@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26730.8
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29409.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL", "DAL\DAL.csproj", "{C4BED3F4-7A53-4C77-AAE2-378669C19529}"
 EndProject
@@ -17,8 +17,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Configuration", "Configurat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Common\Common.csproj", "{EB4E09C8-82F3-40E6-83BD-04BF6646DE82}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Security", "Security\Security.csproj", "{B35DB7C4-CC11-4895-B137-08C19F34BFF4}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test", "Test\Test.csproj", "{FDB40E97-0662-4150-B1FD-C64D0E6981C9}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL.Infrastructure", "DAL.Infrastructure\DAL.Infrastructure.csproj", "{86228FEA-00E8-4B47-AC83-2546A4079557}"
@@ -27,7 +25,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApp", "WebApp\WebApp.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MetronicBundleBuilder", "MetronicBundleBuilder\MetronicBundleBuilder.csproj", "{7F59CC33-1984-4700-A119-F670A9440128}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp", "ConsoleApp\ConsoleApp.csproj", "{41B14778-E9BE-4798-AC05-6D78DB0CF107}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp", "ConsoleApp\ConsoleApp.csproj", "{41B14778-E9BE-4798-AC05-6D78DB0CF107}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,10 +61,6 @@ Global
 		{EB4E09C8-82F3-40E6-83BD-04BF6646DE82}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EB4E09C8-82F3-40E6-83BD-04BF6646DE82}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EB4E09C8-82F3-40E6-83BD-04BF6646DE82}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B35DB7C4-CC11-4895-B137-08C19F34BFF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B35DB7C4-CC11-4895-B137-08C19F34BFF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B35DB7C4-CC11-4895-B137-08C19F34BFF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B35DB7C4-CC11-4895-B137-08C19F34BFF4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FDB40E97-0662-4150-B1FD-C64D0E6981C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FDB40E97-0662-4150-B1FD-C64D0E6981C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FDB40E97-0662-4150-B1FD-C64D0E6981C9}.Release|Any CPU.ActiveCfg = Release|Any CPU

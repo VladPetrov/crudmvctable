@@ -3,7 +3,7 @@ namespace Domain
 {
   public enum UserType
   {
-    None = 0,
-    Admin = 4,
+    Client = 0,
+    AdminOrBackOffice = 4,
   }
 }
