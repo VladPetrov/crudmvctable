@@ -27,7 +27,8 @@ namespace DAL.DbManagers.Seeds
                         {
                             Balance = 10000,
                             ContractStartDate = DateTime.Now,
-                            ContractEndDate = DateTime.Now.AddMonths(1)
+                            ContractEndDate = DateTime.Now.AddMonths(1),
+                            Name = "Google s.r.o."
                         }
                     },
 
@@ -41,7 +42,8 @@ namespace DAL.DbManagers.Seeds
                         {
                             Balance = 80000,
                             ContractStartDate = DateTime.Now.AddMonths(-2),
-                            ContractEndDate = DateTime.Now.AddMonths(-1)
+                            ContractEndDate = DateTime.Now.AddMonths(-1),
+                            Name = "Amazon s.r.o."
                         }
                     },
                 });

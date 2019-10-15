@@ -18,6 +18,9 @@ namespace DAL.Model
         [Timestamp]
         public byte[] RowVersion { get; set; }
 
+        [Required]
+        public string Name { get; set; }
+
         public long Balance { get; set; }
 
         public DateTime ContractStartDate { get; set; }

@@ -21,5 +21,12 @@ namespace Domain.Client
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
+
+        [Range(0, long.MaxValue)]
+        public long Balance { get; set; }
+        
+        public DateTime ContractStartDate { get; set; }
+
+        public DateTime ContractEndDate { get; set; }
     }
 }

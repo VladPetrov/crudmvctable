@@ -6,9 +6,9 @@ using NUnit.Framework;
 namespace Test.GenericInfrastructure.GenericRepository
 {
     [TestFixture]
-    public class GenericRepositotyTest
+    public class GenericRepositoryTest
     {
-        private bool UseInMemoryDb => false;
+        private bool UseInMemoryDb => true;
 
         private GenericInfrastructureContext Context { get; set; }
 

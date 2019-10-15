@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Linq.Expressions;
+using System.Text.RegularExpressions;
 using Common;
 using Common.Exceptions;
 using Common.Table;
@@ -17,7 +18,9 @@ namespace DAL.Repositories.TableFilters
             object val;
             try
             {
-                val = TypeDescriptor.GetConverter(field.Type).ConvertFrom(filter.Value.ToString());
+                var valStr = Regex.Replace(filter.Value.ToString(), @"[^\d^-]", String.Empty);
+
+                val = TypeDescriptor.GetConverter(field.Type).ConvertFrom(valStr);
             }
             catch (Exception e)
             {

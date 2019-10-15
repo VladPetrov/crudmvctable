@@ -14,9 +14,6 @@ namespace DAL.Mapping
 
         public static void AddProfiles(IMapperConfigurationExpression configuration)
         {
-            //configuration.ShouldMapField = ShouldMap;
-            //configuration.ShouldMapProperty = ShouldMap;
-
             configuration.AddProfile<MessageProfile>();
             configuration.AddProfile<TransactionProfile>();
             configuration.AddProfile<ProjectProfile>();
@@ -26,6 +23,7 @@ namespace DAL.Mapping
             configuration.AddProfile<FileUploadLogErrorProfile>();
             configuration.AddProfile<ManyToManyRelationProfile>();
             configuration.AddProfile<CountyProfile>();
+            configuration.AddProfile<ClientProfile>();
         }
     }
 }

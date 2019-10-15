@@ -17,6 +17,10 @@ namespace Domain.Client
 
         public string Email { get; set; }
 
+        public bool EmailConfirmed { get; set; }
+
+        public string Name { get; set; }
+
         public long Balance { get; set; }
 
         public DateTime ContractStartDate { get; set; }
