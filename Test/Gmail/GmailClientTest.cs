@@ -5,6 +5,7 @@ using System;
 
 namespace Test.Gmail
 {
+    [Ignore("")]
     [TestFixture]
     public class GmailClientTest
     {
