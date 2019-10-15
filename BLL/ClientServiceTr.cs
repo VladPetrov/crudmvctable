@@ -15,8 +15,14 @@ namespace BLL
 {
     public class ClientServiceTr : BaseRepository<DataBase, string>, IClientService
     {
-        public ClientServiceTr(DataBase context) : base(context)
+        private AppsUserManager UserManager { get; }
+
+        private IEmailSenderService EmailSender { get; }
+
+        public ClientServiceTr(DataBase context, AppsUserManager userManager, IEmailSenderService emailSender) : base(context)
         {
+            UserManager = userManager;
+            EmailSender = emailSender;
         }
 
         public ListResult<ClientDisplay> List(ListRequest request)
@@ -33,6 +39,8 @@ namespace BLL
 
         public UpsertResult<ClientDomain> Upsert(ClientDomain domain)
         {
+            
+            
             throw new NotImplementedException();
         }
 

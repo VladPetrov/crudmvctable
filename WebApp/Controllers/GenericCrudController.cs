@@ -4,6 +4,7 @@ using Domain;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using Microsoft.AspNetCore.Authorization;
+using WebApp.Extensions;
 using WebApp.Model;
 using WebApp.Model.GenericMvc;
 
@@ -86,7 +87,10 @@ namespace WebApp.Controllers
             if (result.Success)
             {
                 SetMessageFor(ActionStatus.Created);
-                return RedirectToAction(nameof(IndexPage));
+
+                Defensive.AssertNotNull(result.Data);
+
+                return RedirectAfterCreate(result.Data.Id);
             }
 
             return GetPartialView(TitleType.Create, result);
@@ -158,6 +162,23 @@ namespace WebApp.Controllers
             var listResult = request.FromListResult<TDisplay, TKey>(Service.List(request.ToListRequest(page.Value)), page.Value);
 
             return listResult.ToMvcTableResponse();
+        }
+
+        protected IActionResult RedirectAfterCreate(TKey id)
+        {
+            var pageContext = ViewData.GetPageContext();
+
+            if (pageContext.TableCanEdit)
+            {
+                return RedirectToAction(nameof(Edit), new {id = id});
+            }
+
+            if (pageContext.TableCanDetails)
+            {
+                return RedirectToAction(nameof(Details), new { id = id });
+            }
+
+            return RedirectToAction(nameof(IndexPage));
         }
     }
 }
