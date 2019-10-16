@@ -7,21 +7,20 @@
     var context = Html.GetPageContext();
 }
 
-<div id="@context.PageContainerId">
+    <div id="@context.PageContainerId">
+        @await Html.RenderPageHeaderAsync()
 
-    @await Html.RenderPageHeaderAsync()
-
-    <div class="m-content">
-        <div class="m-portlet m-portlet--full-height">
-            <div class="m-portlet__body">
-                <div class="m-section">
-                    <div class="m-section__content">
-                        @await Html.PartialAsync("_StatusMessage", Model.StatusMessage)
-                        @* ReSharper disable once Mvc.PartialViewNotResolved *@
-                        @await Html.PartialAsync("_AjaxContent", Url.Action(nameof(BasicCrudController<DomainBase, DomainBase, long>.Table)))
+        <div class="m-content">
+            <div class="m-portlet m-portlet--full-height">
+                <div class="m-portlet__body">
+                    <div class="m-section">
+                        <div class="m-section__content">
+                            @await Html.RenderStatusMessageAsync()
+                            @* ReSharper disable once Mvc.PartialViewNotResolved *@
+                            @await Html.PartialAsync("_AjaxContent", Url.Action(nameof(BasicCrudController<DomainBase, DomainBase, long>.Table)))
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>

@@ -8,9 +8,10 @@
 }
 
 @* ReSharper disable Mvc.PartialViewNotResolved *@
+@* ReSharper disable once Mvc.ActionNotResolved *@
 @if (context.IsChildPage && Html.GetAction() == nameof(BasicCrudController<DomainBase, DomainBase, long>.IndexPage))
 {
-    @await Html.PartialAsync("_StatusMessage", Model.StatusMessage)
+    @await Html.RenderStatusMessageAsync()
     @await Html.PartialAsync("_AjaxContent", Url.Action(nameof(BasicCrudController<DomainBase, DomainBase, long>.Table)))
 }
 else
@@ -33,7 +34,8 @@ else
                 <div class="m-section">
                     <div class="m-section__content">
                         <div id="@context.PageContainerId">
-                            @await Html.PartialAsync("_StatusMessage", Model.StatusMessage)
+                            @await Html.RenderStatusMessageAsync()
+                            @* ReSharper disable once Mvc.ActionNotResolved *@
                             @await Html.PartialAsync("_AjaxContent", Url.Action(nameof(BasicCrudController<DomainBase, DomainBase, long>.Table)))
                         </div>
                     </div>

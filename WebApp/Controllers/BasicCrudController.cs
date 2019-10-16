@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using WebApp.Extensions;
 using WebApp.Filters;
 using WebApp.Model;
 using WebApp.Model.GenericMvc;
@@ -63,25 +64,32 @@ namespace WebApp.Controllers
             return childPageRequest;
         }
 
-        protected virtual string GetStatusMessage()
+        protected virtual void RenderStatusMessage()
         {
             var status = TempData.Get<IndexPageTempData>(nameof(IndexPageTempData))?.Status;
 
             if (status == null)
             {
-                return null;
+                return;
             }
+
+            string message;
 
             switch (status)
             {
                 case ActionStatus.Created:
-                    return "Item was Added successfully";
+                    message = "Item was Added successfully";
+                    break;
                 case ActionStatus.Updated:
-                    return "Item was Updated successfully";
+                    message = "Item was Updated successfully";
+                    break;
                 case ActionStatus.Deleted:
-                    return "Item was Deleted successfully";
+                    message = "Item was Deleted successfully";
+                    break;
                 default: throw new SwitchExpressionValueException(status);
             }
+
+            ViewData.SetStatusMessage(message);
         }
 
         protected void SetMessageFor(ActionStatus status)

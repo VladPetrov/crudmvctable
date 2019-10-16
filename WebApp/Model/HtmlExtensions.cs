@@ -28,6 +28,11 @@ namespace WebApp.Model
             return htmlHelper.PartialAsync("_PageHeader");
         }
 
+        public static Task<IHtmlContent> RenderStatusMessageAsync<TModel>(this IHtmlHelper<TModel> htmlHelper)
+        {
+            return htmlHelper.PartialAsync("_StatusMessage");
+        }
+
         public static Task<IHtmlContent> RenderBackToListButtonAsync<TModel>(this IHtmlHelper<TModel> htmlHelper)
         {
             var model = new CrudButtonViewModel(CrudButtonsSettings.BackToListLabel, CrudButtonsSettings.BackToListUrl, CrudButtonsSettings.BackToListStyle);

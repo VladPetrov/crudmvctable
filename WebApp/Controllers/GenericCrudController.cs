@@ -38,7 +38,9 @@ namespace WebApp.Controllers
         [HttpGet]
         public override IActionResult IndexPage()
         {
-            return GetView(TitleType.Index, nameof(Index), new GenericMvcIndexViewModel(false, GetStatusMessage()));
+            RenderStatusMessage();
+
+            return GetView(TitleType.Index, nameof(Index), new GenericMvcIndexViewModel(false));
         }
         
         [HttpPost]
@@ -62,6 +64,8 @@ namespace WebApp.Controllers
         [HttpGet]
         public override IActionResult Details(TKey id)
         {
+            RenderStatusMessage();
+
             return GetPartialView(TitleType.Details, Service.GetById(id));
         }
 
@@ -99,6 +103,8 @@ namespace WebApp.Controllers
         [HttpGet]
         public override IActionResult Edit(TKey id)
         {
+            RenderStatusMessage();
+
             return GetPartialView(TitleType.Edit, Service.GetById(id));
         }
 

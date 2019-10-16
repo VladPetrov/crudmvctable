@@ -2,6 +2,8 @@
 @using WebApp.Model.GenericMvc.ChildPage
 @model Domain.DomainBase
 
+@await Html.RenderStatusMessageAsync()
+
 @await Html.RenderPageHeaderAsync()
 
 <div class="m-content">

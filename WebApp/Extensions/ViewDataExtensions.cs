@@ -21,5 +21,18 @@ namespace WebApp.Extensions
 
             return context;
         }
+
+        public static void SetStatusMessage(this ViewDataDictionary viewData, string message)
+        {
+            if (message != null)
+            {
+                viewData[StatusMessageViewModel.Name] = new StatusMessageViewModel(message);
+            }
+        }
+
+        public static StatusMessageViewModel GetStatusMessage(this ViewDataDictionary viewData)
+        {
+            return (StatusMessageViewModel)viewData[StatusMessageViewModel.Name] ?? new StatusMessageViewModel();
+        }
     }
 }
