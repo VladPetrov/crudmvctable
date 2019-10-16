@@ -97,6 +97,8 @@ namespace WebApp.Controllers
                 return RedirectAfterCreate(result.Data.Id);
             }
 
+            result = UpsertResult<TDomain>.Error(result.Message, domain); //return model back with errors
+            
             return GetPartialView(TitleType.Create, result);
         }
 
@@ -124,6 +126,10 @@ namespace WebApp.Controllers
             if (result.Success)
             {
                 SetMessageFor(ActionStatus.Updated);
+            }
+            else
+            {
+                result = UpsertResult<TDomain>.Error(result.Message, domain); //return model back with errors 
             }
 
             TryRenderStatusMessage();

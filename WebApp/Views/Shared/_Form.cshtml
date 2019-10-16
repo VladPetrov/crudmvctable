@@ -10,12 +10,7 @@
     <div class="col-md-6">
         <div class="m-portlet">
             @await Html.PartialAsync("_FormHeader", descriptor.Name)
-
-            @if (!descriptor.ReadOnly)
-            {
-                @Html.ValidationSummary(true, "", new {@class = "text-danger"})
-            }
-
+            
             <form class="m-form m-form--fit m-form--label-align-right"
                   asp-action="@(descriptor.Action ?? Html.GetAction())"
                   data-ajax="true"
@@ -36,6 +31,11 @@
                             </div>
                         }
                     </div>
+
+                    @if (!descriptor.ReadOnly)
+                    {
+                        @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+                    }
                 </div>
 
                 @await Html.PartialAsync("_FormButtons")

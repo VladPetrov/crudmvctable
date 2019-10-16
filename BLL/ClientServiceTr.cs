@@ -85,7 +85,7 @@ namespace BLL
                 return UpsertResult<ClientDomain>.Ok(GetById(client.Id).Data);
             }
 
-            return UpsertResult<ClientDomain>.Error(string.Join("; ", result.Errors.Select(x => x.Description)));
+            return UpsertResult<ClientDomain>.Error(string.Join(" ", result.Errors.Select(x => x.Description)));
         }
 
         public OperationResult<DeleteResult> Delete(string id)

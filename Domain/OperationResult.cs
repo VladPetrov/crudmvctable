@@ -140,9 +140,9 @@ namespace Domain
             return Create(data, message, OperationCode.Ok, null, warnings);
         }
 
-        public new static UpsertResult<TData> Error([NotNull] string message)
+        public new static UpsertResult<TData> Error([NotNull] string message, TData data = default(TData))
         {
-            return Create(default(TData), message, OperationCode.GeneralError, "");
+            return Create(data, message, OperationCode.GeneralError, "");
         }
 
         public new static UpsertResult<TData> Error(Exception e)
