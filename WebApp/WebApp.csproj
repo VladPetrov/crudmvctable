@@ -101,6 +101,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="Areas\BackOffice\Views\Clients\_EditModel.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Views\Categories\Details.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>

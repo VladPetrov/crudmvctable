@@ -1,5 +1,5 @@
 ﻿@using Domain
-@model DomainBase
+@model IDomain
 
 @{
     var descriptor = Html.GetFormDescriptor();
@@ -24,7 +24,7 @@
                   data-ajax-update="#@context.PageContainerId">
 
                 @Html.AntiForgeryToken()
-                @Html.HiddenFor(x => x.Id)
+                @Html.Hidden("id", Model.GetId())
                 @Html.HiddenFor(x => x.RowVersion)
 
                 <div class="m-portlet__body">

@@ -2,7 +2,7 @@
 @using WebApp.Controllers
 @using WebApp.Model.GenericMvc
 @using WebApp.Model.GenericMvc.ChildPage
-@model Domain.DomainBase
+@model Domain.IDomain
 
 @{
     Layout = null;
@@ -12,9 +12,9 @@
 <hr />
 @await Html.PartialAsync("_DisplayModel", Model)
 <br>
-@await Html.PartialAsync("_ChildPage", ChildPageDescriptor.Create(nameof(SubMessagesController), Model.Id))
+@await Html.PartialAsync("_ChildPage", ChildPageDescriptor.Create(nameof(SubMessagesController), Model.GetId()))
 
 <div>
     @await Component.InvokeAsync(typeof(ButtonComponent), ButtonViewModel.Create("Back to List", "IndexPage", "btn btn-default btn-sm"))
-    |@await Component.InvokeAsync(typeof(ButtonComponent), ButtonViewModel.Create("Edit", "Edit", "btn btn-primary btn-sm", new { id = Model.Id }))
+    |@await Component.InvokeAsync(typeof(ButtonComponent), ButtonViewModel.Create("Edit", "Edit", "btn btn-primary btn-sm", new { id = Model.GetId() }))
 </div>

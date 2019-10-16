@@ -1,13 +1,13 @@
 ﻿@using WebApp.Controllers
 @using WebApp.Model.GenericMvc.ChildPage
-@model Domain.DomainBase
+@model Domain.IDomain
 
 @await Html.RenderPageHeaderAsync()
 
 <div class="m-content">
     @await Html.PartialAsync("_EditModel")
 
-    @await Html.PartialAsync("_ChildPage", ChildPageDescriptor.Create(nameof(SubCategoriesController), Model.Id))
+    @await Html.PartialAsync("_ChildPage", ChildPageDescriptor.Create(nameof(SubCategoriesController), Model.GetId()))
 
     @await Html.RenderCrudButtonsAsync()
 </div>

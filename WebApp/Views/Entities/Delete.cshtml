@@ -1,6 +1,6 @@
 ﻿@using WebApp.Controllers
 @using WebApp.Model.GenericMvc.ChildPage
-@model Domain.DomainBase
+@model Domain.IDomain
 
 @await Html.RenderStatusMessageAsync()
 
@@ -9,9 +9,9 @@
 <div class="m-content">
     @await Html.PartialAsync("_DisplayModel", Model)
 
-    @await Html.PartialAsync("_ChildPage", ChildPageDescriptor.Create(nameof(IbansController), Model.Id, true))
+    @await Html.PartialAsync("_ChildPage", ChildPageDescriptor.Create(nameof(IbansController), Model.GetId(), true))
 
-    @await Html.PartialAsync("_ChildPage", ManyToManyChildPageDescriptor.Create(nameof(EntityProjectManyToManyRelationController), Model.Id, true))
+    @await Html.PartialAsync("_ChildPage", ManyToManyChildPageDescriptor.Create(nameof(EntityProjectManyToManyRelationController), Model.GetId(), true))
 
     @await Html.RenderCrudButtonsAsync()
 </div>

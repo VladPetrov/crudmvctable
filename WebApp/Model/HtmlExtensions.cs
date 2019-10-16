@@ -51,11 +51,11 @@ namespace WebApp.Model
 
             if (pageContext.TableCanEdit)
             {
-                var model = htmlHelper.ViewData.Model as DomainBase;
+                var model = htmlHelper.ViewData.Model as IDomain;
 
                 Defensive.AssertNotNull(model);
 
-                var viewModel = new CrudButtonViewModel(CrudButtonsSettings.EditLabel, CrudButtonsSettings.EditUrl, CrudButtonsSettings.EditStyle, new { id = model.Id });
+                var viewModel = new CrudButtonViewModel(CrudButtonsSettings.EditLabel, CrudButtonsSettings.EditUrl, CrudButtonsSettings.EditStyle, new { id = model.GetId() });
 
                 return htmlHelper.PartialAsync("_CrudButton", viewModel);
             }

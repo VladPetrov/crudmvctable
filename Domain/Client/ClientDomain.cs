@@ -24,6 +24,7 @@ namespace Domain.Client
         public string ClientName { get; set; }
 
         [Required]
+        [Display(Name = "Phone Number")]
         public string PhoneNumber { get; set; }
 
         [Range(0, long.MaxValue)]
