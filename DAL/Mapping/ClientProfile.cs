@@ -34,6 +34,14 @@ namespace DAL.Mapping
                 .ForPath(x => x.LockoutEnd, opt => opt.Ignore())
                 .ForPath(x => x.LockoutEnabled, opt => opt.Ignore())
                 .ForPath(x => x.AccessFailedCount, opt => opt.Ignore());
+
+            CreateMap<ApplicationUser, ClientDomain>()
+                .ForMember(x => x.ClientName, opt => opt.MapFrom(x => x.ClientProfile.Name))
+                .ForMember(x => x.Balance, opt => opt.MapFrom(x => x.ClientProfile.Balance))
+                .ForMember(x => x.ContractStartDate, opt => opt.MapFrom(x => x.ClientProfile.ContractStartDate))
+                .ForMember(x => x.ContractEndDate, opt => opt.MapFrom(x => x.ClientProfile.ContractEndDate))
+
+                ;
         }
     }
 }

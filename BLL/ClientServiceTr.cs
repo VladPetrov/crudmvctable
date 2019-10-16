@@ -5,6 +5,7 @@ using System.Text;
 using AutoMapper;
 using BLL.Infrastructure;
 using Common;
+using Common.Exceptions;
 using Common.StringConstants;
 using Common.Table;
 using DAL.Model;
@@ -14,6 +15,8 @@ using Domain.Client;
 using Domain.DeleteResult;
 using DAL.Extensions;
 using Microsoft.AspNetCore.Identity;
+using AutoMapper.QueryableExtensions;
+using Microsoft.EntityFrameworkCore;
 
 namespace BLL
 {
@@ -38,41 +41,34 @@ namespace BLL
 
         public OperationResult<ClientDomain> GetById(string id)
         {
-            throw new NotImplementedException();
+            var client = UserManager
+                .Users
+                .Where(x => x.Id == id)
+                .ProjectTo<ClientDomain>()
+                .FirstOrDefault();
+
+            if (client == null)
+            {
+                throw new EntityNotFoundException($"Client with Id '{id}' was not found");
+            }
+
+            return OperationResult.Ok().SetData(client);
         }
 
         public UpsertResult<ClientDomain> Upsert(ClientDomain domain)
         {
-            ApplicationUser client = null;
+            var client = domain.IsNew ? ApplicationUser.CreateClient() 
+                : UserManager
+                    .Users
+                    .Where(x => x.Id == domain.Id)
+                    .Include(x => x.ClientProfile)
+                    .Single();
+
+            Mapper.Map(domain, client); 
             
-            if (domain.IsNew)
-            {
-                client = ApplicationUser.CreateClient();
-            }
-
-            Mapper.Map(domain, client);
-            
-            //client.Email = domain.Email;
-            //client.UserName = domain.Email;
-
-            //client.ClientProfile = new ClientProfile
-            //{
-            //    Name = domain.ClientName,
-            //    Balance = domain.Balance,
-            //    ContractStartDate = domain.ContractStartDate,
-            //    ContractEndDate = domain.ContractEndDate
-            //};
-
             IdentityResult result = null;
 
-            if (domain.IsNew)
-            {
-                result = UserManager.CreateAsync(client).Result;
-            }
-            else
-            {
-                result = UserManager.UpdateAsync(client).Result;
-            }
+            result = domain.IsNew ? UserManager.CreateAsync(client).Result : UserManager.UpdateAsync(client).Result;
             
             if (result.Succeeded)
             {
@@ -85,8 +81,8 @@ namespace BLL
                 //await EmailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);
 
                 Log.Logger().Information("User created a new client.");
-
-                return UpsertResult<ClientDomain>.Ok(domain);
+                
+                return UpsertResult<ClientDomain>.Ok(GetById(client.Id).Data);
             }
 
             return UpsertResult<ClientDomain>.Error(string.Join("; ", result.Errors.Select(x => x.Description)));

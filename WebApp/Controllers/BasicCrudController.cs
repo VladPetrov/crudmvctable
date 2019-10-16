@@ -64,7 +64,7 @@ namespace WebApp.Controllers
             return childPageRequest;
         }
 
-        protected virtual void RenderStatusMessage()
+        protected virtual void TryRenderStatusMessage()
         {
             var status = TempData.Get<IndexPageTempData>(nameof(IndexPageTempData))?.Status;
 

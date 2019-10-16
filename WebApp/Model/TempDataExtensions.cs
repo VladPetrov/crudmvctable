@@ -15,6 +15,8 @@ namespace WebApp.Model
         {
             tempData.TryGetValue(key, out var val);
 
+            tempData[key] = null;
+
             return val != null ? JsonConvert.DeserializeObject<T>((string)val) : defaultVal;
         }
     }
