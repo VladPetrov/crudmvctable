@@ -70,7 +70,7 @@ namespace DAL.DbManagers
 
             Defensive.AssertTrue(result.Succeeded, string.Join("; ", result.Errors));
 
-            result = await RoleManager.CreateAsync(new IdentityRole(RoleNames.Customer));
+            result = await RoleManager.CreateAsync(new IdentityRole(RoleNames.Client));
 
             Defensive.AssertTrue(result.Succeeded, string.Join("; ", result.Errors));
         }

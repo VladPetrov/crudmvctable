@@ -24,7 +24,7 @@
                   data-ajax-update="#@context.PageContainerId">
 
                 @Html.AntiForgeryToken()
-                @Html.Hidden("id", Model.GetId())
+                @Html.Hidden(nameof(IDomain<long>.Id), Model.GetId())
                 @Html.HiddenFor(x => x.RowVersion)
 
                 <div class="m-portlet__body">

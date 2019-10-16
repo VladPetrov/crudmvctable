@@ -76,7 +76,7 @@ namespace BLL
             
             if (result.Succeeded)
             {
-                UserManager.AddToRoleAsync(client, RoleNames.Customer).Wait();
+                UserManager.AddToRoleAsync(client, RoleNames.Client).Wait();
 
                 var code = UserManager.GenerateEmailConfirmationTokenAsync(client).Result;
 
