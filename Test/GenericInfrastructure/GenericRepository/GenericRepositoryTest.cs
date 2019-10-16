@@ -8,7 +8,7 @@ namespace Test.GenericInfrastructure.GenericRepository
     [TestFixture]
     public class GenericRepositoryTest
     {
-        private bool UseInMemoryDb => true;
+        private bool UseInMemoryDb => false;
 
         private GenericInfrastructureContext Context { get; set; }
 

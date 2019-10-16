@@ -1,4 +1,8 @@
-﻿using AutoMapper;
+﻿using System;
+using System.Linq;
+using System.Linq.Expressions;
+using AutoMapper;
+using Common.Exceptions;
 using Common.Extensions;
 using Common.Table;
 using DAL.Extensions;
@@ -30,26 +34,50 @@ namespace DAL.Repositories
 
         public virtual TDomain GetById(TKey id)
         {
-            return Set
-                .FindOptional(id)
-                .SomeOrEntityNotFoundException()
-                .Do(e => Context.Entry(e).GetDatabaseValues())
-                .Map(Mapper.Map<TDomain>)
-                .ValueOrFailure();
+            //return Set
+            //    .FindOptional(id)
+            //    .SomeOrEntityNotFoundException()
+            //    //.Do(e => Context.Entry(e).GetDatabaseValues())
+            //    .Map(Mapper.Map<TDomain>)
+            //    .ValueOrFailure();
+
+            var item = Set.AsNoTracking().FirstOrDefault(EqualsPredicate(id));
+
+            if (item == null)
+            {
+                throw new EntityNotFoundException($"{typeof(TEntity).FullName} with {id}");
+            }
+
+            return Mapper.Map<TDomain>(item);
         }
 
         public virtual UpsertResult<TDomain> Upsert(TDomain domain)
         {
-            var saved = Set
-                .FindOptional(domain.Id)
-                .CreateIfNone()
-                .MapFrom(domain)
-                .MatchNew<TEntity, TKey>(entity => Set.Add(entity))
-                .Do(Context.SaveChanges)
-                .Map(entity => GetById(entity.Id))
-                .ValueOrFailure();
+            var t = Mapper.Map<TEntity>(domain);
 
-            return UpsertResult<TDomain>.Ok(saved);
+            var local = Set.Local.FirstOrDefault(EqualsPredicate(domain.Id).Compile());
+
+            if (local != null)
+            {
+                Context.Entry(local).State = EntityState.Detached;
+            }
+
+            Set.Update(t);
+
+            Context.SaveChanges();
+
+            return UpsertResult<TDomain>.Ok(GetById(t.Id));
+
+            //var saved = Set
+            //    .FindOptional(domain.Id)
+            //    .CreateIfNone()
+            //    .MapFrom(domain)
+            //    .MatchNew<TEntity, TKey>(entity => Set.Add(entity))
+            //    .Do(Context.SaveChanges)
+            //    .Map(entity => GetById(entity.Id))
+            //    .ValueOrFailure();
+
+            //return UpsertResult<TDomain>.Ok(saved);
         }
 
         public virtual DeleteResult Delete(TKey id)
@@ -65,6 +93,13 @@ namespace DAL.Repositories
                             Context.SaveChanges();
                         });
                 });
+        }
+
+        protected static Expression<Func<TEntity, bool>> EqualsPredicate(TKey id)
+        {
+            Expression<Func<TEntity, TKey>> selector = x => x.Id;
+            Expression<Func<TKey>> closure = () => id;
+            return Expression.Lambda<Func<TEntity, bool>>(Expression.Equal(selector.Body, closure.Body), selector.Parameters);
         }
     }
 }
