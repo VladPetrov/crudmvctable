@@ -90,7 +90,21 @@ namespace BLL
 
         public OperationResult<DeleteResult> Delete(string id)
         {
-            throw new NotImplementedException();
+            return ReferenceChecker
+                .Check(id)
+                .OnDelete(() =>
+                {
+                    var client = UserManager
+                        .Users
+                        .SingleOrDefault(x => x.Id == id);
+
+                    if (client != null)
+                    {
+                        UserManager.DeleteAsync(client).Wait();
+
+                    }
+                })
+                .ToOperationResult();
         }
     }
 }

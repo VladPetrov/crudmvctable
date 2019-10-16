@@ -15,5 +15,13 @@ namespace DAL.Extensions
         {
             return (IQueryable<object>)typeof(Queryable).GetMethod("Cast").MakeGenericMethod(t).Invoke(null, new []{queryable});
         }
+
+        public static void SafeRemove<T>(this DbContext context, T obj) where T : class
+        {
+            if (obj != null)
+            {
+                context.Remove(obj);
+            }
+        }
     }
 }
