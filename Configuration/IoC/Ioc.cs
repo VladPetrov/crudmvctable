@@ -39,6 +39,7 @@ namespace Configuration.IoC
             Container.Register<IIbanRepository, IbanRepository>();
             Container.Register<IEntityProjectManyToManyServiceTr, EntityProjectManyToManyServiceTr>();
             Container.Register<ISubCategoryRepository, SubCategoryRepository>();
+            Container.Register<IClientRepository, ClientRepository>();
 
             Container.Register<DataBase>(new PerRequestLifeTime());
             Container.Register<TransientDataBase>();
@@ -65,7 +66,7 @@ namespace Configuration.IoC
             Container.Register<ISubCategoryService, SubCategoryService>();
             Container.Register<IEndBalanceService, EndBalanceServiceTr>();
             Container.Register<ScriptsResolveService, ScriptsResolveService>();
-            Container.Register<IClientService, ClientServiceTr>();
+            Container.Register<IClientService, ClientService>();
 
             Container.Register<ISeed, BasicSeed>(nameof(BasicSeed));
             Container.Register<ISeed, EntitySeed>(nameof(EntitySeed));

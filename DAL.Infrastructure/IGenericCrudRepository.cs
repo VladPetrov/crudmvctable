@@ -4,11 +4,11 @@ using Domain.DeleteResult;
 
 namespace DAL.Infrastructure
 {
-    public interface IGenericCrudRepository<TDto, TDomain, TKey>
-        where TDto    : IDomain<TKey>
+    public interface IGenericCrudRepository<TDisplay, TDomain, in TKey>
+        where TDisplay    : IDomain<TKey>
         where TDomain : IDomain<TKey>
     {
-        ListResult<TDto> List(ListRequest request);
+        ListResult<TDisplay> List(ListRequest request);
 
         TDomain GetById(TKey id);
 
