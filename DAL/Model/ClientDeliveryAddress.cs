@@ -12,7 +12,7 @@ namespace DAL.Model
         [ForeignKey(nameof(Profile))]
         public string Id { get; set; }
 
-        public bool IsNew => Id != null;
+        public bool IsNew => Id == null;
 
         public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
 

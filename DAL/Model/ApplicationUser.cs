@@ -8,7 +8,7 @@ namespace DAL.Model
 {
     public class ApplicationUser : IdentityUser, IEntity<string>
     {
-        public bool IsNew => Id != null;
+        public bool IsNew => Id == null;
 
         public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
 
