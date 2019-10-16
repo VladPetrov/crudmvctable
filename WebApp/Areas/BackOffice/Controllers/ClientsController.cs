@@ -10,6 +10,7 @@ using WebApp.Model.GenericMvc;
 namespace WebApp.Areas.BackOffice.Controllers
 {
     [Area(AreasNames.BackOfficeArea)]
+    [SetAvailableTableActions(TableActions.Add, TableActions.Delete, TableActions.Details, TableActions.Edit)]
     public class ClientsController : MasterPageCrudController<ClientDisplay, ClientDomain, string>
     {
         public ClientsController(IClientService service) : base(service)

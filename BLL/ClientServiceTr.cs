@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using AutoMapper;
 using BLL.Infrastructure;
+using Common;
+using Common.StringConstants;
 using Common.Table;
 using DAL.Model;
 using DAL.Repositories;
@@ -10,6 +13,7 @@ using Domain;
 using Domain.Client;
 using Domain.DeleteResult;
 using DAL.Extensions;
+using Microsoft.AspNetCore.Identity;
 
 namespace BLL
 {
@@ -39,9 +43,53 @@ namespace BLL
 
         public UpsertResult<ClientDomain> Upsert(ClientDomain domain)
         {
+            ApplicationUser client = null;
             
+            if (domain.IsNew)
+            {
+                client = ApplicationUser.CreateClient();
+            }
+
+            Mapper.Map(domain, client);
             
-            throw new NotImplementedException();
+            //client.Email = domain.Email;
+            //client.UserName = domain.Email;
+
+            //client.ClientProfile = new ClientProfile
+            //{
+            //    Name = domain.ClientName,
+            //    Balance = domain.Balance,
+            //    ContractStartDate = domain.ContractStartDate,
+            //    ContractEndDate = domain.ContractEndDate
+            //};
+
+            IdentityResult result = null;
+
+            if (domain.IsNew)
+            {
+                result = UserManager.CreateAsync(client).Result;
+            }
+            else
+            {
+                result = UserManager.UpdateAsync(client).Result;
+            }
+            
+            if (result.Succeeded)
+            {
+                UserManager.AddToRoleAsync(client, RoleNames.Customer).Wait();
+
+                var code = UserManager.GenerateEmailConfirmationTokenAsync(client).Result;
+
+                //var callbackUrl = Url.EmailConfirmationLink(user.Id.ToString(), code, Request.Scheme);
+
+                //await EmailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);
+
+                Log.Logger().Information("User created a new client.");
+
+                return UpsertResult<ClientDomain>.Ok(domain);
+            }
+
+            return UpsertResult<ClientDomain>.Error(string.Join("; ", result.Errors.Select(x => x.Description)));
         }
 
         public OperationResult<DeleteResult> Delete(string id)

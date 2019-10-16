@@ -17,7 +17,7 @@ namespace DAL.Model
 
         public UserType UserType { get; set; }
 
-        public virtual ClientProfile ClientProfile { get; set; }
+        public virtual ClientProfile ClientProfile { get; set; } 
 
         public static ApplicationUser CreateClient()
         {

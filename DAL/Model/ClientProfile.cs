@@ -29,7 +29,7 @@ namespace DAL.Model
 
         public virtual ApplicationUser User { get; set; }
 
-        public virtual ClientDeliveryAddress DeliveryAddress { get; set; }
+        public virtual ClientDeliveryAddress DeliveryAddress { get; set; } 
 
         public virtual ClientAuthorizedPersons AuthorizedPersons { get; set; }
     }

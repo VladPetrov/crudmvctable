@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace Domain.Client
 {
@@ -19,14 +17,22 @@ namespace Domain.Client
 
         [Required]
         [EmailAddress]
-        [Display(Name = "Email")]
         public string Email { get; set; }
+
+        [Required]
+        [Display(Name = "Client Name")]
+        public string ClientName { get; set; }
+
+        [Required]
+        public string PhoneNumber { get; set; }
 
         [Range(0, long.MaxValue)]
         public long Balance { get; set; }
-        
+
+        [Display(Name = "Contract Start Date")]
         public DateTime ContractStartDate { get; set; }
 
+        [Display(Name = "Contract End Date")]
         public DateTime ContractEndDate { get; set; }
     }
 }
