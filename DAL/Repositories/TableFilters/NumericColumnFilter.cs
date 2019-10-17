@@ -25,7 +25,7 @@ namespace DAL.Repositories.TableFilters
             catch (Exception e)
             {
                 Log.Logger().Warning(e, "Numeric convert failed");
-                val = 0;
+                val = Activator.CreateInstance(field.Type);
             }
 
             ConstantExpression value = Expression.Constant(val);
