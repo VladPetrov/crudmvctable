@@ -6,6 +6,7 @@
  * Created by Igor Escobar on 2012-03-10. Please report any bug at github.com/igorescobar/jQuery-Mask-Plugin
  *
  * Copyright (c) 2012 Igor Escobar http://igorescobar.com
+ * https://igorescobar.github.io/jQuery-Mask-Plugin/docs.html#field-options
  *
  * The MIT License (http://www.opensource.org/licenses/mit-license.php)
  *

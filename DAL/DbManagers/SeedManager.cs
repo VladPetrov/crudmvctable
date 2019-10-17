@@ -11,8 +11,6 @@ namespace DAL.DbManagers
     [UsedImplicitly]
     public class SeedManager
     {
-        private List<Type> Seeds { get; } = new List<Type>();
-
         private IServiceProvider Container { get; }
         
         public SeedManager(IServiceProvider ioc)
