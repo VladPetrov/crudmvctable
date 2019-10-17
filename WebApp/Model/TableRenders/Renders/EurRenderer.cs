@@ -11,14 +11,8 @@ namespace WebApp.Model.TableRenders.Renders
             {
                 return new HtmlString("");
             }
-
-            var val = (long)model;
-
-            var doubleVal = (double) val;
-
-            var str = Regex.Replace($"{doubleVal / 100:0.00} EUR", @"\B(?=(\d{3})+(?!\d))", " ");
-
-            return new HtmlString($"<div class=\"currency-euro\">{str}</div");
+            
+            return new HtmlString($"<div class=\"currency-euro\">{model}</div");
         }
     }
 }
