@@ -39,7 +39,7 @@
             var val = descr.DataSelector.DynamicInvoke(item);
 
             <td>
-                @(descr.ColumnRenderer.Render(val))
+                <div class="@descr.ColumnClass">@(descr.ColumnRenderer.Render(val))</div>
             </td>
         }
 

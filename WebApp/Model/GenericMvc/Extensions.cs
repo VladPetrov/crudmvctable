@@ -37,7 +37,8 @@ namespace WebApp.Model.GenericMvc
                 FieldId = column.FieldId,
                 FiledType = column.FiledType,
                 Model = model,
-                ColumnFilterRenderer = column.ColumnFilterRenderer
+                ColumnFilterRenderer = column.ColumnFilterRenderer,
+                ColumnClass = column.ColumnClass
             };
         }
 

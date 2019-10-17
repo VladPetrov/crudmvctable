@@ -2,5 +2,5 @@
 @model TableFilterDescriptor
 
 <div>
-    <input @Model.RenderFilterDataTags() type="text" class="form-control stringFilter" style="padding-right: 25px">
+    <input @Model.RenderFilterDataTags() type="text" class="form-control stringFilter @Model.ColumnClass" style="padding-right: 25px">
 </div>

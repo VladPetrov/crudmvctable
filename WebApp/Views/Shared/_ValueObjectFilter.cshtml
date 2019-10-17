@@ -4,7 +4,7 @@
 
 <div>
     @Html.DropDownList("ValueObjectFilter", Model.Items, " ",
-        new { @class = "form-control valueObjectFilter",
+        new { @class = $"form-control valueObjectFilter",
               data_field_id = Model.ReplacedFieldId,
               data_filter_value = Model.ReplacedFilterValue
         })

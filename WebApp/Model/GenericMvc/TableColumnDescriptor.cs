@@ -25,6 +25,8 @@ namespace WebApp.Model.GenericMvc
 
         public IColumnSortRenderer ColumnSortRenderer { get; set; }
 
+        public string ColumnClass { get; set; }
+
         public Task<IHtmlContent> RenderColumnFilter(IHtmlHelper helper)
         {
             return this.ToFiltersDescriptor(GetModel(helper)).RenderFilterAsync(helper);

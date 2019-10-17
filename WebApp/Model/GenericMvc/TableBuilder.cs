@@ -43,7 +43,8 @@ namespace WebApp.Model.GenericMvc
                 DataSelector         = filedSelector.Compile(),
                 ColumnRenderer       = options.ColumnRenderer ?? new DefaultColumnRenderer(),
                 ColumnFilterRenderer = options.FilterRenderer ?? new DefaultColumnFilterRenderer(),
-                ColumnSortRenderer   = options.SortRenderer ?? new DefaultColumnSortRenderer()
+                ColumnSortRenderer   = options.SortRenderer ?? new DefaultColumnSortRenderer(),
+                ColumnClass          = options.ColumnClass
             });
 
             return this;
@@ -93,5 +94,6 @@ namespace WebApp.Model.GenericMvc
         public IColumnRenderer ColumnRenderer { get; set; }
         public IColumnSortRenderer SortRenderer { get; set; }
         public IColumnFilterRenderer FilterRenderer { get; set; }
+        public string ColumnClass { get; set; }
     }
 }

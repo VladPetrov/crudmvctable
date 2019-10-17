@@ -11,8 +11,10 @@ namespace WebApp.Model.TableRenders.Renders
             {
                 return new HtmlString("");
             }
+
+            double val = (long) model;
             
-            return new HtmlString($"<div class=\"currency-euro\">{model}</div");
+            return new HtmlString($"<div class=\"currency-euro\">{val/100:C}</div");
         }
     }
 }

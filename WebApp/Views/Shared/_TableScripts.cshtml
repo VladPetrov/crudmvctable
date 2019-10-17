@@ -10,5 +10,17 @@
         service.startListeningToEvents();
     }
 
-    $(`#@context.TableContainerId .currency-euro`).inputmask({ alias : "currency", prefix: '€' });
+    $(`#@context.TableContainerId .currency-euro`).removeAttr("type");
+    $(`#@context.TableContainerId .currency-euro`).inputmask(
+        {
+            alias: "currency",
+            prefix: '€',
+            onBeforePaste: function (pastedValue, opts)
+            {
+                console.log(pastedValue, opts);
+            },
+            removeMaskOnSubmit: true
+        });
+
+    console.log($(`#@context.TableContainerId .currency-euro`));
 </script>

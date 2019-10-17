@@ -12,7 +12,7 @@
 <div>
     @Html.DropDownList("booleanFilter", items, " ", new
     {
-        @class = "form-control booleanFilter",
+        @class = $"form-control booleanFilter {Model.ColumnClass}",
         data_field_id = Model.FieldId,
         data_filter_value = Model.FilterValue
     })

@@ -18,7 +18,7 @@ namespace DAL.Repositories.TableFilters
             object val;
             try
             {
-                var valStr = Regex.Replace(filter.Value.ToString(), @"[^\d^-]", String.Empty);
+                var valStr = filter.Value.ToString().ToValidNumberInStr();
 
                 val = TypeDescriptor.GetConverter(field.Type).ConvertFrom(valStr);
             }

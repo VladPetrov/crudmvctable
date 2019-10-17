@@ -5,6 +5,7 @@ using Common;
 using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using WebApp.Model.ColumnFilter;
+using Common.Exceptions;
 
 namespace WebApp.Model.GenericMvc
 {
@@ -18,6 +19,8 @@ namespace WebApp.Model.GenericMvc
 
         public IColumnFilterRenderer ColumnFilterRenderer { private get; set; }
 
+        public string ColumnClass { get; set; }
+
         public object FilterValue => Model.Filters.SingleOrDefault(x => x.FieldId == FieldId)?.Value;
 
         public async Task<IHtmlContent> RenderFilterAsync(IHtmlHelper helper)
@@ -29,7 +32,7 @@ namespace WebApp.Model.GenericMvc
 
         public IHtmlContent RenderFilterDataTags()
         {
-            return new HtmlString($"data-filter-value='{FilterValue}' data-field-id='{FieldId}'");
+            return new HtmlString($"data-filter-value='{FilterValue?.ToString().ToValidNumberInStr()}' data-field-id='{FieldId}'");
         }
     }
 }

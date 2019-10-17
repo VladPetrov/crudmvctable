@@ -4,7 +4,7 @@
 <div>
     @Html.DropDownList("enumFilter", Html.GetSelectList(Model.FiledType), " ", new
     {
-        @class = "form-control enumFilter",
+        @class = $"form-control enumFilter {Model.ColumnClass}",
         data_field_id = Model.FieldId,
         data_filter_value = Model.FilterValue
     })

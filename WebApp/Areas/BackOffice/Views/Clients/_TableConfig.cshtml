@@ -7,10 +7,10 @@
 
 @{
     var descriptor = TableBuilder<ClientDisplay>.CreateNew()
-        .AddColumn(x => x.Name)
-        .AddColumn(x => x.Email)
-        .AddColumn(x => x.EmailConfirmed)
-        .AddColumn(x => x.Balance, new RowOptions{ColumnRenderer = new EurRenderer()})
+        //.AddColumn(x => x.Name)
+        //.AddColumn(x => x.Email)
+        //.AddColumn(x => x.EmailConfirmed)
+        .AddColumn(x => x.Balance, new RowOptions{ColumnClass = "currency-euro", ColumnRenderer = new EurRenderer()})
         .AddColumn(x => x.ContractStartDate)
         .AddColumn(x => x.ContractEndDate)
         .Build();
