@@ -11,7 +11,7 @@
         service.startListeningToEvents();
     }
 
-    $(`#@context.TableContainerId .@Constants.CurrencyClass`).removeAttr("type");
-    $(`#@context.TableContainerId .@Constants.CurrencyClass`).mask('#.##0,00', {reverse: true});
+    $(`#@context.TableContainerId .@Constants.CurrencyClass`).attr("type", "text");
+    $(`#@context.TableContainerId .@Constants.CurrencyClass`).mask('@Constants.CurrencyMask', {reverse: true});
 
 </script>

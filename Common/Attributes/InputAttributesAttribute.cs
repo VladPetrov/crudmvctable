@@ -18,13 +18,8 @@ namespace Common.Attributes
 
     public class CurrencyAttribute : InputAttributesAttribute
     {
-        public CurrencyAttribute() : base()
+        public CurrencyAttribute() : base(new { currency = "currency"})
         {
-            Attributes = new  Dictionary<string, object>()
-            {
-                {"data-mask", "#.##0,00"},
-                {"data-mask-reverse", "true"},
-            };
         }
     }
 }

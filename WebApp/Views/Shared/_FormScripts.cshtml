@@ -1,4 +1,5 @@
-﻿@{
+﻿@using Common.StringConstants
+@{
     var id = Guid.NewGuid().ToString();
 }
 
@@ -36,5 +37,9 @@
                 rightArrow: '<i class="la la-angle-right"></i>'
             },
         });
+
+        let inputs = $form.find('input[currency=currency]');
+        inputs.attr("type", "text");;
+        inputs.mask('@Constants.CurrencyMask', {reverse: true});
     }
 </script>
