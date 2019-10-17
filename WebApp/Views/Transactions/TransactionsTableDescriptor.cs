@@ -1,4 +1,5 @@
-﻿using DAL.Model;
+﻿using Common.StringConstants;
+using DAL.Model;
 using Domain.Transaction;
 using WebApp.Controllers;
 using WebApp.Model.ColumnFilter;
@@ -28,7 +29,7 @@ namespace WebApp.Views.Transactions
                     FilterRenderer =
                         new ValueObjectColumnFilterRenderer<TransactionDisplay, Entity>(x => x.RecipientEntityId)
                 })
-                .AddColumn(x => x.Amount, new EurRenderer())
+                .AddColumn(x => x.Amount, new RowOptions{ColumnClass = Constants.CurrencyClass })
                 .AddColumn(x => x.Note, new RowOptions
                 {
                     ColumnRenderer = new NoteRender()

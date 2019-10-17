@@ -1,4 +1,5 @@
-﻿@{
+﻿@using Common.StringConstants
+@{
     var descriptor = Html.GetTableDescriptor();
     var context = Html.GetPageContext();
 }
@@ -10,17 +11,7 @@
         service.startListeningToEvents();
     }
 
-    $(`#@context.TableContainerId .currency-euro`).removeAttr("type");
-    $(`#@context.TableContainerId .currency-euro`).inputmask(
-        {
-            alias: "currency",
-            prefix: '€',
-            onBeforePaste: function (pastedValue, opts)
-            {
-                console.log(pastedValue, opts);
-            },
-            removeMaskOnSubmit: true
-        });
+    $(`#@context.TableContainerId .@Constants.CurrencyClass`).removeAttr("type");
+    $(`#@context.TableContainerId .@Constants.CurrencyClass`).mask('#.##0,00', {reverse: true});
 
-    console.log($(`#@context.TableContainerId .currency-euro`));
 </script>

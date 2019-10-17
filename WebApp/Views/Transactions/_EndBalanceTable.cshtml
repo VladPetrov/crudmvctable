@@ -2,11 +2,6 @@
 @using WebApp.Model.TableRenders.Renders
 @model Domain.Balance.EndBalance
 
-@{
-    var renderer = new EurRenderer();
-
-    Func<long, IHtmlContent> render = x => renderer.Render(x);
-}
 <div class="row" style="margin-top: 20px">
     <div class="table-responsive">
         <table class="table">
@@ -22,12 +17,12 @@
             </thead>
             <tbody>
             <tr>
-                <td>@render(Model.BalanceOnStartDate)</td>
-                <td>@render(Model.BalanceOnEndDate)</td>
-                <td>@render(Model.TotalIncome)</td>
-                <td>@render(Model.TotalExpenses)</td>
-                <td>@render(Model.TotalAmount)</td>
-                <td>@render(Model.AvailableBalance)</td>
+                <td>Model.BalanceOnStartDate</td>
+                <td>Model.BalanceOnEndDate</td>
+                <td>Model.TotalIncome</td>
+                <td>Model.TotalExpenses</td>
+                <td>Model.TotalAmount</td>
+                <td>Model.AvailableBalance</td>
             </tr>
             </tbody>
         </table>
@@ -65,9 +60,9 @@
                                     {                                      
                                         <tr>
                                             <td>@summary.Name</td>
-                                            <td>@render(summary.Budget)</td>
-                                            <td>@render(summary.Expenses)</td>
-                                            <td>@render(summary.Saldo)</td>
+                                            <td>summary.Budget</td>
+                                            <td>summary.Expenses</td>
+                                            <td>summary.Saldo</td>
                                         </tr>
                                     }
                                     </tbody>

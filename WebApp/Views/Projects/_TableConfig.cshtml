@@ -1,6 +1,6 @@
-﻿@using Domain.Project
+﻿@using Common.StringConstants
+@using Domain.Project
 @using WebApp.Model.GenericMvc
-@using WebApp.Model.TableRenders.Renders
 
 @model TableViewModel
 
@@ -8,7 +8,7 @@
     var descriptor = TableBuilder<ProjectDto>.CreateNew()
         .AddColumn(x => x.Name)
         .AddColumn(x => x.Acronym)
-        .AddColumn(x => x.Budget, new RowOptions{ColumnRenderer = new EurRenderer()})
+        .AddColumn(x => x.Budget, new RowOptions{ColumnClass = Constants.CurrencyClass})
         .AddColumn(x => x.StartDate)
         .AddColumn(x => x.EndDate)
         .Build();
