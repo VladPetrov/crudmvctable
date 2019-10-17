@@ -39,7 +39,11 @@
         });
 
         let inputs = $form.find('input[currency=currency]');
-        inputs.attr("type", "text");;
-        inputs.mask('@Constants.CurrencyMask', {reverse: true});
+        inputs.attr("type", "text");
+        inputs.mask('@Constants.CurrencyMask', { reverse: true });
+        
+        $form.submit(function( event ) {  
+            inputs.unmask();
+        });  
     }
 </script>
