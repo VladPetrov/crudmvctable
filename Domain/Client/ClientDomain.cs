@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using Common.Attributes;
 
 namespace Domain.Client
 {
@@ -27,6 +28,7 @@ namespace Domain.Client
         [Display(Name = "Phone Number")]
         public string PhoneNumber { get; set; }
 
+        [Currency]
         [Range(0, long.MaxValue)]
         public long Balance { get; set; }
 
