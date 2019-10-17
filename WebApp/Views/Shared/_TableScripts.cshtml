@@ -1,18 +1,12 @@
-﻿@using Domain
-@using WebApp.Controllers
-
-@model TableViewModel
-
-@{
+﻿@{
+    var descriptor = Html.GetTableDescriptor();
     var context = Html.GetPageContext();
-    var serviceName = context.TableServiceName;
 }
 
-@* ReSharper disable Mvc.ActionNotResolved *@
 <script>
-    scripts.TableService.initService('@serviceName',
-        () => new scripts.TableService('@context.TableContainerId',
-            '@Url.Action(nameof(GenericCrudController<DomainBase, DomainBase, long>.ApplyFilters))',
-            '@Url.Action(nameof(GenericCrudController<DomainBase, DomainBase, long>.Table))',
-            @Model.PagingInfo.ItemsPerPage));
+    {
+        let service = scripts.TableService.instance('@context.TableServiceName');
+
+        service.startListeningToEvents();
+    }
 </script>

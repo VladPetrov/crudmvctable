@@ -8,13 +8,15 @@
 }
 
 <div id="@context.TableContainerId" class='noselect'>
-    @await Html.PartialAsync("_TableScripts")
-    @await Html.PartialAsync("_TableMenu")
+    <partial name="_InitTableServiceScript"/>
+    <partial name="_TableMenu"/>
     <table class="table table-striped m-table">
-        @await Html.PartialAsync("_TableSorts")
-        @await Html.PartialAsync("_TableFilters")
-        @await Html.PartialAsync("_TableItems", Model.Data)
+        <partial name="_TableSorts" />
+        <partial name="_TableFilters" />
+        <partial name="_TableItems" model="@Model.Data" />
+
+        <partial name="_TableScripts" />
+        <partial name="_CustomTableScripts" />
     </table>
-    @await Html.PartialAsync("_TablePagination", Model.ToPagingViewModel())
+    <partial name="_TablePagination" model="@Model.ToPagingViewModel()"/>
 </div>
-@await Html.PartialAsync("_CustomTableScripts")

@@ -18,7 +18,7 @@ namespace WebApp.Model.TableRenders.Renders
 
             var str = Regex.Replace($"{doubleVal / 100:0.00} EUR", @"\B(?=(\d{3})+(?!\d))", " ");
 
-            return new HtmlString(str);
+            return new HtmlString($"<div class=\"currency-euro\">{str}</div");
         }
     }
 }
