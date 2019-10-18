@@ -1,5 +1,6 @@
 ﻿using DAL.Infrastructure;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -32,5 +33,7 @@ namespace DAL.Model
         public virtual ClientDeliveryAddress DeliveryAddress { get; set; } 
 
         public virtual ClientAuthorizedPersons AuthorizedPersons { get; set; }
+
+        public virtual List<ClientFirm> Frims { get; set; }
     }
 }

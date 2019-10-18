@@ -1,4 +1,5 @@
 ﻿using System;
+using Common.Table;
 using Microsoft.AspNetCore.Http;
 using WebApp.Extensions;
 
@@ -18,12 +19,27 @@ namespace WebApp.Model.GenericMvc.ChildPage
 
         public ChildPageDescriptorBase(object masterEntityFk, string fullControllerName, bool isReadonly)
         {
-            MasterEntityFk = masterEntityFk;
+            MasterEntityFk = masterEntityFk != null? masterEntityFk : throw new ArgumentException(nameof(masterEntityFk));
             IsReadonly = isReadonly;
             FullControllerName = fullControllerName;
         }
 
         public string ControllerName => FullControllerName.ToControllerName();
+
+        protected FilterType GetFilterType()
+        {
+            if (MasterEntityFk is long || MasterEntityFk is long? || MasterEntityFk is int || MasterEntityFk is int?)
+            {
+                return FilterType.Number;
+            }
+
+            if (MasterEntityFk is string)
+            {
+                return FilterType.String;
+            }
+
+            throw new NotFiniteNumberException($"Found not implemented filter for the type {MasterEntityFk.GetType().FullName}");
+        }
 
         public abstract void SaveChildPageMusterFilterToSession(ISession session);
     }

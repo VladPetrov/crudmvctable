@@ -29,7 +29,7 @@ namespace WebApp.Model.GenericMvc.ChildPage
                         FieldId = nameof(IChildEntity<long>.MusterEntityFk),
                         Operator = FilterOperator.Equal,
                         Value = MasterEntityFk,
-                        Type = FilterType.Number
+                        Type = GetFilterType()
                     }
                 }
             };

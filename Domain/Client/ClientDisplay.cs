@@ -27,6 +27,6 @@ namespace Domain.Client
 
         public DateTime ContractEndDate { get; set; }
 
-        public List<string> Companies { get; set; } = new List<string>();
+        public List<string> Firms { get; set; } = new List<string>();
     }
 }

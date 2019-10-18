@@ -28,6 +28,7 @@ namespace DAL.Model
         public DbSet<EntityProject> EntityProject { get; set; }
         public DbSet<TransactionFiles> TransactionFiles { get; set; }
         public DbSet<Country> Countries { get; set; }
+        public DbSet<ClientProfile> ClientProfiles { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -51,8 +52,9 @@ namespace DAL.Model
                 .HasForeignKey<TransactionFiles>(x => x.FilePreviewId);
         }
 
-        private bool _transactionInProgress = false; //todo obselet code
+        private bool _transactionInProgress = false; //todo obsolete code
 
+        [Obsolete]
         public void DoInTransaction([NotNull] Action action,
             IsolationLevel isolationLevel = IsolationLevel.RepeatableRead)
         {

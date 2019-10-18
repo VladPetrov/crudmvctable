@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Linq;
+using AutoMapper;
 using DAL.Model;
 using Domain.Client;
 
@@ -13,7 +14,9 @@ namespace DAL.Mapping
                 .ForMember(x => x.Balance, opt => opt.MapFrom(x => x.ClientProfile.Balance))
                 .ForMember(x => x.ContractStartDate, opt => opt.MapFrom(x => x.ClientProfile.ContractStartDate))
                 .ForMember(x => x.ContractEndDate, opt => opt.MapFrom(x => x.ClientProfile.ContractEndDate))
-                .ForMember(x => x.Companies, opt => opt.Ignore()); //todo
+                .ForMember(x => x.Firms, opt => opt.MapFrom(x => x.ClientProfile.Frims.Select(y => y.Name))); 
+
+
 
             CreateMap<ClientDomain, ApplicationUser>()
                 .ForMember(x => x.Id, opt => opt.Ignore())
