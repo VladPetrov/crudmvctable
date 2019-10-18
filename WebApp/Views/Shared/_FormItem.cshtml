@@ -8,7 +8,7 @@
 
     var property = ViewData.ModelExplorer.Properties.FirstOrDefault(x => string.Equals(x.Metadata.Name, itemDescriptor.Name));
 
-    Defensive.AssertNotNull(property, $"Requested prop name '{itemDescriptor}' was not found");
+    Defensive.AssertNotNull(property, $"Requested prop name '{itemDescriptor.Name}' was not found");
 
     var propName = property.Metadata.Name;
 

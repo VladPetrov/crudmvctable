@@ -115,12 +115,11 @@ namespace WebApp.Controllers
 
             Defensive.AssertNotNull(childEntity, "Child entity must implement IChildEntity interface");
 
-            var fk = GetChildPageMusterFilter().Filters.Single(x => x.Type == FilterType.Number)?.Value;
+            var fk = GetChildPageMusterFilter().Filters.SingleOrDefault(x => x.FieldId == nameof(IChildEntity<long>.MusterEntityFk))?.Value;
 
             Defensive.AssertNotNull(fk, "Session for child page is expired");
 
-            childEntity.MusterEntityFk =
-                (TKey)GetChildPageMusterFilter().Filters.Single(x => x.Type == FilterType.Number).Value;
+            childEntity.MusterEntityFk = (TKey)fk;
         }
 
         protected virtual void AssembleTitleFor(TitleType type)
