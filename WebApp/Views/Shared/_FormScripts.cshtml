@@ -42,6 +42,8 @@
         
         $form.submit(function( event ) {  
             inputs.unmask();
+
+            modalService.closePage(); //close all modals
         });  
     }
 </script>

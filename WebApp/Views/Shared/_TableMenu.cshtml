@@ -1,5 +1,7 @@
-﻿@using Microsoft.AspNetCore.Mvc.Rendering
+﻿@using Domain
+@using Microsoft.AspNetCore.Mvc.Rendering
 @using WebApp.Components
+@using WebApp.Controllers
 @using WebApp.Model.GenericMvc
 
 @{
@@ -7,11 +9,11 @@
     var context = Html.GetPageContext();
 }
 
-<div style="margin: 10px">
-    @if (context.TableCanAdd)
-    {
-        @await Component.InvokeAsync(typeof(ButtonComponent), ButtonViewModel.Create("Add new", "Create", "btn btn-primary btn-sm"))
-    }
-    <span class="pull-right">@await Html.PartialAsync("_TableQuickMenu", descriptor.GetQuickMenuViewModel())</span>
-    <div class="clearfix"></div>
-</div>
+    <div style="margin: 10px">
+            @if (context.TableCanAdd)
+            {
+                @await Component.InvokeAsync(typeof(ButtonComponent), ButtonViewModel.Create("Add new", nameof(BasicCrudController<DomainBase, DomainBase, long>.Create), "btn btn-primary btn-sm"))
+            }
+            <span class="pull-right">@await Html.PartialAsync("_TableQuickMenu", descriptor.GetQuickMenuViewModel())</span>
+            <div class="clearfix"></div>
+        </div>

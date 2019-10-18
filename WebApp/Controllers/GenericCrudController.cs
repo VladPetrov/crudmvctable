@@ -126,6 +126,11 @@ namespace WebApp.Controllers
             if (result.Success)
             {
                 SetMessageFor(ActionStatus.Updated);
+
+                if (IsChildPage)
+                {
+                    return RedirectToAction(nameof(IndexPage)); //spike for modal service
+                }
             }
             else
             {
@@ -179,6 +184,11 @@ namespace WebApp.Controllers
 
         protected IActionResult RedirectAfterCreate(TKey id)
         {
+            if (IsChildPage)
+            {
+                return RedirectToAction(nameof(IndexPage)); //spike for modal service
+            }
+            
             var pageContext = ViewData.GetPageContext();
 
             if (pageContext.TableCanEdit)
