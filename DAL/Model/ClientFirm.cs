@@ -7,6 +7,11 @@ namespace DAL.Model
 {
     public class ClientFirm : IEntity<string>
     {
+        public ClientFirm()
+        {
+            Id = Guid.NewGuid().ToString();
+        }
+        
         [Key]
         public string Id { get; set; }
 
@@ -22,9 +27,9 @@ namespace DAL.Model
 
         public bool Enabled { get; set; }
 
-        [ForeignKey(nameof(Client))]
-        public string ClientId { get; set; }
+        [ForeignKey(nameof(Profile))]
+        public string ProfileId { get; set; }
 
-        public virtual ClientProfile Client { get; set; }
+        public virtual ClientProfile Profile { get; set; }
     }
 }

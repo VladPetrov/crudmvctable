@@ -29,6 +29,7 @@ namespace DAL.Model
         public DbSet<TransactionFiles> TransactionFiles { get; set; }
         public DbSet<Country> Countries { get; set; }
         public DbSet<ClientProfile> ClientProfiles { get; set; }
+        public DbSet<ClientFirm> ClientFirms { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder builder)

@@ -13,11 +13,8 @@ namespace DAL.Mapping
                 .ForMember(x => x.Name, opt => opt.MapFrom(x => x.ClientProfile.Name))
                 .ForMember(x => x.Balance, opt => opt.MapFrom(x => x.ClientProfile.Balance))
                 .ForMember(x => x.ContractStartDate, opt => opt.MapFrom(x => x.ClientProfile.ContractStartDate))
-                .ForMember(x => x.ContractEndDate, opt => opt.MapFrom(x => x.ClientProfile.ContractEndDate))
-                .ForMember(x => x.Firms, opt => opt.MapFrom(x => x.ClientProfile.Frims.Select(y => y.Name))); 
-
-
-
+                .ForMember(x => x.ContractEndDate, opt => opt.MapFrom(x => x.ClientProfile.ContractEndDate));
+            
             CreateMap<ClientDomain, ApplicationUser>()
                 .ForMember(x => x.Id, opt => opt.Ignore())
                 .ForMember(x => x.UserType, opt => opt.Ignore())

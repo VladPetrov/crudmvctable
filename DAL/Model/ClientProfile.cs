@@ -34,6 +34,6 @@ namespace DAL.Model
 
         public virtual ClientAuthorizedPersons AuthorizedPersons { get; set; }
 
-        public virtual List<ClientFirm> Frims { get; set; }
+        public virtual List<ClientFirm> Firms { get; set; } = new List<ClientFirm>();
     }
 }
