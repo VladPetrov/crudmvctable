@@ -1,11 +1,10 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using Common;
+﻿using Common;
 using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 using WebApp.Model.ColumnFilter;
-using Common.Exceptions;
 
 namespace WebApp.Model.GenericMvc
 {
@@ -30,9 +29,11 @@ namespace WebApp.Model.GenericMvc
             return await ColumnFilterRenderer.RenderFilter(helper, this);
         }
 
-        public IHtmlContent RenderFilterDataTags()
+        public IHtmlContent RenderFilterDataTags(Func<object, string> valueTransform = null)
         {
-            return new HtmlString($"data-filter-value='{FilterValue?.ToString().ToValidNumberInStr()}' data-field-id='{FieldId}'");
+            var filterVal = valueTransform == null ? FilterValue?.ToString() : valueTransform(FilterValue);
+
+            return new HtmlString($"data-filter-value='{filterVal}' data-field-id='{FieldId}'");
         }
     }
 }

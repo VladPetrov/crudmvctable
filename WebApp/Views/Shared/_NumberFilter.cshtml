@@ -1,7 +1,8 @@
-﻿@using WebApp.Model.GenericMvc
+﻿@using Common.Exceptions
+@using WebApp.Model.GenericMvc
 @model TableFilterDescriptor
 
 
 <div>
-    <input @Model.RenderFilterDataTags() type="number" class="form-control numberFilter @Model.ColumnClass" style="padding-right: 25px">
+    <input @Model.RenderFilterDataTags(val => val?.ToString()?.ToValidNumberInStr()) type="number" class="form-control numberFilter @Model.ColumnClass" style="padding-right: 25px">
 </div>
