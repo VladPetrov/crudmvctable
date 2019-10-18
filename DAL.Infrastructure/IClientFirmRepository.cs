@@ -2,7 +2,7 @@
 
 namespace DAL.Infrastructure
 {
-    public interface IClientFirmRepository : IGenericCrudRepository<ClientFirmDisplay, ClientFirmDomain, string>
+    public interface IClientFirmRepository : IGenericCrudRepository<FirmDisplay, FirmDomain, string>
     {
     }
 }

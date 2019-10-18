@@ -41,10 +41,10 @@ namespace DAL.Mapping
                 .ForMember(x => x.ContractStartDate, opt => opt.MapFrom(x => x.ClientProfile.ContractStartDate))
                 .ForMember(x => x.ContractEndDate, opt => opt.MapFrom(x => x.ClientProfile.ContractEndDate));
 
-            CreateMap<ClientFirm, ClientFirmDisplay>()
+            CreateMap<ClientFirm, FirmDisplay>()
                 .ForMember(x => x.MusterEntityFk, opt => opt.MapFrom(x => x.ProfileId));
 
-            CreateMap<ClientFirm, ClientFirmDomain>()
+            CreateMap<ClientFirm, FirmDomain>()
                 .ForMember(x => x.MusterEntityFk, opt => opt.MapFrom(x => x.ProfileId))
                 .ReverseMap();
         }

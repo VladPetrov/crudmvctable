@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Domain.Client
 {
-    public class ClientFirmDomain : IDomain<string>, IChildEntity<string>
+    public class FirmDomain : IDomain<string>, IChildEntity<string>
     {
         public string Id { get; set; }
 
@@ -18,7 +18,7 @@ namespace Domain.Client
         [Required]
         public string Name { get; set; }
 
-        public bool Enabled { get; set; }
+        public bool Enabled { get; set; } = true;
 
         public string MusterEntityFk { get; set; }
     }

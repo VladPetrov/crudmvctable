@@ -1,9 +1,9 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
+
 
 namespace Domain.Client
 {
-    public class ClientFirmDisplay : IDomain<string>, IChildEntity<string>
+    public class FirmDisplay : IDomain<string>, IChildEntity<string>
     {
         public string Id { get; set; }
 

@@ -6,7 +6,7 @@
 @model WebApp.Model.TableViewModel
 
 @{
-    var descriptor = TableBuilder<ClientFirmDisplay>.CreateNew()
+    var descriptor = TableBuilder<FirmDisplay>.CreateNew()
         .AddColumn(x => x.Name)
         .AddColumn(x => x.Enabled)
         .Build();

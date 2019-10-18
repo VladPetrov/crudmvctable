@@ -9,7 +9,7 @@ namespace WebApp.Areas.BackOffice.Controllers
 {
     [Area(AreasNames.BackOfficeArea)]
     [SetAvailableTableActions(TableActions.Add, TableActions.Details, TableActions.Edit)]
-    public class ClientFirmsController : ChildPageCrudController<ClientFirmDisplay, ClientFirmDomain, string>
+    public class ClientFirmsController : ChildPageCrudController<FirmDisplay, FirmDomain, string>
     {
         public ClientFirmsController(IClientFirmService service) : base(service)
         {

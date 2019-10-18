@@ -2,7 +2,7 @@
 
 namespace BLL.Infrastructure
 {
-    public interface IClientFirmService : IGenericCrudService<ClientFirmDisplay, ClientFirmDomain, string>
+    public interface IClientFirmService : IGenericCrudService<FirmDisplay, FirmDomain, string>
     {
     }
 }

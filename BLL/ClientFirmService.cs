@@ -4,7 +4,7 @@ using Domain.Client;
 
 namespace BLL
 {
-    public class ClientFirmService : GenericCrudService<ClientFirmDisplay, ClientFirmDomain, string>, IClientFirmService
+    public class ClientFirmService : GenericCrudService<FirmDisplay, FirmDomain, string>, IClientFirmService
     {
         public ClientFirmService(IClientFirmRepository repository) : base(repository)
         {

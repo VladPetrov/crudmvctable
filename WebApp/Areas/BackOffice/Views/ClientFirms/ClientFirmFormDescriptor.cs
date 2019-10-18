@@ -7,7 +7,7 @@ namespace WebApp.Areas.BackOffice.Views.ClientFirms
     {
         public static FormDescriptor Get(bool readOnly)
         {
-            return FormBuilder<ClientFirmDomain>.CreateNew(readOnly, null)
+            return FormBuilder<FirmDomain>.CreateNew(readOnly, null)
                 .AddItem(x => x.Name)
                 .AddItem(x => x.Enabled)
                 .Build();
