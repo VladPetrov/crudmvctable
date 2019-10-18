@@ -4,7 +4,7 @@ using Domain.Message;
 
 namespace BLL
 {
-    public class SubMessageService : GenericCrudServise<SubMessageDisplay, SubMessageDetails, long>, ISubMessageService
+    public class SubMessageService : GenericCrudService<SubMessageDisplay, SubMessageDetails, long>, ISubMessageService
     {
         public SubMessageService(ISubMessageRepository repository) : base(repository)
         {

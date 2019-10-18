@@ -39,9 +39,14 @@ namespace DAL.Mapping
                 .ForMember(x => x.ClientName, opt => opt.MapFrom(x => x.ClientProfile.Name))
                 .ForMember(x => x.Balance, opt => opt.MapFrom(x => x.ClientProfile.Balance))
                 .ForMember(x => x.ContractStartDate, opt => opt.MapFrom(x => x.ClientProfile.ContractStartDate))
-                .ForMember(x => x.ContractEndDate, opt => opt.MapFrom(x => x.ClientProfile.ContractEndDate))
+                .ForMember(x => x.ContractEndDate, opt => opt.MapFrom(x => x.ClientProfile.ContractEndDate));
 
-                ;
+            CreateMap<ClientFirm, ClientFirmDisplay>()
+                .ForMember(x => x.MusterEntityFk, opt => opt.MapFrom(x => x.ProfileId));
+
+            CreateMap<ClientFirm, ClientFirmDomain>()
+                .ForMember(x => x.MusterEntityFk, opt => opt.MapFrom(x => x.ProfileId))
+                .ReverseMap();
         }
     }
 }

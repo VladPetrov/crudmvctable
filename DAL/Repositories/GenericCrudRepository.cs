@@ -14,10 +14,10 @@ using Optional.Unsafe;
 
 namespace DAL.Repositories
 {
-    public abstract class GenericCrudRepository<TContext, TEntity, TDto, TDomain, TKey> : BaseRepository<TContext, TKey>,
-        IGenericCrudRepository<TDto, TDomain, TKey>
+    public abstract class GenericCrudRepository<TContext, TEntity, TDisplay, TDomain, TKey> : BaseRepository<TContext, TKey>,
+        IGenericCrudRepository<TDisplay, TDomain, TKey>
         where TEntity : class, IEntity<TKey>, new()
-        where TDto : class, IDomain<TKey>
+        where TDisplay : class, IDomain<TKey>
         where TDomain : class, IDomain<TKey>, new()
         where TContext : DbContext
     {
@@ -27,9 +27,9 @@ namespace DAL.Repositories
 
         protected DbSet<TEntity> Set => Context.Set<TEntity>();
 
-        public virtual ListResult<TDto> List(ListRequest request)
+        public virtual ListResult<TDisplay> List(ListRequest request)
         {
-            return Set.ApplyTableRequest<TEntity, TDto, TKey>(request);
+            return Set.ApplyTableRequest<TEntity, TDisplay, TKey>(request);
         }
 
         public virtual TDomain GetById(TKey id)

@@ -6,19 +6,19 @@ using Domain.DeleteResult;
 
 namespace BLL
 {
-    public abstract class GenericCrudServise<TDto, TDomain, TKey> : IGenericCrudService<TDto, TDomain, TKey>
-        where TDto : IDomain<TKey>
+    public abstract class GenericCrudService<TDisplay, TDomain, TKey> : IGenericCrudService<TDisplay, TDomain, TKey>
+        where TDisplay : IDomain<TKey>
         where TDomain : IDomain<TKey>
 
     {
-        protected IGenericCrudRepository<TDto, TDomain, TKey> Repository { get; }
+        protected IGenericCrudRepository<TDisplay, TDomain, TKey> Repository { get; }
 
-        protected GenericCrudServise(IGenericCrudRepository<TDto, TDomain, TKey> repository)
+        protected GenericCrudService(IGenericCrudRepository<TDisplay, TDomain, TKey> repository)
         {
             Repository = repository;
         }
 
-        public virtual ListResult<TDto> List(ListRequest request)
+        public virtual ListResult<TDisplay> List(ListRequest request)
         {
             return Repository.List(request);
         }

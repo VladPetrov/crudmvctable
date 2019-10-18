@@ -1,4 +1,6 @@
 ﻿@using Common
+@using Domain
+@using WebApp.Controllers
 @using WebApp.Model.GenericMvc.ChildPage
 @model ChildPageDescriptorBase
 
@@ -37,7 +39,7 @@
     <script>
         $.ajax({
             type: "GET",
-            url: '@Url.Action("Index", Model.ControllerName, new { isReadonly = Model.IsReadonly})',
+            url: '@Url.Action(nameof(BasicCrudController<DomainBase, DomainBase, long>.Index), Model.ControllerName, new { isReadonly = Model.IsReadonly})',
             data: '',
             contentType: "application/json; charset=utf-8",
             dataType: "HTML",

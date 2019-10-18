@@ -4,7 +4,7 @@ using Domain.Category;
 
 namespace BLL
 {
-    public class SubCategoryService : GenericCrudServise<SubCategoryDisplay, SubCategoryDomain, long>, ISubCategoryService
+    public class SubCategoryService : GenericCrudService<SubCategoryDisplay, SubCategoryDomain, long>, ISubCategoryService
     {
         public SubCategoryService(ISubCategoryRepository repository) : base(repository)
         {
