@@ -1,0 +1,16 @@
+﻿@using Domain.Client
+@using WebApp.Model
+@using WebApp.Model.GenericMvc
+
+
+@model WebApp.Model.TableViewModel
+
+@{
+    var descriptor = TableBuilder<ClientFirmDisplay>.CreateNew()
+        .AddColumn(x => x.Name)
+        .AddColumn(x => x.Enabled)
+        .Build();
+}
+
+@await Html.TableAsync(Model, descriptor)
+
