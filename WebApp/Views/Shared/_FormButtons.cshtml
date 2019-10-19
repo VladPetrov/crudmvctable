@@ -18,7 +18,7 @@
                     <button type="submit" class="@CrudButtonsSettings.CreateStyle">@CrudButtonsSettings.CreateLabel</button>
                     break;
                 default:
-                    throw new Exception("Unknown action");
+                    throw new Exception("_FormButtons view error: found unknown Action Name");
             }
         }
         else if (Html.GetAction() == CrudButtonsSettings.DeleteUrl)
