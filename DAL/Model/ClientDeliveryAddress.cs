@@ -1,24 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using DAL.Infrastructure;
 
 namespace DAL.Model
 {
-    public class ClientDeliveryAddress : IEntity<string>
+    public class ClientDeliveryAddress : EntityBaseWithStrKey
     {
         [Key]
         [ForeignKey(nameof(Profile))]
-        public string Id { get; set; }
-
-        public bool IsNew => Id == null;
-
-        public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
-
-        [Timestamp]
-        public byte[] RowVersion { get; set; }
-
+        public new string Id { get; set; }
+        
         [Required]
         public string Name { get; set; }
 

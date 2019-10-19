@@ -6,19 +6,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DAL.Model
 {
-    public class ClientProfile : IEntity<string>
+    public class ClientProfile : EntityBaseWithStrKey
     {
         [Key]
         [ForeignKey(nameof(User))]
-        public string Id { get; set; }
-
-        public bool IsNew => Id == null;
-
-        public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
-
-        [Timestamp]
-        public byte[] RowVersion { get; set; }
-
+        public new string Id { get; set; }
+        
         [Required]
         public string Name { get; set; }
 

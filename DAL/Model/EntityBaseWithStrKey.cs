@@ -1,20 +1,20 @@
-﻿using DAL.Infrastructure;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
+using DAL.Infrastructure;
 
 namespace DAL.Model
 {
-    public abstract class EntityBase : IEntity<long>
+    public abstract class EntityBaseWithStrKey : IEntity<string>
     {
         [Key]
-        public long Id { get; set; }
-        
+        public string Id { get; set; }
+
         [Required]
         public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
 
         [Timestamp]
         public byte[] RowVersion { get; set; }
-        
-        public bool IsNew => Id == 0;
+
+        public bool IsNew => Id == null;
     }
 }

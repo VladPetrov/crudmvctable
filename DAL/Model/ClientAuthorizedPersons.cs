@@ -1,23 +1,14 @@
-﻿using DAL.Infrastructure;
-using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DAL.Model
 {
-    public class ClientAuthorizedPersons : IEntity<string>
+    public class ClientAuthorizedPersons : EntityBaseWithStrKey
     {
         [Key]
         [ForeignKey(nameof(Profile))]
-        public string Id { get; set; }
-
-        public bool IsNew => Id == null;
-
-        public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
-
-        [Timestamp]
-        public byte[] RowVersion { get; set; }
-
+        public new string Id { get; set; }
+        
         public string Person1 { get; set; }
 
         public string Person2 { get; set; }
