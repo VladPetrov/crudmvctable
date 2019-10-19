@@ -3,6 +3,19 @@
 @using WebApp.Model.ProfileSettings
 @model ProfileSettingsModel
 
+@{
+
+    string buildRoute(string actionName) => Url.Action(actionName, 
+                                                        nameof(ProfileSettingsController).ToControllerName(), 
+                                                    new
+                                                            {
+                                                                userId = Model.MusterEntityFk, 
+                                                                isReadonly = Model.IsReadOnly, 
+                                                                Area = ""
+                                                            });
+
+}
+
 @if (Model.HasMusterEntityFk)
 {
     <div class="m-portlet m-portlet--full-height">
@@ -44,28 +57,18 @@
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane active show" id="notifications" role="tabpanel">
-                                notifications
+                                <partial name="_AjaxContent" , model="@buildRoute(nameof(ProfileSettingsController.NotificationsSettings))" />
                             </div>
                             <div class="tab-pane" id="deliveryAddress" role="tabpanel">
-                                @* ReSharper disable once Mvc.ActionNotResolved *@
-                                <partial name="_AjaxContent", 
-                                         model="@Url.Action(nameof(ProfileSettingsController.NotificationsSettings), 
-                                                    nameof(ProfileSettingsController).ToControllerName(),
-                                                    new
-                                                    {
-                                                        userId = Model.MusterEntityFk,
-                                                        isReadonly = Model.IsReadOnly,
-                                                        Area = ""
-                                                    })"/>
-
+                                <partial name="_AjaxContent", model= "@buildRoute(nameof(ProfileSettingsController.DeliveryAddressSettings))" />
                             </div>
                             <div class="tab-pane" id="authorizedPerson" role="tabpanel">
-                                authorizedPerson
+                                <partial name="_AjaxContent" , model="@buildRoute(nameof(ProfileSettingsController.AuthorizedPersonSettings))" />
                             </div>
                             <div class="tab-pane" id="loginSettings" role="tabpanel">
                                 @if (!Model.BackOfficeArea)
                                 {
-                                    @:loginSettings
+                                    <partial name="_AjaxContent" , model="@buildRoute(nameof(ProfileSettingsController.LoginSettings))" />
                                 }
                             </div>
                         </div>
