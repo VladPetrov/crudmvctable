@@ -1,0 +1,31 @@
+﻿@model string
+
+@if (Model != null)
+{
+    <div class="m-portlet m-portlet--full-height">
+
+        <div data-toggle="collapse" data-target="#profileSettings" style="cursor: pointer">
+            <div class="m-portlet__head">
+                <div class="m-portlet__head-caption">
+                    <div class="m-portlet__head-title">
+                        <h3 class="m-portlet__head-text">
+                            Profile Settings
+                        </h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="collapse" id="profileSettings">
+            <div class="m-portlet__body">
+                <div class="m-section">
+                    <div class="m-section__content">
+
+                        @* ReSharper disable once Mvc.ActionNotResolved *@
+                        @*<partial name="_AjaxContent", model="@Url.Action(nameof(BasicCrudController<DomainBase, DomainBase, long>.Table))"/>*@
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

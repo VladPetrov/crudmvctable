@@ -11,5 +11,7 @@
 
         <partial name="_ChildPage" model="@ChildPageDescriptor.Create(nameof(ClientFirmsController), Model.GetId(), true)" />
 
+        <partial name="_ProfileSettings" model="@Model.GetId()" />
+
         @await Html.RenderCrudButtonsAsync()
     </div>
