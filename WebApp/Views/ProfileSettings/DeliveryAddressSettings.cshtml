@@ -1,0 +1,17 @@
+﻿@using Domain.ProfileSettings
+@using WebApp.Model.Forms
+
+@{
+    var isReadonly = false;
+
+    var descriptor = FormBuilder<DeliveryAddressDomain>.CreateNew(isReadonly)
+        .AddItem(x => x.Name)
+        .AddItem(x => x.StreetAndNumber)
+        .AddItem(x => x.PostalCode)
+        .AddItem(x => x.City)
+        .Build();
+}
+
+@*@await Html.FormTwoColumnsAsync(descriptor)*@
+
+<h1>fuck you</h1>

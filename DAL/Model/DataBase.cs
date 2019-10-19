@@ -30,6 +30,8 @@ namespace DAL.Model
         public DbSet<Country> Countries { get; set; }
         public DbSet<ClientProfile> ClientProfiles { get; set; }
         public DbSet<ClientFirm> ClientFirms { get; set; }
+        public DbSet<ClientDeliveryAddress> ClientDeliveryAddresses { get; set; }
+        public DbSet<ClientAuthorizedPersons> ClientAuthorizedPersons { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder builder)

@@ -19,7 +19,7 @@ namespace WebApp.Controllers
         {
             SetReadonlyModeForView(isReadonly);
 
-            return View(Service.GetNotificationSettings(userId));
+            return PartialView(Service.GetNotificationSettings(userId));
         }
 
         [HttpPost]
@@ -33,7 +33,7 @@ namespace WebApp.Controllers
         {
             SetReadonlyModeForView(isReadonly);
 
-            return View(Service.GetDeliveryAddress(userId));
+            return PartialView(Service.GetDeliveryAddress(userId));
         }
 
         [HttpPost]
@@ -47,7 +47,7 @@ namespace WebApp.Controllers
         {
             SetReadonlyModeForView(isReadonly);
 
-            return View(Service.GetAuthorizedPersonSettings(userId));
+            return PartialView(Service.GetAuthorizedPersonSettings(userId));
         }
 
         [HttpPost]
@@ -62,7 +62,7 @@ namespace WebApp.Controllers
         {
             SetReadonlyModeForView(isReadonly);
 
-            return View(Service.GetLoginSettings(userId));
+            return PartialView(Service.GetLoginSettings(userId));
         }
 
         [HttpPost]

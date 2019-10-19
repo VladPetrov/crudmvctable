@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Domain.ProfileSettings
 {
@@ -11,7 +8,12 @@ namespace Domain.ProfileSettings
         public string Name { get; set; }
 
         [Required]
+        [Display(Name = "Street and number")]
         public string StreetAndNumber { get; set; }
+
+        [Required]
+        [Display(Name = "Postal code (ZIP)")]
+        public string PostalCode { get; set; }
 
         [Required]
         public string City { get; set; }

@@ -24,6 +24,7 @@ namespace DAL.Mapping
             configuration.AddProfile<ManyToManyRelationProfile>();
             configuration.AddProfile<CountyProfile>();
             configuration.AddProfile<ClientProfile>();
+            configuration.AddProfile<ProfileSettingsProfile>();
         }
     }
 }

@@ -53,7 +53,7 @@ namespace DAL.Repositories
 
         public virtual UpsertResult<TDomain> Upsert(TDomain domain)
         {
-            var t = Mapper.Map<TEntity>(domain);
+            var entity = Mapper.Map<TEntity>(domain);
 
             var local = Set.Local.FirstOrDefault(EqualsPredicate(domain.Id).Compile());
 
@@ -62,11 +62,11 @@ namespace DAL.Repositories
                 Context.Entry(local).State = EntityState.Detached;
             }
 
-            Set.Update(t);
+            Set.Update(entity);
 
             Context.SaveChanges();
 
-            return UpsertResult<TDomain>.Ok(GetById(t.Id));
+            return UpsertResult<TDomain>.Ok(GetById(entity.Id));
 
             //var saved = Set
             //    .FindOptional(domain.Id)

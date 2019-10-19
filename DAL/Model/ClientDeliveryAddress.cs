@@ -16,6 +16,9 @@ namespace DAL.Model
         public string StreetAndNumber { get; set; }
 
         [Required]
+        public string PostalCode { get; set; }
+
+        [Required]
         public string City { get; set; }
 
         [Required]

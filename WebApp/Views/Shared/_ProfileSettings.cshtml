@@ -57,13 +57,13 @@
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane active show" id="notifications" role="tabpanel">
-                                <partial name="_AjaxContent" , model="@buildRoute(nameof(ProfileSettingsController.NotificationsSettings))" />
+                                @*<partial name="_AjaxContent" , model="@buildRoute(nameof(ProfileSettingsController.NotificationsSettings))" />*@
                             </div>
                             <div class="tab-pane" id="deliveryAddress" role="tabpanel">
                                 <partial name="_AjaxContent", model= "@buildRoute(nameof(ProfileSettingsController.DeliveryAddressSettings))" />
                             </div>
                             <div class="tab-pane" id="authorizedPerson" role="tabpanel">
-                                <partial name="_AjaxContent" , model="@buildRoute(nameof(ProfileSettingsController.AuthorizedPersonSettings))" />
+                                @*<partial name="_AjaxContent" , model="@buildRoute(nameof(ProfileSettingsController.AuthorizedPersonSettings))" />*@
                             </div>
                             <div class="tab-pane" id="loginSettings" role="tabpanel">
                                 @if (!Model.BackOfficeArea)
