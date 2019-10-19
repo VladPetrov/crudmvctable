@@ -4,14 +4,17 @@
 @{
     var isReadonly = false;
 
+    var formContainerId = Guid.NewGuid().ToString();
+
     var descriptor = FormBuilder<DeliveryAddressDomain>.CreateNew(isReadonly)
         .AddItem(x => x.Name)
         .AddItem(x => x.StreetAndNumber)
         .AddItem(x => x.PostalCode)
         .AddItem(x => x.City)
+        .SetAjaxFromContainerId(formContainerId)
         .Build();
 }
 
-@*@await Html.FormTwoColumnsAsync(descriptor)*@
-
-<h1>fuck you</h1>
+    <div id="@formContainerId">
+        @await Html.FormTwoColumnsAsync(descriptor)
+    </div>

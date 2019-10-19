@@ -3,7 +3,7 @@
 
 @{
     var descriptor = Html.GetFormDescriptor();
-    var context = Html.GetPageContext();
+    var containerId = descriptor.AjaxFromContainerId ?? Html.GetPageContext().PageContainerId;
 }
 
 <div class="row">
@@ -16,7 +16,7 @@
                   data-ajax="true"
                   data-ajax-method="Post"
                   data-ajax-mode="replace"
-                  data-ajax-update="#@context.PageContainerId">
+                  data-ajax-update="#@containerId">
 
                 @Html.AntiForgeryToken()
                 @Html.Hidden(nameof(IDomain<long>.Id), Model.GetId())

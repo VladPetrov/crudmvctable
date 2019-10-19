@@ -46,7 +46,14 @@ namespace WebApp.Model.Forms
 
             return this;
         }
-        
+
+        public FormBuilder<T> SetAjaxFromContainerId(string ajaxFromContainerId)
+        {
+            Descriptor.SetAjaxFromContainerId(ajaxFromContainerId);
+
+            return this;
+        }
+
         public FormDescriptor Build()
         {
             Defensive.AssertTrue(Descriptor.Items.Count > 0, "Form has no items specified");

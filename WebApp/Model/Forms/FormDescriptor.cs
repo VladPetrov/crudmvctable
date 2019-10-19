@@ -13,6 +13,8 @@ namespace WebApp.Model.Forms
 
         public string Action { get; }
 
+        public string AjaxFromContainerId { get; private set; }
+
         private readonly List<FormItemsDescriptor> _items = new List<FormItemsDescriptor>();
         
         public FormDescriptor(bool readOnly, string action, string name)
@@ -27,6 +29,11 @@ namespace WebApp.Model.Forms
         public void AddItem(FormItemsDescriptor item)
         {
             _items.Add(item);
+        }
+
+        public void SetAjaxFromContainerId(string ajaxFromContainerId)
+        {
+            AjaxFromContainerId = ajaxFromContainerId;
         }
     }
 }
