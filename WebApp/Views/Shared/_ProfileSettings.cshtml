@@ -1,4 +1,6 @@
-﻿@using WebApp.Model.ProfileSettings
+﻿@using WebApp.Controllers
+@using WebApp.Extensions
+@using WebApp.Model.ProfileSettings
 @model ProfileSettingsModel
 
 @if (Model.HasMusterEntityFk)
@@ -45,7 +47,17 @@
                                 notifications
                             </div>
                             <div class="tab-pane" id="deliveryAddress" role="tabpanel">
-                                deliveryAddress
+                                @* ReSharper disable once Mvc.ActionNotResolved *@
+                                <partial name="_AjaxContent", 
+                                         model="@Url.Action(nameof(ProfileSettingsController.NotificationsSettings), 
+                                                    nameof(ProfileSettingsController).ToControllerName(),
+                                                    new
+                                                    {
+                                                        userId = Model.MusterEntityFk,
+                                                        isReadonly = Model.IsReadOnly,
+                                                        Area = ""
+                                                    })"/>
+
                             </div>
                             <div class="tab-pane" id="authorizedPerson" role="tabpanel">
                                 authorizedPerson
@@ -57,10 +69,6 @@
                                 }
                             </div>
                         </div>
-
-                        @* ReSharper disable once Mvc.ActionNotResolved *@
-                        @*<partial name="_AjaxContent", model="@Url.Action(nameof(BasicCrudController<DomainBase, DomainBase, long>.Table))"/>*@
-
                     </div>
                 </div>
             </div>

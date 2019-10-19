@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace WebApp.Model.UsersPanel
+namespace Domain.ProfileSettings
 {
-    public class CreateUserViewModel
+    public class LoginSettingsDomain : DomainBaseWithStrKey
     {
         [Required]
         [EmailAddress]

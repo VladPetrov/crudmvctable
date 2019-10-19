@@ -69,6 +69,7 @@ namespace Configuration.IoC
             Container.Register<ScriptsResolveService, ScriptsResolveService>();
             Container.Register<IClientService, ClientService>();
             Container.Register<IClientFirmService, ClientFirmService>();
+            Container.Register<IProfileSettingsService, ProfileSettingsService>();
 
             Container.Register<ISeed, BasicSeed>(nameof(BasicSeed));
             Container.Register<ISeed, EntitySeed>(nameof(EntitySeed));
