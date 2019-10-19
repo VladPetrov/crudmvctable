@@ -1,5 +1,6 @@
 ﻿@using WebApp.Areas.BackOffice.Controllers
 @using WebApp.Model.GenericMvc.ChildPage
+@using WebApp.Model.ProfileSettings
 @model Domain.IDomain
 
 @await Html.RenderStatusMessageAsync()
@@ -11,7 +12,7 @@
 
         <partial name="_ChildPage" model="@ChildPageDescriptor.Create(nameof(ClientFirmsController), Model.GetId(), true)" />
 
-        <partial name="_ProfileSettings" model="@Model.GetId()" />
+        <partial name="_ProfileSettings" model="@ProfileSettingsModel.CreateForBackOfficeArea((string)Model.GetId())" />
 
         @await Html.RenderCrudButtonsAsync()
     </div>

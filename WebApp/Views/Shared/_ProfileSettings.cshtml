@@ -1,0 +1,69 @@
+﻿@using WebApp.Model.ProfileSettings
+@model ProfileSettingsModel
+
+@if (Model.HasMusterEntityFk)
+{
+    <div class="m-portlet m-portlet--full-height">
+
+        <div data-toggle="collapse" data-target="#profileSettings" style="cursor: pointer">
+            <div class="m-portlet__head">
+                <div class="m-portlet__head-caption">
+                    <div class="m-portlet__head-title">
+                        <h3 class="m-portlet__head-text">
+                            Profile Settings
+                        </h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="collapse" id="profileSettings">
+            <div class="m-portlet__body">
+                <div class="m-section">
+                    <div class="m-section__content">
+
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active show" data-toggle="tab" href="#" data-target="#notifications">Notifications</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#" data-target="#deliveryAddress">Delivery address</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#" data-target="#authorizedPerson">Authorized person</a>
+                            </li>
+                            <li class="nav-item">
+                            <a class="nav-link 
+                               @if(Model.BackOfficeArea)
+                               {
+                                @:disabled
+                               }" 
+                               data-toggle="tab" href="#" data-target="#loginSettings">Login Settings</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active show" id="notifications" role="tabpanel">
+                                notifications
+                            </div>
+                            <div class="tab-pane" id="deliveryAddress" role="tabpanel">
+                                deliveryAddress
+                            </div>
+                            <div class="tab-pane" id="authorizedPerson" role="tabpanel">
+                                authorizedPerson
+                            </div>
+                            <div class="tab-pane" id="loginSettings" role="tabpanel">
+                                @if (!Model.BackOfficeArea)
+                                {
+                                    @:loginSettings
+                                }
+                            </div>
+                        </div>
+
+                        @* ReSharper disable once Mvc.ActionNotResolved *@
+                        @*<partial name="_AjaxContent", model="@Url.Action(nameof(BasicCrudController<DomainBase, DomainBase, long>.Table))"/>*@
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

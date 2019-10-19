@@ -110,7 +110,7 @@
     <Content Update="Areas\BackOffice\Views\Clients\_DisplayModel.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
-    <Content Update="Areas\BackOffice\Views\Clients\_ProfileSettings.cshtml">
+    <Content Update="Views\Shared\_ProfileSettings.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Areas\BackOffice\Views\Clients\_EditModel.cshtml">
