@@ -22,7 +22,8 @@ namespace WebApp.Controllers
             Service = service;
             UserManager = userManager;
         }
-        
+
+        [HttpGet]
         public IActionResult NotificationsSettings(string userId, bool isReadonly)
         {
             SetReadonlyModeForView(isReadonly);
@@ -31,16 +32,16 @@ namespace WebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult NotificationsSettings(List<NotificationsDomain> settings)
+        public IActionResult NotificationsSettings(NotificationsViewModel model)
         {
             SetReadonlyModeForView(false);
 
             if (!ModelState.IsValid)
             {
-                return PartialView(settings);
+                return PartialView(model);
             }
 
-            return GetPartialView(Service.UpsertNotificationSettings(settings));
+            return GetPartialView(Service.UpsertNotificationSettings(model));
         }
 
         [HttpGet]

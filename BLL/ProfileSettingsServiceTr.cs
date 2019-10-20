@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper.QueryableExtensions;
+using Common;
 using Microsoft.EntityFrameworkCore;
 
 namespace BLL
@@ -20,14 +21,33 @@ namespace BLL
             Context = context;
         }
 
-        public IEnumerable<NotificationsDomain> GetNotificationSettings(string userId)
+        public NotificationsViewModel GetNotificationSettings(string userId)
         {
-            throw new NotImplementedException();
-        }
+            return new NotificationsViewModel
+            {
+                Notifications = Context.ClientFirms
+                    .Where(x => x.Id == userId)
+                    .ProjectTo<NotificationsDomain>()
+                    .ToList(),
 
-        public UpsertResult<IEnumerable<NotificationsDomain>> UpsertNotificationSettings(IEnumerable<NotificationsDomain> model)
+                UserId = userId
+            };
+        }
+        
+        public UpsertResult<NotificationsViewModel> UpsertNotificationSettings(NotificationsViewModel model)
         {
-            throw new NotImplementedException();
+            Defensive.AssertTrue(model.Notifications != null && model.Notifications.Any());
+            
+            foreach (var domain in model.Notifications)
+            {
+                var firm = Context.ClientFirms.FirstOrDefault(x => x.Id == domain.Id);
+
+                Mapper.Map(domain, firm);
+            }
+
+            Context.SaveChanges();
+
+            return UpsertResult<NotificationsViewModel>.Ok(GetNotificationSettings(model.UserId));
         }
 
         public DeliveryAddressDomain GetDeliveryAddress(string userId)
