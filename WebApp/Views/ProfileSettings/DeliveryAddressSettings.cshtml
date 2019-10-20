@@ -1,14 +1,11 @@
 ﻿@using DAL.Model
 @using Domain.ProfileSettings
 @using WebApp.Controllers
-@using WebApp.Extensions
 @using WebApp.Model.Forms
 @using WebApp.Model.TableRenders.Renders
-@using WebApp.Views.Shared.CommonButtons
+@using WebApp.Views.ProfileSettings
 
 @{
-    var formContainerId = Guid.NewGuid().ToString();
-
     var descriptor = FormBuilder<DeliveryAddressDomain>.CreateNew((bool)ViewData[ProfileSettingsController.Mode])
         .AddItem(x => x.Name)
         .AddItem(x => x.StreetAndNumber)
@@ -19,34 +16,17 @@
             ColumnRenderer = new ValueObjectRenderer<Country>()
         })
         .Build();
+
+    var context = new AjaxFormContext
+    {
+        FormDescriptor = descriptor,
+        ActionName = nameof(ProfileSettingsController.DeliveryAddressSettings)
+    };
+
+    var viewData = new ViewDataDictionary(ViewData)
+    {
+        new KeyValuePair<string, object>(AjaxFormContext.Name, context)
+    };
 }
 
-    <div id="@formContainerId">
-        <form class="m-form m-form--fit m-form--label-align-right"
-              data-ajax="true"
-              data-ajax-method="Post"
-              data-ajax-mode="replace"
-              data-ajax-update="#@formContainerId"
-              asp-area=""
-              asp-action="@nameof(ProfileSettingsController.DeliveryAddressSettings)"
-              asp-controller="@nameof(ProfileSettingsController).ToControllerName()">
-
-            <div class="">
-                <div class="m-form__section m-form__section--first">
-                    @await Html.FormItems_TwoColumnsAsync(descriptor)
-                </div>
-
-                <div style="font-size: 13px">
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
-                </div>
-
-                <hr/>
-                @if (!descriptor.ReadOnly)
-                {
-                    <button type="submit" style="margin-top: 30px" class="@CrudButtonsSettings.SaveStyle">Save</button>
-                }
-            </div>
-            @await Html.PartialAsync("_FormScripts")
-        </form>
-    </div>
+<partial name="_CommonAjaxForm", model="@Model" view-data="@viewData"/>

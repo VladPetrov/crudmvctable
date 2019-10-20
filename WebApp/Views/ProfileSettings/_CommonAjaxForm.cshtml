@@ -1,0 +1,44 @@
+﻿@using Common
+@using WebApp.Controllers
+@using WebApp.Extensions
+@using WebApp.Views.ProfileSettings
+@using WebApp.Views.Shared.CommonButtons
+
+@{
+    var formContainerId = Guid.NewGuid().ToString();
+
+    var context = (AjaxFormContext)ViewData[AjaxFormContext.Name];
+
+    Defensive.AssertNotNull(context, "Form context cant be null");
+}
+
+
+<div id="@formContainerId">
+    <form class="m-form m-form--fit m-form--label-align-right"
+          data-ajax="true"
+          data-ajax-method="Post"s
+          data-ajax-mode="replace"
+          data-ajax-update="#@formContainerId"
+          asp-area=""
+          asp-action="@context.ActionName"
+          asp-controller="@nameof(ProfileSettingsController).ToControllerName()">
+
+        <div class="">
+            <div class="m-form__section m-form__section--first">
+                @await Html.FormItems_TwoColumnsAsync(context.FormDescriptor)
+            </div>
+
+            <div style="font-size: 13px">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+            </div>
+
+            <hr/>
+            @if (!context.FormDescriptor.ReadOnly)
+            {
+                <button type="submit" style="margin-top: 30px" class="@CrudButtonsSettings.SaveStyle">Save</button>
+            }
+        </div>
+        @await Html.PartialAsync("_FormScripts")
+    </form>
+</div>

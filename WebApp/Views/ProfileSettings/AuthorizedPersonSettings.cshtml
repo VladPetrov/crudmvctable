@@ -1,0 +1,26 @@
+﻿@using Domain.ProfileSettings
+@using WebApp.Controllers
+@using WebApp.Model.Forms
+@using WebApp.Views.ProfileSettings
+
+@{
+    var descriptor = FormBuilder<AuthorizedPersonDomain>.CreateNew((bool)ViewData[ProfileSettingsController.Mode])
+        .AddItem(x => x.Person1)
+        .AddItem(x => x.Person2)
+        .AddItem(x => x.Person3)
+        .Build();
+
+    var context = new AjaxFormContext
+    {
+        FormDescriptor = descriptor,
+        ActionName = nameof(ProfileSettingsController.AuthorizedPersonSettings)
+    };
+
+    var viewData = new ViewDataDictionary(ViewData)
+    {
+        new KeyValuePair<string, object>(AjaxFormContext.Name, context)
+    };
+}
+
+<partial name="_CommonAjaxForm" , model="@Model" view-data="@viewData" />
+

@@ -32,12 +32,10 @@ namespace BLL
 
         public DeliveryAddressDomain GetDeliveryAddress(string userId)
         {
-            var settings = Context.ClientDeliveryAddresses
+            return Context.ClientDeliveryAddresses
                                .ProjectTo<DeliveryAddressDomain>()
                                .SingleOrDefault(x => x.Id == userId) 
                            ?? new DeliveryAddressDomain { Id = userId};
-            
-            return settings;
         }
 
         public UpsertResult<DeliveryAddressDomain> UpsertDeliveryAddress(DeliveryAddressDomain model)
@@ -63,19 +61,32 @@ namespace BLL
 
         public AuthorizedPersonDomain GetAuthorizedPersonSettings(string userId)
         {
-            var settings = Context.ClientAuthorizedPersons.SingleOrDefault(x => x.Id == userId) 
-                           ?? new ClientAuthorizedPersons{ Id = userId };
-
-            return Mapper.Map<AuthorizedPersonDomain>(settings);
+            return Context.ClientAuthorizedPersons
+                               .ProjectTo<AuthorizedPersonDomain>()
+                               .SingleOrDefault() 
+                           ?? new AuthorizedPersonDomain { Id = userId };
         }
 
         public UpsertResult<AuthorizedPersonDomain> UpsertAuthorizedPersonSettings(AuthorizedPersonDomain model)
         {
-            var entity = Mapper.Map<ClientAuthorizedPersons>(model);
+            var profile = Context.ClientProfiles
+                .Where(x => x.Id == model.Id)
+                .Include(x => x.AuthorizedPersons)
+                .Single();
 
-            Upsert(entity);
 
-            return UpsertResult<AuthorizedPersonDomain>.Ok(GetAuthorizedPersonSettings(entity.Id));
+            if (profile.AuthorizedPersons == null)
+            {
+                profile.AuthorizedPersons = Mapper.Map<ClientAuthorizedPersons>(model);
+            }
+            else
+            {
+                Mapper.Map(model, profile.AuthorizedPersons);
+            }
+
+            Context.SaveChanges();
+
+            return UpsertResult<AuthorizedPersonDomain>.Ok(GetAuthorizedPersonSettings(model.Id));
         }
 
         public LoginSettingsDomain GetLoginSettings(string userId)

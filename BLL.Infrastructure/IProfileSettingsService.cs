@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Domain;
+﻿using Domain;
 using Domain.ProfileSettings;
+using System.Collections.Generic;
 
 namespace BLL.Infrastructure
 {
