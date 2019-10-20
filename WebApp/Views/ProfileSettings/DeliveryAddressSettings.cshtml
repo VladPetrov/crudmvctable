@@ -1,5 +1,8 @@
 ﻿@using Domain.ProfileSettings
+@using WebApp.Controllers
+@using WebApp.Extensions
 @using WebApp.Model.Forms
+@using WebApp.Views.Shared.CommonButtons
 
 @{
     var isReadonly = false;
@@ -16,5 +19,29 @@
 }
 
     <div id="@formContainerId">
-        @await Html.FormCrudTwoColumnsAsync(descriptor)
+        <form class="m-form m-form--fit m-form--label-align-right"
+              data-ajax="true"
+              data-ajax-method="Post"
+              data-ajax-mode="replace"
+              data-ajax-update="#@formContainerId"
+              asp-area=""
+              asp-action="@nameof(ProfileSettingsController.DeliveryAddressSettings)"
+              asp-controller="@nameof(ProfileSettingsController).ToControllerName()">
+
+            <div class="">
+                <div class="m-form__section m-form__section--first">
+                    @await Html.FormItems_TwoColumnsAsync(descriptor)
+                </div>
+
+                @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                <hr/>
+                @if (!descriptor.ReadOnly)
+                {
+                    <button type="submit" class="@CrudButtonsSettings.SaveStyle">Save</button>
+                }
+            </div>
+
+            @await Html.PartialAsync("_FormScripts")
+
+        </form>
     </div>

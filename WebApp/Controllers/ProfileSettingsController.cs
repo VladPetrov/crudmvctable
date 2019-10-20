@@ -39,6 +39,11 @@ namespace WebApp.Controllers
         [HttpPost]
         public IActionResult DeliveryAddressSettings(DeliveryAddressDomain model)
         {
+            if (!ModelState.IsValid)
+            {
+                return PartialView(model);
+            }
+            
             return GetView(Service.UpsertDeliveryAddress(model));
         }
 

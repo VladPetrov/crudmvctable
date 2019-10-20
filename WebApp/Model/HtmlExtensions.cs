@@ -85,6 +85,8 @@ namespace WebApp.Model
 
         public static Task<IHtmlContent> FormCrudTwoColumnsAsync<TModel>(this IHtmlHelper<TModel> helper, FormDescriptor descriptor)
         {
+            Defensive.AssertNotNull(descriptor);
+
             var dictionary = new ViewDataDictionary(helper.ViewData)
             {
                 new KeyValuePair<string, object>(FormDescriptor.DescriptorName, descriptor)
@@ -93,37 +95,16 @@ namespace WebApp.Model
             return helper.PartialAsync("_FormTwoColumns", helper.ViewData.Model, dictionary);
         }
 
-        private static string FormItems => "FormItems_jweoijfiw";
-
-        public static Task<IHtmlContent> FormItems_TwoColumnsAsync<TModel>(this IHtmlHelper<TModel> helper, IEnumerable<FormItemsDescriptor> items)
+        public static Task<IHtmlContent> FormItems_TwoColumnsAsync<TModel>(this IHtmlHelper<TModel> helper, FormDescriptor descriptor)
         {
-            var dictionary = new ViewDataDictionary(helper.ViewData)
-            {
-                new KeyValuePair<string, object>(FormItems, items)
-            };
-
-            return helper.PartialAsync("_FormItemsTwoColumns", helper.ViewData.Model, dictionary);
+            return RenderFormItems( helper, descriptor, "_FormItemsTwoColumns");
         }
 
-        public static Task<IHtmlContent> FormItemsAsync<TModel>(this IHtmlHelper<TModel> helper, IEnumerable<FormItemsDescriptor> items)
+        public static Task<IHtmlContent> FormItemsAsync<TModel>(this IHtmlHelper<TModel> helper, FormDescriptor descriptor)
         {
-            var dictionary = new ViewDataDictionary(helper.ViewData)
-            {
-                new KeyValuePair<string, object>(FormItems, items)
-            };
-
-            return helper.PartialAsync("_FormItmes", helper.ViewData.Model, dictionary);
+           return RenderFormItems(helper, descriptor, "_FormItems");
         }
-
-        public static IEnumerable<FormItemsDescriptor> GetFormItems<TModel>(this IHtmlHelper<TModel> helper)
-        {
-            var items = (IEnumerable<FormItemsDescriptor>)helper.ViewData[FormItems];
-
-            Defensive.AssertNotNull(items);
-
-            return items;
-        }
-
+        
         public static Task<IHtmlContent> TableAsync(this IHtmlHelper helper, TableViewModel model, TableDescriptor descriptor)
         {
             var dictionary =
@@ -208,6 +189,21 @@ namespace WebApp.Model
 
             return new HtmlString(stb.ToString());
         }
+
+        private static Task<IHtmlContent> RenderFormItems<TModel>(IHtmlHelper<TModel> helper, FormDescriptor descriptor, string viewName)
+        {
+            Defensive.AssertNotNull(descriptor);
+
+            var dictionary = new ViewDataDictionary(helper.ViewData);
+
+            if (!dictionary.ContainsKey(FormDescriptor.DescriptorName))
+            {
+                dictionary.Add(new KeyValuePair<string, object>(FormDescriptor.DescriptorName, descriptor));
+            }
+
+            return helper.PartialAsync(viewName, helper.ViewData.Model, dictionary);
+        }
+
     }
 }
 

@@ -2,7 +2,7 @@
 @model IDomain
 
 @{
-    var items = Html.GetFormItems().ToList();
+    var descriptor = Html.GetFormDescriptor();
 }
 
 @Html.AntiForgeryToken()
@@ -10,7 +10,7 @@
 @Html.HiddenFor(x => x.RowVersion)
 
 
-@foreach (var itemDescriptor in items)
+@foreach (var itemDescriptor in descriptor.Items)
 {
     <div class="form-group m-form__group">
         @await Html.PartialAsync("_FormItem", Model, Html.SaveToViewDictionary(itemDescriptor))
