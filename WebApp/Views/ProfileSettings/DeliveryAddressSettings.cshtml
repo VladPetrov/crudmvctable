@@ -5,16 +5,13 @@
 @using WebApp.Views.Shared.CommonButtons
 
 @{
-    var isReadonly = false;
-
     var formContainerId = Guid.NewGuid().ToString();
 
-    var descriptor = FormBuilder<DeliveryAddressDomain>.CreateNew(isReadonly)
+    var descriptor = FormBuilder<DeliveryAddressDomain>.CreateNew((bool)ViewData[ProfileSettingsController.Mode])
         .AddItem(x => x.Name)
         .AddItem(x => x.StreetAndNumber)
         .AddItem(x => x.PostalCode)
         .AddItem(x => x.City)
-        .SetAjaxFromContainerId(formContainerId)
         .Build();
 }
 
@@ -36,14 +33,13 @@
                 <div style="font-size: 13px">
                     @Html.ValidationSummary(false, "", new { @class = "text-danger" })
                 </div>
+
                 <hr/>
                 @if (!descriptor.ReadOnly)
                 {
                     <button type="submit" style="margin-top: 30px" class="@CrudButtonsSettings.SaveStyle">Save</button>
                 }
             </div>
-
             @await Html.PartialAsync("_FormScripts")
-
         </form>
     </div>

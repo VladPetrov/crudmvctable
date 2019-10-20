@@ -76,9 +76,11 @@ namespace WebApp.Controllers
             return GetView(Service.UpsertLoginSettings(model));
         }
 
+        public static string Mode => "readonlyMode"; 
+
         private void SetReadonlyModeForView(bool isReadonly)
         {
-
+            ViewData[Mode] = isReadonly;
         }
     }
 }
