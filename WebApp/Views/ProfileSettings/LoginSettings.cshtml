@@ -1,0 +1,25 @@
+﻿@using Domain.ProfileSettings
+@using WebApp.Controllers
+@using WebApp.Model.Forms
+@using WebApp.Views.ProfileSettings
+
+@{
+    var descriptor = FormBuilder<LoginSettingsDomain>.CreateNew((bool)ViewData[ProfileSettingsController.Mode])
+        .AddItem(x => x.Email)
+        .AddItem(x => x.Password)
+        .AddItem(x => x.ConfirmPassword)
+        .Build();
+
+    var context = new AjaxFormContext
+    {
+        FormDescriptor = descriptor,
+        ActionName = nameof(ProfileSettingsController.LoginSettings)
+    };
+
+    var viewData = new ViewDataDictionary(ViewData)
+{
+        new KeyValuePair<string, object>(AjaxFormContext.Name, context)
+    };
+}
+
+<partial name="_CommonAjaxForm" , model="@Model" view-data="@viewData" />

@@ -10,10 +10,7 @@ namespace BLL.Infrastructure
         UpsertResult<IEnumerable<NotificationsDomain>> UpsertNotificationSettings(IEnumerable<NotificationsDomain> model);
         DeliveryAddressDomain GetDeliveryAddress(string userId);
         UpsertResult<DeliveryAddressDomain> UpsertDeliveryAddress(DeliveryAddressDomain model);
-        AuthorizedPersonDomain GetAuthorizedPersonSettings(string userId);
-        UpsertResult<AuthorizedPersonDomain> UpsertAuthorizedPersonSettings(AuthorizedPersonDomain model);
-        LoginSettingsDomain GetLoginSettings(string userId);
-        UpsertResult<LoginSettingsDomain> UpsertLoginSettings(LoginSettingsDomain model);
-
+        AuthorizedPersonDomain GetAuthorizedPersonsSettings(string userId);
+        UpsertResult<AuthorizedPersonDomain> UpsertAuthorizedPersonsSettings(AuthorizedPersonDomain model);
     }
 }

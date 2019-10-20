@@ -44,7 +44,7 @@
                                 <a class="nav-link" data-toggle="tab" href="#" data-target="#deliveryAddress">Delivery address</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#" data-target="#authorizedPerson">Authorized person</a>
+                                <a class="nav-link" data-toggle="tab" href="#" data-target="#authorizedPerson">Authorized persons</a>
                             </li>
                             <li class="nav-item">
                             <a class="nav-link 
@@ -63,13 +63,13 @@
                                 <partial name="_AjaxContent", model= "@buildRoute(nameof(ProfileSettingsController.DeliveryAddressSettings))" />
                             </div>
                             <div class="tab-pane" id="authorizedPerson" role="tabpanel">
-                                <partial name="_AjaxContent" , model="@buildRoute(nameof(ProfileSettingsController.AuthorizedPersonSettings))" />
+                                <partial name="_AjaxContent" , model="@buildRoute(nameof(ProfileSettingsController.AuthorizedPersonsSettings))" />
                             </div>
                             <div class="tab-pane" id="loginSettings" role="tabpanel">
-                                @if (!Model.BackOfficeArea)
-                                {
+                                @*@if (!Model.BackOfficeArea)
+                                {*@
                                     <partial name="_AjaxContent" , model="@buildRoute(nameof(ProfileSettingsController.LoginSettings))" />
-                                }
+                                @*}*@
                             </div>
                         </div>
                     </div>

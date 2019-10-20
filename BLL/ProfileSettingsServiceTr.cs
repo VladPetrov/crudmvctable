@@ -59,7 +59,7 @@ namespace BLL
             return UpsertResult<DeliveryAddressDomain>.Ok(GetDeliveryAddress(model.Id));
         }
 
-        public AuthorizedPersonDomain GetAuthorizedPersonSettings(string userId)
+        public AuthorizedPersonDomain GetAuthorizedPersonsSettings(string userId)
         {
             return Context.ClientAuthorizedPersons
                                .ProjectTo<AuthorizedPersonDomain>()
@@ -67,7 +67,7 @@ namespace BLL
                            ?? new AuthorizedPersonDomain { Id = userId };
         }
 
-        public UpsertResult<AuthorizedPersonDomain> UpsertAuthorizedPersonSettings(AuthorizedPersonDomain model)
+        public UpsertResult<AuthorizedPersonDomain> UpsertAuthorizedPersonsSettings(AuthorizedPersonDomain model)
         {
             var profile = Context.ClientProfiles
                 .Where(x => x.Id == model.Id)
@@ -86,24 +86,7 @@ namespace BLL
 
             Context.SaveChanges();
 
-            return UpsertResult<AuthorizedPersonDomain>.Ok(GetAuthorizedPersonSettings(model.Id));
-        }
-
-        public LoginSettingsDomain GetLoginSettings(string userId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public UpsertResult<LoginSettingsDomain> UpsertLoginSettings(LoginSettingsDomain model)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void Upsert<TEntity>(TEntity entity)
-        {
-            Context.Update(entity);
-
-            Context.SaveChanges();
+            return UpsertResult<AuthorizedPersonDomain>.Ok(GetAuthorizedPersonsSettings(model.Id));
         }
     }
 }
