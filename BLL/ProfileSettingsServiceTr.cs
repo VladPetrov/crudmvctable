@@ -26,7 +26,7 @@ namespace BLL
             return new NotificationsViewModel
             {
                 Notifications = Context.ClientFirms
-                    .Where(x => x.Id == userId)
+                    .Where(x => x.ProfileId == userId)
                     .ProjectTo<NotificationsDomain>()
                     .ToList(),
 
