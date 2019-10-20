@@ -33,11 +33,13 @@
                     @await Html.FormItems_TwoColumnsAsync(descriptor)
                 </div>
 
-                @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                <div style="font-size: 13px">
+                    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                </div>
                 <hr/>
                 @if (!descriptor.ReadOnly)
                 {
-                    <button type="submit" class="@CrudButtonsSettings.SaveStyle">Save</button>
+                    <button type="submit" style="margin-top: 30px" class="@CrudButtonsSettings.SaveStyle">Save</button>
                 }
             </div>
 
