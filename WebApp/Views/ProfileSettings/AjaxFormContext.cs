@@ -9,5 +9,7 @@ namespace WebApp.Views.ProfileSettings
         public string ActionName { get; set; }
 
         public FormDescriptor FormDescriptor { get; set; }
+
+        public bool RenderAsTwoColumn { get; set; } = true;
     }
 }

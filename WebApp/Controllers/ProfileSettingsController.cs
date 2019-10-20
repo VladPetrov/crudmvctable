@@ -98,7 +98,7 @@ namespace WebApp.Controllers
             
             var email = (await UserManager.FindByIdAsync(userId)).Email;
 
-            return PartialView(new LoginSettingsDomain{ Email = email });
+            return PartialView(new LoginSettingsDomain{ Id = userId, Email = email });
         }
 
         [HttpPost]

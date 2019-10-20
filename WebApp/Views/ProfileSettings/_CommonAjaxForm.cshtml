@@ -25,7 +25,16 @@
 
         <div class="">
             <div class="m-form__section m-form__section--first">
-                @await Html.FormItems_TwoColumnsAsync(context.FormDescriptor)
+                @if (context.RenderAsTwoColumn)
+                {
+                    @await Html.FormItems_TwoColumnsAsync(context.FormDescriptor)
+                }
+                else
+                {
+                <div class="col-md-6">
+                    @await Html.FormItemsAsync(context.FormDescriptor)
+                </div>
+                }
             </div>
 
             <div style="font-size: 13px">

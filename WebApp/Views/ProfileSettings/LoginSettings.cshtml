@@ -13,7 +13,8 @@
     var context = new AjaxFormContext
     {
         FormDescriptor = descriptor,
-        ActionName = nameof(ProfileSettingsController.LoginSettings)
+        ActionName = nameof(ProfileSettingsController.LoginSettings),
+        RenderAsTwoColumn = false
     };
 
     var viewData = new ViewDataDictionary(ViewData)
