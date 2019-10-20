@@ -25,7 +25,14 @@ namespace WebApp.Controllers
         [HttpPost]
         public IActionResult NotificationsSettings(List<NotificationsDomain> settings)
         {
-            return GetView(Service.UpsertNotificationSettings(settings));
+            SetReadonlyModeForView(false);
+
+            if (!ModelState.IsValid)
+            {
+                return PartialView(settings);
+            }
+
+            return GetPartialView(Service.UpsertNotificationSettings(settings));
         }
 
         [HttpGet]
@@ -46,7 +53,7 @@ namespace WebApp.Controllers
                 return PartialView(model);
             }
             
-            return GetView(Service.UpsertDeliveryAddress(model));
+            return GetPartialView(null, Service.UpsertDeliveryAddress(model));
         }
 
         [HttpGet]
@@ -61,7 +68,14 @@ namespace WebApp.Controllers
         [AutoValidateAntiforgeryToken]
         public IActionResult AuthorizedPersonSettings(AuthorizedPersonDomain model)
         {
-            return GetView(Service.UpsertAuthorizedPersonSettings(model));
+            SetReadonlyModeForView(false);
+
+            if (!ModelState.IsValid)
+            {
+                return PartialView(model);
+            }
+
+            return GetPartialView(null, Service.UpsertAuthorizedPersonSettings(model));
         }
 
         [HttpGet]
@@ -75,7 +89,14 @@ namespace WebApp.Controllers
         [HttpPost]
         public IActionResult LoginSettings(LoginSettingsDomain model)
         {
-            return GetView(Service.UpsertLoginSettings(model));
+            SetReadonlyModeForView(false);
+
+            if (!ModelState.IsValid)
+            {
+                return PartialView(model);
+            }
+
+            return GetPartialView(Service.UpsertLoginSettings(model));
         }
 
         public static string Mode => "readonlyMode"; 

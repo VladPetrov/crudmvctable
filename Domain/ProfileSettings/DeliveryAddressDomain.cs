@@ -18,6 +18,7 @@ namespace Domain.ProfileSettings
         [Required]
         public string City { get; set; }
 
+        [Required]
         public ValueObject Country { get; set; }
     }
 }

@@ -1,7 +1,10 @@
-﻿@using Domain.ProfileSettings
+﻿@using Common.StringConstants
+@using DAL.Model
+@using Domain.ProfileSettings
 @using WebApp.Controllers
 @using WebApp.Extensions
 @using WebApp.Model.Forms
+@using WebApp.Model.TableRenders.Renders
 @using WebApp.Views.Shared.CommonButtons
 
 @{
@@ -12,6 +15,10 @@
         .AddItem(x => x.StreetAndNumber)
         .AddItem(x => x.PostalCode)
         .AddItem(x => x.City)
+        .AddItem(x => x.Country , new FormItemOptions
+        {
+            ColumnRenderer = new ValueObjectRenderer<Country>()
+        })
         .Build();
 }
 
@@ -32,6 +39,7 @@
 
                 <div style="font-size: 13px">
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
                 </div>
 
                 <hr/>

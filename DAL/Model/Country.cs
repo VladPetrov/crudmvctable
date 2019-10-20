@@ -1,8 +1,6 @@
-﻿using Domain;
-
-namespace DAL.Model
+﻿namespace DAL.Model
 {
-    public class Country : DomainBase
+    public class Country : EntityBase
     {
         public string Name { get; set; }
     }

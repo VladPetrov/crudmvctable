@@ -67,5 +67,14 @@ namespace WebApp.Controllers
             }
             return PartialView(viewName, model.Data);
         }
+
+        protected PartialViewResult GetPartialView<TData>(OperationResult<TData> model)
+        {
+            if (!model.Success)
+            {
+                ModelState.AddModelError("", model.Message);
+            }
+            return PartialView(model.Data);
+        }
     }
 }
