@@ -93,6 +93,37 @@ namespace WebApp.Model
             return helper.PartialAsync("_FormTwoColumns", helper.ViewData.Model, dictionary);
         }
 
+        private static string FormItems => "FormItems_jweoijfiw";
+
+        public static Task<IHtmlContent> FormItems_TwoColumnsAsync<TModel>(this IHtmlHelper<TModel> helper, IEnumerable<FormItemsDescriptor> items)
+        {
+            var dictionary = new ViewDataDictionary(helper.ViewData)
+            {
+                new KeyValuePair<string, object>(FormItems, items)
+            };
+
+            return helper.PartialAsync("_FormItemsTwoColumns", helper.ViewData.Model, dictionary);
+        }
+
+        public static Task<IHtmlContent> FormItemsAsync<TModel>(this IHtmlHelper<TModel> helper, IEnumerable<FormItemsDescriptor> items)
+        {
+            var dictionary = new ViewDataDictionary(helper.ViewData)
+            {
+                new KeyValuePair<string, object>(FormItems, items)
+            };
+
+            return helper.PartialAsync("_FormItmes", helper.ViewData.Model, dictionary);
+        }
+
+        public static IEnumerable<FormItemsDescriptor> GetFormItems<TModel>(this IHtmlHelper<TModel> helper)
+        {
+            var items = (IEnumerable<FormItemsDescriptor>)helper.ViewData[FormItems];
+
+            Defensive.AssertNotNull(items);
+
+            return items;
+        }
+
         public static Task<IHtmlContent> TableAsync(this IHtmlHelper helper, TableViewModel model, TableDescriptor descriptor)
         {
             var dictionary =

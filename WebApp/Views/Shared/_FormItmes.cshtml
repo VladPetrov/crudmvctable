@@ -1,0 +1,18 @@
+﻿@using Domain
+@model IDomain
+
+@{
+    var items = Html.GetFormItems().ToList();
+}
+
+@Html.AntiForgeryToken()
+@Html.Hidden(nameof(IDomain<long>.Id), Model.GetId())
+@Html.HiddenFor(x => x.RowVersion)
+
+
+@foreach (var itemDescriptor in items)
+{
+    <div class="form-group m-form__group">
+        @await Html.PartialAsync("_FormItem", Model, Html.SaveToViewDictionary(itemDescriptor))
+    </div>
+}

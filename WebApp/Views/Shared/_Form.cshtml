@@ -21,17 +21,8 @@
                 <div class="m-portlet__body">
                     <div class="m-form__section m-form__section--first">
 
-                        @Html.AntiForgeryToken()
-                        @Html.Hidden(nameof(IDomain<long>.Id), Model.GetId())
-                        @Html.HiddenFor(x => x.RowVersion)
+                        @await Html.FormItemsAsync(descriptor.Items)
 
-
-                        @foreach (var itemDescriptor in descriptor.Items)
-                        {
-                            <div class="form-group m-form__group">
-                                @await Html.PartialAsync("_FormItem", Model, Html.SaveToViewDictionary(itemDescriptor))
-                            </div>
-                        }
                     </div>
 
                     @if (!descriptor.ReadOnly)

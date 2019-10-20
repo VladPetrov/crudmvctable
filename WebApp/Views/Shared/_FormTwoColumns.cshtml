@@ -20,28 +20,9 @@
 
                 <div class="m-portlet__body">
                     <div class="m-form__section m-form__section--first">
+                        
+                        @await Html.FormItems_TwoColumnsAsync(descriptor.Items)
 
-                        @Html.AntiForgeryToken()
-                        @Html.Hidden(nameof(IDomain<long>.Id), Model.GetId())
-                        @Html.HiddenFor(x => x.RowVersion)
-
-                        @for (var i = 0; i < descriptor.Items.Count; i += 2)
-                        {
-                            var itemDescriptor1 = descriptor.Items[i];
-                            var itemDescriptor2 = i + 1 > descriptor.Items.Count - 1 ? null : descriptor.Items[i + 1];
-
-                            <div class="form-group m-form__group row">
-                                <div class="col-lg-6">
-                                    @await Html.PartialAsync("_FormItem", Model, Html.SaveToViewDictionary(itemDescriptor1))
-                                </div>
-                                <div class="col-lg-6">
-                                    @if (itemDescriptor2 != null)
-                                    {
-                                        @await Html.PartialAsync("_FormItem", Model, Html.SaveToViewDictionary(itemDescriptor2))
-                                    }
-                                </div>
-                            </div>
-                        }
                     </div>
 
                     @if (!descriptor.ReadOnly)
