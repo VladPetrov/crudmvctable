@@ -6,6 +6,7 @@ using BLL.Infrastructure;
 namespace WebApp.Controllers
 {
     [AutoValidateAntiforgeryToken]
+    [Route("[controller]/[action]/{userId}/{isReadonly}")]
     public class ProfileSettingsController : MvcController
     {
         private IProfileSettingsService Service { get; }
