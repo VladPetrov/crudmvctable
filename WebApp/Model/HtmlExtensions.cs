@@ -73,7 +73,7 @@ namespace WebApp.Model
             return helper.PartialAsync("_DisplayFormItems", helper.ViewData.Model);
         }
         
-        public static Task<IHtmlContent> FormAsync<TModel>(this IHtmlHelper<TModel> helper, FormDescriptor descriptor)
+        public static Task<IHtmlContent> FormCrudAsync<TModel>(this IHtmlHelper<TModel> helper, FormDescriptor descriptor)
         {
             var dictionary = new ViewDataDictionary(helper.ViewData)
             {
@@ -83,7 +83,7 @@ namespace WebApp.Model
             return helper.PartialAsync("_Form", helper.ViewData.Model, dictionary);
         }
 
-        public static Task<IHtmlContent> FormTwoColumnsAsync<TModel>(this IHtmlHelper<TModel> helper, FormDescriptor descriptor)
+        public static Task<IHtmlContent> FormCrudTwoColumnsAsync<TModel>(this IHtmlHelper<TModel> helper, FormDescriptor descriptor)
         {
             var dictionary = new ViewDataDictionary(helper.ViewData)
             {

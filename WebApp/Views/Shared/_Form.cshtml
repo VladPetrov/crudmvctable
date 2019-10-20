@@ -18,12 +18,14 @@
                   data-ajax-mode="replace"
                   data-ajax-update="#@containerId">
 
-                @Html.AntiForgeryToken()
-                @Html.Hidden(nameof(IDomain<long>.Id), Model.GetId())
-                @Html.HiddenFor(x => x.RowVersion)
-
                 <div class="m-portlet__body">
                     <div class="m-form__section m-form__section--first">
+
+                        @Html.AntiForgeryToken()
+                        @Html.Hidden(nameof(IDomain<long>.Id), Model.GetId())
+                        @Html.HiddenFor(x => x.RowVersion)
+
+
                         @foreach (var itemDescriptor in descriptor.Items)
                         {
                             <div class="form-group m-form__group">

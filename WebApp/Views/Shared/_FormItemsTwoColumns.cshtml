@@ -18,13 +18,12 @@
                   data-ajax-mode="replace"
                   data-ajax-update="#@containerId">
 
+                @Html.AntiForgeryToken()
+                @Html.Hidden(nameof(IDomain<long>.Id), Model.GetId())
+                @Html.HiddenFor(x => x.RowVersion)
+
                 <div class="m-portlet__body">
                     <div class="m-form__section m-form__section--first">
-
-                        @Html.AntiForgeryToken()
-                        @Html.Hidden(nameof(IDomain<long>.Id), Model.GetId())
-                        @Html.HiddenFor(x => x.RowVersion)
-
                         @for (var i = 0; i < descriptor.Items.Count; i += 2)
                         {
                             var itemDescriptor1 = descriptor.Items[i];
@@ -46,7 +45,7 @@
 
                     @if (!descriptor.ReadOnly)
                     {
-                        @Html.ValidationSummary(false, "", new {@class = "text-danger"})
+                        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
                     }
                 </div>
 
