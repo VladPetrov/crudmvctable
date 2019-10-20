@@ -14,8 +14,7 @@ namespace DAL.Mapping
                 .ForMember(x => x.Country, opt => opt.Ignore())
                 .ForMember(x => x.CountryId, opt => opt.MapFrom(x => x.Country.Id))
                 .ForMember(x => x.Profile, opt => opt.Ignore());
-                //.ForMember(x => x.Id, opt => opt.Ignore());
-
+                
             CreateMap<ClientAuthorizedPersons, AuthorizedPersonDomain>().ReverseMap();
         }
     }
