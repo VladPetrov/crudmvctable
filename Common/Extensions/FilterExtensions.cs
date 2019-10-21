@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 
-namespace Common.Exceptions
+namespace Common.Extensions
 {
     public static class FilterExtensions
     {

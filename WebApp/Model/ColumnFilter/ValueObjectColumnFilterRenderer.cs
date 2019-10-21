@@ -24,7 +24,7 @@ namespace WebApp.Model.ColumnFilter
 
         public ValueObjectColumnFilterRenderer(Expression<Func<TDomain, long>> fkSelector, Expression<Func<TEntity, bool>> predicate = null)
         {
-            _fkFieldId = fkSelector.GetPropetyPath();
+            _fkFieldId = fkSelector.GetPropertyPath();
             _predicate = predicate;
         }
 

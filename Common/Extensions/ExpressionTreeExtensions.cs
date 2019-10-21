@@ -7,7 +7,7 @@ namespace Common.Extensions
 {
     public static class ExpressionTreesExtensions
     {
-        public static string GetPropetyPath<T, P>(this Expression<Func<T, P>> expression)
+        public static string GetPropertyPath<T, P>(this Expression<Func<T, P>> expression)
         {
             MemberExpression memberExpression;
             var stb = new StringBuilder();

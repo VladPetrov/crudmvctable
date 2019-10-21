@@ -23,7 +23,7 @@ namespace WebApp.Model.Forms
         {
             Descriptor.AddItem(new FormItemsDescriptor
             {
-                Name = expression.GetPropetyPath(),
+                Name = expression.GetPropertyPath(),
                 Type = typeof(TResult),
                 Renderer = columnRenderer,
                 Readonly = @readonly,
@@ -37,7 +37,7 @@ namespace WebApp.Model.Forms
         {
             Descriptor.AddItem(new FormItemsDescriptor
             {
-                Name = expression.GetPropetyPath(),
+                Name = expression.GetPropertyPath(),
                 Type = typeof(TResult),
                 Renderer = options?.ColumnRenderer,
                 Readonly = options?.Readonly ?? false,

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Linq.Expressions;
-using System.Text.RegularExpressions;
 using Common;
 using Common.Exceptions;
+using Common.Extensions;
 using Common.Table;
 using DAL.Extensions;
 

@@ -22,7 +22,7 @@ namespace WebApp.Model.GenericMvc
             _descriptor.Columns.Add(new TableColumnDescriptor
             {
                 DisplayName          = (expression.Body as MemberExpression)?.Member.GetDisplayName(),
-                FieldId              = expression.GetPropetyPath(),
+                FieldId              = expression.GetPropertyPath(),
                 FiledType            = typeof(TResult),
                 DataSelector         = expression.Compile(),
                 ColumnRenderer       = columnRenderer ?? new DefaultColumnRenderer(),
@@ -38,7 +38,7 @@ namespace WebApp.Model.GenericMvc
             _descriptor.Columns.Add(new TableColumnDescriptor
             {
                 DisplayName          = (filedSelector.Body as MemberExpression)?.Member.GetDisplayName(),
-                FieldId              = filedSelector.GetPropetyPath(),
+                FieldId              = filedSelector.GetPropertyPath(),
                 FiledType            = typeof(TResult),
                 DataSelector         = filedSelector.Compile(),
                 ColumnRenderer       = options.ColumnRenderer ?? new DefaultColumnRenderer(),
