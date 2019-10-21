@@ -38,37 +38,37 @@
 
                         <ul class="nav nav-tabs" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link active show" data-toggle="tab" href="#" data-target="#notifications">Notifications</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#" data-target="#deliveryAddress">Delivery address</a>
+                                <a class="nav-link active show" data-toggle="tab" href="#" data-target="#deliveryAddress">Delivery address</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" data-toggle="tab" href="#" data-target="#authorizedPerson">Authorized persons</a>
                             </li>
                             <li class="nav-item">
-                            <a class="nav-link 
+                                <a class="nav-link" data-toggle="tab" href="#" data-target="#notifications">Notifications</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link
                                @if(Model.BackOfficeArea)
                                {
                                    @:disabled
-                               }" 
-                               data-toggle="tab" href="#" data-target="#loginSettings">Login Settings</a>
+                               }"
+                                   data-toggle="tab" href="#" data-target="#loginSettings">Login Settings</a>
                             </li>
                         </ul>
                         <div class="tab-content">
-                            <div class="tab-pane active show" id="notifications" role="tabpanel">
-                                <partial name="_AjaxContent", model="@buildRoute(nameof(ProfileSettingsController.NotificationsSettings))" />
-                            </div>
-                            <div class="tab-pane" id="deliveryAddress" role="tabpanel">
-                                <partial name="_AjaxContent", model="@buildRoute(nameof(ProfileSettingsController.DeliveryAddressSettings))" />
+                            <div class="tab-pane active show" id="deliveryAddress" role="tabpanel">
+                                <partial name="_AjaxContent" , model="@buildRoute(nameof(ProfileSettingsController.DeliveryAddressSettings))" />
                             </div>
                             <div class="tab-pane" id="authorizedPerson" role="tabpanel">
-                                <partial name="_AjaxContent", model="@buildRoute(nameof(ProfileSettingsController.AuthorizedPersonsSettings))" />
+                                <partial name="_AjaxContent" , model="@buildRoute(nameof(ProfileSettingsController.AuthorizedPersonsSettings))" />
+                            </div>
+                            <div class="tab-pane" id="notifications" role="tabpanel">
+                                <partial name="_AjaxContent" , model="@buildRoute(nameof(ProfileSettingsController.NotificationsSettings))" />
                             </div>
                             <div class="tab-pane" id="loginSettings" role="tabpanel">
                                 @if (!Model.BackOfficeArea)
                                 {
-                                    <partial name="_AjaxContent", model="@buildRoute(nameof(ProfileSettingsController.LoginSettings))" />
+                                    <partial name="_AjaxContent" , model="@buildRoute(nameof(ProfileSettingsController.LoginSettings))" />
                                 }
                             </div>
                         </div>
