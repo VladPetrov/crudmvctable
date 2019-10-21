@@ -8,9 +8,9 @@
 @await Html.RenderPageHeaderAsync()
 
 <div class="m-content">
-    <partial name="_EditModel"/>
+    @*<partial name="_EditModel"/>
     
-    <partial name="_ChildPage" model="@ChildPageDescriptor.Create(nameof(ClientFirmsController), Model.GetId())"/>
+    <partial name="_ChildPage" model="@ChildPageDescriptor.Create(nameof(ClientFirmsController), Model.GetId())"/>*@
     
     <partial name="_ProfileSettings" model="@ProfileSettingsModel.CreateForBackOfficeArea((string)Model.GetId(), false)"/>
     

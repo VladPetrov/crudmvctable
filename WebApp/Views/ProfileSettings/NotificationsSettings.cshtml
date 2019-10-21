@@ -9,13 +9,13 @@
     var isReadonly = (bool) ViewData[ProfileSettingsController.Mode];
     var formContainerId = Guid.NewGuid().ToString();
 
-    var htmlAttributes = new object();
-    var readonlyClass = "";
+    var checkboxHtmlAttributes = new object();
+    var checkboxReadonlyClass = "";
     
     if (isReadonly)
     {
-        htmlAttributes = htmlAttributes.Merge(new { disabled = "disabled", @readonly = "readonly" });
-        readonlyClass = "m-checkbox--disabled";
+        checkboxHtmlAttributes = checkboxHtmlAttributes.Merge(new { disabled = "disabled", @readonly = "readonly" });
+        checkboxReadonlyClass = "m-checkbox--disabled";
     }
 }
 
@@ -32,21 +32,21 @@
         @Html.HiddenFor(x => x.UserId)
         @Html.AntiForgeryToken()
 
-        <div class="">
+        <div class="col-md-6">
             <div class="m-form__section m-form__section--first">
                 @for (int i = 0; i < Model.Notifications.Count; i++)
                 {
-                    <div class="col-md-6">
-                        <div class="form-group m-form__group">
+                    <div class="">
+                        @*<div class="form-group m-form__group">
                             @Html.EditorFor(x => Model.Notifications[i].FirmName, new { htmlAttributes = htmlAttributes })
                         </div>
                         <div class="form-group m-form__group">
                             @Html.EditorFor(x => Model.Notifications[i].SendNotificationsToEmail, new { htmlAttributes = htmlAttributes })
-                        </div>
+                        </div>*@
                         <div class="form-group m-form__group">
-                            <label class="m-checkbox @readonlyClass">
-                                @Html.EditorFor(x => Model.Notifications[i].SendNotificationsToEmail, new { htmlAttributes = htmlAttributes })
-                                Label
+                            <label class="m-checkbox @checkboxReadonlyClass">
+                                @Html.EditorFor(x => Model.Notifications[i].SendNotificationsToEmail, new { htmlAttributes = checkboxHtmlAttributes })
+                                @Html.LabelFor(x => Model.Notifications[0].SendNotificationsToEmail)
                                 <span></span>
                             </label>
                         </div>
@@ -54,12 +54,37 @@
                 }
             </div>
 
+
+            @*<div class="m-section">
+                <div class="m-section__content">
+                    <div class="m-demo" data-code-preview="true" data-code-html="true" data-code-js="false">
+                        <div class="m-demo__preview">
+                            <div class="m-stack m-stack--hor m-stack--general m-stack--demo" style="height: 400px">
+                                <div class="m-stack__item">
+                                    <div class="m-stack__demo-item">Item 1</div>
+                                    <div>some text</div>
+                                </div>
+                                <div class="m-stack__item">
+                                    <div class="m-stack__demo-item">Item 2</div>
+                                </div>
+                                <div class="m-stack__item">
+                                    <div class="m-stack__demo-item">Item 3</div>
+                                </div>
+                                <div class="m-stack__item">
+                                    <div class="m-stack__demo-item">Item 4</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>*@
+
             <div style="font-size: 13px">
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 @Html.ValidationSummary(false, "", new { @class = "text-danger" })
             </div>
 
-            <hr/>
+            <hr />
             @if (!isReadonly)
             {
                 <button type="submit" style="margin-top: 30px" class="@CrudButtonsSettings.SaveStyle">Save</button>

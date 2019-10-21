@@ -8,8 +8,10 @@ namespace Domain.ProfileSettings
         [Display(Name = "E-mail notification to another e-mail")]
         public string NotificationEmail { get; set; }
 
+        [Display(Name = "Send notifications")]
         public bool SendNotificationsToEmail { get; set; }
 
+        [Display(Name = "Firm")]
         public string FirmName { get; set; }
     }
 }
