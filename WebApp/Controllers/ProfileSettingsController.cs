@@ -1,11 +1,12 @@
 ﻿using BLL.Infrastructure;
 using DAL.Repositories;
 using Domain.ProfileSettings;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
+using Microsoft.AspNet.Identity;
 using WebApp.Extensions;
+using IdentityResult = Microsoft.AspNetCore.Identity.IdentityResult;
 
 
 namespace WebApp.Controllers
@@ -179,7 +180,7 @@ namespace WebApp.Controllers
 
         private bool HasRightsToChangePass(string userId)
         {
-            return true;
+            return userId == IdentityExtensions.GetUserId(User.Identity);
         }
 
         private void AddErrors(IdentityResult result)
