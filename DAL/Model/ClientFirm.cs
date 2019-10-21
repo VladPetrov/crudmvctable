@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DAL.Model
 {
+    [Display(Name = "Client")]
     public class ClientFirm : EntityBaseWithStrKey
     {
         public ClientFirm()

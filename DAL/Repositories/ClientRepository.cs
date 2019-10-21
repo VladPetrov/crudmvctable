@@ -12,6 +12,7 @@ using Domain.DeleteResult;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using Common;
 
 namespace DAL.Repositories
 {
@@ -22,6 +23,8 @@ namespace DAL.Repositories
         public ClientRepository(DataBase context, AppsUserManager userManager) : base(context)
         {
             UserManager = userManager;
+
+            ReferenceChecker.RegisterReferences(new Reference<ClientFirm, string>(firm => firm.ProfileId));
         }
 
         public ListResult<ClientDisplay> List(ListRequest request)
@@ -84,8 +87,9 @@ namespace DAL.Repositories
 
                     if (client != null)
                     {
-                        UserManager.DeleteAsync(client).Wait();
+                        Defensive.AssertTrue(client.UserType == UserType.Client);
 
+                        UserManager.DeleteAsync(client).Wait();
                     }
                 });
         }

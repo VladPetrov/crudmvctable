@@ -76,6 +76,7 @@ namespace WebApp.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public override IActionResult Create(TDomain domain)
         {
             if (!ModelState.IsValid)
@@ -111,6 +112,7 @@ namespace WebApp.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public override IActionResult Edit(TDomain domain)
         {
             if (!ModelState.IsValid)
@@ -148,6 +150,7 @@ namespace WebApp.Controllers
             return GetPartialView(TitleType.Delete, Service.GetById(id));
         }
 
+        [ValidateAntiForgeryToken]
         [HttpPost, ActionName(nameof(Delete))]
         public override IActionResult DeleteConfirmed(TKey id)
         {
@@ -159,7 +162,7 @@ namespace WebApp.Controllers
                 return RedirectToAction(nameof(IndexPage));
             }
 
-            ModelState.AddModelError("", result.Message); //todo support DeleteResult
+            ModelState.AddModelError("", result.Message); 
 
             return GetPartialView(TitleType.Delete, Service.GetById(id));
         }

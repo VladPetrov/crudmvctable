@@ -1,6 +1,6 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Reflection;
-using Common.Attributes;
 using JetBrains.Annotations;
 
 namespace Common.Extensions
@@ -10,7 +10,7 @@ namespace Common.Extensions
         [NotNull]
         public static string GetDomainName(this Type type)
         {
-            return type.GetCustomAttribute<DomainNameAttribute>()?.Name ?? type.Name.ToDisplayName();
+            return type.GetCustomAttribute<DisplayAttribute>()?.Name ?? type.Name.ToDisplayName();
         }
     }
 }

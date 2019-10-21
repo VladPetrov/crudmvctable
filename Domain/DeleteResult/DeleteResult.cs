@@ -27,13 +27,13 @@ namespace Domain.DeleteResult
             References.Add(new ExternalReference
             {
                 Count = count,
-                DomainName = type.GetDomainName()
+                Name = type.GetDomainName()
             });
         }
 
         public string GetErrorMessage()
         {
-            return string.Join("/n", References.Select(r => $"{r.DomainName} is referenced {r.Count} time/s"));
+            return string.Join("/n", References.Select(r => $"Object is referenced by '{r.Name}' {r.Count} time/s"));
         }
     }
 }

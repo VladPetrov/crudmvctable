@@ -11,7 +11,7 @@ namespace Test.GenericInfrastructure
     #region Entity
 
     [UsedImplicitly]
-    [DomainName("User Domain Name")]
+    [Display(Name = "User Domain Name")]
     internal class User : EntityBase
     {
         public string FirstName { get; set; }
@@ -22,7 +22,7 @@ namespace Test.GenericInfrastructure
     }
 
     [UsedImplicitly]
-    [DomainName("Account Domain Name")]
+    [Display(Name = "Account Domain Name")]
     internal class Account : EntityBase
     {
         public int AccountNumber { get; set; }
@@ -36,7 +36,7 @@ namespace Test.GenericInfrastructure
     }
 
     [UsedImplicitly]
-    [DomainName("Adress Domain Name")]
+    [Display(Name = "Adress Domain Name")]
     internal class Adress : EntityBase
     {
         [Key, ForeignKey(nameof(User))]

@@ -20,15 +20,12 @@
 
                 <div class="m-portlet__body">
                     <div class="m-form__section m-form__section--first">
-                        
+
                         @await Html.FormItems_TwoColumnsAsync(descriptor)
 
                     </div>
 
-                    @if (!descriptor.ReadOnly)
-                    {
-                        @Html.ValidationSummary(false, "", new {@class = "text-danger"})
-                    }
+                    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
                 </div>
 
                 @await Html.PartialAsync("_FormButtons")
