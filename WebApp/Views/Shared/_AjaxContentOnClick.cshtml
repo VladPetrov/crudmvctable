@@ -1,0 +1,27 @@
+﻿@model AjaxContentOnClickViewModel
+
+@{
+    var id = Guid.NewGuid().ToString();
+}
+
+<div id="@id">
+
+</div>
+
+
+<script>
+    $('#@Model.ClickObjectId').click(function() 
+    {
+        $.ajax({
+            type: "GET",
+            url: '@Model.Url',
+            data: '',
+            contentType: "application/json; charset=utf-8",
+            dataType: "HTML",
+            success: response =>
+            {
+                $(`#@id`).html(response);
+            }
+        });
+    })
+</script>

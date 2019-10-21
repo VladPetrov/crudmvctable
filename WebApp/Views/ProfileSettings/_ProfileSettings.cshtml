@@ -4,7 +4,6 @@
 @model ProfileSettingsModel
 
 @{
-
     string buildRoute(string actionName) => Url.Action(actionName, 
                                                         nameof(ProfileSettingsController).ToControllerName(), 
                                                     new
@@ -13,7 +12,6 @@
                                                                 isReadonly = Model.IsReadOnly, 
                                                                 Area = ""
                                                             });
-
 }
 
 @if (Model.HasMusterEntityFk)
@@ -44,7 +42,7 @@
                                 <a class="nav-link" data-toggle="tab" href="#" data-target="#authorizedPerson">Authorized persons</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#" data-target="#notifications">Notifications</a>
+                                <a class="nav-link" id="notificationsLinks" data-toggle="tab" href="#" data-target="#notifications">Notifications</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link
@@ -63,7 +61,8 @@
                                 <partial name="_AjaxContent" , model="@buildRoute(nameof(ProfileSettingsController.AuthorizedPersonsSettings))" />
                             </div>
                             <div class="tab-pane" id="notifications" role="tabpanel">
-                                <partial name="_AjaxContent" , model="@buildRoute(nameof(ProfileSettingsController.NotificationsSettings))" />
+                                @{var onclickModel = new AjaxContentOnClickViewModel(buildRoute(nameof(ProfileSettingsController.NotificationsSettings)), "notificationsLinks");}
+                                <partial name="_AjaxContentOnClick" , model="@onclickModel"/>
                             </div>
                             <div class="tab-pane" id="loginSettings" role="tabpanel">
                                 @if (!Model.BackOfficeArea)
