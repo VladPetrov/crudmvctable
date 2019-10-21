@@ -17,6 +17,13 @@
         checkboxHtmlAttributes = checkboxHtmlAttributes.Merge(new { disabled = "disabled", @readonly = "readonly" });
         checkboxReadonlyClass = "m-checkbox--disabled";
     }
+
+    object controlHtmlAttributes = new { @class = "form-control m-input" };
+
+    if (isReadonly)
+    {
+        controlHtmlAttributes = controlHtmlAttributes.Merge(new { disabled = "disabled", @readonly = "readonly" });
+    }
 }
 
 <div id="@formContainerId">
@@ -32,23 +39,31 @@
         @Html.HiddenFor(x => x.UserId)
         @Html.AntiForgeryToken()
 
-        <div class="col-md-6">
+        <div >
             <div class="m-form__section m-form__section--first">
                 @for (int i = 0; i < Model.Notifications.Count; i++)
                 {
-                    <div class="">
-                        @*<div class="form-group m-form__group">
-                            @Html.EditorFor(x => Model.Notifications[i].FirmName, new { htmlAttributes = htmlAttributes })
+                    @Html.HiddenFor(x => Model.Notifications[i].Id)
+
+                    <div>
+                        <div class="form-group m-form__group">
+                            <h3>
+                                <small class="text-muted">Notification of inbox </small>
+                                @Model.Notifications[i].FirmName
+                            </h3>
                         </div>
-                        <div class="form-group m-form__group">
-                            @Html.EditorFor(x => Model.Notifications[i].SendNotificationsToEmail, new { htmlAttributes = htmlAttributes })
-                        </div>*@
-                        <div class="form-group m-form__group">
-                            <label class="m-checkbox @checkboxReadonlyClass">
-                                @Html.EditorFor(x => Model.Notifications[i].SendNotificationsToEmail, new { htmlAttributes = checkboxHtmlAttributes })
-                                @Html.LabelFor(x => Model.Notifications[0].SendNotificationsToEmail)
-                                <span></span>
-                            </label>
+                        <div class="col-md-6">
+                            <div class="form-group m-form__group">
+                                <label class="m-checkbox @checkboxReadonlyClass">
+                                    @Html.EditorFor(x => Model.Notifications[i].SendNotificationsToEmail, new { htmlAttributes = checkboxHtmlAttributes })
+                                    @Html.LabelFor(x => Model.Notifications[0].SendNotificationsToEmail)
+                                    <span></span>
+                                </label>
+                            </div>
+                            <div class="form-group m-form__group">
+                                @Html.LabelFor(x => x.Notifications[0].NotificationEmail)
+                                @Html.EditorFor(x => Model.Notifications[i].NotificationEmail, new { htmlAttributes = controlHtmlAttributes })
+                            </div>
                         </div>
                     </div>
                 }
