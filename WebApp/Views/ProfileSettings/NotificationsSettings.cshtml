@@ -38,68 +38,58 @@
 
         @Html.HiddenFor(x => x.UserId)
         @Html.AntiForgeryToken()
-        
-        <div class="m-form__section m-form__section--first">
-            @for (int i = 0; i < Model.Notifications.Count; i++)
-            {
-                @Html.HiddenFor(x => Model.Notifications[i].Id)
 
-                <div class="form-group m-form__group">
-                    <h3>
-                        <small class="text-muted">Notification of inbox </small>
-                        @Model.Notifications[i].FirmName
-                    </h3>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group m-form__group">
-                        <label class="m-checkbox @checkboxReadonlyClass">
-                            @Html.EditorFor(x => Model.Notifications[i].SendNotificationsToEmail, new {htmlAttributes = checkboxHtmlAttributes})
-                            @Html.LabelFor(x => Model.Notifications[0].SendNotificationsToEmail)
-                            <span></span>
-                        </label>
-                    </div>
-                    <div class="form-group m-form__group">
-                        @Html.LabelFor(x => x.Notifications[0].NotificationEmail)
-                        @Html.EditorFor(x => Model.Notifications[i].NotificationEmail, new {htmlAttributes = controlHtmlAttributes})
-                    </div>
-                </div>
-            }
+        <div class="m-section">
+            <div class="m-section__content">
+                <div class="m-demo" data-code-preview="true" data-code-html="true" data-code-js="false" style="border: none">
+                    <div>
+                        <div class="m-stack m-stack--hor m-stack--general m-stack--demo" style="height: 400px">
 
-            @*<div class="m-section">
-                <div class="m-section__content">
-                    <div class="m-demo" data-code-preview="true" data-code-html="true" data-code-js="false">
-                        <div class="m-demo__preview">
-                            <div class="m-stack m-stack--hor m-stack--general m-stack--demo" style="height: 400px">
+                            @for (int i = 0; i < Model.Notifications.Count; i++)
+                            {
                                 <div class="m-stack__item">
-                                    <div class="m-stack__demo-item">Item 1</div>
-                                    <div>some text</div>
+                                    <div class="m-stack__demo-item">
+                                        @Html.HiddenFor(x => Model.Notifications[i].Id)
+
+                                        <div class="form-group m-form__group">
+                                            <h3>
+                                                <small class="text-muted">Notification of inbox </small>
+                                                @Model.Notifications[i].FirmName
+                                            </h3>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group m-form__group">
+                                                <label class="m-checkbox @checkboxReadonlyClass">
+                                                    @Html.EditorFor(x => Model.Notifications[i].SendNotificationsToEmail, new {htmlAttributes = checkboxHtmlAttributes})
+                                                    @Html.LabelFor(x => Model.Notifications[0].SendNotificationsToEmail)
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                            <div class="form-group m-form__group">
+                                                @Html.LabelFor(x => x.Notifications[0].NotificationEmail)
+                                                @Html.EditorFor(x => Model.Notifications[i].NotificationEmail, new {htmlAttributes = controlHtmlAttributes})
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </div>
-                                <div class="m-stack__item">
-                                    <div class="m-stack__demo-item">Item 2</div>
-                                </div>
-                                <div class="m-stack__item">
-                                    <div class="m-stack__demo-item">Item 3</div>
-                                </div>
-                                <div class="m-stack__item">
-                                    <div class="m-stack__demo-item">Item 4</div>
-                                </div>
-                            </div>
+                            }
+
                         </div>
                     </div>
                 </div>
-            </div>*@
-
-            <div style="font-size: 13px">
-                @Html.ValidationSummary(true, "", new {@class = "text-danger"})
-                @Html.ValidationSummary(false, "", new {@class = "text-danger"})
             </div>
-
-            <hr/>
-            @if (!isReadonly)
-            {
-                <button type="submit" style="margin-top: 30px" class="@CrudButtonsSettings.SaveStyle">Save</button>
-            }
         </div>
+
+        <div style="font-size: 13px">
+            @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+            @Html.ValidationSummary(false, "", new {@class = "text-danger"})
+        </div>
+
+        @if (!isReadonly)
+        {
+            <button type="submit" class="@CrudButtonsSettings.SaveStyle">Save</button>
+        }
         @await Html.PartialAsync("_FormScripts")
     </form>
 </div>

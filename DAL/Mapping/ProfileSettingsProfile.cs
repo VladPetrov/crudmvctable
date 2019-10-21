@@ -19,8 +19,10 @@ namespace DAL.Mapping
                 .ReverseMap();
 
             CreateMap<ClientFirm, NotificationsDomain>()
-                .ForMember(x => x.FirmName, opt => opt.MapFrom(x => x.Name))
-                .ReverseMap();
+                .ForMember(x => x.FirmName, opt => opt.MapFrom(x => x.Name));
+
+            CreateMap<NotificationsDomain, ClientFirm>()
+                .ForMember(x => x.Name, opt => opt.Ignore());
         }
     }
 }

@@ -18,7 +18,7 @@ namespace DAL.Model
 
         public string NotificationEmail { get; set; }
 
-        public bool SendNotificationsToEmail { get; set; }
+        public bool SendNotificationsToEmail { get; set; } = true;
         
         [ForeignKey(nameof(Profile))]
         public string ProfileId { get; set; }
