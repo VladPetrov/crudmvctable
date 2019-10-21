@@ -12,6 +12,7 @@
     Defensive.AssertNotNull(context, "Form context cant be null");
 }
 
+@await Html.RenderStatusMessageAsync()
 
 <div id="@formContainerId">
     <form class="m-form m-form--fit m-form--label-align-right"

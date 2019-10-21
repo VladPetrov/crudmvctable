@@ -1,11 +1,11 @@
-﻿using System;
-using Domain.ProfileSettings;
-using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using BLL.Infrastructure;
+﻿using BLL.Infrastructure;
 using DAL.Repositories;
+using Domain.ProfileSettings;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Threading.Tasks;
+using WebApp.Extensions;
 
 
 namespace WebApp.Controllers
@@ -41,7 +41,14 @@ namespace WebApp.Controllers
                 return PartialView(model);
             }
 
-            return GetPartialView(Service.UpsertNotificationSettings(model));
+            var result = Service.UpsertNotificationSettings(model);
+
+            if (result.Success)
+            {
+                SendSuccessStatusMessage();
+            }
+
+            return GetPartialView(result);
         }
 
         [HttpGet]
@@ -61,8 +68,15 @@ namespace WebApp.Controllers
             {
                 return PartialView(model);
             }
+
+            var result = Service.UpsertDeliveryAddress(model);
+
+            if (result.Success)
+            {
+                SendSuccessStatusMessage();
+            }
             
-            return GetPartialView(null, Service.UpsertDeliveryAddress(model));
+            return GetPartialView(result);
         }
 
         [HttpGet]
@@ -84,7 +98,14 @@ namespace WebApp.Controllers
                 return PartialView(model);
             }
 
-            return GetPartialView(null, Service.UpsertAuthorizedPersonsSettings(model));
+            var result = Service.UpsertAuthorizedPersonsSettings(model);
+
+            if (result.Success)
+            {
+                SendSuccessStatusMessage();
+            }
+
+            return GetPartialView(result);
         }
 
         [HttpGet]
@@ -144,6 +165,8 @@ namespace WebApp.Controllers
                 return PartialView(model);
             }
 
+            SendSuccessStatusMessage();
+
             return PartialView(new LoginSettingsDomain{Email = model.Email});
         }
 
@@ -158,12 +181,18 @@ namespace WebApp.Controllers
         {
             return true;
         }
+
         private void AddErrors(IdentityResult result)
         {
             foreach (var error in result.Errors)
             {
                 ModelState.AddModelError(string.Empty, error.Description);
             }
+        }
+
+        private void SendSuccessStatusMessage()
+        {
+            ViewData.SetStatusMessage("Profile settings were updated");
         }
     }
 }

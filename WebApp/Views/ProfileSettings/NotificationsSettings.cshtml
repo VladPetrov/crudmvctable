@@ -6,7 +6,7 @@
 @model NotificationsViewModel
 
 @{
-    var isReadonly = (bool) ViewData[ProfileSettingsController.Mode];
+    var isReadonly = (bool)ViewData[ProfileSettingsController.Mode];
     var formContainerId = Guid.NewGuid().ToString();
 
     var checkboxHtmlAttributes = new object();
@@ -14,17 +14,19 @@
 
     if (isReadonly)
     {
-        checkboxHtmlAttributes = checkboxHtmlAttributes.Merge(new {disabled = "disabled", @readonly = "readonly"});
+        checkboxHtmlAttributes = checkboxHtmlAttributes.Merge(new { disabled = "disabled", @readonly = "readonly" });
         checkboxReadonlyClass = "m-checkbox--disabled";
     }
 
-    object controlHtmlAttributes = new {@class = "form-control m-input"};
+    object controlHtmlAttributes = new { @class = "form-control m-input" };
 
     if (isReadonly)
     {
-        controlHtmlAttributes = controlHtmlAttributes.Merge(new {disabled = "disabled", @readonly = "readonly"});
+        controlHtmlAttributes = controlHtmlAttributes.Merge(new { disabled = "disabled", @readonly = "readonly" });
     }
 }
+
+@await Html.RenderStatusMessageAsync()
 
 <div id="@formContainerId">
     <form class="m-form m-form--fit m-form--label-align-right"
@@ -60,14 +62,14 @@
                                         <div class="col-md-6">
                                             <div class="form-group m-form__group">
                                                 <label class="m-checkbox @checkboxReadonlyClass">
-                                                    @Html.EditorFor(x => Model.Notifications[i].SendNotificationsToEmail, new {htmlAttributes = checkboxHtmlAttributes})
+                                                    @Html.EditorFor(x => Model.Notifications[i].SendNotificationsToEmail, new { htmlAttributes = checkboxHtmlAttributes })
                                                     @Html.LabelFor(x => Model.Notifications[0].SendNotificationsToEmail)
                                                     <span></span>
                                                 </label>
                                             </div>
                                             <div class="form-group m-form__group">
                                                 @Html.LabelFor(x => x.Notifications[0].NotificationEmail)
-                                                @Html.EditorFor(x => Model.Notifications[i].NotificationEmail, new {htmlAttributes = controlHtmlAttributes})
+                                                @Html.EditorFor(x => Model.Notifications[i].NotificationEmail, new { htmlAttributes = controlHtmlAttributes })
                                             </div>
                                         </div>
                                     </div>
@@ -82,8 +84,8 @@
         </div>
 
         <div style="font-size: 13px">
-            @Html.ValidationSummary(true, "", new {@class = "text-danger"})
-            @Html.ValidationSummary(false, "", new {@class = "text-danger"})
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
         </div>
 
         @if (!isReadonly)
