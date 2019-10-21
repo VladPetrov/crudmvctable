@@ -146,7 +146,7 @@ namespace WebApp.Controllers
                 default: throw new SwitchExpressionValueException(type);
             }
 
-            ViewData[MvcViewConstants.Title] = title;
+            ViewData.SetPageTitle(title);
         }
 
         #region GetView

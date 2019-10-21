@@ -7,7 +7,7 @@
 @using WebApp.Views.Transactions
 @model TransactionDomain
 
-@await Html.RenderPageHeaderAsync()
+@await Html.RenderPageTitleAsync()
 
 <div class="m-content">
     @await Html.FormCrudTwoColumnsAsync(TransactionFormDescriptor.Get(true))

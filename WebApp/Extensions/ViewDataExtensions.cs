@@ -30,6 +30,14 @@ namespace WebApp.Extensions
             }
         }
 
+        public static void SetPageTitle(this ViewDataDictionary viewData, string title)
+        {
+            if (title != null)
+            {
+                viewData[MvcViewConstants.Title] = title;
+            }
+        }
+
         public static StatusMessageViewModel GetStatusMessage(this ViewDataDictionary viewData)
         {
             return (StatusMessageViewModel)viewData[StatusMessageViewModel.Name] ?? new StatusMessageViewModel();

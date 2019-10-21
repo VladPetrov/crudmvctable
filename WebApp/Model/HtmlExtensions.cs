@@ -18,14 +18,14 @@ namespace WebApp.Model
 {
     public static class HtmlExtensions
     {
-        public static IHtmlContent GetPageHeader<TModel>(this IHtmlHelper<TModel> htmlHelper)
+        public static IHtmlContent GetPageTitle<TModel>(this IHtmlHelper<TModel> htmlHelper)
         {
             return new HtmlString($"{htmlHelper.ViewData[MvcViewConstants.Title]}");
         }
 
-        public static Task<IHtmlContent> RenderPageHeaderAsync<TModel>(this IHtmlHelper<TModel> htmlHelper)
+        public static Task<IHtmlContent> RenderPageTitleAsync<TModel>(this IHtmlHelper<TModel> htmlHelper)
         {
-            return htmlHelper.PartialAsync("_PageHeader");
+            return htmlHelper.PartialAsync("_PageTitle");
         }
 
         public static Task<IHtmlContent> RenderStatusMessageAsync<TModel>(this IHtmlHelper<TModel> htmlHelper)

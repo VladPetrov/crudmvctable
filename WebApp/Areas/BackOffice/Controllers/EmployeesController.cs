@@ -7,26 +7,30 @@ using Common.StringConstants;
 using DAL.Model;
 using DAL.Repositories;
 using Domain;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using WebApp.Extensions;
 using WebApp.Model.UsersPanel;
+using Constants = Common.StringConstants.Constants;
+using IdentityResult = Microsoft.AspNetCore.Identity.IdentityResult;
 
 namespace WebApp.Areas.BackOffice.Controllers
 {
 
     [Authorize(Roles = RoleNames.Admin)]
-    public class UsersPanelController : BackOfficeController
+    public class EmployeesController : BackOfficeController
     {
         private AppsUserManager UserManager { get; }
 
         private IEmailSenderService EmailSender { get; }
 
+        private string Title => "Back-Office Employees";
+
         [TempData]
         public string StatusMessage { get; set; }
 
-        public UsersPanelController(AppsUserManager userManager, IEmailSenderService emailSender)
+        public EmployeesController(AppsUserManager userManager, IEmailSenderService emailSender)
         {
             UserManager = userManager;
             EmailSender = emailSender;
@@ -39,7 +43,8 @@ namespace WebApp.Areas.BackOffice.Controllers
                 .Where(x => x.UserType == UserType.AdminOrBackOffice)
                 .ToList();
 
-            ViewBag.StatusMessage = StatusMessage;
+            ViewData.SetStatusMessage(StatusMessage);
+            ViewData.SetPageTitle(Title);
 
             return View(users);
         }
@@ -129,6 +134,8 @@ namespace WebApp.Areas.BackOffice.Controllers
                     
                     Log.Logger().Information("User created a new account with password.");
 
+                    StatusMessage = "Account was created successfully";
+
                     return RedirectToAction(nameof(Index));
                 }
 
@@ -140,7 +147,30 @@ namespace WebApp.Areas.BackOffice.Controllers
         [HttpGet]
         public async Task<IActionResult> Delete(string id)
         {
-            throw new NotImplementedException();
+            if (id == IdentityExtensions.GetUserId(User.Identity))
+            {
+                StatusMessage = "Error: User can't delete himself";
+                return RedirectToAction(nameof(Index));
+            }
+
+            var user = await UserManager.FindByIdAsync(id);
+
+            if (user == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            if (user.UserName == Constants.DefaultUser)
+            {
+                StatusMessage = "Error: Default account can't delete";
+                return RedirectToAction(nameof(Index));
+            }
+
+            await UserManager.DeleteAsync(user);
+
+            StatusMessage = "Account was deleted";
+
+            return RedirectToAction(nameof(Index));
         }
 
         private void AddErrors(IdentityResult result)
