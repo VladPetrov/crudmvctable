@@ -57,13 +57,31 @@ namespace DAL.Repositories
                     .Users
                     .Where(x => x.Id == domain.Id)
                     .Include(x => x.ClientProfile)
+                    .Include(x => x.ClientProfile.Firms)
                     .Single();
 
+            var defaultFirmNameWasChanged = !domain.IsNew && domain.DefaultFirmName != client.ClientProfile.DefaultFirmName;
+            
             Mapper.Map(domain, client);
 
             IdentityResult result = null;
 
-            result = domain.IsNew ? UserManager.CreateAsync(client).Result : UserManager.UpdateAsync(client).Result;
+            if (domain.IsNew)
+            {
+                client.ClientProfile.Firms.Add(ClientFirm.CreateDefaultFirm(domain.DefaultFirmName)); //create default firm
+
+                result = UserManager.CreateAsync(client).Result;
+            }
+            else
+            {
+                if (defaultFirmNameWasChanged)
+                {
+                    client.ClientProfile.Firms.Single(x => x.FirmType == FirmType.Default).Name =
+                        domain.DefaultFirmName; //create default firm
+                }
+
+                result = UserManager.UpdateAsync(client).Result;
+            }
 
             if (result.Succeeded)
             {

@@ -15,6 +15,6 @@ namespace WebApp.Areas.BackOffice.Controllers
         {
         }
 
-        protected override string Title => "Firms";
+        protected override string Title => "Additional Firms";
     }
 }
