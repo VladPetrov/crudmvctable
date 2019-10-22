@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Linq.Expressions;
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Common.Exceptions;
 using Common.Extensions;
 using Common.Table;
@@ -41,14 +42,17 @@ namespace DAL.Repositories
             //    .Map(Mapper.Map<TDomain>)
             //    .ValueOrFailure();
 
-            var item = Set.AsNoTracking().FirstOrDefault(EqualsPredicate(id));
+            var item = Set
+                .Where(EqualsPredicate(id))
+                .ProjectTo<TDomain>()
+                .FirstOrDefault();
 
             if (item == null)
             {
                 throw new EntityNotFoundException($"{typeof(TEntity).FullName} with {id}");
             }
 
-            return Mapper.Map<TDomain>(item);
+            return item;
         }
 
         public virtual UpsertResult<TDomain> Upsert(TDomain domain)

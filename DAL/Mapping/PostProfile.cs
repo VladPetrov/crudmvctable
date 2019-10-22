@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using AutoMapper;
+﻿using AutoMapper;
 using DAL.Model;
 using Domain.Post;
 
@@ -16,6 +13,10 @@ namespace DAL.Mapping
 
             CreateMap<FirmPost, PostDomain>()
                 .ForMember(x => x.Recipient, opt => opt.MapFrom(x => x.Firm));
+
+            CreateMap<PostDomain, FirmPost>()
+                .ForMember(x => x.Firm, opt => opt.Ignore())
+                .ForMember(x => x.FirmId, opt => opt.MapFrom(x => x.Recipient.Id));
         }
     }
 }

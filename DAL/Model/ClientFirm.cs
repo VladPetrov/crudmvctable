@@ -14,7 +14,8 @@ namespace DAL.Model
             Id = Guid.NewGuid().ToString();
         }
 
-        [Required] public string Name { get; set; }
+        [Required] 
+        public string Name { get; set; }
 
         public bool Enabled { get; set; }
 
