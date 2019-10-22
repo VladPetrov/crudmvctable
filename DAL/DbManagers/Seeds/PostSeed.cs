@@ -18,13 +18,13 @@ namespace DAL.DbManagers.Seeds
         {
             var firms = Context.ClientFirms.ToList();
 
-            for (int i = 0; i < 20; i++)
+            for (int i = 0; i < 60; i++)
             {
                 Context.FirmPost.AddRange(new List<FirmPost>
                 {
                     new FirmPost
                     {
-                        DeliveredDate = DateTime.Now,
+                        DeliveredDate = DateTime.Now.AddDays(-i),
                         Firm = firms[0],
                         RegisteredBy = "Admin",
                         Status = LetterStatus.New,
@@ -35,7 +35,7 @@ namespace DAL.DbManagers.Seeds
 
                     new FirmPost
                     {
-                        DeliveredDate = DateTime.Now,
+                        DeliveredDate = DateTime.Now.AddDays(-i*2),
                         Firm = firms[1],
                         RegisteredBy = "Vlado",
                         Status = LetterStatus.ForwardedByEmail,
@@ -46,7 +46,7 @@ namespace DAL.DbManagers.Seeds
 
                     new FirmPost
                     {
-                        DeliveredDate = DateTime.Now,
+                        DeliveredDate = DateTime.Now.AddDays(-4),
                         Firm = firms[2],
                         RegisteredBy = "Den",
                         Status = LetterStatus.ForwardedByPost,
