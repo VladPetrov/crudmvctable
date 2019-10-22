@@ -80,6 +80,7 @@ namespace Configuration.IoC
             Container.Register<ISeed, TransactionSeed>(nameof(TransactionSeed));
             Container.Register<ISeed, CategorySeed>(nameof(CategorySeed));
             Container.Register<ISeed, ClientsSeed>(nameof(ClientsSeed));
+            Container.Register<ISeed, PostSeed>(nameof(PostSeed));
 
             Container.Register<AppsUserManager>();
         }
