@@ -4,6 +4,7 @@ using Domain.Post;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using FirmPost = DAL.Model.FirmPost;
 
 namespace DAL.DbManagers.Seeds
 {
@@ -17,41 +18,44 @@ namespace DAL.DbManagers.Seeds
         {
             var firms = Context.ClientFirms.ToList();
 
-            Context.FirmPost.AddRange(new List<FirmPost>
+            for (int i = 0; i < 20; i++)
             {
-                new FirmPost
+                Context.FirmPost.AddRange(new List<FirmPost>
                 {
-                    DeliveredDate = DateTime.Now,
-                    Firm = firms[0],
-                    RegisteredBy = "Seed",
-                    Status = LetterStatus.New,
-                    Type = LetterType.Letter,
-                    Note = "some note",
-                    Sender = "Bratislava"
-                },
+                    new FirmPost
+                    {
+                        DeliveredDate = DateTime.Now,
+                        Firm = firms[0],
+                        RegisteredBy = "Admin",
+                        Status = LetterStatus.New,
+                        Type = LetterType.Letter,
+                        Note = "some note",
+                        Sender = "Bratislava"
+                    },
 
-                new FirmPost
-                {
-                    DeliveredDate = DateTime.Now,
-                    Firm = firms[1],
-                    RegisteredBy = "Seed",
-                    Status = LetterStatus.ForwardedByEmail,
-                    Type = LetterType.LetterFirstClass,
-                    Note = null,
-                    Sender = "Sumy"
-                },
+                    new FirmPost
+                    {
+                        DeliveredDate = DateTime.Now,
+                        Firm = firms[1],
+                        RegisteredBy = "Vlado",
+                        Status = LetterStatus.ForwardedByEmail,
+                        Type = LetterType.LetterFirstClass,
+                        Note = null,
+                        Sender = "Sumy"
+                    },
 
-                new FirmPost
-                {
-                    DeliveredDate = DateTime.Now,
-                    Firm = firms[2],
-                    RegisteredBy = "Seed",
-                    Status = LetterStatus.ForwardedByPost,
-                    Type = LetterType.RegisteredLetter,
-                    Note = "some note",
-                    Sender = "Kosice"
-                }
-            });
+                    new FirmPost
+                    {
+                        DeliveredDate = DateTime.Now,
+                        Firm = firms[2],
+                        RegisteredBy = "Den",
+                        Status = LetterStatus.ForwardedByPost,
+                        Type = LetterType.RegisteredLetter,
+                        Note = "some note",
+                        Sender = "Kosice"
+                    }
+                });
+            }
         }
     }
 }
