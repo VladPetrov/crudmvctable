@@ -13,6 +13,7 @@
         .AddColumn(x => x.Type)
         .AddColumn(x => x.Status)
         .AddColumn(x => x.RegisteredBy)
+        .AddRowsSelect()
         .Build();
 }
 

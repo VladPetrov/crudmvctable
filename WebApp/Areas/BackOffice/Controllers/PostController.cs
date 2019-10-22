@@ -16,5 +16,12 @@ namespace WebApp.Areas.BackOffice.Controllers
         }
 
         protected override string Title => "Post";
+
+        protected override int ItemsPerPage => 100;
+
+        protected override IActionResult RedirectAfterCreate(string id)
+        {
+            return RedirectToAction(nameof(IndexPage)); 
+        }
     }
 }

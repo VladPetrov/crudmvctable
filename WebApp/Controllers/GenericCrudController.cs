@@ -185,7 +185,7 @@ namespace WebApp.Controllers
             return listResult.ToMvcTableResponse();
         }
 
-        protected IActionResult RedirectAfterCreate(TKey id)
+        protected virtual IActionResult RedirectAfterCreate(TKey id)
         {
             if (IsChildPage)
             {
