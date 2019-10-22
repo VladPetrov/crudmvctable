@@ -1,0 +1,15 @@
+﻿@using WebApp.Areas.BackOffice.Controllers
+@using WebApp.Model.GenericMvc.ChildPage
+@model Domain.IDomain
+
+@await Html.RenderStatusMessageAsync()
+
+@await Html.RenderPageTitleAsync()
+
+<div class="m-content">
+    @await Html.PartialAsync("_DisplayModel", Model)
+    
+    <partial name="_ChildPage" model="@ChildPageDescriptor.Create(nameof(ClientFirmsController), Model.GetId(), true)" />
+
+    @await Html.RenderCrudButtonsAsync()
+</div>
