@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Domain.Client;
@@ -12,9 +13,8 @@ namespace DAL.Model
         {
             Id = Guid.NewGuid().ToString();
         }
-        
-        [Required]
-        public string Name { get; set; }
+
+        [Required] public string Name { get; set; }
 
         public bool Enabled { get; set; }
 
@@ -23,15 +23,18 @@ namespace DAL.Model
         public bool SendNotificationsToEmail { get; set; } = true;
 
         public FirmType FirmType { get; set; } = FirmType.Additional;
-        
-        [ForeignKey(nameof(Profile))]
+
+        [ForeignKey(nameof(Profile))] 
         public string ProfileId { get; set; }
 
         public virtual ClientProfile Profile { get; set; }
 
+        public virtual List<FirmPost> Post { get; set; } = new List<FirmPost>();
+
+
         public static ClientFirm CreateDefaultFirm(string name)
         {
-            return new ClientFirm{Name = name, FirmType = FirmType.Default, Enabled = true};
+            return new ClientFirm {Name = name, FirmType = FirmType.Default, Enabled = true};
         }
     }
 }

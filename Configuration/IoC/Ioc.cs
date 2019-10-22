@@ -41,6 +41,7 @@ namespace Configuration.IoC
             Container.Register<ISubCategoryRepository, SubCategoryRepository>();
             Container.Register<IClientRepository, ClientRepository>();
             Container.Register<IClientFirmRepository, ClientFirmRepository>();
+            Container.Register<IPostRepository, PostRepository>();
 
             Container.Register<DataBase>(new PerRequestLifeTime());
             Container.Register<TransientDataBase>();
@@ -70,6 +71,7 @@ namespace Configuration.IoC
             Container.Register<IClientService, ClientService>();
             Container.Register<IClientFirmService, ClientFirmService>();
             Container.Register<IProfileSettingsService, ProfileSettingsServiceTr>();
+            Container.Register<IPostService, PostService>();
 
             Container.Register<ISeed, BasicSeed>(nameof(BasicSeed));
             Container.Register<ISeed, EntitySeed>(nameof(EntitySeed));
