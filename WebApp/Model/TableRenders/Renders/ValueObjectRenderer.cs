@@ -6,21 +6,25 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Configuration.IoC;
+using DAL.Infrastructure;
 using DAL.Model;
 using DAL.Repositories;
+using Domain;
 using WebApp.Model.Forms;
 
 namespace WebApp.Model.TableRenders.Renders
 {
-    public class ValueObjectRenderer<T> : IFormItemRenderer where T : EntityBase
+    public class ValueObjectRenderer<TEntity, TValueObject, TKey> : IFormItemRenderer 
+        where TEntity : class, IEntity<TKey>
+        where TValueObject : IValueObject<TKey>
     {
         private readonly string _optionalLabel;
 
-        private readonly Expression<Func<T, bool>> _predicate;
+        private readonly Expression<Func<TEntity,bool>> _predicate;
 
-        public ValueObjectRenderer(Expression<Func<T, bool>> predicate = null):this(null, predicate){}
+        public ValueObjectRenderer(Expression<Func<TEntity,bool>> predicate = null):this(null, predicate){}
 
-        public ValueObjectRenderer(string optionalLabel, Expression<Func<T, bool>> predicate = null)
+        public ValueObjectRenderer(string optionalLabel, Expression<Func<TEntity, bool>> predicate = null)
         {
             _optionalLabel = optionalLabel;
             _predicate = predicate;
@@ -28,7 +32,7 @@ namespace WebApp.Model.TableRenders.Renders
 
         public async Task<IHtmlContent> RenderAsync(IHtmlHelper htmlHelper, FormItemsDescriptor descriptor)
         {
-            var repository = (IValueObjectRepository)Ioc.Container.GetInstance(typeof(IValueObjectRepository));
+            var repository = (IValueObjectRepository<TValueObject, TKey>)Ioc.Container.GetInstance(typeof(IValueObjectRepository<TValueObject, TKey>));
 
             var items = repository.GetItems(_predicate).ToSelectListItems();
 

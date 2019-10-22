@@ -2,7 +2,7 @@
 
 namespace Domain
 {
-    public class ValueObjectStrKey : IValueObject
+    public class ValueObjectStrKey : IValueObject<string>
     {
         public string Id { get; set; }
 

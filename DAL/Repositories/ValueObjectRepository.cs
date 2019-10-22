@@ -1,9 +1,7 @@
-﻿using AutoMapper;
-using AutoMapper.QueryableExtensions;
-using DAL.Extensions;
+﻿using AutoMapper.QueryableExtensions;
+using DAL.Infrastructure;
 using DAL.Model;
 using Domain;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,18 +9,22 @@ using System.Linq.Expressions;
 
 namespace DAL.Repositories
 {
-    public class ValueObjectRepository : BaseRepository<DbContext, long>, IValueObjectRepository
+    public class ValueObjectRepository<TValueObject, TKey> : IValueObjectRepository<TValueObject, TKey>
+        where TValueObject : IValueObject<TKey>
     {
-        public ValueObjectRepository(DataBase context) : base(context)
+        private DataBase Context { get; }
+
+        public ValueObjectRepository(DataBase context)
         {
+            Context = context;
         }
 
-        public IEnumerable<IValueObject> GetItems<T>() where T : EntityBase
+        public IEnumerable<IValueObject<TKey>> GetItems<T>() where T : class, IEntity<TKey>
         {
             return GetItems<T>(null);
         }
 
-        public IEnumerable<IValueObject> GetItems<T>(Expression<Func<T, bool>> predicate) where T : EntityBase
+        public IEnumerable<IValueObject<TKey>> GetItems<T>(Expression<Func<T, bool>> predicate) where T : class, IEntity<TKey>
         {
             var query = Context.Set<T>().AsQueryable();
 
@@ -31,7 +33,7 @@ namespace DAL.Repositories
                 query = query.Where(predicate);
             }
 
-            return query.ProjectTo<ValueObject>().ToList();
+            return query.ProjectTo<TValueObject>().ToList().Cast<IValueObject<TKey>>().ToList();
         }
     }
 }

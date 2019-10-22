@@ -31,7 +31,7 @@ namespace Configuration.IoC
             Container.Register<ITransactionTagRepository, TransactionTagRepository>();
             Container.Register<IProjectRepository, ProjectRepository>();
             Container.Register<ICategoryRepository, CategoryRepository>();
-            Container.Register<IValueObjectRepository, ValueObjectRepository>();
+            Container.Register(typeof(IValueObjectRepository<,>), typeof(ValueObjectRepository<,>));
             Container.Register<IFileRepository, FileRepository>();
             Container.Register<IFileUploadLogger, FileUploadLogger>();
             Container.Register<ITransactionThroughEmailInfoRepository, TransactionThroughEmailInfoRepository>();

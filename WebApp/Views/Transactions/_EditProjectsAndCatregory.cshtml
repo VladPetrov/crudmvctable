@@ -1,10 +1,11 @@
 ﻿@using Common.StringConstants
 @using DAL.Model
 @using DAL.Repositories
+@using Domain
 @using WebApp.Model.TableRenders.Renders
 @using WebApp.Model.Transactions
 @model ProjectAndCategoryEditViewModel
-@inject IValueObjectRepository Repository
+@inject IValueObjectRepository<ValueObject, long> Repository
 
 @{
     var projects = Repository.GetItems<Project>();

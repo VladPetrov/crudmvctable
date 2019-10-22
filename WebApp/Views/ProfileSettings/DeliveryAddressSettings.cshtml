@@ -1,4 +1,5 @@
 ﻿@using DAL.Model
+@using Domain
 @using Domain.ProfileSettings
 @using WebApp.Controllers
 @using WebApp.Model.Forms
@@ -13,7 +14,7 @@
         .AddItem(x => x.City)
         .AddItem(x => x.Country , new FormItemOptions
         {
-            ColumnRenderer = new ValueObjectRenderer<Country>()
+            ColumnRenderer = new ValueObjectRenderer<Country, ValueObject, long>()
         })
         .Build();
 

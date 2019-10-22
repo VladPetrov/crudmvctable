@@ -1,9 +1,10 @@
 ﻿@using DAL.Model
 @using DAL.Repositories
+@using Domain
 @using WebApp.Model.TableRenders.Renders
 @using WebApp.Model.Transactions
 @model ImportTransactionsCsvVm
-@inject IValueObjectRepository Repository
+@inject IValueObjectRepository<ValueObject, long> Repository
 
 @{
     ViewData["Title"] = "Import Transactions";

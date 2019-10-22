@@ -1,5 +1,6 @@
 ﻿using Common.StringConstants;
 using DAL.Model;
+using Domain;
 using Domain.Transaction;
 using WebApp.Controllers;
 using WebApp.Model.ColumnFilter;
@@ -21,13 +22,13 @@ namespace WebApp.Views.Transactions
                 .AddColumn(x => x.Entity, new RowOptions
                 {
                     FilterRenderer =
-                        new ValueObjectColumnFilterRenderer<TransactionDisplay, Entity>(x => x.EntityId,
+                        new ValueObjectColumnFilterRenderer<TransactionDisplay, Entity, ValueObject, long>(x => x.EntityId,
                             e => !e.IsSupplier)
                 })
                 .AddColumn(x => x.RecipientEntity, new RowOptions
                 {
                     FilterRenderer =
-                        new ValueObjectColumnFilterRenderer<TransactionDisplay, Entity>(x => x.RecipientEntityId)
+                        new ValueObjectColumnFilterRenderer<TransactionDisplay, Entity, ValueObject, long>(x => x.RecipientEntityId)
                 })
                 .AddColumn(x => x.Amount, new RowOptions{ColumnClass = Constants.CurrencyClass })
                 .AddColumn(x => x.Note, new RowOptions
@@ -37,11 +38,11 @@ namespace WebApp.Views.Transactions
                 .AddColumn(x => x.Category, new RowOptions
                 {
                     FilterRenderer =
-                        new ValueObjectColumnFilterRenderer<TransactionDisplay, Category>(x => x.CategoryId)
+                        new ValueObjectColumnFilterRenderer<TransactionDisplay, Category, ValueObject, long>(x => x.CategoryId)
                 })
                 .AddColumn(x => x.Project, new RowOptions
                 {
-                    FilterRenderer = new ValueObjectColumnFilterRenderer<TransactionDisplay, Project>(x => x.ProjectId)
+                    FilterRenderer = new ValueObjectColumnFilterRenderer<TransactionDisplay, Project, ValueObject, long>(x => x.ProjectId)
                 })
                 .AddColumn(x => x.Type)
                 .AddColumn(x => x.Source)

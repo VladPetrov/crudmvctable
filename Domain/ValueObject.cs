@@ -2,12 +2,12 @@
 
 namespace Domain
 {
-    public interface IValueObject : IDomain
+    public interface IValueObject<T> : IDomain<T>
     {
         string Name { get; set; }
     }
 
-    public class ValueObject : IValueObject
+    public class ValueObject : IValueObject<long>
     {
         public long Id { get; set; }
         

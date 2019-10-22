@@ -1,10 +1,11 @@
 ﻿@using DAL.Model
 @using DAL.Repositories
+@using Domain
 @using WebApp.Controllers
 @using WebApp.Extensions
 @using WebApp.Model.Transactions
 @model TransactionFilesViewModel
-@inject IValueObjectRepository Repository;
+@inject IValueObjectRepository<ValueObject, long> Repository;
 
 @{
     Layout = null;

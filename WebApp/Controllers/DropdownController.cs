@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
 using System.Linq.Expressions;
+using Domain;
 using Microsoft.AspNetCore.Authorization;
 
 namespace WebApp.Controllers
@@ -11,9 +12,9 @@ namespace WebApp.Controllers
     [Authorize]
     public class DropdownController : Controller
     {
-        private IValueObjectRepository ValueObjectRepository { get; }
+        private IValueObjectRepository<ValueObject, long> ValueObjectRepository { get; }
 
-        public DropdownController(IValueObjectRepository valueObjectRepository)
+        public DropdownController(IValueObjectRepository<ValueObject, long> valueObjectRepository)
         {
             ValueObjectRepository = valueObjectRepository;
         }

@@ -1,5 +1,6 @@
 ﻿using Common.StringConstants;
 using DAL.Model;
+using Domain;
 using Domain.Transaction;
 using WebApp.Model.Forms;
 using WebApp.Model.TableRenders.Renders;
@@ -17,12 +18,12 @@ namespace WebApp.Views.Transactions
                 .AddItem(x => x.Entity, new FormItemOptions
                 {
                     @Readonly = isReadonlyFields,
-                    ColumnRenderer = new ValueObjectRenderer<Entity>(Constants.DropdownDefaultOption, x => !x.IsSupplier),
+                    ColumnRenderer = new ValueObjectRenderer<Entity, ValueObject, long>(Constants.DropdownDefaultOption, x => !x.IsSupplier),
                     HtmlAttributes = new { @id = RecipientEntityId }
                 })
                 .AddItem(x => x.RecipientEntity, new FormItemOptions
                 {
-                    ColumnRenderer = new ValueObjectRenderer<Entity>(Constants.DropdownDefaultOption)
+                    ColumnRenderer = new ValueObjectRenderer<Entity, ValueObject, long>(Constants.DropdownDefaultOption)
                 })
                 .AddItem(x => x.CreatedTime, isReadonlyFields)
                 .AddItem(x => x.Iban, isReadonlyFields)
@@ -32,10 +33,10 @@ namespace WebApp.Views.Transactions
                 .AddItem(x => x.Source, isReadonlyFields)
                 .AddItem(x => x.Project, new FormItemOptions
                 {
-                    ColumnRenderer = new ValueObjectRenderer<Project>(Constants.DropdownDefaultOption),
+                    ColumnRenderer = new ValueObjectRenderer<Project, ValueObject, long>(Constants.DropdownDefaultOption),
                     HtmlAttributes = new {@id = ProjectId}
                 })
-                .AddItem(x => x.Category, false, new ValueObjectRenderer<Category>(Constants.DropdownDefaultOption))
+                .AddItem(x => x.Category, false, new ValueObjectRenderer<Category, ValueObject, long>(Constants.DropdownDefaultOption))
                 .Build();
         }
     }
