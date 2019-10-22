@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Domain.Client
 {
@@ -9,7 +9,7 @@ namespace Domain.Client
 
         public bool EmailConfirmed { get; set; }
 
-        public string Name { get; set; }
+        public string DefaultFirmName { get; set; }
 
         public long Balance { get; set; }
 

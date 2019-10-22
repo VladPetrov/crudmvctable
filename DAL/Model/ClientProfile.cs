@@ -13,7 +13,7 @@ namespace DAL.Model
         public new string Id { get; set; }
         
         [Required]
-        public string Name { get; set; }
+        public string DefaultFirmName { get; set; }
 
         public long Balance { get; set; }
 

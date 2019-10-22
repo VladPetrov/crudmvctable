@@ -8,7 +8,7 @@
 
 @{
     var descriptor = TableBuilder<ClientDisplay>.CreateNew()
-        .AddColumn(x => x.Name)
+        .AddColumn(x => x.DefaultFirmName)
         .AddColumn(x => x.Email)
         .AddColumn(x => x.EmailConfirmed)
         .AddColumn(x => x.Balance, new RowOptions{ColumnClass = Constants.CurrencyClass})

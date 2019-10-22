@@ -28,7 +28,7 @@ namespace DAL.DbManagers.Seeds
                             Balance = 10000,
                             ContractStartDate = DateTime.Now,
                             ContractEndDate = DateTime.Now.AddMonths(1),
-                            Name = "Google s.r.o.",
+                            DefaultFirmName = "Google s.r.o.",
 
                             Firms = new List<ClientFirm>
                             {
@@ -58,7 +58,7 @@ namespace DAL.DbManagers.Seeds
                             Balance = 80000,
                             ContractStartDate = DateTime.Now.AddMonths(-2),
                             ContractEndDate = DateTime.Now.AddMonths(-1),
-                            Name = "Amazon s.r.o.",
+                            DefaultFirmName = "Amazon s.r.o.",
 
                             Firms = new List<ClientFirm>
                             {

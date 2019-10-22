@@ -11,8 +11,8 @@ namespace Domain.Client
         public string Email { get; set; }
 
         [Required]
-        [Display(Name = "Client Name")]
-        public string ClientName { get; set; }
+        [Display(Name = "Default Firm Name")]
+        public string DefaultFirmName { get; set; }
 
         [Required]
         [Display(Name = "Phone Number")]

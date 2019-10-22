@@ -22,7 +22,10 @@ namespace DAL.Mapping
                 .ForMember(x => x.FirmName, opt => opt.MapFrom(x => x.Name));
 
             CreateMap<NotificationsDomain, ClientFirm>()
-                .ForMember(x => x.Name, opt => opt.Ignore());
+                .ForMember(x => x.Name, opt => opt.Ignore())
+                .ForMember(x => x.Enabled, opt => opt.Ignore())
+                .ForMember(x => x.ProfileId, opt => opt.Ignore())
+                .ForMember(x => x.Profile, opt => opt.Ignore());
         }
     }
 }
