@@ -1,0 +1,20 @@
+﻿@using Domain.Post
+@using WebApp.Model
+@using WebApp.Model.GenericMvc
+
+
+@model WebApp.Model.TableViewModel
+
+@{
+    var descriptor = TableBuilder<PostDisplay>.CreateNew()
+        .AddColumn(x => x.DeliveredDate)
+        .AddColumn(x => x.Sender)
+        .AddColumn(x => x.Recipient)
+        .AddColumn(x => x.Type)
+        .AddColumn(x => x.Status)
+        .AddColumn(x => x.RegisteredBy)
+        .Build();
+}
+
+@await Html.TableAsync(Model, descriptor)
+
