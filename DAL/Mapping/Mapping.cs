@@ -25,6 +25,7 @@ namespace DAL.Mapping
             configuration.AddProfile<CountyProfile>();
             configuration.AddProfile<ClientProfile>();
             configuration.AddProfile<ProfileSettingsProfile>();
+            configuration.AddProfile<PostProfile>();
         }
     }
 }

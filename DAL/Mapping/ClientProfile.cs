@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using AutoMapper;
 using DAL.Model;
+using Domain;
 using Domain.Client;
 
 namespace DAL.Mapping
@@ -46,6 +47,9 @@ namespace DAL.Mapping
 
             CreateMap<ClientFirm, FirmDomain>()
                 .ForMember(x => x.MusterEntityFk, opt => opt.MapFrom(x => x.ProfileId))
+                .ReverseMap();
+
+            CreateMap<ClientFirm, ValueObjectStrKey>()
                 .ReverseMap();
         }
     }

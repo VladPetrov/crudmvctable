@@ -17,12 +17,12 @@ namespace DAL.Repositories
         {
         }
 
-        public IEnumerable<ValueObject> GetItems<T>() where T : EntityBase
+        public IEnumerable<IValueObject> GetItems<T>() where T : EntityBase
         {
             return GetItems<T>(null);
         }
 
-        public IEnumerable<ValueObject> GetItems<T>(Expression<Func<T, bool>> predicate) where T : EntityBase
+        public IEnumerable<IValueObject> GetItems<T>(Expression<Func<T, bool>> predicate) where T : EntityBase
         {
             var query = Context.Set<T>().AsQueryable();
 

@@ -26,7 +26,8 @@ namespace DAL.Mapping
                 .ForMember(x => x.Enabled, opt => opt.Ignore())
                 .ForMember(x => x.ProfileId, opt => opt.Ignore())
                 .ForMember(x => x.Profile, opt => opt.Ignore())
-                .ForMember(x => x.FirmType, opt => opt.Ignore());
+                .ForMember(x => x.FirmType, opt => opt.Ignore())
+                .ForMember(x => x.Post, opt => opt.Ignore());
         }
     }
 }

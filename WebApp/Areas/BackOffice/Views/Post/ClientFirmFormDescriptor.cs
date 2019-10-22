@@ -8,15 +8,13 @@ namespace WebApp.Areas.BackOffice.Views.Post
     {
         public static FormDescriptor Get(bool readOnly)
         {
-            throw new NotImplementedException();
-            //return FormBuilder<PostDomain>.CreateNew(readOnly, null)
-            //    .AddItem(x => x.DeliveredDate)
-            //    .AddItem(x => x.Sender)
-            //    .AddItem(x => x.Recipient)
-            //    .AddItem(x => x.Type)
-            //    .AddItem(x => x.Status)
-            //    .AddItem(x => x.RegisteredBy)
-            //    .Build();
+            return FormBuilder<PostDomain>.CreateNew(readOnly, null)
+                .AddItem(x => x.Sender)
+                //.AddItem(x => x.Recipient)
+                .AddItem(x => x.DeliveredDate)
+                .AddItem(x => x.Type)
+                .AddItem(x => x.Status)
+                .Build();
         }
     }
 }

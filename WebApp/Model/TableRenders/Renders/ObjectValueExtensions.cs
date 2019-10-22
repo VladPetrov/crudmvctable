@@ -7,9 +7,9 @@ namespace WebApp.Model.TableRenders.Renders
 {
     public static class ObjectValueExtensions
     {
-        public static List<SelectListItem> ToSelectListItems(this IEnumerable<ValueObject> items)
+        public static List<SelectListItem> ToSelectListItems(this IEnumerable<IValueObject> items)
         {
-            return items.Select(x => new SelectListItem {Text = x.Name, Value = x.Id.ToString()}).ToList();
+            return items.Select(x => new SelectListItem {Text = x.Name, Value = x.GetId()?.ToString()}).ToList();
         }
     }
 }

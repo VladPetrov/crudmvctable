@@ -2,20 +2,15 @@
 
 namespace Domain
 {
-    public interface IValueObject : IDomain
+    public class ValueObjectStrKey : IValueObject
     {
-        string Name { get; set; }
-    }
+        public string Id { get; set; }
 
-    public class ValueObject : IValueObject
-    {
-        public long Id { get; set; }
-        
         public string Name { get; set; }
 
         public object GetId() => Id;
 
-        public bool IsNew => Id == 0;
+        public bool IsNew => Id == null;
 
         public DateTime CreatedDate { get; set; }
 
