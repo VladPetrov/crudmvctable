@@ -1,5 +1,8 @@
-﻿@using Domain.Post
+﻿@using DAL.Model
+@using Domain
+@using Domain.Post
 @using WebApp.Model
+@using WebApp.Model.ColumnFilter
 @using WebApp.Model.GenericMvc
 
 
@@ -9,7 +12,10 @@
     var descriptor = TableBuilder<PostDisplay>.CreateNew()
         .AddColumn(x => x.DeliveredDate)
         .AddColumn(x => x.Sender)
-        .AddColumn(x => x.Recipient)
+        .AddColumn(x => x.Recipient, new RowOptions
+        {
+            FilterRenderer = new ValueObjectColumnFilterRenderer<PostDisplay, ClientFirm, ValueObjectStrKey, string>(x => x.RecipientFirmId, f => f.Enabled)
+        })
         .AddColumn(x => x.Type)
         .AddColumn(x => x.Status)
         .AddColumn(x => x.RegisteredBy)
@@ -18,4 +24,3 @@
 }
 
 @await Html.TableAsync(Model, descriptor)
-

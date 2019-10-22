@@ -1,5 +1,5 @@
 ﻿import { ITableFilterCreator, TableService } from "./filtersCommon";
-import { TableFilter } from "../tableServiceCommon";
+import { TableFilter, TableFilterOperator } from "../tableServiceCommon";
 import { getFilterValue, getFilterFieldId } from "./common";
 
 
@@ -23,7 +23,7 @@ export class ValueObjectFilterCreator //implements ITableFilterCreator
 
         if (value != null)
         {
-            const filter = TableFilter.numberFilter(fieldId, value);
+            const filter = this.getFilter(fieldId, value.toString());
             service.upsertFilter(filter);
             input$.val(value);
         }
@@ -34,14 +34,27 @@ export class ValueObjectFilterCreator //implements ITableFilterCreator
 
             if (val)
             {
-                const filter = TableFilter.numberFilter(fieldId, val.toString());
+                const filter = this.getFilter(fieldId, val.toString());
                 service.upsertFilter(filter);
-            } else
+            }
+            else
             {
                 service.removeFilter(fieldId);
             }
 
             service.filterData();
         });
+    }
+
+    private static getFilter(fieldId: string, val: string): TableFilter
+    {
+        if (val.match(/[a-zA-Z]/)) //if id is guid or str
+        {
+            return  new TableFilter(fieldId, 'string', val.trim(), TableFilterOperator.Equal);
+        }
+        else
+        {
+            return TableFilter.numberFilter(fieldId, val);
+        }
     }
 }

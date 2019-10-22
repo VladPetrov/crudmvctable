@@ -24,7 +24,7 @@ namespace WebApp.Model.ColumnFilter
         private readonly Expression<Func<TEntity, bool>> _predicate;
         private readonly string _fkFieldId;
 
-        public ValueObjectColumnFilterRenderer(Expression<Func<TDomain, long>> fkSelector, Expression<Func<TEntity, bool>> predicate = null)
+        public ValueObjectColumnFilterRenderer(Expression<Func<TDomain, TKey>> fkSelector, Expression<Func<TEntity, bool>> predicate = null)
         {
             _fkFieldId = fkSelector.GetPropetyPath();
             _predicate = predicate;

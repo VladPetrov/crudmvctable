@@ -17,5 +17,7 @@ namespace Domain.Post
         public string Sender { get; set; }
 
         public string Recipient { get; set; } //field has no search! 
+
+        public string RecipientFirmId { get; set; } 
     }
 }

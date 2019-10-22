@@ -9,7 +9,8 @@ namespace DAL.Mapping
         public PostProfile()
         {
             CreateMap<FirmPost, PostDisplay>()
-                .ForMember(x => x.Recipient, opt => opt.MapFrom(x => x.Firm.Name));
+                .ForMember(x => x.Recipient, opt => opt.MapFrom(x => x.Firm.Name))
+                .ForMember(x => x.RecipientFirmId, opt => opt.MapFrom(x => x.FirmId));
 
             CreateMap<FirmPost, PostDomain>()
                 .ForMember(x => x.Recipient, opt => opt.MapFrom(x => x.Firm));
