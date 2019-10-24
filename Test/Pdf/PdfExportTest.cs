@@ -1,8 +1,6 @@
-﻿using System;
+﻿using NUnit.Framework;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
-using NUnit.Framework;
 
 namespace Test.Pdf
 {

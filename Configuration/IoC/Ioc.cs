@@ -29,6 +29,7 @@ namespace Configuration.IoC
             Container.Register<IClientRepository, ClientRepository>();
             Container.Register<IClientFirmRepository, ClientFirmRepository>();
             Container.Register<IPostRepository, PostRepository>();
+            Container.Register<IPostDataExportService, PostDataExportService>();
 
             Container.Register<DataBase>(new PerRequestLifeTime());
             Container.Register<TransientDataBase>();

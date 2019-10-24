@@ -14,7 +14,7 @@ namespace BLL
 {
     public static class Pdf
     {
-        public static FileDownloadable CreatePdf([NotNull] List<string> columns, [NotNull] List<List<string>> rows, [NotNull] string title, [NotNull] string fileName, [NotNull] string author)
+        public static FileDownloadable CreatePdf([NotNull] List<string> headers, [NotNull] List<List<string>> rows, [NotNull] string title, [NotNull] string fileName, [NotNull] string author)
         {
             byte[] bytes;
 
@@ -40,10 +40,10 @@ namespace BLL
                     p.SetMarginBottom(10f);
                     doc.Add(p);
 
-                    var table = new Table(columns.Count);
+                    var table = new Table(headers.Count);
                     table.SetWidth(UnitValue.CreatePercentValue(100));
 
-                    columns.ForEach(x =>
+                    headers.ForEach(x =>
                     {
                         var header = new Cell();
                         header.Add(new Paragraph(x).SetBold().SetItalic());

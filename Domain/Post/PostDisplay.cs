@@ -16,8 +16,8 @@ namespace Domain.Post
 
         public string Sender { get; set; }
 
-        public string Recipient { get; set; } //field has no search! 
+        public string Recipient { get; set; } 
 
-        public string RecipientFirmId { get; set; } 
+        public string RecipientFirmId { get; set; } //has no UI column, only for search 
     }
 }

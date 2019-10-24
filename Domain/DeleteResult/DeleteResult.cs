@@ -27,7 +27,7 @@ namespace Domain.DeleteResult
             References.Add(new ExternalReference
             {
                 Count = count,
-                Name = type.GetDomainName()
+                Name = type.GetDisplayName()
             });
         }
 
