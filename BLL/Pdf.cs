@@ -46,7 +46,7 @@ namespace BLL
                     columns.ForEach(x =>
                     {
                         var header = new Cell();
-                        header.Add(new Paragraph(x));
+                        header.Add(new Paragraph(x).SetBold().SetItalic());
                         table.AddHeaderCell(header);
                     });
 

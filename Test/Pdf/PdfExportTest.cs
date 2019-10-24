@@ -21,9 +21,18 @@ namespace Test.Pdf
             new List<string>{"column 2 1", "column 2 2"},
         };
 
+        private string FileName => "test doc";
+
         [Test]
         public void Export()
         {
+            var fileInfo = new FileInfo(Path.Combine(Directory.GetCurrentDirectory(), $"{FileName}.pdf"));
+
+            if (fileInfo.Exists)
+            {
+                fileInfo.Delete();
+            }
+
             var file = BLL.Pdf.CreatePdf(_headrers, _data, "test doc", "pdfTest", "NUnit.Framework");
 
             var path = Path.Combine(Directory.GetCurrentDirectory(), file.Name);
