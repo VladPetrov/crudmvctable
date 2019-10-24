@@ -27,25 +27,7 @@ namespace BLL
         {
             return Repository.SaveFile(file, stream);
         }
-
-        public void UpsertTransactionFile(long transactionId, FileDomain domain, Stream stream)
-        {
-            var previewStream = Pdf.GetFirstPageStream(stream);
-
-            var previewDomain = new FileDomain
-            {
-                FileName = $"preview-{domain.FileName}",
-                ContentType = domain.ContentType
-            };
-
-            Repository.SaveFile(transactionId, domain, previewDomain, stream, previewStream);
-        }
-
-        public FileDomain GetFilePreviewByFileId(long fileId)
-        {
-            return Repository.GetFilePreviewByFileId(fileId);
-        }
-
+        
         public BinaryDataDomain GetBinary(long fileId)
         {
             return Repository.GetBinary(fileId);

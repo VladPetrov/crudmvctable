@@ -42,12 +42,6 @@ namespace ConsoleApp
 
             using (var transaction = context.Database.BeginTransaction())
             {
-                foreach (var project in context.Projects)
-                {
-                    project.Budget = project.Budget * 100;
-                    Log.Logger().Information("processed one item");
-                }
-
                 context.SaveChanges();
 
                 transaction.Commit();

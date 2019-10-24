@@ -22,7 +22,8 @@ namespace WebApp.Controllers
         [HttpPost]
         public JsonResult GetProjectsByEntities(long id)
         {
-            return FilterItems<Project>(id, x => x.Entities.Select(y => y.LeftLinkId).Contains(id));
+            throw new NotFiniteNumberException();
+            // return FilterItems<Project>(id, x => x.Entities.Select(y => y.LeftLinkId).Contains(id));
         }
 
         private JsonResult FilterItems<T>(long id, Expression<Func<T, bool>> predicate) where T : EntityBase

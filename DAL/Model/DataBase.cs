@@ -13,20 +13,8 @@ namespace DAL.Model
         {
         }
         public DbSet<Seed> Seeds { get; set; }
-        public DbSet<Message> Messages { get; set; }
-        public DbSet<Transaction> Transactions { get; set; }
-        public DbSet<TransactionTag> TransactionTags { get; set; }
-        public DbSet<Entity> Entities { get; set; }
-        public DbSet<Project> Projects { get; set; }
-        public DbSet<Category> Categories { get; set; }
-        public DbSet<SubCategory> SubCategories { get; set; }
         public DbSet<File> Files { get; set; }
         public DbSet<BinaryData> Binaries { get; set; }
-        public DbSet<FileUploadLog> FileUploadLogs { get; set; }
-        public DbSet<FileUploadLogError> FileUploadLogErrors { get; set; }
-        public DbSet<TransactionThroughEmailImportInfo> TransactionThroughEmailImportInfo { get; set; }
-        public DbSet<EntityProject> EntityProject { get; set; }
-        public DbSet<TransactionFiles> TransactionFiles { get; set; }
         public DbSet<Country> Countries { get; set; }
         public DbSet<ClientProfile> ClientProfiles { get; set; }
         public DbSet<ClientFirm> ClientFirms { get; set; }
@@ -39,21 +27,6 @@ namespace DAL.Model
         {
             base.OnModelCreating(builder);
 
-            builder.Entity<Transaction>()
-                .HasIndex(r => r.Iban);
-
-            builder.Entity<TransactionTag>()
-                .HasIndex(r => r.Text);
-
-            builder.Entity<TransactionFiles>()
-                .HasOne(x => x.File)
-                .WithOne()
-                .HasForeignKey<TransactionFiles>(x => x.FileId);
-
-            builder.Entity<TransactionFiles>()
-                .HasOne(x => x.FilePreview)
-                .WithOne()
-                .HasForeignKey<TransactionFiles>(x => x.FilePreviewId);
         }
 
         private bool _transactionInProgress = false; //todo obsolete code

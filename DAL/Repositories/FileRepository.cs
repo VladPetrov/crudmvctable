@@ -49,39 +49,6 @@ namespace DAL.Repositories
             }
         }
 
-        public void SaveFile(long transactionId, FileDomain domain, FileDomain domainPreview, Stream stream, Stream previewStream)
-        {
-            using (stream)
-            using (previewStream)
-            {
-                var file = Mapper.Map<File>(domain);
-                var filePreview = Mapper.Map<File>(domainPreview);
-
-                file.BinaryData = new BinaryData { Content = GetBytes(stream) };
-                filePreview.BinaryData = new BinaryData { Content = GetBytes(previewStream) };
-
-                Context.TransactionFiles.Add(new TransactionFiles
-                {
-                    TransactionId = transactionId,
-                    File = file,
-                    FilePreview = filePreview
-                });
-
-                Context.SaveChanges();
-            }
-        }
-
-        public FileDomain GetFilePreviewByFileId(long fileId)
-        {
-            var transactionFile = Context.TransactionFiles
-                .Include(x => x.FilePreview)
-                .First(x => x.FileId == fileId);
-
-            return transactionFile.FilePreview != null 
-                ? Mapper.Map<FileDomain>(transactionFile.FilePreview) 
-                : null;
-        }
-
         public BinaryDataDomain GetBinary(long fileId)
         {
             return Context.Binaries
