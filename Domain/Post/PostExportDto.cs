@@ -1,13 +1,27 @@
-﻿namespace Domain.Post
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+
+namespace Domain.Post
 {
     public class PostExportDto
     {
-        public string Date { get; set; }
+        public DateTime DeliveredDate { get; set; }
 
         public string Sender { get; set; }
 
-        public string Recipient { get; set; }
+        [Display(Name = "Recipient")]
+        public string RecipientFirm { get; set; }
 
-        public string Type { get; set; }
+        public LetterType Type { get; set; }
+
+        public string ClientName { get; set; }
+
+        public string StreetAndNumber { get; set; }
+
+        public string PostalCode { get; set; }
+
+        public string City { get; set; }
+
+        public string Country { get; set; }
     }
 }

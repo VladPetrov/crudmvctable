@@ -6,6 +6,7 @@ using Domain.Post;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Common;
 
 namespace BLL
 {
@@ -31,14 +32,24 @@ namespace BLL
 
             var type = typeof(PostExportDto);
 
-            headers.Add(type.GetProperty(nameof(PostExportDto.Date))?.GetType().GetDisplayName());
+            headers.Add(type.GetProperty(nameof(PostExportDto.DeliveredDate))?.GetType().GetDisplayName());
             headers.Add(type.GetProperty(nameof(PostExportDto.Sender))?.GetType().GetDisplayName());
-            headers.Add(type.GetProperty(nameof(PostExportDto.Recipient))?.GetType().GetDisplayName());
+            headers.Add(type.GetProperty(nameof(PostExportDto.RecipientFirm))?.GetType().GetDisplayName());
+            headers.Add("Address");
             headers.Add(type.GetProperty(nameof(PostExportDto.Type))?.GetType().GetDisplayName());
 
-            var dataInRows = data.Select(item => new List<string> {item.Date, item.Sender, item.Recipient, item.Type}).ToList();
+            var dataInRows = data.Select(item => new List<string>
+            {
+                item.DeliveredDate.ToString(DateTimeContext.DateFormat), 
+                item.Sender,
+                item.RecipientFirm,
+                GetAddress(item),
+                item.Type.GetDisplayName()
+            }).ToList();
 
             return (headers, dataInRows);
         }
+
+        private static string GetAddress(PostExportDto dto) => $"{dto.ClientName}, {dto.Country}, {dto.City}, {dto.StreetAndNumber}, {dto.PostalCode}";
     }
 }
