@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
 using JetBrains.Annotations;
 
@@ -43,16 +45,23 @@ namespace Common.Extensions
             return result;
         }
 
-        public static string NormalizeIban(this string iban)
+        [Pure]
+        [NotNull]
+        public static string ToFileName([NotNull] this string value)
         {
-            Defensive.AssertNotNull(iban, "Iban can not be null");
-
-            if (iban.Length > 10)
+            if (string.IsNullOrWhiteSpace(value))
             {
-                iban = iban.Substring(Math.Max(0, iban.Length - 10)); //get last 10 characters
+                throw new ArgumentException(nameof(value));
             }
 
-            return iban;
+            var fileName = Path.GetInvalidFileNameChars().Aggregate(value.Trim(), (result, symbol) => result.Replace(symbol.ToString(), ""));
+
+            if (string.IsNullOrWhiteSpace(fileName))
+            {
+                throw new Exception($"File name can not be empty: '{value}'");
+            }
+
+            return fileName;
         }
     }
 }
