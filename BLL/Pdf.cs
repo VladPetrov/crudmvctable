@@ -2,47 +2,52 @@
 using Common.Extensions;
 using Common.IO;
 using Domain.Files;
-using iTextSharp.text;
-using iTextSharp.text.pdf;
 using JetBrains.Annotations;
 using System.Collections.Generic;
+using iText.Kernel.Geom;
+using iText.Kernel.Pdf;
+using iText.Layout;
+using iText.Layout.Element;
+using iText.Layout.Properties;
 
 namespace BLL
 {
     public static class Pdf
     {
-        private static FileDownloadable CreatePdf([NotNull] List<string> columns, [NotNull] List<List<string>> rows, [NotNull] string title, [NotNull] string fileName, [NotNull] string author)
+        public static FileDownloadable CreatePdf([NotNull] List<string> columns, [NotNull] List<List<string>> rows, [NotNull] string title, [NotNull] string fileName, [NotNull] string author)
         {
             byte[] bytes;
 
             using (var stream = MemoryStreamManager.Manager.GetStream("CreatePdf"))
             {
-                using (var doc = new Document(PageSize.A4.Rotate()))
+                var writer = new PdfWriter(stream);
+                var pdf = new PdfDocument(writer);
+                
+
+                using (var doc = new Document(pdf, PageSize.A4.Rotate()))
                 {
-                    //Pdf Writer is closed when Document is closed
-                    var writer = PdfWriter.GetInstance(doc, stream);
-
-                    doc.Open();
-
                     Paragraph p;
 
-                    p = new Paragraph($"Title: {title}") {SpacingAfter = 10f};
+                    p = new Paragraph($"Title: {title}");
+                    p.SetMarginBottom(10f);
                     doc.Add(p);
 
-                    p = new Paragraph($"User: {author}") {SpacingAfter = 10f};
+                    p = new Paragraph($"User: {author}");
+                    p.SetMarginBottom(10f);
                     doc.Add(p);
 
-                    p = new Paragraph($"Export Date: {DateTimeContext.Now.ToLongDateString()}") {SpacingAfter = 20f};
+                    p = new Paragraph($"Export Date: {DateTimeContext.Now.ToLongDateString()}");
+                    p.SetMarginBottom(10f);
                     doc.Add(p);
 
-                    var table = new PdfPTable(columns.Count);
-                    table.HeaderRows = 1;
-                    table.WidthPercentage = 100f;
+                    var table = new Table(columns.Count);
+                    table.SetWidth(UnitValue.CreatePercentValue(100));
 
                     columns.ForEach(x =>
                     {
-                        var header = new PdfPCell(new Phrase(x)) {HorizontalAlignment = 1};
-                        table.AddCell(header);
+                        var header = new Cell();
+                        header.Add(new Paragraph(x));
+                        table.AddHeaderCell(header);
                     });
 
                     rows.ForEach(x => x.ForEach(y => table.AddCell(y)));
