@@ -1,8 +1,7 @@
 ﻿@using BLL
-@inject ScriptsResolveService Service
+@*@inject ScriptsResolveService Service*@
 
 @*@Html.RenderScriptTags(Service.GetChunks())*@
 @*@Html.RenderScriptTag(Service.GetScript("main"))*@
-<script src="~/js/scripts/vendors~pdfjsWorker.main.js"></script>
 <script src="~/js/scripts/vendors~main.main.js"></script>
 <script src="~/js/scripts/main.js" asp-append-version="true"></script>
