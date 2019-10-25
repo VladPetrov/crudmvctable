@@ -1,6 +1,6 @@
 ﻿import { TableService } from "../TableService/tableService";
 import { Subscription } from "rxjs";
-import { Xhr } from "../common";
+
 
 class ExportRequest
 {
@@ -74,61 +74,48 @@ export class PostExportService
     private sendRequest(): void
     {
         const request = this.createRequest();
+         
+        const xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() 
+        {
+            let filename = "export.pdf";
+            let disposition = xhttp.getResponseHeader('Content-Disposition');
 
-        // Xhr.requestJson('POST',
-        //     this.url,
-        //     request,
-        //     response =>
-        //     {
-                
-        //     });   
-        $.ajax({
-            type: "POST",
-            url: this.url,
-            data: JSON.stringify(request),
-            contentType: "application/json; charset=utf-8",
-            error: function(request, status, error){console.log(error)},
-            success: function(response, status, xhr) {
-                // check for a filename
-                var filename = "";
-                var disposition = xhr.getResponseHeader('Content-Disposition');
-                if (disposition && disposition.indexOf('attachment') !== -1) {
-                    var filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
-                    var matches = filenameRegex.exec(disposition);
-                    if (matches != null && matches[1]) filename = matches[1].replace(/['"]/g, '');
-                }
-        
-                var type = xhr.getResponseHeader('Content-Type');
-                var blob = new Blob([response], { type: type });
-        
-                if (typeof window.navigator.msSaveBlob !== 'undefined') {
-                    // IE workaround for "HTML7007: One or more blob URLs were revoked by closing the blob for which they were created. These URLs will no longer resolve as the data backing the URL has been freed."
-                    window.navigator.msSaveBlob(blob, filename);
-                } else {
-                    var URL = window.URL || (window as any).webkitURL;
-                    var downloadUrl = URL.createObjectURL(blob);
-        
-                    if (filename) {
-                        // use HTML5 a[download] attribute to specify filename
-                        var a = document.createElement("a");
-                        // safari doesn't support this yet
-                        if (typeof a.download === 'undefined') {
-                            window.location = downloadUrl;
-                        } else {
-                            a.href = downloadUrl;
-                            a.download = filename;
-                            document.body.appendChild(a);
-                            a.click();
-                        }
-                    } else {
-                        window.location = downloadUrl;
-                    }
-        
-                    setTimeout(function () { URL.revokeObjectURL(downloadUrl); }, 100); // cleanup
+            if (disposition && disposition.indexOf('attachment') !== -1) 
+            {
+                var filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
+                var matches = filenameRegex.exec(disposition);
+                if (matches != null && matches[1]) 
+                {
+                    filename = matches[1].replace(/['"]/g, '');
                 }
             }
-        });             
-    }
+                        
+            if (xhttp.readyState === 4 && xhttp.status === 200) 
+            {
+                const downloadUrl = window.URL.createObjectURL(xhttp.response);
+                let a = document.createElement('a');
+                a.href = downloadUrl;
+                a.download = filename;
+                a.style.display = 'none';
+                document.body.appendChild(a);
+                a.click();
+
+                setTimeout(function () 
+                { 
+                    URL.revokeObjectURL(downloadUrl);
+                    document.body.removeChild(a);
+                }, 100); // cleanup
+            }
+        };
+        
+        xhttp.open("POST", this.url);
+        xhttp.setRequestHeader("Content-Type", "application/json");
+        
+        xhttp.responseType = 'blob';
+        xhttp.send(JSON.stringify(request));
+    } 
+  
 
     private createRequest(): ExportRequest
     {
