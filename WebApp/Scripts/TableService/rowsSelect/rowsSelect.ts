@@ -34,7 +34,7 @@ export class CheckBoxContainer
         return this.checkBox.checked;
     }
 
-    public getRowId(): number
+    public getRowId(): number | string
     {
         return $(this.checkBox).closest('tr').data('id');
     }
@@ -42,7 +42,7 @@ export class CheckBoxContainer
 
 export class RowsSelectManager
 {
-    public onSelectedRows: Subject<number[]> = new Subject();
+    public onSelectedRows: Subject<(number|string)[]> = new Subject();
 
     private containers: CheckBoxContainer[] = [];
 
@@ -92,7 +92,7 @@ export class RowsSelectManager
     {
         if (this.doEmit)
         {
-            const ids: number[] = this.containers.filter(x => x.isSelected()).map(x => x.getRowId());
+            const ids: (number|string)[] = this.containers.filter(x => x.isSelected()).map(x => x.getRowId());
             this.onSelectedRows.next(ids);
         }
     }

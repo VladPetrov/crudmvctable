@@ -14,7 +14,7 @@
     <None Remove="Scripts\common\stringConstants.ts" />
     <None Remove="Scripts\dragAndDropFileUploader.ts" />
     <None Remove="Scripts\dropdownService.ts" />
-    <None Remove="Scripts\EditProjectAndCategoryService\editProjectAndCategoryService.ts" />
+    <None Remove="Scripts\PostExportService\PostExportService.ts" />
     <None Remove="Scripts\EndBalanceService\endBalanceService.ts" />
     <None Remove="Scripts\filesPreviewService\filesPreviewService.ts" />
     <None Remove="Scripts\FormScripts\formScripts.ts" />
@@ -74,7 +74,7 @@
     <TypeScriptCompile Include="Scripts\common\stringConstants.ts" />
     <TypeScriptCompile Include="Scripts\dragAndDropFileUploader\dragAndDropFileUploader.ts" />
     <TypeScriptCompile Include="Scripts\dropdownService\dropdownService.ts" />
-    <TypeScriptCompile Include="Scripts\EditProjectAndCategoryService\editProjectAndCategoryService.ts" />
+    <TypeScriptCompile Include="Scripts\PostExportService\PostExportService.ts" />
     <TypeScriptCompile Include="Scripts\EndBalanceService\endBalanceService.ts" />
     <TypeScriptCompile Include="Scripts\filesPreviewService\filesPreviewService.ts" />
     <TypeScriptCompile Include="Scripts\FormScripts\formScripts.ts" />

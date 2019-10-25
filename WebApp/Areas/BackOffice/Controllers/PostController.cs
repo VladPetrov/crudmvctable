@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using BLL.Infrastructure;
+﻿using BLL.Infrastructure;
 using Common.StringConstants;
 using Domain.Post;
 using Microsoft.AspNet.Identity;
@@ -25,6 +24,7 @@ namespace WebApp.Areas.BackOffice.Controllers
 
         protected override int ItemsPerPage => 100;
 
+        [HttpPost]
         public IActionResult Export([FromBody] PostExportRequest request)
         {
             var pdfFile = ExportService.ExportPost(request.Ids, User.Identity.GetUserName());

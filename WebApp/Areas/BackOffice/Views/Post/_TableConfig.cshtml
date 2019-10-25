@@ -20,6 +20,11 @@
         .AddColumn(x => x.Status)
         .AddColumn(x => x.RegisteredBy)
         .AddRowsSelect()
+        .QuickMenuAddButton(
+            null,
+            "Export Post", 
+            MetronicColor.primary,
+            "exportPost")
         .Build();
 }
 
