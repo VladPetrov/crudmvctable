@@ -5,6 +5,7 @@ namespace Domain.Post
 {
     public class PostExportDto
     {
+        [Display(Name = "Date")]
         public DateTime DeliveredDate { get; set; }
 
         public string Sender { get; set; }

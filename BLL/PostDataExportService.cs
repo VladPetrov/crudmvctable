@@ -32,11 +32,11 @@ namespace BLL
 
             var type = typeof(PostExportDto);
 
-            headers.Add(type.GetProperty(nameof(PostExportDto.DeliveredDate))?.GetType().GetDisplayName());
-            headers.Add(type.GetProperty(nameof(PostExportDto.Sender))?.GetType().GetDisplayName());
-            headers.Add(type.GetProperty(nameof(PostExportDto.RecipientFirm))?.GetType().GetDisplayName());
+            headers.Add(type.GetProperty(nameof(PostExportDto.DeliveredDate))?.GetDisplayName());
+            headers.Add(type.GetProperty(nameof(PostExportDto.Sender))?.GetDisplayName());
+            headers.Add(type.GetProperty(nameof(PostExportDto.RecipientFirm))?.GetDisplayName());
             headers.Add("Address");
-            headers.Add(type.GetProperty(nameof(PostExportDto.Type))?.GetType().GetDisplayName());
+            headers.Add(type.GetProperty(nameof(PostExportDto.Type))?.GetDisplayName());
 
             var dataInRows = data.Select(item => new List<string>
             {
