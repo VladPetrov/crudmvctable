@@ -42,33 +42,36 @@ export class PostExportService
         this.$editButton.prop("disabled", true);
         this.url = url;
         
+        this.setEnabledDisabledButtonState();
+
         this.subscription = service.rowsSelectManager.onSelectedRows.subscribe(ids =>
         {
             this.ids = ids;
 
-            if (this.ids && this.ids.length)
-            {
-                this.$editButton.prop("disabled", false);
-            } else
-            {
-                this.$editButton.prop("disabled", true);
-            }
+            this.setEnabledDisabledButtonState();
         });
 
         this.$editButton.click(e =>
         {
-            this.doExport();
+            if (!(this.ids && this.ids.length))
+            {
+                return;
+            }
+
+            this.sendRequest();
         });
     }
 
-    private doExport(): void
+    private setEnabledDisabledButtonState():void
     {
-        if (!(this.ids && this.ids.length))
+        if (this.ids && this.ids.length)
         {
-            return;
+            this.$editButton.removeClass("disabled");
+        } 
+        else
+        {
+            this.$editButton.addClass("disabled");
         }
-
-        this.sendRequest();
     }
 
     private sendRequest(): void
