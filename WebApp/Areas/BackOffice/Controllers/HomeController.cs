@@ -6,7 +6,7 @@ namespace WebApp.Areas.BackOffice.Controllers
     {
         public IActionResult Index()
         {
-            return Content("works");
+            return RedirectToAction("Index", "Post");
         }
     }
 }

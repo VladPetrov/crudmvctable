@@ -1,7 +1,7 @@
 ﻿<div id="m_ver_menu" class="m-aside-menu  m-aside-menu--skin-dark m-aside-menu--submenu-skin-dark m-aside-menu--dropdown" data-menu-vertical="true" m-menu-dropdown="1" m-menu-scrollable="0" m-menu-dropdown-timeout="500">
     <ul class="m-menu__nav  m-menu__nav--dropdown-submenu-arrow ">
         <li class="m-menu__item  m-menu__item--active" aria-haspopup="true">
-            <a asp-area="" asp-controller="Transactions" asp-action="Index" class="m-menu__link ">
+            <a asp-area="BackOffice" asp-controller="Home" asp-action="Index" class="m-menu__link ">
                 <span class="m-menu__item-here"></span>
                 <i class="m-menu__link-icon flaticon-line-graph"></i>
                 <span class="m-menu__link-text">Dashboard</span>
@@ -19,10 +19,17 @@
                 <span class="m-menu__arrow"></span>
                 <ul class="m-menu__subnav">
                     <li class="m-menu__item " aria-haspopup="true" m-menu-link-redirect="1">
-                        <a asp-area="" asp-controller="ImportTransactions" asp-action="Index" class="m-menu__link ">
+                        <a asp-area="BackOffice" asp-controller="Post" asp-action="Index" class="m-menu__link ">
                             <i class="m-menu__link-icon flaticon-cart">
                                 <span></span>
-                            </i><span class="m-menu__link-text">Import Transactions</span>
+                            </i><span class="m-menu__link-text">Manage Post</span>
+                        </a>
+                    </li>
+                    <li class="m-menu__item " aria-haspopup="true" m-menu-link-redirect="1">
+                        <a asp-area="BackOffice" asp-controller="Clients" asp-action="Index" class="m-menu__link ">
+                            <i class="m-menu__link-icon flaticon-coins">
+                                <span></span>
+                            </i><span class="m-menu__link-text">Manage Clients</span>
                         </a>
                     </li>
                 </ul>
@@ -86,24 +93,10 @@
                         </span>
                     </li>
                     <li class="m-menu__item " aria-haspopup="true" m-menu-link-redirect="1">
-                        <a asp-area="" asp-controller="Entities" asp-action="Index" class="m-menu__link ">
+                        <a asp-area="BackOffice" asp-controller="Employees" asp-action="Index" class="m-menu__link ">
                             <i class="m-menu__link-bullet m-menu__link-bullet--dot">
                                 <span></span>
-                            </i><span class="m-menu__link-text">Entities</span>
-                        </a>
-                    </li>
-                    <li class="m-menu__item " aria-haspopup="true" m-menu-link-redirect="1">
-                        <a asp-area="" asp-controller="Projects" asp-action="Index" class="m-menu__link ">
-                            <i class="m-menu__link-bullet m-menu__link-bullet--dot">
-                                <span></span>
-                            </i><span class="m-menu__link-text">Projects</span>
-                        </a>
-                    </li>
-                    <li class="m-menu__item " aria-haspopup="true" m-menu-link-redirect="1">
-                        <a asp-area="" asp-controller="Categories" asp-action="Index" class="m-menu__link ">
-                            <i class="m-menu__link-bullet m-menu__link-bullet--dot">
-                                <span></span>
-                            </i><span class="m-menu__link-text">Categories</span>
+                            </i><span class="m-menu__link-text">Manage Employees</span>
                         </a>
                     </li>
                 </ul>
