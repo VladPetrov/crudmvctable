@@ -4,6 +4,7 @@ using System.Text;
 using BLL.Infrastructure;
 using Domain;
 using Domain.Inbox;
+using Domain.Post;
 
 namespace BLL
 {
@@ -38,7 +39,25 @@ namespace BLL
 
         public List<LetterInfo> GetLetters(string firmId, string userId)
         {
-            return null;
+            return new List<LetterInfo>
+            {
+                new LetterInfo
+                {
+                    DeliveredDate = DateTime.Today,
+                    Recipient = "some address",
+                    Sender = "Canada",
+                    Type = LetterType.Letter,
+                    Note = "slkjdflkd ldskf dfsgfkj sdfg "
+                },
+
+                new LetterInfo
+                {
+                    DeliveredDate = DateTime.Today.AddDays(-5),
+                    Recipient = "som other address",
+                    Sender = "USA",
+                    Type = LetterType.LetterFirstClass
+                }
+            };
         }
     }
 }

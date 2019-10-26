@@ -26,8 +26,7 @@ namespace WebApp.Areas.Client.Controllers
         [HttpGet]
         public IActionResult FirmInbox(string firmId)
         {
-            //return PartialView(Service.GetLetters(firmId, User.Identity.GetUserId()));
-            return Content("rt");
+            return PartialView(Service.GetLetters(firmId, User.Identity.GetUserId()));
         }
     }
 }
