@@ -1,6 +1,7 @@
 ﻿using Common.Configuration;
+using DAL.Infrastructure;
 using DAL.Model;
-using Domain;
+using Domain.Client;
 using System;
 using System.Collections.Generic;
 
@@ -8,75 +9,42 @@ namespace DAL.DbManagers.Seeds
 {
     public class ClientsSeed : AbstractSeed
     {
-        public ClientsSeed(DataBase context) : base(context, SeedType.TestData, 1)
+        private IClientRepository Repository { get; }
+
+        public ClientsSeed(DataBase context, IClientRepository repository) : base(context, SeedType.TestData, 1)
         {
+            Repository = repository;
         }
 
         protected override void DoSeed()
         {
-            Context.Users.AddRange(
-                new List<ApplicationUser>
+            GetUsers().ForEach(u => Repository.Upsert(u));
+        }
+
+        private List<ClientDomain> GetUsers()
+        {
+            return new List<ClientDomain>
                 {
-                    new ApplicationUser
+                    new ClientDomain
                     {
-                        UserType = UserType.Client,
                         Email = "test@test.com",
-                        UserName = "test@test.com",
-                        NormalizedUserName = "test@test.com".ToUpper(),
-                        ClientProfile = new ClientProfile
-                        {
-                            Balance = 10000,
-                            ContractStartDate = DateTime.Now,
-                            ContractEndDate = DateTime.Now.AddMonths(1),
-                            DefaultFirmName = "Google s.r.o.",
-
-                            Firms = new List<ClientFirm>
-                            {
-                                new ClientFirm
-                                {
-                                    Name = "APLOT s.r.o.",
-                                    Enabled = true,
-                                },
-
-                                new ClientFirm
-                                {
-                                    Name = "Demian Spavik – DamSi",
-                                    Enabled = true,
-                                },
-                            }
-                        }
+                        DefaultFirmName = "Google s.r.o.",
+                        PhoneNumber = "123456",
+                        Balance = 8000,
+                        ContractStartDate = DateTime.Now,
+                        ContractEndDate = DateTime.Now.AddDays(2)
                     },
 
-                    new ApplicationUser
+                    new ClientDomain
                     {
-                        UserType = UserType.Client,
-                        Email = "someEmail@gmail.com",
-                        UserName = "someEmail@gmail.com",
-                        NormalizedUserName = "someEmail@gmail.com".ToUpper(),
-                        ClientProfile = new ClientProfile
-                        {
-                            Balance = 80000,
-                            ContractStartDate = DateTime.Now.AddMonths(-2),
-                            ContractEndDate = DateTime.Now.AddMonths(-1),
-                            DefaultFirmName = "Amazon s.r.o.",
-
-                            Firms = new List<ClientFirm>
-                            {
-                                new ClientFirm
-                                {
-                                    Name = "RYNA s.r.o.",
-                                    Enabled = true,
-                                },
-
-                                new ClientFirm
-                                {
-                                    Name = "Aleshcheva, Anastasia",
-                                    Enabled = true,
-                                },
-                            }
-                        }
+                        Email = "Vlado@test.com",
+                        DefaultFirmName = "Amazon s.r.o.",
+                        PhoneNumber = "888 888 3452",
+                        Balance = 100000,
+                        ContractStartDate = DateTime.Now,
+                        ContractEndDate = DateTime.Now.AddDays(20)
                     },
-                });
+                };
         }
     }
 }

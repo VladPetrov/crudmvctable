@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System;
+using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Common.Exceptions;
 using Common.StringConstants;
@@ -19,6 +20,8 @@ namespace DAL.Repositories
     public class ClientRepository : BaseRepository<DataBase, string>, IClientRepository
     {
         private AppsUserManager UserManager { get; }
+
+        private static readonly object UpsertLockObject = new object();
 
         public ClientRepository(DataBase context, AppsUserManager userManager) : base(context)
         {
@@ -52,45 +55,71 @@ namespace DAL.Repositories
 
         public UpsertResult<ClientDomain> Upsert(ClientDomain domain)
         {
-            var client = domain.IsNew ? ApplicationUser.CreateClient()
-                : UserManager
-                    .Users
-                    .Where(x => x.Id == domain.Id)
-                    .Include(x => x.ClientProfile)
-                    .Include(x => x.ClientProfile.Firms)
-                    .Single();
+            lock (UpsertLockObject)
+            {
+                var client = domain.IsNew ? ApplicationUser.CreateClient()
+                    : UserManager
+                        .Users
+                        .Where(x => x.Id == domain.Id)
+                        .Include(x => x.ClientProfile)
+                        .Include(x => x.ClientProfile.Firms)
+                        .Single();
 
-            var defaultFirmNameWasChanged = !domain.IsNew && domain.DefaultFirmName != client.ClientProfile.DefaultFirmName;
+                var defaultFirmNameWasChanged = !domain.IsNew && domain.DefaultFirmName != client.ClientProfile.DefaultFirmName;
             
-            Mapper.Map(domain, client);
+                Mapper.Map(domain, client);
 
-            IdentityResult result = null;
+                IdentityResult result = null;
 
-            if (domain.IsNew)
-            {
-                client.ClientProfile.Firms.Add(ClientFirm.CreateDefaultFirm(domain.DefaultFirmName)); //create default firm
-
-                result = UserManager.CreateAsync(client).Result;
-            }
-            else
-            {
-                if (defaultFirmNameWasChanged)
+                if (domain.IsNew)
                 {
-                    client.ClientProfile.Firms.Single(x => x.FirmType == FirmType.Default).Name =
-                        domain.DefaultFirmName; //create default firm
+                    if (!FirmNameIsUnique(domain.DefaultFirmName))
+                    {
+                        return UpsertResult<ClientDomain>.Error($"Firm name '{domain.DefaultFirmName}' already exists");
+                    }
+                
+                    client.ClientProfile.Firms.Add(ClientFirm.CreateDefaultFirm(domain.DefaultFirmName)); //create default firm
+
+                    result = UserManager.CreateAsync(client).Result;
+                }
+                else
+                {
+                    if (defaultFirmNameWasChanged)
+                    {
+                        var defaultFirm = client.ClientProfile.Firms.Single(x => x.FirmType == FirmType.Default);
+                    
+                        if (!FirmNameIsUnique(domain.DefaultFirmName, defaultFirm.Id))
+                        {
+                            return UpsertResult<ClientDomain>.Error($"Firm name '{domain.DefaultFirmName}' already exists");
+                        }
+
+                        defaultFirm.Name = domain.DefaultFirmName; //update default firm
+                    }
+
+                    result = UserManager.UpdateAsync(client).Result;
                 }
 
-                result = UserManager.UpdateAsync(client).Result;
-            }
-
-            if (result.Succeeded)
-            {
-                UserManager.AddToRoleAsync(client, RoleNames.Client).Wait();
+                if (result.Succeeded)
+                {
+                    UserManager.AddToRoleAsync(client, RoleNames.Client).Wait();
                 
-                return UpsertResult<ClientDomain>.Ok(GetById(client.Id));
-            }
+                    return UpsertResult<ClientDomain>.Ok(GetById(client.Id));
+                }
 
-            return UpsertResult<ClientDomain>.Error(string.Join(" ", result.Errors.Select(x => x.Description)));
+                return UpsertResult<ClientDomain>.Error(string.Join(" ", result.Errors.Select(x => x.Description)));
+            }
+        }
+
+        private bool FirmNameIsUnique(string firmName, string excludeFirmId = null)
+        {
+            var query = Context.ClientFirms.AsQueryable();
+
+            if (excludeFirmId != null)
+            {
+                query = query.Where(x => x.Id != excludeFirmId);
+            }
+            
+            return query.All(x => !string.Equals(x.Name, firmName, StringComparison.InvariantCultureIgnoreCase));
         }
 
         public DeleteResult Delete(string id)
