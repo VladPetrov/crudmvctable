@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
+using DAL.Model;
 
 namespace DAL.Extensions
 {
@@ -22,6 +23,18 @@ namespace DAL.Extensions
             {
                 context.Remove(obj);
             }
+        }
+
+        public static bool FirmNameIsUnique(this DataBase context, string firmName, string excludeFirmId = null)
+        {
+            var query = context.ClientFirms.AsQueryable();
+
+            if (excludeFirmId != null)
+            {
+                query = query.Where(x => x.Id != excludeFirmId);
+            }
+
+            return query.All(x => !string.Equals(x.Name, firmName, StringComparison.InvariantCultureIgnoreCase));
         }
     }
 }
