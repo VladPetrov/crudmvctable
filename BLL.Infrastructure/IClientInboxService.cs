@@ -1,9 +1,5 @@
-﻿using System;
+﻿using Domain.Inbox;
 using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Text;
-using Domain;
-using Domain.Inbox;
 
 namespace BLL.Infrastructure
 {
@@ -12,5 +8,7 @@ namespace BLL.Infrastructure
         FirmsInfo GetFirms(string userId);
 
         List<LetterInfo> GetLetters(string firmId, string userId);
+
+        List<LetterInfo> GetForwarded(string userId);
     }
 }

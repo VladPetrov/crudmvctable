@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using BLL.Infrastructure;
+﻿using BLL.Infrastructure;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -27,6 +23,12 @@ namespace WebApp.Areas.Client.Controllers
         public IActionResult FirmInbox(string firmId)
         {
             return PartialView(Service.GetLetters(firmId, User.Identity.GetUserId()));
+        }
+
+        [HttpGet]
+        public IActionResult Forwarded()
+        {
+            return View(Service.GetForwarded(User.Identity.GetUserId()));
         }
     }
 }

@@ -59,5 +59,28 @@ namespace BLL
                 }
             };
         }
+
+        public List<LetterInfo> GetForwarded(string userId)
+        {
+            return new List<LetterInfo>
+            {
+                new LetterInfo
+                {
+                    DeliveredDate = DateTime.Today,
+                    Recipient = "some address",
+                    Sender = "Canada",
+                    Type = LetterType.Letter,
+                    Note = "slkjdflkd ldskf dfsgfkj sdfg "
+                },
+
+                new LetterInfo
+                {
+                    DeliveredDate = DateTime.Today.AddDays(-5),
+                    Recipient = "som other address",
+                    Sender = "USA",
+                    Type = LetterType.LetterFirstClass
+                }
+            };
+        }
     }
 }
