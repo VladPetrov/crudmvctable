@@ -8,7 +8,7 @@
 @Html.AntiForgeryToken()
 @Html.Hidden(nameof(IDomain<long>.Id), Model.GetId())
 @Html.HiddenFor(x => x.RowVersion)
-
+@Html.HiddenFor(x => x.CreatedDate)
 
 @foreach (var itemDescriptor in descriptor.Items)
 {
