@@ -49,7 +49,7 @@ namespace Configuration.IoC
             Container.Register<ISeed, BasicSeed>(nameof(BasicSeed));
             Container.Register<ISeed, ClientsSeed>(nameof(ClientsSeed));
             Container.Register<ISeed, FirmSeed>(nameof(FirmSeed));
-            //Container.Register<ISeed, PostSeed>(nameof(PostSeed));
+            Container.Register<ISeed, PostSeed>(nameof(PostSeed));
 
             Container.Register<AppsUserManager>();
         }
