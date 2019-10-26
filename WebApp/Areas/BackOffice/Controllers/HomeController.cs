@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WebApp.Extensions;
 
 namespace WebApp.Areas.BackOffice.Controllers
 {
@@ -6,7 +7,7 @@ namespace WebApp.Areas.BackOffice.Controllers
     {
         public IActionResult Index()
         {
-            return RedirectToAction("Index", "Post");
+            return RedirectToAction(nameof(PostController.Index), nameof(PostController).ToControllerName());
         }
     }
 }

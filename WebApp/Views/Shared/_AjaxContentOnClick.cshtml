@@ -10,18 +10,30 @@
 
 
 <script>
-    $('#@Model.ClickObjectId').click(function() 
     {
-        $.ajax({
-            type: "GET",
-            url: '@Model.Url',
-            data: '',
-            contentType: "application/json; charset=utf-8",
-            dataType: "HTML",
-            success: response =>
-            {
-                $(`#@id`).html(response);
-            }
+        if (@Model.LoadOnInit)
+        {
+            loadFunc();
+        }
+        
+        $('#@Model.ClickObjectId').click(function ()
+        {
+            loadFunc();
         });
-    })
+
+        function loadFunc()
+        {
+            $.ajax({
+                type: "GET",
+                url: '@Model.Url',
+                data: '',
+                contentType: "application/json; charset=utf-8",
+                dataType: "HTML",
+                success: response =>
+                {
+                    $(`#@id`).html(response);
+                }
+            });
+        }
+    }
 </script>

@@ -45,6 +45,7 @@ namespace Configuration.IoC
             Container.Register<IClientFirmService, ClientFirmService>();
             Container.Register<IProfileSettingsService, ProfileSettingsServiceTr>();
             Container.Register<IPostService, PostService>();
+            Container.Register<IClientInboxService, ClientInboxService>();
 
             Container.Register<ISeed, BasicSeed>(nameof(BasicSeed));
             Container.Register<ISeed, ClientsSeed>(nameof(ClientsSeed));
