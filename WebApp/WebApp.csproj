@@ -44,6 +44,8 @@
   <ItemGroup>
     <Folder Include="Areas\BackOffice\Data\" />
     <Folder Include="Areas\BackOffice\Models\" />
+    <Folder Include="Areas\Client\Data\" />
+    <Folder Include="Areas\Client\Models\" />
     <Folder Include="Logs\" />
     <Folder Include="wwwroot\js\scripts\" />
     <Folder Include="wwwroot\lib\pdf-js\" />

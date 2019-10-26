@@ -1,6 +1,3 @@
-using Common;
-using Common.StringConstants;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -10,7 +7,7 @@ namespace WebApp.Controllers
     {
         public IActionResult Index()
         {
-            return RedirectToAction("Index", "Transactions");
+            return RedirectToAction("Index", "Post", new{Area = "BackOffice"});
         }
     }
 }
