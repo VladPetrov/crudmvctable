@@ -1,0 +1,23 @@
+﻿@using Common
+@using Domain.Inbox
+@model List<LetterInfo>
+
+<table class="table table-striped m-table">
+    <tr>
+        <th>@Html.LabelFor(x => Model[0].DeliveredDate)</th>
+        <th>@Html.LabelFor(x => Model[0].Sender)</th>
+        <th>@Html.LabelFor(x => Model[0].Recipient)</th>
+        <th>@Html.LabelFor(x => Model[0].Type)</th>
+        <th>@Html.LabelFor(x => Model[0].Note)</th>
+    </tr>
+    @foreach (var info in Model)
+    {
+        <tr>
+            <td>@info.DeliveredDate.ToString(DateTimeContext.DateFormat)</td>
+            <td>@Html.DisplayFor(x => info.Sender)</td>
+            <td>@Html.DisplayFor(x => info.Recipient)</td>
+            <td>@Html.DisplayFor(x => info.Type)</td>
+            <td>@Html.DisplayFor(x => info.Note)</td>
+        </tr>
+    }
+</table>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;
+using Common;
 using Common.Extensions;
 using Microsoft.AspNetCore.Html;
 
@@ -27,7 +28,7 @@ namespace WebApp.Model.TableRenders.Renders
             }
             else if (model is DateTime d)
             {
-                content = $"<div class=\"display-label\">{d:dd.MM.yyyy}</div>";
+                content = $"<div class=\"display-label\">{d.ToString(DateTimeContext.DateFormat)}</div>";
             }
             else if (model.GetType().IsEnum)
             {
