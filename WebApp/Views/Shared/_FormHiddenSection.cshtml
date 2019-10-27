@@ -1,0 +1,8 @@
+﻿@using Common
+@using Domain
+@model IDomain
+
+@Html.AntiForgeryToken()
+@Html.Hidden(nameof(IDomain<long>.Id), Model.GetId())
+@Html.Hidden(nameof(IDomain<long>.CreatedDate), Model.CreatedDate.ToString(DateTimeContext.DateFormat))
+@Html.HiddenFor(x => x.RowVersion)

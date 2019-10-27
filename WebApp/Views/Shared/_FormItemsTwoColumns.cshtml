@@ -5,10 +5,7 @@
     var descriptor = Html.GetFormDescriptor();
 }
 
-@Html.AntiForgeryToken()
-@Html.Hidden(nameof(IDomain<long>.Id), Model.GetId())
-@Html.HiddenFor(x => x.RowVersion)
-@Html.HiddenFor(x => x.CreatedDate)
+<partial name="_FormHiddenSection"/>
 
 @for (var i = 0; i < descriptor.Items.Count; i += 2)
 {
