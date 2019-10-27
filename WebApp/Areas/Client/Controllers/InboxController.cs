@@ -18,6 +18,7 @@ namespace WebApp.Areas.Client.Controllers
         }
         
         [HttpGet]
+        [Route("Inbox")]
         public IActionResult Index()
         {
             ViewData.SetPageTitle(InboxTitle);
@@ -32,6 +33,7 @@ namespace WebApp.Areas.Client.Controllers
         }
 
         [HttpGet]
+        [Route("Forwarded")]
         public IActionResult Forwarded()
         {
             ViewData.SetPageTitle(ForwardedTitle);
