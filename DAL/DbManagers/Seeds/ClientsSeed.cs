@@ -6,19 +6,22 @@ using System;
 using System.Collections.Generic;
 using Common.StringConstants;
 using DAL.Repositories;
+using Domain;
+using Domain.ProfileSettings;
 
 namespace DAL.DbManagers.Seeds
 {
     public class ClientsSeed : AbstractSeed
     {
         private IClientRepository Repository { get; }
-
         private AppsUserManager UserManager { get; }
+        private IProfileSettingsRepository SettingsRepository { get; }
 
-        public ClientsSeed(DataBase context, IClientRepository repository, AppsUserManager userManager) : base(context, SeedType.TestData, 1)
+        public ClientsSeed(DataBase context, IClientRepository repository, AppsUserManager userManager, IProfileSettingsRepository settingsRepository) : base(context, SeedType.TestData, 1)
         {
             Repository = repository;
             UserManager = userManager;
+            SettingsRepository = settingsRepository;
         }
 
         protected override void DoSeed()
@@ -26,6 +29,22 @@ namespace DAL.DbManagers.Seeds
             GetUsers().ForEach(u => Repository.Upsert(u));
 
             SetPasswordForTestClient();
+            SetAddressForTestClient();
+        }
+
+        private void SetAddressForTestClient()
+        {
+            var user = UserManager.FindByEmailAsync(Constants.TestClient).Result;
+
+            SettingsRepository.UpsertDeliveryAddress(new DeliveryAddressDomain
+            {
+                Id = user.Id,
+                City = "Bratislava",
+                Country = new ValueObject { Id = 33},
+                Name = "Vlado",
+                PostalCode = "18 104",
+                StreetAndNumber = "Prievozska 84"
+            });
         }
 
         private List<ClientDomain> GetUsers()

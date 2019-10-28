@@ -16,21 +16,21 @@
                     <div class="m-section__content">
                         <ul class="nav nav-tabs" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link active show" data-toggle="tab" href="#" id="tab-@Model.DefaultFirm.Id" data-target="#@Model.DefaultFirm.Id">
+                                <a class="nav-link active show" data-toggle="tab" href="#" id="tab-@Model.DefaultFirm.Id" data-target="#target-@Model.DefaultFirm.Id">
                                     <h5>@Model.DefaultFirm.Name</h5>
                                 </a>
                             </li>
                             @foreach (var firm in Model.AdditionalFirms)
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link" data-toggle="tab" href="#" id="tab-@firm.Id" data-target="#@firm.Id">
+                                    <a class="nav-link" data-toggle="tab" href="#" id="tab-@firm.Id" data-target="#target-@firm.Id">
                                         <h5>@firm.Name</h5>
                                     </a>
                                 </li>
                             }
                         </ul>
                         <div class="tab-content">
-                            <div class="tab-pane active show" id="@Model.DefaultFirm.Id" role="tabpanel">
+                            <div class="tab-pane active show" id="target-@Model.DefaultFirm.Id" role="tabpanel">
                                 @{
                                     var contentModel = new AjaxContentOnClickViewModel(buildUrl(Model.DefaultFirm.Id), $"tab-{Model.DefaultFirm.Id}", true);
                                 }
@@ -40,7 +40,7 @@
                             {
                                 contentModel = new AjaxContentOnClickViewModel(buildUrl(firm.Id), $"tab-{firm.Id}");
 
-                                <div class="tab-pane" id="@firm.Id" role="tabpanel">
+                                <div class="tab-pane" id="target-@firm.Id" role="tabpanel">
                                     <partial name="_AjaxContentOnClick" , model="@contentModel"/>
                                 </div>
                             }

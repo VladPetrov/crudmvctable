@@ -46,7 +46,6 @@ namespace BLL
                 .Where(x => x.ProfileId == userId && x.Id == firmId)
                 .SelectMany(x => x.Post)
                 .Where(x => x.Status == LetterStatus.New)
-                .Take(5)
                 .ProjectTo<PostDto>()
                 .ToList()
                 .Select(x => new LetterInfo

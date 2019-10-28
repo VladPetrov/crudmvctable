@@ -4,7 +4,7 @@
     var id = Guid.NewGuid().ToString();
 }
 
-<div id="@id">
+<div id="container-@id">
 
 </div>
 
@@ -18,7 +18,7 @@
         dataType: "HTML",
         success: response =>
         {
-            $(`#@id`).html(response);
+            $(`#container-@id`).html(response);
         }
     });
 </script>

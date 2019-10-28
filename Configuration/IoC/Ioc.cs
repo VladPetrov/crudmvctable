@@ -43,7 +43,7 @@ namespace Configuration.IoC
             Container.Register<ScriptsResolveService, ScriptsResolveService>();
             Container.Register<IClientService, ClientService>();
             Container.Register<IClientFirmService, ClientFirmService>();
-            Container.Register<IProfileSettingsService, ProfileSettingsServiceTr>();
+            Container.Register<IProfileSettingsRepository, ProfileSettingsRepository>();
             Container.Register<IPostService, PostService>();
             Container.Register<IClientInboxService, ClientInboxService>();
 

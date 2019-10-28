@@ -24,7 +24,7 @@
                 return null;
             }
             
-            return $"{ClientName}, {Country}, {City}, {StreetAndNumber}, {PostalCode}";
+            return $"{ClientName}, {Country.Substring(3)}, {City}, {StreetAndNumber}, {PostalCode}";
         }
 
         private bool IsOrEmpty(string str)

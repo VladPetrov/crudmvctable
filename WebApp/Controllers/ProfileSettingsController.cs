@@ -4,6 +4,7 @@ using Domain.ProfileSettings;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
+using DAL.Infrastructure;
 using Microsoft.AspNet.Identity;
 using WebApp.Extensions;
 using IdentityResult = Microsoft.AspNetCore.Identity.IdentityResult;
@@ -15,12 +16,12 @@ namespace WebApp.Controllers
     [Route("[controller]/[action]/{userId}/{isReadonly}")]
     public class ProfileSettingsController : MvcController
     {
-        private IProfileSettingsService Service { get; }
+        private IProfileSettingsRepository Repository { get; }
         private AppsUserManager UserManager { get; }
 
-        public ProfileSettingsController(IProfileSettingsService service, AppsUserManager userManager)
+        public ProfileSettingsController(IProfileSettingsRepository repository, AppsUserManager userManager)
         {
-            Service = service;
+            Repository = repository;
             UserManager = userManager;
         }
 
@@ -29,7 +30,7 @@ namespace WebApp.Controllers
         {
             SetReadonlyModeForView(isReadonly);
 
-            return PartialView(Service.GetNotificationSettings(userId));
+            return PartialView(Repository.GetNotificationSettings(userId));
         }
 
         [HttpPost]
@@ -42,7 +43,7 @@ namespace WebApp.Controllers
                 return PartialView(model);
             }
 
-            var result = Service.UpsertNotificationSettings(model);
+            var result = Repository.UpsertNotificationSettings(model);
 
             if (result.Success)
             {
@@ -57,7 +58,7 @@ namespace WebApp.Controllers
         {
             SetReadonlyModeForView(isReadonly);
 
-            return PartialView(Service.GetDeliveryAddress(userId));
+            return PartialView(Repository.GetDeliveryAddress(userId));
         }
 
         [HttpPost]
@@ -70,7 +71,7 @@ namespace WebApp.Controllers
                 return PartialView(model);
             }
 
-            var result = Service.UpsertDeliveryAddress(model);
+            var result = Repository.UpsertDeliveryAddress(model);
 
             if (result.Success)
             {
@@ -85,7 +86,7 @@ namespace WebApp.Controllers
         {
             SetReadonlyModeForView(isReadonly);
 
-            return PartialView(Service.GetAuthorizedPersonsSettings(userId));
+            return PartialView(Repository.GetAuthorizedPersonsSettings(userId));
         }
 
         [HttpPost]
@@ -99,7 +100,7 @@ namespace WebApp.Controllers
                 return PartialView(model);
             }
 
-            var result = Service.UpsertAuthorizedPersonsSettings(model);
+            var result = Repository.UpsertAuthorizedPersonsSettings(model);
 
             if (result.Success)
             {

@@ -1,9 +1,9 @@
 ﻿using Domain;
 using Domain.ProfileSettings;
 
-namespace BLL.Infrastructure
+namespace DAL.Infrastructure
 {
-    public interface IProfileSettingsService
+    public interface IProfileSettingsRepository
     {
         NotificationsViewModel GetNotificationSettings(string userId);
         UpsertResult<NotificationsViewModel> UpsertNotificationSettings(NotificationsViewModel model);

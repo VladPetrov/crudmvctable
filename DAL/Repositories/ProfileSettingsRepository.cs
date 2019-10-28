@@ -1,22 +1,20 @@
-﻿using AutoMapper;
-using BLL.Infrastructure;
+﻿using System.Linq;
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using Common;
+using DAL.Infrastructure;
 using DAL.Model;
 using Domain;
 using Domain.ProfileSettings;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using AutoMapper.QueryableExtensions;
-using Common;
 using Microsoft.EntityFrameworkCore;
 
-namespace BLL
+namespace DAL.Repositories
 {
-    public class ProfileSettingsServiceTr : IProfileSettingsService
+    public class ProfileSettingsRepository : IProfileSettingsRepository
     {
         private DataBase Context { get; }
 
-        public ProfileSettingsServiceTr(DataBase context)
+        public ProfileSettingsRepository(DataBase context)
         {
             Context = context;
         }
