@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using AutoMapper.QueryableExtensions;
+﻿using AutoMapper.QueryableExtensions;
 using BLL.Infrastructure;
 using Common;
 using DAL.Model;
@@ -10,10 +6,12 @@ using Domain;
 using Domain.Client;
 using Domain.Inbox;
 using Domain.Post;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace BLL
 {
-    public class ClientInboxService : IClientInboxService
+    public class ClientInboxService : IClientInboxService //todo it is repository
     {
         private DataBase Context { get; }
 
@@ -35,6 +33,7 @@ namespace BLL
 
                 AdditionalFirms = Context.ClientFirms
                     .Where(x => x.Profile.Id == userId && x.FirmType == FirmType.Additional)
+                    .OrderBy(x => x.Name)
                     .ProjectTo<ValueObjectStrKey>()
                     .ToList()
             };
@@ -42,45 +41,38 @@ namespace BLL
 
         public List<LetterInfo> GetPost(string firmId, string userId)
         {
-            var t = Context.ClientFirms
-                .Where(x => x.ProfileId == userId && x.Id == firmId)
-                .SelectMany(x => x.Post)
+            return Context.FirmPost
+                .Where(x => x.Firm.ProfileId == userId && x.FirmId == firmId)
                 .Where(x => x.Status == LetterStatus.New)
+                .OrderByDescending(x => x.DeliveredDate)
                 .ProjectTo<PostDto>()
                 .ToList()
-                .Select(x => new LetterInfo
-                {
-                    DeliveredDate = x.DeliveredDate,
-                    Type = x.Type,
-                    Note = x.Note,
-                    Sender = x.Sender,
-                    Recipient = new AddressBuilder(x.ClientName, x.Country, x.City, x.StreetAndNumber, x.PostalCode).GetAddress(),
-                })
+                .Select(MapToLetterInfo)
                 .ToList();
-
-            return t;
         }
 
         public List<LetterInfo> GetForwarded(string userId)
         {
-            return new List<LetterInfo>
-            {
-                new LetterInfo
-                {
-                    DeliveredDate = DateTime.Today,
-                    Recipient = "some address",
-                    Sender = "Canada",
-                    Type = LetterType.Letter,
-                    Note = "slkjdflkd ldskf dfsgfkj sdfg "
-                },
+            return Context.FirmPost
+                .Where(x => x.Firm.ProfileId == userId)
+                .Where(x => x.Status != LetterStatus.New)
+                .OrderByDescending(x => x.DeliveredDate)
+                .ProjectTo<PostDto>()
+                .ToList()
+                .Select(MapToLetterInfo)
+                .ToList();
+        }
 
-                new LetterInfo
-                {
-                    DeliveredDate = DateTime.Today.AddDays(-5),
-                    Recipient = "som other address",
-                    Sender = "USA",
-                    Type = LetterType.LetterFirstClass
-                }
+        private static LetterInfo MapToLetterInfo(PostDto dto)
+        {
+            return new LetterInfo
+            {
+                DeliveredDate = dto.DeliveredDate,
+                Type = dto.Type,
+                Note = dto.Note,
+                Sender = dto.Sender,
+                Recipient = new AddressBuilder(dto.ClientName, dto.Country, dto.City, dto.StreetAndNumber, dto.PostalCode)
+                    .GetAddress()
             };
         }
     }

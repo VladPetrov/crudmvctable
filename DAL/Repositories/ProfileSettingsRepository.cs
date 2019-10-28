@@ -5,6 +5,7 @@ using Common;
 using DAL.Infrastructure;
 using DAL.Model;
 using Domain;
+using Domain.Client;
 using Domain.ProfileSettings;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,15 +22,24 @@ namespace DAL.Repositories
 
         public NotificationsViewModel GetNotificationSettings(string userId)
         {
-            return new NotificationsViewModel
+            var query = Context.ClientFirms.Where(x => x.ProfileId == userId);
+
+            var model = new NotificationsViewModel
             {
-                Notifications = Context.ClientFirms
-                    .Where(x => x.ProfileId == userId)
+                Notifications = query
+                    .Where(x => x.FirmType == FirmType.Additional)
+                    .OrderBy(x => x.Name)
                     .ProjectTo<NotificationsDomain>()
                     .ToList(),
 
                 UserId = userId
             };
+
+            var defaultFirmNotification = query.Where(x => x.FirmType == FirmType.Default).ProjectTo<NotificationsDomain>().Single();
+
+            model.Notifications.Insert(0, defaultFirmNotification);
+
+            return model;
         }
         
         public UpsertResult<NotificationsViewModel> UpsertNotificationSettings(NotificationsViewModel model)

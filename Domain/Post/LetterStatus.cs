@@ -4,6 +4,7 @@
     {
         New,
         ForwardedByPost,
-        ForwardedByEmail
+        ForwardedByEmail,
+        TakenByClient
     }
 }
