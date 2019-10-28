@@ -18,7 +18,7 @@ namespace DAL.DbManagers.Seeds
         {
             var firms = Context.ClientFirms.ToList();
 
-            for (int i = 0; i < 60; i++)
+            for (int i = 0; i < 600; i++)
             {
                 Context.FirmPost.AddRange(new List<FirmPost>
                 {
@@ -49,7 +49,37 @@ namespace DAL.DbManagers.Seeds
                         DeliveredDate = DateTime.Now.AddDays(-4),
                         Firm = firms[2],
                         RegisteredBy = "Den",
-                        Status = LetterStatus.ForwardedByPost,
+                        Status = LetterStatus.New,
+                        Type = LetterType.RegisteredLetter,
+                        Note = "some note",
+                        Sender = "Kosice"
+                    },
+                    new FirmPost
+                    {
+                        DeliveredDate = DateTime.Now.AddDays(-4),
+                        Firm = firms[3],
+                        RegisteredBy = "Den",
+                        Status = LetterStatus.New,
+                        Type = LetterType.RegisteredLetter,
+                        Note = "some note",
+                        Sender = "Kosice"
+                    },
+                    new FirmPost
+                    {
+                        DeliveredDate = DateTime.Now.AddDays(-4),
+                        Firm = firms[4],
+                        RegisteredBy = "Den",
+                        Status = LetterStatus.New,
+                        Type = LetterType.RegisteredLetter,
+                        Note = "some note",
+                        Sender = "Kosice"
+                    },
+                    new FirmPost
+                    {
+                        DeliveredDate = DateTime.Now.AddDays(-4),
+                        Firm = firms[5],
+                        RegisteredBy = "Den",
+                        Status = LetterStatus.New,
                         Type = LetterType.RegisteredLetter,
                         Note = "some note",
                         Sender = "Kosice"
