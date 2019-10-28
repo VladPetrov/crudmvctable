@@ -44,6 +44,7 @@ namespace DAL.Repositories
 
             var item = Set
                 .Where(EqualsPredicate(id))
+                .AsNoTracking()
                 .ProjectTo<TDomain>()
                 .FirstOrDefault();
 

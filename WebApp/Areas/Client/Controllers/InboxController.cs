@@ -29,7 +29,7 @@ namespace WebApp.Areas.Client.Controllers
         [HttpGet]
         public IActionResult FirmInbox(string firmId)
         {
-            return PartialView(Service.GetLetters(firmId, User.Identity.GetUserId()));
+            return PartialView(Service.GetPost(firmId, User.Identity.GetUserId()));
         }
 
         [HttpGet]

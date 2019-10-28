@@ -40,27 +40,25 @@ namespace BLL
             };
         }
 
-        public List<LetterInfo> GetLetters(string firmId, string userId)
+        public List<LetterInfo> GetPost(string firmId, string userId)
         {
-            return new List<LetterInfo>
-            {
-                new LetterInfo
+            var t = Context.ClientFirms
+                .Where(x => x.ProfileId == userId && x.Id == firmId)
+                .SelectMany(x => x.Post)
+                .Where(x => x.Status == LetterStatus.New)
+                .ProjectTo<PostDto>()
+                .ToList()
+                .Select(x => new LetterInfo
                 {
-                    DeliveredDate = DateTime.Today,
-                    Recipient = "some address",
-                    Sender = "Canada",
-                    Type = LetterType.Letter,
-                    Note = "slkjdflkd ldskf dfsgfkj sdfg "
-                },
+                    DeliveredDate = x.DeliveredDate,
+                    Type = x.Type,
+                    Note = x.Note,
+                    Sender = x.Sender,
+                    Recipient = new AddressBuilder(x.ClientName, x.Country, x.City, x.StreetAndNumber, x.PostalCode).GetAddress(),
+                })
+                .ToList();
 
-                new LetterInfo
-                {
-                    DeliveredDate = DateTime.Today.AddDays(-5),
-                    Recipient = "som other address",
-                    Sender = "USA",
-                    Type = LetterType.LetterFirstClass
-                }
-            };
+            return t;
         }
 
         public List<LetterInfo> GetForwarded(string userId)

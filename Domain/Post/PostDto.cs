@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Domain.Post
 {
-    public class PostExportDto
+    public class PostDto
     {
         [Display(Name = "Date")]
         public DateTime DeliveredDate { get; set; }
@@ -24,5 +24,7 @@ namespace Domain.Post
         public string City { get; set; }
 
         public string Country { get; set; }
+
+        public string Note { get; set; }
     }
 }

@@ -15,9 +15,9 @@ namespace DAL.Repositories
         {
         }
 
-        public IEnumerable<PostExportDto> Export(IEnumerable<string> ids)
+        public IEnumerable<PostDto> Export(IEnumerable<string> ids)
         {
-            return Context.FirmPost.Where(x => ids.Contains(x.Id)).ProjectTo<PostExportDto>().ToList();
+            return Context.FirmPost.Where(x => ids.Contains(x.Id)).ProjectTo<PostDto>().ToList();
         }
 
         public override ListResult<PostDisplay> List(ListRequest request)

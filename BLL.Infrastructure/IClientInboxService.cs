@@ -7,7 +7,7 @@ namespace BLL.Infrastructure
     {
         FirmsInfo GetFirms(string userId);
 
-        List<LetterInfo> GetLetters(string firmId, string userId);
+        List<LetterInfo> GetPost(string firmId, string userId);
 
         List<LetterInfo> GetForwarded(string userId);
     }

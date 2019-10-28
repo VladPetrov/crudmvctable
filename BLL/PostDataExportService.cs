@@ -26,17 +26,17 @@ namespace BLL
             return Pdf.CreatePdf(headers, dataRows, "post export", $"post export {DateTime.Now.ToShortDateString()}", exportBy);
         }
 
-        private (List<string> headers, List<List<string>> data) ParseData(IEnumerable<PostExportDto> data)
+        private (List<string> headers, List<List<string>> data) ParseData(IEnumerable<PostDto> data)
         {
             var headers = new List<string>();
 
-            var type = typeof(PostExportDto);
+            var type = typeof(PostDto);
 
-            headers.Add(type.GetProperty(nameof(PostExportDto.DeliveredDate))?.GetDisplayName());
-            headers.Add(type.GetProperty(nameof(PostExportDto.Sender))?.GetDisplayName());
-            headers.Add(type.GetProperty(nameof(PostExportDto.RecipientFirm))?.GetDisplayName());
+            headers.Add(type.GetProperty(nameof(PostDto.DeliveredDate))?.GetDisplayName());
+            headers.Add(type.GetProperty(nameof(PostDto.Sender))?.GetDisplayName());
+            headers.Add(type.GetProperty(nameof(PostDto.RecipientFirm))?.GetDisplayName());
             headers.Add("Address");
-            headers.Add(type.GetProperty(nameof(PostExportDto.Type))?.GetDisplayName());
+            headers.Add(type.GetProperty(nameof(PostDto.Type))?.GetDisplayName());
 
             var dataInRows = data.Select(item => new List<string>
             {
@@ -50,6 +50,9 @@ namespace BLL
             return (headers, dataInRows);
         }
 
-        private static string GetAddress(PostExportDto dto) => $"{dto.ClientName}, {dto.Country}, {dto.City}, {dto.StreetAndNumber}, {dto.PostalCode}";
+        private static string GetAddress(PostDto dto)
+        {
+            return new AddressBuilder(dto.ClientName, dto.Country,  dto.City, dto.StreetAndNumber, dto.PostalCode).GetAddress();
+        }
     }
 }

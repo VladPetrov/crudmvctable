@@ -19,7 +19,7 @@ namespace DAL.Mapping
                 .ForMember(x => x.Firm, opt => opt.Ignore())
                 .ForMember(x => x.FirmId, opt => opt.MapFrom(x => x.Recipient.Id));
 
-            CreateMap<FirmPost, PostExportDto>()
+            CreateMap<FirmPost, PostDto>()
                 .ForMember(x => x.DeliveredDate, opt => opt.MapFrom(x => x.DeliveredDate))
                 .ForMember(x => x.RecipientFirm, opt => opt.MapFrom(x => x.Firm.Name))
                 .ForMember(x => x.RecipientFirm, opt => opt.MapFrom(x => x.Firm.Name))
