@@ -12,7 +12,7 @@
 
         <partial name="_ChildPage" model="@ChildPageDescriptor.Create(nameof(ClientFirmsController), Model.GetId(), true)" />
 
-        <partial name="~/Views/ProfileSettings/_ProfileSettings.cshtml" model="@ProfileSettingsModel.CreateForBackOfficeArea((string)Model.GetId())" />
+        <partial name="_ProfileSettings" model="@ProfileSettingsModel.CreateForBackOfficeArea((string)Model.GetId())" />
 
         @await Html.RenderCrudButtonsAsync()
     </div>

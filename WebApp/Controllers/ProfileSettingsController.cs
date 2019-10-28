@@ -6,12 +6,14 @@ using System;
 using System.Threading.Tasks;
 using DAL.Infrastructure;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNetCore.Authorization;
 using WebApp.Extensions;
 using IdentityResult = Microsoft.AspNetCore.Identity.IdentityResult;
 
 
 namespace WebApp.Controllers
 {
+    [Authorize]
     [AutoValidateAntiforgeryToken]
     [Route("[controller]/[action]/{userId}/{isReadonly}")]
     public class ProfileSettingsController : MvcController

@@ -1,0 +1,21 @@
+﻿@model string
+
+@using WebApp.Model.ProfileSettings
+
+@await Html.RenderPageTitleAsync()
+
+<div class="m-content">
+    <div class="m-portlet m-portlet--full-height">
+        <div>
+            <div class="m-portlet__body" style="padding-bottom: 5px !important">
+                <div class="m-section">
+                    <div class="m-section__content">
+
+                        <partial name="~/Views/ProfileSettings/_ProfileSettingsCommon.cshtml" model="@ProfileSettingsModel.CreateForClientArea(Model)" />
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

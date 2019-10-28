@@ -1,0 +1,32 @@
+﻿@using WebApp.Model.ProfileSettings
+@model ProfileSettingsModel
+
+
+@if (Model.HasMusterEntityFk)
+{
+    <div class="m-portlet m-portlet--full-height">
+
+        <div data-toggle="collapse" data-target="#profileSettings" style="cursor: pointer">
+            <div class="m-portlet__head">
+                <div class="m-portlet__head-caption">
+                    <div class="m-portlet__head-title">
+                        <h3 class="m-portlet__head-text">
+                            Profile Settings
+                        </h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="collapse" id="profileSettings">
+            <div class="m-portlet__body" style="padding-bottom: 5px!important">
+                <div class="m-section">
+                    <div class="m-section__content">
+
+                        <partial name="~/Views/ProfileSettings/_ProfileSettingsCommon.cshtml" model="@Model" />
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
