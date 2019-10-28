@@ -2,6 +2,7 @@
 using Common.StringConstants;
 using Domain.Post;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebApp.Controllers;
 using WebApp.Model.GenericMvc;
@@ -10,6 +11,7 @@ using WebApp.Model.Post;
 namespace WebApp.Areas.BackOffice.Controllers
 {
     [Area(AreasNames.BackOfficeArea)]
+    [Authorize(Roles = RoleNames.BackOffice)]
     [SetAvailableTableActions(TableActions.Add, TableActions.Details, TableActions.Edit, TableActions.Delete)]
     public class PostController : MasterPageCrudController<PostDisplay, PostDomain, string>
     {

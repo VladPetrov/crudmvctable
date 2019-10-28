@@ -5,6 +5,10 @@
         public static string DropdownDefaultOption => "--Select Value--";
         public static string DefaultUser => "system@test.com";
         public static string DefaultUserPassword => "Df34rwr235";
+        public static string TestClient => "client@test.com";
+        public static string TestClientPassword => "FDGwerv!2";
+        
+
         public static string CurrencyClass => "currency";
         public static string CurrencyMask => "#.##0,00";
     }

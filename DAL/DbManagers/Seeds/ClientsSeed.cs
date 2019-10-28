@@ -4,6 +4,8 @@ using DAL.Model;
 using Domain.Client;
 using System;
 using System.Collections.Generic;
+using Common.StringConstants;
+using DAL.Repositories;
 
 namespace DAL.DbManagers.Seeds
 {
@@ -11,14 +13,19 @@ namespace DAL.DbManagers.Seeds
     {
         private IClientRepository Repository { get; }
 
-        public ClientsSeed(DataBase context, IClientRepository repository) : base(context, SeedType.TestData, 1)
+        private AppsUserManager UserManager { get; }
+
+        public ClientsSeed(DataBase context, IClientRepository repository, AppsUserManager userManager) : base(context, SeedType.TestData, 1)
         {
             Repository = repository;
+            UserManager = userManager;
         }
 
         protected override void DoSeed()
         {
             GetUsers().ForEach(u => Repository.Upsert(u));
+
+            SetPasswordForTestClient();
         }
 
         private List<ClientDomain> GetUsers()
@@ -27,7 +34,7 @@ namespace DAL.DbManagers.Seeds
                 {
                     new ClientDomain
                     {
-                        Email = "test@test.com",
+                        Email = Constants.TestClient,
                         DefaultFirmName = "Google s.r.o.",
                         PhoneNumber = "123456",
                         Balance = 8000,
@@ -45,6 +52,15 @@ namespace DAL.DbManagers.Seeds
                         ContractEndDate = DateTime.Now.AddDays(20)
                     },
                 };
+        }
+
+        private void SetPasswordForTestClient()
+        {
+            var user = UserManager.FindByEmailAsync(Constants.TestClient).Result;
+
+            UserManager.RemovePasswordAsync(user).Wait();
+
+            UserManager.AddPasswordAsync(user, Constants.TestClientPassword).Wait();
         }
     }
 }

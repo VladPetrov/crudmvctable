@@ -39,14 +39,7 @@ namespace WebApp.Controllers
         public async Task<IActionResult> Login(string returnUrl = null)
         {
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme); // Clear the existing external cookie to ensure a clean login process
-
-            if (_env.IsDevelopment())
-            {
-                await _signInManager.PasswordSignInAsync(Constants.DefaultUser, Constants.DefaultUserPassword, true, lockoutOnFailure: true);
-
-                return RedirectToLocal(returnUrl);
-            }
-
+            
             ViewData["ReturnUrl"] = returnUrl;
             return View();
         }
@@ -178,7 +171,7 @@ namespace WebApp.Controllers
 
             if (user == null)
             {
-                return RedirectToAction(nameof(ResetPasswordConfirmation));
+                return RedirectToAction(nameof(AccessDenied));
             }
 
             var result = await _userManager.ResetPasswordAsync(user, model.Code, model.Password);
@@ -204,6 +197,34 @@ namespace WebApp.Controllers
         public IActionResult AccessDenied()
         {
             return View();
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        public async Task<IActionResult> LoginAsAdmin()
+        {
+            if (_env.IsDevelopment())
+            {
+                await _signInManager.PasswordSignInAsync(Constants.DefaultUser, Constants.DefaultUserPassword, true, lockoutOnFailure: true);
+
+                return RedirectToAction("Index", "Home");
+            }
+
+            return new StatusCodeResult(404);
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        public async Task<IActionResult> LoginAsClient()
+        {
+            if (_env.IsDevelopment())
+            {
+                await _signInManager.PasswordSignInAsync(Constants.TestClient, Constants.TestClientPassword, true, lockoutOnFailure: true);
+
+                return RedirectToAction("Index", "Home");
+            }
+
+            return new StatusCodeResult(404);
         }
 
         #region Helpers
